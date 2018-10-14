@@ -8,6 +8,14 @@ Ideas or code from that by Vampire and KiloSwiss have been used for certain func
 
 Significant Changes:
 =====================
+6.86 (Experimental)
+
+Build 153.
+Added: tools to pull data from mission.sqm pre-formated for use in static or dynamic blckeagls missions.
+Added: functions that allow you to spawn units, statics inside or on top of buildings.
+Fixed: an issue that caused vehicles to be destroyed by buildings upon mission spawn.
+Fixed: an issue that prevented completion of capture/hostage missions on Exile servers (Thanks to MGTDB).
+
 6.84
 Added Option to load weapons, pistols, uniforms, headgear, vests and backpacks from CfgPricing or the Arsenal Pricing and exclude items above a certain price
 	Add details on configs for enabling this and setting the maximum price
