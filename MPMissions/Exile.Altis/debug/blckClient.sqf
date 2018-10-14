@@ -67,7 +67,7 @@
 	
 	GMS_fnc_initHostage = {
 		private _hostage = _this;
-		if (blck_modType isEqualTo "Epoch") then {_hostage call GMS_fnc_addHostageActions};
+		_hostage call GMS_fnc_addHostageActions;
 		_hostage call GMS_fnc_addAssetAnimations;
 		diag_log format["_fnc_initHostage: hostage %1 initialized",_hostage];
 	};
@@ -114,7 +114,7 @@
 	
 	GMS_fnc_initLeader = {
 		private _leader = _this;
-		if (blck_modType isEqualTo "Epoch") then {_leader call GMS_fnc_addLeaderActions};
+		_leader call GMS_fnc_addLeaderActions;
 		_leader call GMS_fnc_addAssetAnimations;
 		diag_log format["_fnc_initLeader: Leader %1 initialized",_leader];		
 	};
