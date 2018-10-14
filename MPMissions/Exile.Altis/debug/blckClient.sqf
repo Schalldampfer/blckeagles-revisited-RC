@@ -55,7 +55,8 @@
 
 	GMS_fnc_addHostageActions = {
 		private _hostage = _this;
-		private _handle = _hostage addAction ["Free Hostage",{_this call GMS_fnc_freeHostage},[],1,showWindow,hideOnUse, "","alive _target", 3];	
+		//private _handle = _hostage addAction ["Free Hostage",{_this call GMS_fnc_freeHostage}]; //,[],1,showWindow,hideOnUse,(alive _hostage)];
+		private _handle = _hostage addAction ["Free Hostage",{_this call GMS_fnc_freeHostage},[],1,showWindow,hideOnUse];  //,"",{alive _target}]; //,"", (alive _target)];		
 	};
 	
 	GMS_fnc_addAssetAnimations = {
@@ -67,7 +68,7 @@
 	
 	GMS_fnc_initHostage = {
 		private _hostage = _this;
-		if (blck_modType isEqualTo "Epoch") then {_hostage call GMS_fnc_addHostageActions};
+		_hostage call GMS_fnc_addHostageActions;
 		_hostage call GMS_fnc_addAssetAnimations;
 		diag_log format["_fnc_initHostage: hostage %1 initialized",_hostage];
 	};
@@ -109,19 +110,16 @@
 	
 	GMS_fnc_addLeaderActions = {
 		private _leader = _this;
-		private _handle = _leader addAction ["Capture",{_this call GMS_fnc_arrestLeader},[],1,showWindow,hideOnUse, "","alive _target", 3];
+		private _handle = _leader addAction ["Under Arrest",{_this call GMS_fnc_arrestLeader},[],1,showWindow,hideOnUse];  //,"",{alive _target}]; //,"", (alive _target)];			
 	};
 	
 	GMS_fnc_initLeader = {
 		private _leader = _this;
-		if (blck_modType isEqualTo "Epoch") then {_leader call GMS_fnc_addLeaderActions};
+		_leader call GMS_fnc_addLeaderActions;
 		_leader call GMS_fnc_addAssetAnimations;
 		diag_log format["_fnc_initLeader: Leader %1 initialized",_leader];		
 	};
 	
-	GMS_fnc_clearAllActions = {
-		removeAllActions (_this select 0);
-	};
 if !(isServer) then
 {
 	//diag_log "[blckeagls] initializing client variables";
@@ -337,6 +335,6 @@ if !(isServer) then
 		};
 
 	};
-	diag_log "blck client loaded ver 7/29/18 for Version 6.84 8 PM";	
+	diag_log "blck client loaded ver 4/2/18 for Version 6.81 8 PM";	
 	
 };
