@@ -199,6 +199,7 @@ systemChat _logging;
 //diag_log format["_cb = %1%2",endl,_cb];
 
 _configuredStatics = [];
+_configuredStaticsPositions = [];
 _configuredUnits = [];
 /*
 	This bit will set up the garrison for each building having units and / or statics inside it or on top.
@@ -222,7 +223,7 @@ _fn_configureGarrisonForBuildingATL = {
 			if (_b isEqualTo _building) then
 			{
 				_configuredStatics pushBackUnique _x;
-				
+				//_configuredStaticsPositions pushBack  (getPosATL _x) vectorDiff CENTER;
 				if (_staticsText isEqualTo "") then
 				{
 					_staticsText = format['["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff (getPosATL _b),getDir _x];
@@ -285,7 +286,7 @@ _cb = _cb + "_garrisonedBuilding_ATLsystem = [";
 		};
 	};
 		
-} forEach ((allMissionObjects "StaticWeapon") + (allMissionObjects unitMarkerObject));
+} forEach ((allMissionObjects "StaticWeapon") + (allMissionObjects "Man") + (allMissionObjects unitMarkerObject));
 _cb = _cb + format["%1];%1%1",endl];
 
 ///////////////////
@@ -415,20 +416,24 @@ _cb = _cb + format["%1];%1%1",endl];
 ///////////////////
 // Setup info for remaining static/emplaced weapons
 ///////////////////
+_count = 0;
 _cb = _cb + format["_missionEmplacedWeapons = ["];
 {
 	
-	if !(_x in _configuredStatics) then
-	{	
+	//if !(_x in _configuredStatics) then
+	private _isInside = [_x] call _fn_isInside;
+	if !(_isInside) then
+	{
 		// 	["B_HMG_01_high_F",[22883.5,16757.6,6.31652],"blue",0,10]
 		_line = format['     ["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x, 'true','true'];	
 		systemChat _line;	
-		if (_forEachIndex == 0) then
+		if (_count == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};
+		_count = _count + 1;
 	};
 
 }forEach allMissionObjects "StaticWeapon";

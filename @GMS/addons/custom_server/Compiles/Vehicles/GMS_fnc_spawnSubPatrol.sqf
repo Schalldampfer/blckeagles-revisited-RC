@@ -22,6 +22,8 @@ if (blck_debugLevel > 1) then {diag_log format["spawnVehicle.sqf:  _vehType = %1
 _veh = createVehicle[_vehType, _pos, [], 0, "NONE"];
 _veh setVariable["blck_vehicle",true];
 [_veh] call blck_fnc_protectVehicle;
+_veh setVariable["blck_vehicleSearchRadius",blck_playerDetectionRangeSubs];
+_veh setVariable["blck_vehiclePlayerDetectionOdds",blck_vehiclePlayerDetectionOdds];
 
 #ifdef blck_debugMode
 if (blck_debugLevel > 1) then {diag_log format["spawnVehicle.sqf:: vehicle spawned is %1",_veh];};

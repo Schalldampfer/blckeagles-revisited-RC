@@ -41,9 +41,9 @@ _staticsSpawned = [];
 _group = call blck_fnc_create_AI_Group; 
 {
     _g = _x;
-    {
-            diag_log format["_g %1 = %2",_forEachIndex,_g select _forEachIndex];
-    }forEach _g;   
+    //{
+            //diag_log format["_g %1 = %2",_forEachIndex,_g select _forEachIndex];
+    //}forEach _g;   
     //   ["Land_Unfinished_Building_02_F",[-28.3966,34.8145,-0.00268841],0,true,true,[["B_HMG_01_high_F",[-5.76953,1.16504,7.21168],360]],[]],          
     _x params["_bldClassName","_bldRelPos","_bldDir","_s","_d","_statics","_men"];
     //diag_log format["_bldClassName = %1 | _bldRelPos = %2 | _bldDir = %3",_bldClassName,_bldRelPos,_bldDir];
@@ -53,8 +53,8 @@ _group = call blck_fnc_create_AI_Group;
     _buildingsSpawned pushBack _building;
     _staticsSpawned = [_building,_group,_statics,_men,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,"none",_weaponList,_sideArms] call blck_fnc_spawnGarrisonInsideBuilding_ATL;
 }forEach _garrisonedBuilding_ATLsystem;
-{
-    diag_log format["__fnc_garrisonBuilding_ATLsystem: %2 = %1",_x select 1, _x select 0];
-}forEach [ [_buildingsSpawned,"Buildings"],[_staticsSpawned,"Statics"]];
+//{
+    //diag_log format["__fnc_garrisonBuilding_ATLsystem: %2 = %1",_x select 1, _x select 0];
+//}forEach [ [_buildingsSpawned,"Buildings"],[_staticsSpawned,"Statics"]];
 _return = [_group,_buildingsSpawned,_staticsSpawned];
 _return

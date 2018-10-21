@@ -64,6 +64,7 @@ _blck_AllMissionAI = [];
 _AI_Vehicles = [];
 _blck_localMissionMarker = [_markerClass,_coords,"","",_markerColor,_markerType];
 #define delayTime 1
+#define useRelativePos true
 
 #ifdef blck_debugMode
 diag_log "_missionSpawner:  All variables initialized";
@@ -173,14 +174,6 @@ if (blck_debugLevel > 0) then
 	diag_log format["[blckeagls] missionSpawner:: (237) Landscape spawned: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
 };
 #endif
-
-uiSleep  delayTime;;
-
-if (count _missionLootVehicles > 0) then
-{
-	_temp = [_coords,_missionLootVehicles,_loadCratesTiming] call blck_fnc_spawnMissionLootVehicles;
-	_crates append _temp;
-};
 
 uiSleep  delayTime;
 
@@ -364,7 +357,6 @@ if (_abort) exitWith
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
 if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
 {
-	#define useRelativePos true
 	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnMissionVehiclePatrols;
 
 	if (typeName _temp isEqualTo "ARRAY") then
@@ -394,6 +386,13 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 	{
 		_objects append _crates;
 	};
+};
+uiSleep  delayTime;;
+
+if (count _missionLootVehicles > 0) then
+{
+	_temp = [_coords,_missionLootVehicles,_loadCratesTiming] call blck_fnc_spawnMissionLootVehicles;
+	_crates append _temp;
 };
 if (_noPara > 0 && (random(1) < _chancePara) && _paraTriggerDistance == 0) then
 {
@@ -459,6 +458,7 @@ while {_missionComplete isEqualTo -1} do
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 2) exitWith {uiSleep blck_triggerLoopCompleteTime;diag_log "_missionSpawner (492) scripted Mission End blck_debugLevel = 3";};
 	#endif
+	
 	if (_endIfPlayerNear) then
 	{
 		if ([_locations,20,true] call blck_fnc_playerInRangeArray) then {_missionComplete = 1};

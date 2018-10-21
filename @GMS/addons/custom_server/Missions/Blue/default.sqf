@@ -79,7 +79,7 @@ private _addedLandscape = ["Land_FoodSacks_01_cargo_brown_F","Land_FoodSacks_01_
 						"Land_BarrelTrash_grey_F","Land_WoodenTable_large_F","Land_BagFence_Short_F","Land_WoodPile_F"]
 */
 
-_missionLandscape = ["Flag_AAF_F","Land_TentDome_F","Land_TentDome_F","Land_TentDome_F","Land_TentDome_F","Land_FieldToilet_F","Campfire_burning_F"]; // list of objects to spawn as landscape
+_missionLandscape = [/*"Flag_AAF_F",*/"Land_TentDome_F","Land_TentDome_F","Land_TentDome_F","Land_TentDome_F","Land_FieldToilet_F","Campfire_burning_F"]; // list of objects to spawn as landscape
 for "_i" from 1 to 8 do 
 {
 	_missionLandscape pushBack selectRandom [

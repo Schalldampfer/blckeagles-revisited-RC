@@ -41,7 +41,7 @@ blck_fnc_spawnMissionLootBoxesRelative = compileFinal preprocessFileLineNumbers 
 blck_fnc_spawnSingleObject = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnSingleObject.sqf";
 blck_fnc_emptyObjectInventory = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_emptyObjectInventory.sqf";
 blck_fnc_spawnMissionLandscapeRelative = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLandscapeRelative.sqf";
-
+blck_fnc_nearestPlayers = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_nearestPlayers.sqf";
 //blck_fnc_getTraderCitiesEpoch = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitiesEpoch.sqf";
 //blck_fnc_getTraderCitesExile = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitesExile.sqf";
 
@@ -123,6 +123,8 @@ blck_fnc_releaseVehicleToPlayers = compileFinal preprocessFileLineNumbers "\q\ad
 blck_fnc_deleteAIVehicle = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_deleteAIVehicle.sqf";
 blck_fnc_destroyVehicleAndCrew = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_destroyVehicleAndCrew.sqf";
 blck_fnc_reloadVehicleAmmo = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_reloadVehicleAmmo.sqf";
+blck_fnc_scanForPlayersNearVehicles = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_scanForPlayersNearVehicles.sqf";
+blck_fnc_revealNearbyPlayers = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_revealNearbyPlayers.sqf";
 
 // functions to support Units
 blck_fnc_removeGear = compileFinal  preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Units\GMS_fnc_removeGear.sqf"; // Strip an AI unit of all gear.
