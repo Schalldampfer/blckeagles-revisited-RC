@@ -15,10 +15,12 @@
 private["_groupSpawned"];
 
 _groupSpawned = createGroup [blck_AI_Side, true]; 
-_groupSpawned setVariable["groupVehicle",objNull];
-#ifdef useDynamicSimulation
-_groupSpawned enableDynamicSimulation true;
-#endif
+//_groupSpawned setVariable["groupVehicle",objNull];
+if (blck_simulationManager == blck_useDynamicSimulationManagement) then 
+{
+	_groupSpawned enableDynamicSimulation true;
+};
+
 _groupSpawned setcombatmode "RED";
 _groupSpawned setBehaviour "COMBAT";
 _groupSpawned allowfleeing 0;
@@ -27,7 +29,7 @@ _groupSpawned setFormation blck_groupFormation;
 _groupSpawned setVariable ["blck_group",true,true];
 
 #ifdef blck_debugMode
-diag_log format["_fnc_create_AI_Group: _groupSpawned = %1",_groupSpawned];
+if (blck_debugLevel >= 2) then {diag_log format["_fnc_create_AI_Group: _groupSpawned = %1",_groupSpawned]};
 #endif
 
 _groupSpawned

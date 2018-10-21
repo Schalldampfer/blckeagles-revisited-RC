@@ -41,6 +41,7 @@ while {true} do
 		_timer5sec = diag_tickTime + 5;
 		[] call blck_fnc_missionGroupMonitor;
 		[] call blck_fnc_sm_missionPatrolMonitor;
+	
 		//diag_log format["[blckeagls] _fnc_mainThread 5 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if (diag_tickTime > _timer20sec) then
@@ -48,6 +49,8 @@ while {true} do
 		[] call blck_fnc_cleanupAliveAI;
 		[] call blck_fnc_cleanupObjects;
 		[] call blck_fnc_cleanupDeadAI;
+		[] call blck_fnc_scanForPlayersNearVehicles;		
+		//[] call blck_fnc_cleanEmptyGroups;
 		_timer20sec = diag_tickTime + 20;
 		//diag_log format["[blckeagls] _fnc_mainThread 20 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};

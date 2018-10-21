@@ -15,6 +15,17 @@ params["_mission"];
 // params["_objects"];
 if (isNil "_markerColor") then {_markerColor = "ColorBlack"};
 if (isNil "_markerType") then {_markerType = ["mil_box",[]]};
+if (isNil "_markerColor") then {_markerColor = "ColorBlack"};
+if (isNil "_markerType") then {_markerType = ["mil_box",[]]};
+if (isNil "_missionLandscape") then {_missionLandscape = []};
+if (isNil "_garrisonedBuilding_ASLsystem") then {_garrisonedBuilding_ASLsystem = []};
+if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {_garrisonedBuildings_BuildingPosnSystem = []};
+if (isNil "_airPatrols") then {_airPatrols = []};
+if (isNil "_aiGroupParameters") then {_aiGroupParameters = []};
+if (isNil "_missionEmplacedWeapons") then {_missionEmplacedWeapons = []};
+if (isNil "_vehiclePatrolParameters") then {_vehiclePatrolParameters = []};
+if (isNil "_missionLootVehicles") then {_missionLootVehicles = []};
+
 _markerClass = format["static%1",floor(random(1000000))];
 _blck_localMissionMarker = [_markerClass,_missionCenter,"","",_markerColor,_markerType];
 if (blck_labelMapMarkers select 0) then

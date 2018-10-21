@@ -675,6 +675,13 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Item_InstantCoffee"
 	];
 	
+	#ifdef useCUP
+	
+	#endif
+	
+	#ifdef useRHS
+	
+	#endif
 	blck_ConsumableItems = blck_Meats + blck_Drink + blck_Food;
 	blck_throwableExplosives = ["HandGrenade","MiniGrenade"];
 	blck_otherExplosives = ["1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"];
@@ -846,7 +853,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
-				["130Rnd_338_Mag",3,5]
+				["130Rnd_338_Mag",3,5],
+				// Apex Ammo				
+				["130Rnd_338_Mag",1,3],
+				["150Rnd_93x64_Mag",1,3]
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -1051,10 +1061,10 @@ blck_contructionLootExile = [
 			["Exile_Item_JunkMetal",1,10],["Exile_Item_LightBulb",1,10],["Exile_Item_MetalBoard",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_CamoTentKit",1,10],["Exile_Item_MetalScrews",3,10]
 		],
 		[//Items
-			["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Item_CanOpener","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_Hammer",
+			"Exile_Item_Matches","Exile_Item_CookingPot","Exile_Item_CanOpener","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_Hammer",
 			"Exile_Item_CordlessScrewdriver","Exile_Item_FireExtinguisher","Exile_Item_OilCanister","Exile_Item_Screwdriver","Exile_Item_Shovel","Exile_Item_Wrench","Exile_Item_CordlessScrewdriver",
 			"Exile_Item_FireExtinguisher","Exile_Item_OilCanister","Exile_Item_Screwdriver","Exile_Item_DuctTape","Binocular","Rangefinder","ItemGPS","ItemMap","ItemCompass","ItemRadio","ItemWatch",
-			"Exile_Item_XM8"]			
+			"Exile_Item_XM8"
 		],
 		[ // Backpacks
 			

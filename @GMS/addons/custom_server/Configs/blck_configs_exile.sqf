@@ -710,9 +710,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
-				["MMG_02_black_F","150Rnd_93x64_Mag"],
-				["MMG_02_camo_F","150Rnd_93x64_Mag"],
-				["MMG_02_sand_F","150Rnd_93x64_Mag"],
+				["MMG_02_black_F","130Rnd_338_Mag"],
+				["MMG_02_camo_F","130Rnd_338_Mag"],
+				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_sniper_F","10Rnd_338_Mag"],
@@ -743,7 +743,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag" ,1,5],
 				["10Rnd_127x54_Mag",1,5],
 				["10Rnd_93x64_DMR_05_Mag" ,1,5],
-				["10Rnd_93x64_DMR_05_Mag" ,1,5]				
+				["10Rnd_93x64_DMR_05_Mag" ,1,5],
+				// Apex Ammo				
+				["130Rnd_338_Mag",1,3],
+				["150Rnd_93x64_Mag",1,3]				
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],
@@ -805,6 +808,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
+				["MMG_01_tan_F","150Rnd_93x64_Mag"],
+				["MMG_02_black_F","130Rnd_338_Mag"],
+				["MMG_02_camo_F","130Rnd_338_Mag"],
+				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
 				["srifle_DMR_03_F","10Rnd_338_Mag"],		
 				["srifle_DMR_04_Tan_F","10Rnd_338_Mag"],
@@ -830,7 +837,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag" ,1,4],
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
-				["10Rnd_93x64_DMR_05_Mag" ,1,4]					
+				["10Rnd_93x64_DMR_05_Mag" ,1,4],
+				// Apex Ammo				
+				["130Rnd_338_Mag",1,3],
+				["150Rnd_93x64_Mag",1,3]				
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -1035,10 +1045,10 @@ blck_contructionLootExile = [
 			["Exile_Item_Sand",4,10],["Exile_Item_Cement",4,10],["Exile_Item_WaterCanisterDirtyWater",1,3],["Exile_Item_FuelCanisterFull",1,3]
 		],
 		[//Items
-			["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Item_CanOpener","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_Hammer",
+			"Exile_Item_Matches","Exile_Item_CookingPot","Exile_Item_CanOpener","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_Hammer",
 			"Exile_Item_CordlessScrewdriver","Exile_Item_FireExtinguisher","Exile_Item_OilCanister","Exile_Item_Screwdriver","Exile_Item_Shovel","Exile_Item_Wrench","Exile_Item_CordlessScrewdriver",
 			"Exile_Item_FireExtinguisher","Exile_Item_OilCanister","Exile_Item_Screwdriver","Exile_Item_DuctTape","Binocular","Rangefinder","ItemGPS","ItemMap","ItemCompass","ItemRadio","ItemWatch",
-			"Exile_Item_XM8"]			
+			"Exile_Item_XM8"
 		],
 		[ // Backpacks
 			

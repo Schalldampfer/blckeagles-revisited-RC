@@ -51,7 +51,7 @@ _lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts
 _startMsg = "Pirates were spotted off the coast - intercept them and collect the loot";
 _endMsg = "The pirates were defeated";
 _markerLabel = "";
-//_markerType = ["ELIPSE",[200,200],"GRID"];
+//_markerType = ["ellipse",[200,200],"GRID"];
 // An alternative would be:
 _markerType = ["mil_triangle",[0,0]];  // You can replace mil_triangle with any other valid Arma 3 marker type https://community.bistudio.com/wiki/cfgMarkers
 _markerColor = "ColorRed";  //  This can be any valid Arma Marker Color  

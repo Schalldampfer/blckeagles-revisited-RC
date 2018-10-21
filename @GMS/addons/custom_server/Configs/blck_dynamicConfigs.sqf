@@ -103,7 +103,7 @@ if (blck_modType isEqualTo "Exile") then
 {
 	_classnameList = (missionConfigFile >> "CfgExileArsenal" ) call BIS_fnc_getCfgSubClasses;
 };
-diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
+//diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
 {
 	private _temp = [_x] call bis_fnc_itemType;
 	//diag_log _temp;

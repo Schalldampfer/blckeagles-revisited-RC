@@ -13,12 +13,23 @@
 
 	#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+	/*
+		changing any of these variables may break the mission systemChat
+	*/
+	blck_locationBlackList = [];  // Do not touch ...
+	blck_debugON = false;  //  Do not touch ... 
+	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
 	execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
 	if (true) exitWith {};
 	#endif
 	
-	diag_log "[blckeagls] Loading configurations for Non-militarized servers: blck_configs.sqf";
+	//diag_log "[blckeagls] Loading configurations for Non-militarized servers: blck_configs.sqf";
+	/*
+		**************************************
+		Configurations begin here
+		**************************************
+	*/
 	/***************************************************************
 		BLCKEAGLS SUPPLEMENTAL MODULES
 	****************************************************************	
@@ -31,7 +42,14 @@
 
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
-	
+	blck_simulationManager = blck_useBlckeaglsSimulationManagement; 
+	diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
+	/*
+		blck_simulationManagementOff  - no simulation management occurs
+		blck_useBlckeaglsSimulationManager - simulation is enabled/disabled by periodic checks for nearby players; a 'wake' function is included when a units simulation is turned on
+		blck_useDynamicSimulationManagement 2 - arma dynamic simulation is used
+	*/
+
 	// Note that you can define map-specific variants in custom_server\configs\blck_custom_config.sqf
 	blck_useTimeAcceleration = false; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
 	blck_timeAccelerationDay = 0.25;  // Daytime time accelearation
@@ -87,7 +105,7 @@
 	blck_SmokeAtMissions = [false,"random"];  // set to [false,"anything here"] to disable this function altogether. 
 	blck_useSignalEnd = true; // When true a smoke grenade/chemlight will appear at the loot crate for 2 min after mission completion.
 	blck_missionEndCondition = "allKilledOrPlayerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
-	blck_killPercentage = 0.9;  // The mission will complete if this fraction of the total AI spawned has been killed.
+	blck_killPercentage = 0.999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
 	blck_spawnCratesTiming = "atMissionSpawnGround"; // Choices: "atMissionSpawnGround","atMissionEndGround","atMissionEndAir". 
 							 // Crates spawned in the air will be spawned at mission center or the position(s) defined in the mission file and dropped under a parachute.
@@ -367,8 +385,8 @@
 	{
 		diag_log format["[blckeagles] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
-				waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		waitUntil{blck_dynamicConfigsLoaded};
-		blck_dynamicConfigsLoaded = nil;
+		//waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
+		//waitUntil{blck_dynamicConfigsLoaded};
+		//blck_dynamicConfigsLoaded = nil;
 	};
 	blck_configsLoaded = true;

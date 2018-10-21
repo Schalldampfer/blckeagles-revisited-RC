@@ -13,9 +13,8 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
-private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_markerMissionName","_missionLandscapeMode","_missionLandscape",
-	"_missionLootBoxes","_missionLootVehicles","_missionEmplacedWeapons","_minNoAI","_maxNoAI","_noAIGroups","_noVehiclePatrols","_noEmplacedWeapons",
-	"_uniforms","_headgear","_weaponList","_sideArms","_vests","_backpacks","_chanceReinforcements","_noPara","_helipatrol","_endCondition","_markerColor","_markerType","_useMines","_difficulty","_mission","_missionCenter"];
+
+#include "privateVars.sqf";
 
 _mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 _missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.
@@ -56,7 +55,7 @@ _lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts
 								  //  blck_lootCountsOrange = [[6,8],[24,32],[5,10],[25,35],16,1];   // Orange
 
 _markerLabel = "";
-//_markerType = ["ELIPSE",[200,200],"GRID"];
+//_markerType = ["ellipse",[200,200],"GRID"];
 // An alternative would be:
 _markerType = ["mil_triangle",[0,0]];  // You can replace mil_triangle with any other valid Arma 3 marker type https://community.bistudio.com/wiki/cfgMarkers
 _markerColor = "ColorRed";  //  This can be any valid Arma Marker Color  

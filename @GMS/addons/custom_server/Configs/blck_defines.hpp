@@ -11,14 +11,22 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 
+
 #define useAPEX 
-//#define useDynamicSimulation
-//#define blck_debugMode
-//#define blck_milServer
+#define blck_milServer
+#define blck_useCUP
+#define blck_useRHS
 
 ////////////////////////////
 //  Do not touch anything below this line
 ///////////////////////////
+
+//#define useDynamicSimulation
+//#define blck_debugMode
+//#define GRG_TestServer
+#define GRGserver
+#define blck_triggerLoopCompleteTime 40*60
+
 #define onFoot 1
 #define inVehicle 2
 
@@ -29,5 +37,15 @@
 #define groupSpawned 2
 #define timesSpawned 3
 #define respawnAt 4
-
-
+#define blck_playerDetectionRangeAir 800
+#define blck_playerDetectionRangeGroundVehicle 400
+#define blck_vehiclePlayerDetectionOdds 0.6
+#define blck_playerDetectionRangeSubs 100
+#define blck_playerDetectionRangeSurfaceVehicle 150
+#define blck_simulationEnabledDistance 2500
+#define blck_simulationManagementOff 0
+#define blck_useBlckeaglsSimulationManager 1
+#define blck_useDynamicSimulationManagement 2
+#define blck_simulationManagementOff 0
+#define blck_useBlckeaglsSimulationManagement 1
+#define blck_useDynamicSimulationManagement 2

@@ -47,15 +47,14 @@ blck_configsLoaded = nil;
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 
 #ifdef GRGserver
-diag_log "[blckegls] Running Ghostridergaming Version";
+diag_log "[blckeagls] Running GRG Version";
 #endif
-#ifdef useDynamicSimulation
-diag_log "[blckegls] dynamic simulation manager enabled";
-#else
-diag_log "[blckegls] blckegls simulation manager enabled";
-#endif
-//_marker = createMarker ["HomeBase",[24000,18000,0]];
-//_marker setMarkerColor "ColorBlack";
-//_marker setMarkerType "hd_flag";
+
+switch (blck_simulationManager) do
+	case 1: {diag_log "[blckeagls] dynamic simulation manager enabled"}; 
+	case 2: {diag_log "[blckeagls] blckeagls simulation manager enabled"};
+	case 0: {diag_log "[blckeagls] simulation management disabled"};
+};
+
 diag_log format["[blckeagls] for HC version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
 [] spawn blck_fnc_HC_monitor;

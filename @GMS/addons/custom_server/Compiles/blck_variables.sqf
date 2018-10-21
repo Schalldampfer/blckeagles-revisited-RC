@@ -12,8 +12,10 @@
 */
 #include"\q\addons\custom_server\Configs\blck_defines.hpp";
 
-blck_debugON = true;
-blck_debugLevel = 0;  // Sets level of detail for debugging info - WIP.
+diag_log "[blckeagls] loading variables";
+
+//  blck_debugON = false;  Moved to blck_configs.sqf because of script loading order issues.
+//  blck_debugLevel = 0;  Moved to blck_configs.sqf because of script loading order issues.
 blck_minFPS = 8; 
 
 ////////////////////////////////////////////////
@@ -22,7 +24,6 @@ blck_minFPS = 8;
 blck_townLocations = []; //nearestLocations [blck_mapCenter, ["NameCity","NameCityCapital"], 30000];
 blck_ActiveMissionCoords = [];
 blck_recentMissionCoords = [];
-blck_locationBlackList = [];
 blck_monitoredVehicles = [];
 blck_livemissionai = [];
 blck_monitoredMissionAIGroups = [];  //  Used to track groups in active missions for whatever purpose
@@ -34,20 +35,26 @@ blck_activeMissions = [];
 blck_deadAI = [];
 blck_connectedHCs = [];
 blck_missionMarkers = [];
-blck_groupsOnHC = [];
-blck_vehiclesOnHC = [];
+//blck_groupsOnHC = [];
+//blck_vehiclesOnHC = [];
 //blck_HC_monitoredVehicles = [];
 //blck_HC_monitoredGroups = [];
-#ifdef useDynamicSimulation
-"Group" setDynamicSimulationDistance 1800;
-enableDynamicSimulationSystem true;
-#endif
+if (blck_simulationManager == 2) then 
+{
+	"Group" setDynamicSimulationDistance 1800;
+	enableDynamicSimulationSystem true;
+};
 
 blck_heliCrashSites = [];
 
 // radius within whih missions are triggered. The trigger causes the crate and AI to spawn.
-blck_TriggerDistance = 1000;
+#ifdef blck_milServer
+blck_TriggerDistance = 1500;
+#else
+blck_TriggerDistance = 1500;
+#endif
+
 blck_mainThreadUpdateInterval = 60;
-//blck_missionSpawning = false;
+blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
 diag_log "[blckeagls] Variables Loaded";
 blck_variablesLoaded = true;

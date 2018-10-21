@@ -2,26 +2,49 @@
 blck Mission system by Ghostrider [GRG]
 Loosely based on the AI mission system by blckeagls ver 2.0.2
 Contributions by Narines: bug fixes, testing, infinite ammo fix.
-Ideas or code from that by Vampire and KiloSwiss have been used for certain functions.
-
-
+Ideas or code from that by He-Man, Vampire and KiloSwiss have been used for certain functions.
+Many thanks for new Coding and ideas from Grahame.
 
 Significant Changes:
 =====================
-6.84
-Added Option to load weapons, pistols, uniforms, headgear, vests and backpacks from CfgPricing or the Arsenal Pricing and exclude items above a certain price
+6.86 Build 155
+Added support for spawning infantry and statics inside buildings for forming a garrison using either of two methods.
+	1. by placing a marker object such as a sphere in the building you define it as having units/statics inside 
+	2. by placing units or statics in it you determine the garrison to be placed at mission spawn.
+Added tools to facilitate grabbing data from missions in the editor (see the new TOOLS folders for more information).
+Added additional error checks for missing mission parameters.
+Fixed: issues that prevented completion of capture/hostage missions on exile servers
+Added: code that forces air, land and sea vehicles to detect nearby players which should help with frozen AI _noChoppers
+Changed: code for blckeagls simulation manager to force simulation when groups are awoken.
+Added: additional settings for simulation management (see blck_configs.sqf for details)
+Changed: Simulation management is now set using the new variable blck_simulationManager which is defined in blck_configs.sqf
+Fixed: issues with AI not throwing smoke when healing themselves.
+
+6.84 Build 145
+Added Option to load weapons, pistols, uniforms, headgear, vests and backpacks from CfgPricing (Epoch) or the Arsenal (Exile) and exclude items above a certain price
 	Add details on configs for enabling this and setting the maximum price
+	To use this new feature
+	Set blck_useConfigsGeneratedLoadouts = true; 
+	
+	To specify the maximum price for items added to AI, change:
+	blck_maximumItemPriceInAI_Loadouts = 100; 
+	
 	NOTE: this function overides any loadouts you specify in blck_config.sqf etc.
 	
-Added functions to despawn static patrols invehicles on on foot when no players are nearby. This tracks the number of infantry alive in a group and respawns only the number alive when the group was despawned.
-
+Added functions to despawn static patrols of all types when no players are nearby. This tracks the number of infantry alive in a group and respawns only the number alive when the group was despawned.
 Added: Static units will now be spawned with gear specific to difficulty level (blue, red, green, orange) as specified in blck_config.sqf etc.
+Added: AI now have a chance of spawning with binocs or range finders.
+Added: a lit road cone spawns at the center of the mission to help find it and aid in triggering mission completion.
 
 Changed: Hostage missions redesigned to reduce chances of AI being glitched into containers and of mission objects flying about when spawned in.
+Changed: Units are spawned with greater dispersion.
+Changed: method for spawning random landscapes has been changed. Note the added randomization in missions\blue\default.sqf
+
 Fixed: Collisions between objects at missions caused issues.
 Fixed: Attempted a fix to reduce the chance that AI will spawn inside or under objects like rocks or containers.
 Fixed: Captive missions now complete properly. 
 Fixed: Hostage missions now complete properly.
+Fixed: Paratroops spawned at UMS missions now spawn with scuba gear.
 
 Version 1.82 Build 134
 Added: configs for blue, red, green and orange pistol, vest, backpack and uniforms (with thanks to Grahame for suggesting this change and doing most of the coding)

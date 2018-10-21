@@ -538,7 +538,10 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch", "nanite_pills_epoch"];
 		blck_specialItems = blck_throwableExplosives + blck_medicalItems;		
 		blck_NVG = ["NVG_EPOCH"];
-        blck_epochValuables = ["PartOreGold","PartOreSilver","PartOre","ItemGoldBar","ItemGoldBar2oz","ItemGoldBar3oz","ItemGoldBar4oz","ItemGoldBar5oz","ItemGoldBar6oz","ItemGoldBar7oz","ItemGoldBar8oz","ItemGoldBar9oz","ItemGoldBar10oz","ItemSilverBar","ItemSilverBar2oz","ItemSilverBar3oz","ItemSilverBar4oz","ItemSilverBar5oz","ItemSilverBar6oz","ItemSilverBar7oz","ItemSilverBar8oz","ItemSilverBar9oz","ItemSilverBar10oz","ItemAluminumBar","ItemAluminumBar10oz","ItemCopperBar","ItemCopperBar10oz","ItemTinBar","ItemTinBar10oz","ItemTopaz","ItemOnyx","ItemSapphire","ItemAmethyst","ItemEmerald","ItemCitrine","ItemRuby","ItemQuartz","ItemJade","ItemGarnet","ItemKiloHemp"];
+		blck_epochValuables = ["PartOreGold","PartOreSilver","PartOre","ItemGoldBar","ItemSilverBar",
+			"ItemGoldBar10oz","ItemTopaz","ItemOnyx","ItemSapphire","ItemAmethyst",
+			"ItemEmerald","ItemCitrine","ItemRuby","ItemQuartz","ItemJade",
+			"ItemGarnet","ItemKiloHemp"];
         blck_epochBuildingSupplies = ["PartPlankPack","ItemPlywoodPack","CinderBlocks","MortarBucket","ItemScraps",
             "ItemCorrugated","ItemCorrugatedLg","CircuitParts","WoodLog_EPOCH","ItemRope","ItemStick","ItemRock","ItemBurlap","ItemBulb","ItemSolar","ItemCables","ItemBattery","Pelt_EPOCH","JackKit","ItemCanvas","ItemSeedBag","ItemPipe"];
         blck_epochVehicleRepair = ["EngineParts","FuelTank","SpareTire","ItemGlass",
@@ -594,9 +597,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
-				["MMG_02_black_F","150Rnd_93x64_Mag"],
-				["MMG_02_camo_F","150Rnd_93x64_Mag"],
-				["MMG_02_sand_F","150Rnd_93x64_Mag"],
+				["MMG_02_black_F","130Rnd_338_Mag"],
+				["MMG_02_camo_F","130Rnd_338_Mag"],
+				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_sniper_F","10Rnd_338_Mag"],
@@ -629,8 +632,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag" ,1,4],
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
-				["10Rnd_93x64_DMR_05_Mag" ,1,4]	
+				["10Rnd_93x64_DMR_05_Mag" ,1,4],
 				// Apex Ammo				
+				["130Rnd_338_Mag",1,3],
+				["150Rnd_93x64_Mag",1,3]
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -662,7 +667,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["ItemAluminumBar",1,3],
 				["ItemTinBar",1,3],
 				["ItemCanvas",2,4],
-				//"SeedPacket_Hemp","SeedPacket_GoldenSeal","SeedPacket_Poppy","SeedPacket_Pumpkin","SeedPacket_Sunflower"
+									//"SeedPacket_Hemp","SeedPacket_GoldenSeal","SeedPacket_Poppy","SeedPacket_Pumpkin","SeedPacket_Sunflower"
 				["ItemKiloHemp",1,3],
 				["ItemRope",1,3],
 				["ItemBurlap",1,3],
@@ -682,7 +687,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["ItemKiloHemp",1,2],["ItemRuby",1,2],["ItemSilverBar",1,2],["ItemEmerald",1,2],["ItemTopaz",1,2],["ItemOnyx",1,2],["ItemSapphire",1,2],["ItemAmethyst",1,2],
 				["ItemSodaRbull",1,3],["ItemSodaOrangeSherbet",1,3],["ItemSodaPurple",1,3],["ItemSodaMocha",1,3],["ItemSodaBurst",1,3],
 				["CookedChicken_EPOCH",1,3],["CookedGoat_EPOCH",1,3],["CookedSheep_EPOCH",1,3],["FoodSnooter",1,3],["FoodMeeps",1,3],["FoodBioMeat",1,3],["ItemTuna",1,3],["ItemSeaBass",1,3],["ItemTrout",1,3],
-				"Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
+				"FAK" , "Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
 				"caffeinepills_epoch", "orlistat_epoch", "ItemCanteen_Empty", "ItemCanteen_Clean", "ItemBottlePlastic_Empty", 
 				"ItemBottlePlastic_Clean", "atropine_epoch", "ItemWaterPurificationTablets", "ItemPainKillers", "ItemDefibrillator", 
 				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch", "nanite_pills_epoch"
@@ -730,11 +735,22 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
+				["MMG_01_tan_F","150Rnd_93x64_Mag"],
+				["MMG_02_black_F","130Rnd_338_Mag"],
+				["MMG_02_camo_F","130Rnd_338_Mag"],
+				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
-				["srifle_DMR_03_F","10Rnd_338_Mag"],		
+				["srifle_DMR_02_F","10Rnd_338_Mag"],
+				["srifle_DMR_02_sniper_F","10Rnd_338_Mag"],
+				["srifle_DMR_03_F","10Rnd_338_Mag"],
+				["srifle_DMR_03_tan_F","10Rnd_338_Mag"],
 				["srifle_DMR_04_Tan_F","10Rnd_338_Mag"],
-				["srifle_DMR_05_hex_F","10Rnd_338_Mag"],	
-				["srifle_DMR_06_camo_F","10Rnd_338_Mag"]
+				["srifle_DMR_05_hex_F","10Rnd_338_Mag"],
+				["srifle_DMR_05_tan_F","10Rnd_338_Mag"],
+				["srifle_DMR_06_camo_F","10Rnd_338_Mag"],				
+				["srifle_DMR_04_F","10Rnd_127x54_Mag"],
+				["srifle_DMR_05_blk_F","10Rnd_93x64_DMR_05_Mag"],
+				["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"]
 				
 			],
 			[//Magazines
@@ -757,7 +773,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag" ,1,4],
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
-				["10Rnd_93x64_DMR_05_Mag" ,1,4]					
+				["10Rnd_93x64_DMR_05_Mag" ,1,4],
+				// Apex Ammo				
+				["130Rnd_338_Mag",1,3],
+				["150Rnd_93x64_Mag",1,3]								
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -789,7 +808,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["ItemAluminumBar",1,3],
 				["ItemTinBar",1,3],
 				["ItemCanvas",2,4],
-				//"SeedPacket_Hemp","SeedPacket_GoldenSeal","SeedPacket_Poppy","SeedPacket_Pumpkin","SeedPacket_Sunflower"
+									//"SeedPacket_Hemp","SeedPacket_GoldenSeal","SeedPacket_Poppy","SeedPacket_Pumpkin","SeedPacket_Sunflower"
 				["ItemKiloHemp",1,3],
 				["ItemRope",1,3],
 				["ItemBurlap",1,3],
@@ -810,7 +829,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["ItemKiloHemp",1,2],["ItemRuby",1,2],["ItemSilverBar",1,2],["ItemGoldBar10oz",1,2],
 				["ItemSodaRbull",1,3],["ItemSodaOrangeSherbet",1,3],["ItemSodaPurple",1,3],["ItemSodaMocha",1,3],["ItemSodaBurst",1,3],
 				["CookedChicken_EPOCH",1,3],["CookedGoat_EPOCH",1,3],["CookedSheep_EPOCH",1,3],["FoodSnooter",1,3],["FoodMeeps",1,3],["FoodBioMeat",1,3],["ItemTuna",1,3],["ItemSeaBass",1,3],["ItemTrout",1,3],
-				"Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
+				"FAK" , "Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
 				"caffeinepills_epoch", "orlistat_epoch", "ItemCanteen_Empty", "ItemCanteen_Clean", "ItemBottlePlastic_Empty", 
 				"ItemBottlePlastic_Clean", "atropine_epoch", "ItemWaterPurificationTablets", "ItemPainKillers", "ItemDefibrillator", 
 				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch", "nanite_pills_epoch"
@@ -935,10 +954,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Heal_EPOCH",1,2],["Defib_EPOCH",1,2],["Repair_EPOCH",1,2],["FAK",1,5],["VehicleRepair",1,5],
 				["ItemSodaRbull",1,3],["ItemSodaOrangeSherbet",1,3],["ItemSodaPurple",1,3],["ItemSodaMocha",1,3],["ItemSodaBurst",1,3],
 				["CookedChicken_EPOCH",1,3],["CookedGoat_EPOCH",1,3],["CookedSheep_EPOCH",1,3],["FoodSnooter",1,3],["FoodMeeps",1,3],["FoodBioMeat",1,3],["ItemTuna",1,3],["ItemSeaBass",1,3],["ItemTrout",1,3],
-				"Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
+				"FAK" , "Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
 				"caffeinepills_epoch", "orlistat_epoch", "ItemCanteen_Empty", "ItemCanteen_Clean", "ItemBottlePlastic_Empty", 
 				"ItemBottlePlastic_Clean", "atropine_epoch", "ItemWaterPurificationTablets", "ItemPainKillers", "ItemDefibrillator", 
-				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch", "nanite_pills_epoch"
+				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch"
 			],
 			[ // Backpacks
 				["B_AssaultPack_dgtl",0,2],["B_AssaultPack_khk",0,2],["B_AssaultPack_mcamo",0,2],["B_AssaultPack_ocamo",0,2],["B_AssaultPack_rgr",0,2],["B_AssaultPack_sgg",0,2],
@@ -1058,7 +1077,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["CookedChicken_EPOCH",1,3],["CookedGoat_EPOCH",1,3],["CookedSheep_EPOCH",1,3],
 				["FoodSnooter",1,3],["FoodMeeps",1,3],["FoodBioMeat",1,3],["ItemTuna",1,3],["ItemSeaBass",1,3],["ItemTrout",1,3],["ItemPowderMilk",1,3],["ItemRicebox",1,3],
 				["ItemCereals",1,3],["krypto_candy_epoch",1,3],["ItemBakedBeans",1,3],["HotAxeSauce_epoch",1,3],
-				"Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
+				"FAK" , "Towelette" , "ItemVitamins", "morphine_epoch", "iodide_pills_epoch", "adrenaline_epoch", 
 				"caffeinepills_epoch", "orlistat_epoch", "ItemCanteen_Empty", "ItemCanteen_Clean", "ItemBottlePlastic_Empty", 
 				"ItemBottlePlastic_Clean", "atropine_epoch", "ItemWaterPurificationTablets", "ItemPainKillers", "ItemDefibrillator", 
 				"ItemBloodBag_Empty", "ItemBloodBag_Full", "ItemAntibiotic", "nanite_cream_epoch", "nanite_pills_epoch"
@@ -1077,7 +1096,7 @@ blck_highPoweredLoot = blck_BoxLoot_Orange;
 blck_supportLoot = blck_BoxLoot_Orange;
 
 
-	blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
-	
-	diag_log "[blckeagls] Configurations for Epoch Loaded";
-	blck_configsEpochLoaded = true;
+blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
+
+diag_log "[blckeagls] Configurations for Epoch Loaded";
+blck_configsEpochLoaded = true;

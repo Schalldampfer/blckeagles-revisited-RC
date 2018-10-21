@@ -164,28 +164,22 @@ _fn_simulationMonitor = {
 	}else{
 		_playerType = ["Epoch_Male_F","Epoch_Female_F"];
 	};
-	//diag_log format["_fn_simulationMonitor::  _playerType = %1",_playerType];
 	{
-		//  player nearEntities [["Car", "Motorcycle", "Tank"], 50];
-		_players = (leader _x) nearEntities [_playerType, 1800];
+		_players = (leader _x) nearEntities [_playerType, blck_simulationEnabledDistance];
 		if (count _players > 0) then
 		{
-		  // Be sure simulation is on for all units in the group
-		  if !(_x getVariable["blck_simulationStatus",false]) then
+		  if !(simulationEnabled _x) then
 		  {
-			_x setVariable["blck_simulationStatus",true];
-			{
-				_x enableSimulationGlobal  true;
-			}forEach (units _x);
+			  	{
+					_x enableSimulationGlobal  true;
+					(_players select 0) reveal _x;  //  Force simulation on
+				}forEach (units _x);
 		  };
 		}else{
 			// Be sure simulation is off for all units in the group.
-			if !(_x getVariable["blck_simulationStatus",true]) then
+			if (simulationEnabled _x) then
 			{
-				_x setVariable["blck_simulationStatus",false];
-				{
-					_x enableSimulationGlobal false;
-				}forEach (units _x);		
+				{_x enableSimulationGlobal false}forEach (units _x);		
 			};
 		};
 	} forEach blck_monitoredMissionAIGroups;
@@ -200,6 +194,5 @@ if (blck_debugLevel > 2) then {diag_log format["_fnc_missionGroupMonitor: execut
 uiSleep 0.1;
 [] call _fn_monitorGroupWaypoints;
 
-#ifndef useDynamicSimulation
-[] call _fn_simulationMonitor;
-#endif
+if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {[] call _fn_simulationMonitor};
+

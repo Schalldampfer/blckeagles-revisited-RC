@@ -11,24 +11,19 @@
 
 if ( !(isServer) || hasInterface) exitWith{};
 
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+#include "blck_defines.hpp";
 
 if !(isNil "blck_Initialized") exitWith{};
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
 diag_log format["[blckeagls] Loading Server Mission System Version %2 Build Date %1",_blck_versionDate,_blck_version];
 
-call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
-waitUntil {(isNil "blck_variablesLoaded") isEqualTo false;};
-waitUntil{blck_variablesLoaded};
-blck_variablesLoaded = nil;
-
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
 waitUntil {(isNil "blck_functionsCompiled") isEqualTo false;};
 waitUntil{blck_functionsCompiled};
 blck_functionsCompiled = nil;
-diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
+diag_log format["[blckeagls] functions compiled at %1",diag_tickTime];
 
 blck_modType = call blck_fnc_getModType;
 publicVariable "blck_modType";
@@ -37,16 +32,26 @@ execVM "\q\addons\custom_server\Configs\blck_configs.sqf";
 waitUntil {(isNil "blck_configsLoaded") isEqualTo false;};
 waitUntil{blck_configsLoaded};
 blck_configsLoaded = nil;
-diag_log format["[blckeagls] blck_useHC = %1",blck_useHC];
+diag_log format["[blckeagls] blck_useHC = %1 | 	blck_simulationManager = %2 ",blck_useHC,blck_simulationManager];
+diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
+
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
+diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
+
+
+call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
+waitUntil {(isNil "blck_variablesLoaded") isEqualTo false;};
+waitUntil{blck_variablesLoaded};
+blck_variablesLoaded = nil;
+diag_log format["[blckeagls] blck_variables loaded at %1",diag_tickTime];
 
 // spawn map addons to give the server time to position them before spawning in crates etc.
 if (blck_spawnMapAddons) then
 {
 	call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\MapAddons\MapAddons_init.sqf";
 }else{
-	diag_log "[blckegls] Map Addons disabled";
+	diag_log "[blckeagls] Map Addons disabled";
 };
 blck_spawnMapAddons = nil;
 
@@ -63,13 +68,24 @@ diag_log "[blckeagls] Mission Lists Loaded Successfully";
 
 [] execVM "\q\addons\custom_server\Missions\Static\GMS_StaticMissions_init.sqf";
 [] execVM "q\addons\custom_server\Missions\UMS\GMS_UMS_init.sqf";  // loads functions and spawns any static missions.
-diag_log "blck_init_server: ->> Static and UMS systems initialized.";
+diag_log "[blckeagls] blck_init_server: ->> Static and UMS systems initialized.";
 
-#ifdef useDynamicSimulation
-diag_log "[blckegls] dynamic simulation manager enabled";
-#else
-diag_log "[blckegls] blckegls simulation manager enabled";
+switch (blck_simulationManager) do
+{
+	case 2: {diag_log "[blckeagls] dynamic simulation manager enabled"}; 
+	case 1: {diag_log "[blckeagls] blckeagls simulation manager enabled"};
+	case 0: {diag_log "[blckeagls] simulation management disabled"};
+};
+
+
+#ifdef GRGserver
+// start the dynamic loot crate system
+[] execVM "\q\addons\custom_server\DLS\DLS_init.sqf";
+waitUntil {(isNil "blck_DLSComplete") isEqualTo false;};
+waitUntil{blck_DLSComplete};
+blck_DLSComplete = nil;
 #endif
+
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
 diag_log format["blckeagls] waiting for players to join ----    >>>>"];
 
