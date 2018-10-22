@@ -11,7 +11,8 @@
 
 if ( !(isServer) || hasInterface) exitWith{};
 
-#include "blck_defines.hpp";
+//#include "blck_defines.hpp";
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 if !(isNil "blck_Initialized") exitWith{};
 private _blck_loadingStartTime = diag_tickTime;
