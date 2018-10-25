@@ -11,7 +11,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private["_grpPilot","_chopperType","_patrolHeli","_launcherType","_unitPilot","_unitCrew","_mags","_turret","_return","_abort","_supplyHeli"];
+private["_grpPilot","_chopperType","_patrolHeli","_launcherType","_unitPilot","_unitCrew","_mags","_turret","_return","_abort","_supplyHeli","_minDist","_maxDist"];
 params["_coords","_skillAI","_helis",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]],["_Launcher","none"]];
 
 if (_uniforms isEqualTo []) 		then {_uniforms = [_skillAI] call blck_fnc_selectAIUniforms};
@@ -55,7 +55,19 @@ if !(isNull _grpPilot)  then
 	_grpPilot setVariable["arc",0];
 	_grpPilot setVariable["wpRadius",30];
 	_grpPilot setVariable["wpMode","SAD"];
-
+	//  		[_pos,_minDist,_maxDist,_groupSpawned,"random","SAD","infantry"] spawn blck_fnc_setupWaypoints;
+	diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
+	switch (toLower(_skillAI)) do
+	{
+		case "blue": {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisBlue};
+		case "red" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisRed};
+		case "green" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisGreen};
+		case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
+		default {_minDist = 150; _maxDist = 500};
+	};
+		diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
+	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","pilot"] call blck_fnc_setupWaypoints;
+	blck_monitoredMissionAIGroups pushBack _grpPilot;
 	//create helicopter and spawn it
 	if (( typeName _helis) isEqualTo "ARRAY") then 
 	{
@@ -150,8 +162,6 @@ if !(isNull _grpPilot)  then
 		diag_log format["_fnc_spawnMissionHeli (133)::-->> Heli %1 outfited with a crew numbering %2",_patrolHeli, crew _patrolHeli];
 	};
 	#endif
-
-	//blck_monitoredMissionAIGroups pushBack _grpPilot;
 };
 //diag_log format["[blckeagls] _fnc_spawnMissionHeli:: _patrolHeli %1 | _grpPilot %2 | _abort %3",_patrolHeli,_grpPilot,_abort];
 _return = [_patrolHeli,units _grpPilot,_abort];

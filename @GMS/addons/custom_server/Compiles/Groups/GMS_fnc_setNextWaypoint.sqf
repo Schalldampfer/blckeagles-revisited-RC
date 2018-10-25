@@ -17,12 +17,10 @@
 private["_group","_wp","_index","_pattern","_mode","_arc","_dis","_wpPos"];
 
 _group = group _this;
-
 _group setVariable["timeStamp",diag_tickTime];
 _group setcombatmode "YELLOW";
 _group setBehaviour "COMBAT"
 _wp = [_group, 0];
-
 _pattern = _group getVariable["wpPattern",[]];
 _index = _group getVariable["wpIndex",0];
 _index = _index + 1;
