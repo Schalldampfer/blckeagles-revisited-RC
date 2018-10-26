@@ -78,15 +78,6 @@ switch (blck_simulationManager) do
 	case 0: {diag_log "[blckeagls] simulation management disabled"};
 };
 
-
-#ifdef GRGserver
-// start the dynamic loot crate system
-[] execVM "\q\addons\custom_server\DLS\DLS_init.sqf";
-waitUntil {(isNil "blck_DLSComplete") isEqualTo false;};
-waitUntil{blck_DLSComplete};
-blck_DLSComplete = nil;
-#endif
-
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
 diag_log format["blckeagls] waiting for players to join ----    >>>>"];
 
