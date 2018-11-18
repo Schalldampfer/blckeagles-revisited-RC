@@ -46,10 +46,6 @@ blck_configsLoaded = nil;
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 
-#ifdef GRGserver
-diag_log "[blckeagls] Running GRG Version";
-#endif
-
 switch (blck_simulationManager) do
 	case 1: {diag_log "[blckeagls] dynamic simulation manager enabled"}; 
 	case 2: {diag_log "[blckeagls] blckeagls simulation manager enabled"};

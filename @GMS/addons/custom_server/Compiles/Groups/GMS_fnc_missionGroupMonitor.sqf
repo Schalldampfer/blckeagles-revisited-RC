@@ -17,9 +17,9 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-//diag_log format["_fnc_missionGroupMonitor (4/29:4:09 PM)::-->> running function at diag_tickTime = %1 with blck_fnc_missionGroupMonitor = %2",diag_tickTime,blck_monitoredMissionAIGroups];
 #ifdef blck_debugMode
-	//diag_log format["_fnc_missionGroupMonitor:: blck_debugMode defined"];
+diag_log format["_fnc_missionGroupMonitor (4/29:4:09 PM)::-->> running function at diag_tickTime = %1 with blck_fnc_missionGroupMonitor = %2",diag_tickTime,blck_monitoredMissionAIGroups];
+//diag_log format["_fnc_missionGroupMonitor:: blck_debugMode defined"];
 #endif
 _fn_allPlayers = {
 	private ["_players"];
@@ -31,29 +31,10 @@ _fn_allPlayers = {
 	_players
 };
 
-_fn_aliveGroupUnits = {
-	private["_grp","_aliveUnits"];
-	_grp = _this select 0;
-	_aliveUnits = [];
-	{
-		if ( alive _x) then {_aliveUnits pushback _x};
-	} forEach (units _grp);
-	_aliveUnits
-};
+////////////////
+//  local functions
+////////////////
 
-_fn_inCombat = {
-	private["_grp","_targets","_players","_aliveUnits"];
-	_grp = _this select 0;
-	_players = [] call _fn_allPlayers;
-	_aliveUnits = [_grp] call _fn_aliveGroupUnits;
-	_inCombat = false;
-	{
-		_targets = _x findNearestEnemy (position _x);
-		if !(isNull _targets) exitWith {_inCombat = true};
-	} forEach _aliveUnits;
-	//diag_log format["_fn_inCombat::-->> _grp to test is %1 and result is %2",_grp,_inCombat];
-	_inCombat;
-};
 
 _fn_removeEmptyOrNullGroups = {
 	//diag_log format["_fn_removeEmptyOrNullGroups::-->> excuting function at %1",diag_tickTime];
@@ -75,10 +56,20 @@ _fn_removeEmptyOrNullGroups = {
 	};
 };
 
+_fn_centerGroup = {
+
+};
+
 _fn_monitorGroupWaypoints = {
 	{
 		private["_timeStamp","_index","_unit","_soldierType"];
-		
+		/*
+		#define blck_turnBackRadiusInfantry 800
+		#define blck_turnBackRadiusVehicles 1000
+		#define blck_turnBackRadiusHelis 1000
+		#define blck_turnBackRadiusJets 1500
+		*/
+		diag_log format["_fn_monitorGroupWaypoints - radii: on foot %1 | vehicle %2 | heli %3 | jet %4",blck_turnBackRadiusInfantry,blck_turnBackRadiusVehicles,blck_turnBackRadiusHelis,blck_turnBackRadiusJets];
 		_timeStamp = _x getVariable ["timeStamp",0];
 		if (_timeStamp isEqualTo 0) then {
 			_x setVariable["timeStamp",diag_tickTime];
@@ -118,9 +109,9 @@ _fn_monitorGroupWaypoints = {
 				{
 					private _leader = leader _x;
 					(_leader) call blck_fnc_changeToMoveWaypoint;
-					#ifdef blck_debugMode
-					if (blck_debugLevel > 2) then {diag_log format["_fnc_missionGroupMonitor: vehicle group %1 stuck, waypoint reset",_x];};
-					#endif
+					//#ifdef blck_debugMode
+					if (true /*blck_debugLevel > 2*/) then {diag_log format["_fnc_missionGroupMonitor: vehicle group %1 stuck, waypoint reset",_x];};
+					//#endif
 					/*
 					if ( (getPos _leader) distance2d (_group getVariable "patrolCenter") > 200) then 
 					{
@@ -130,28 +121,28 @@ _fn_monitorGroupWaypoints = {
 
 			};
 		};
+		/*
 		if (_soldierType isEqualTo "helicopter") then
 		{
-			if (diag_tickTime > (_x getVariable "timeStamp") + 60) then
+			if ((diag_tickTime > (_x getVariable "timeStamp")) then
 			{
-				_units = [_x] call _fn_aliveGroupUnits;
+				private _units = [_x] call _fn_aliveGroupUnits;
 				if (count _units > 0) then
 				{
 					private _leader = leader _x;
-					(_leader) call blck_fnc_changeToMoveWaypoint;
-					#ifdef blck_debugMode
-					if (blck_debugLevel > 2) then {diag_log format["_fnc_missionGroupMonitor: helicopter group %1 stuck, waypoint reset",_x];};
-					#endif
-					/*
-					if ( (getPos _leader) distance2d (_group getVariable "patrolCenter") > 200) then 
+					if (_leader distance (_group getVariable "patrolCenter") > blck_turnBackRadiusHelis) then
 					{
-						
-					};
-					*/
+						_leader call blck_fnc_changeToMoveWaypoint;
+						//#ifdef blck_debugMode
+						if (true ) then {diag_log format["_fnc_missionGroupMonitor: helicopter group %1 stuck, waypoint reset",_x];};
+						//#endif
+						//diag_log format["_fnc_missionGroupMonitor: helicopter group %1 stuck, waypoint reset",_x];
+					};					
 				};
 
 			};
-		};		
+		};	
+		*/
 	} forEach blck_monitoredMissionAIGroups;
 };
 
@@ -165,22 +156,18 @@ _fn_simulationMonitor = {
 		_playerType = ["Epoch_Male_F","Epoch_Female_F"];
 	};
 	{
-		_players = (leader _x) nearEntities [_playerType, blck_simulationEnabledDistance];
+		private _players = (leader _x) nearEntities [_playerType, blck_simulationEnabledDistance];
 		if (count _players > 0) then
 		{
-		  if !(simulationEnabled _x) then
+		  private _group = _x;
 		  {
 			  	{
 					_x enableSimulationGlobal  true;
 					(_players select 0) reveal _x;  //  Force simulation on
-				}forEach (units _x);
+				}forEach (units _group);
 		  };
 		}else{
-			// Be sure simulation is off for all units in the group.
-			if (simulationEnabled _x) then
-			{
-				{_x enableSimulationGlobal false}forEach (units _x);		
-			};
+				{_x enableSimulationGlobal false}forEach (units _x);	
 		};
 	} forEach blck_monitoredMissionAIGroups;
 };
@@ -192,7 +179,7 @@ if (blck_debugLevel > 2) then {diag_log format["_fnc_missionGroupMonitor: execut
 #endif
 [] call _fn_removeEmptyOrNullGroups;
 uiSleep 0.1;
-[] call _fn_monitorGroupWaypoints;
+//[] call _fn_monitorGroupWaypoints;
 
 if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {[] call _fn_simulationMonitor};
 

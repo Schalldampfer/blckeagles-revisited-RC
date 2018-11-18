@@ -1,8 +1,5 @@
 /*
-   call as [] call blck_fnc_cleanEmptyGroups;
-   Deletes any empty groups and thereby prevents errors resulting from createGroup returning nullGroup.
    By Ghostrider [GRG]
-  3/18/17
 	--------------------------
 	License
 	--------------------------

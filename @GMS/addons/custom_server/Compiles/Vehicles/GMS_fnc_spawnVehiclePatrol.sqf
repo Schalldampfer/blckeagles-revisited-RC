@@ -15,7 +15,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private["_vehType","_safepos","_veh","_unitNumber"];
-params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",30],["_maxDis",45],["_group",grpNull],["_setWaypoints",true]];
+params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true]];
 #ifdef blck_debugMode
 if (blck_debugLevel > 1) then
 {

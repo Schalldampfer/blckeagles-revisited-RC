@@ -1,8 +1,6 @@
 /*
 	By Ghostrider [GRG]
 	Copyright 2016
-
-	
 	--------------------------
 	License
 	--------------------------
@@ -15,7 +13,6 @@
 private["_groupSpawned"];
 
 _groupSpawned = createGroup [blck_AI_Side, true]; 
-//_groupSpawned setVariable["groupVehicle",objNull];
 if (blck_simulationManager == blck_useDynamicSimulationManagement) then 
 {
 	_groupSpawned enableDynamicSimulation true;

@@ -48,7 +48,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_crateMoneyOrange = [500, 750];
 
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = false;
+	blck_useConfigsGeneratedLoadouts = true;
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
 	_blck_armed_vehicles_Exile = [
@@ -160,9 +160,9 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	//"Exile_Car_HMMWV_M134_Desert",
 	"Exile_Car_HMMWV_M2_Desert",
 	"B_LSV_01_armed_F",
-	//"_MRAP_02_gmg_ghex_F",
+	"_MRAP_02_gmg_ghex_F",
 	//"O_MRAP_02_hmg_ghex_F",
-	//"O_MRAP_03_gmg_ghex_F",
+	"O_MRAP_03_gmg_ghex_F",
 	//"O_MRAP_03_hmg_ghex_F",	
 	"B_MBT_01_cannon_F",
 	"B_MBT_01_cannon_F",	// Duplicate to increase chance that these will spawn relative to others

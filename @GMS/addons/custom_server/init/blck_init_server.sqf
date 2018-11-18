@@ -11,8 +11,7 @@
 
 if ( !(isServer) || hasInterface) exitWith{};
 
-//#include "blck_defines.hpp";
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+#include "blck_defines.hpp";
 
 if !(isNil "blck_Initialized") exitWith{};
 private _blck_loadingStartTime = diag_tickTime;
@@ -62,6 +61,10 @@ waitUntil {(isNil "blck_worldSet") isEqualTo false;};
 waitUntil{blck_worldSet};
 blck_worldSet = nil;
 
+#ifdef GRG_TestServer
+//[] execVM "\q\addons\custom_server\init\testCrateLoading.sqf";
+#endif 
+
 // set up the lists of available missions for each mission category
 diag_log "[blckeagls] Loading Mission Lists";
 #include "\q\addons\custom_server\Missions\GMS_missionLists.sqf";
@@ -78,8 +81,8 @@ switch (blck_simulationManager) do
 	case 0: {diag_log "[blckeagls] simulation management disabled"};
 };
 
-diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
-diag_log format["blckeagls] waiting for players to join ----    >>>>"];
+diag_log "[blckeagls] Running GhostriderGaming Version";
+#endif
 
 if !(blck_debugON || (blck_debugLevel isEqualTo 0)) then
 {
@@ -88,6 +91,7 @@ if !(blck_debugON || (blck_debugLevel isEqualTo 0)) then
 } else {
 	diag_log "[blckeagls] spawning Missions";
 };
+
 
 if (blck_spawnStaticLootCrates) then
 {
@@ -106,23 +110,29 @@ if (true /*blck_blacklistTraderCities*/) then
 {
 	execVM "\q\addons\custom_server\init\GMS_fnc_getTraderCites.sqf";
 };
-
+diag_log format["[blckeagls] _init_server: blck_enableOrangeMissions = %1",blck_enableOrangeMissions];
 //Start the mission timers
 if (blck_enableOrangeMissions > 0) then
 {
 	//[_missionListOrange,_pathOrange,"OrangeMarker","orange",blck_TMin_Orange,blck_TMax_Orange] spawn blck_fnc_missionTimer;//Starts major mission system (Orange Map Markers)
 	[_missionListOrange,_pathOrange,"OrangeMarker","orange",blck_TMin_Orange,blck_TMax_Orange,blck_enableOrangeMissions] call blck_fnc_addMissionToQue;
 };
+
+diag_log format["[blckeagls] _init_server: blck_enableGreenMissions = %1",blck_enableGreenMissions];
 if (blck_enableGreenMissions > 0) then
 {
 	//[_missionListGreen,_pathGreen,"GreenMarker","green",blck_TMin_Green,blck_TMax_Green] spawn blck_fnc_missionTimer;//Starts major mission system 2 (Green Map Markers)
 	[_missionListGreen,_pathGreen,"GreenMarker","green",blck_TMin_Green,blck_TMax_Green,blck_enableGreenMissions] call blck_fnc_addMissionToQue;
 };
+
+diag_log format["[blckeagls] _init_server: blck_enableRedMissions = %1",blck_enableRedMissions];
 if (blck_enableRedMissions > 0) then
 {
 	//[_missionListRed,_pathRed,"RedMarker","red",blck_TMin_Red,blck_TMax_Red] spawn blck_fnc_missionTimer;//Starts minor mission system (Red Map Markers)//Starts minor mission system 2 (Red Map Markers)
 	[_missionListRed,_pathRed,"RedMarker","red",blck_TMin_Red,blck_TMax_Red,blck_enableRedMissions] call blck_fnc_addMissionToQue;
 };
+
+diag_log format["[blckeagls] _init_server: blck_enableBlueMissions = %1",blck_enableBlueMissions];
 if (blck_enableBlueMissions > 0) then
 {
 	//[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue] spawn blck_fnc_missionTimer;//Starts minor mission system (Blue Map Markers)

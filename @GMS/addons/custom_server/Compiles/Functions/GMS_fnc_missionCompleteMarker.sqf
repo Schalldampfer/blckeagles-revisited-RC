@@ -9,7 +9,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-//#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private["_location","_MainMarker","_name"];
 //diag_log format["blck_fnc_missionCompleteMarker:: _this = %1",_this];

@@ -55,7 +55,7 @@ if !(isNull _grpPilot)  then
 	_grpPilot setVariable["arc",0];
 	_grpPilot setVariable["wpRadius",30];
 	_grpPilot setVariable["wpMode","SAD"];
-	//  		[_pos,_minDist,_maxDist,_groupSpawned,"random","SAD","infantry"] spawn blck_fnc_setupWaypoints;
+	//[_coords,_minDist,_maxDist,_groupSpawned,"random","SAD","infantry"] spawn blck_fnc_setupWaypoints;
 	diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
 	switch (toLower(_skillAI)) do
 	{
@@ -65,8 +65,8 @@ if !(isNull _grpPilot)  then
 		case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
 		default {_minDist = 150; _maxDist = 500};
 	};
-		diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
-	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","pilot"] call blck_fnc_setupWaypoints;
+
+	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","helicopter"] call blck_fnc_setupWaypoints;
 	blck_monitoredMissionAIGroups pushBack _grpPilot;
 	//create helicopter and spawn it
 	if (( typeName _helis) isEqualTo "ARRAY") then 
@@ -79,7 +79,8 @@ if !(isNull _grpPilot)  then
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 1) then
 	{
-		diag_log format["_fnc_spawnMissionHeli (78):: _chopperType selected = %1",_chopperType];
+			diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
+			diag_log format["_fnc_spawnMissionHeli (78):: _chopperType selected = %1",_chopperType];
 	};
 	#endif
 

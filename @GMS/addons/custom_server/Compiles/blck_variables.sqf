@@ -12,11 +12,16 @@
 */
 #include"\q\addons\custom_server\Configs\blck_defines.hpp";
 
-diag_log "[blckeagls] loading variables";
+//diag_log "[blckeagls] loading variables";
 
-//  blck_debugON = false;  Moved to blck_configs.sqf because of script loading order issues.
-//  blck_debugLevel = 0;  Moved to blck_configs.sqf because of script loading order issues.
 blck_minFPS = 8; 
+
+// radius within whih missions are triggered. The trigger causes the crate and AI to spawn.
+#ifdef blck_milServer
+blck_TriggerDistance = 1500;
+#else
+blck_TriggerDistance = 1500;
+#endif
 
 ////////////////////////////////////////////////
 //  Do Not Touch Anything Below This Line
@@ -35,10 +40,7 @@ blck_activeMissions = [];
 blck_deadAI = [];
 blck_connectedHCs = [];
 blck_missionMarkers = [];
-//blck_groupsOnHC = [];
-//blck_vehiclesOnHC = [];
-//blck_HC_monitoredVehicles = [];
-//blck_HC_monitoredGroups = [];
+
 if (blck_simulationManager == 2) then 
 {
 	"Group" setDynamicSimulationDistance 1800;
@@ -47,14 +49,9 @@ if (blck_simulationManager == 2) then
 
 blck_heliCrashSites = [];
 
-// radius within whih missions are triggered. The trigger causes the crate and AI to spawn.
-#ifdef blck_milServer
-blck_TriggerDistance = 1500;
-#else
-blck_TriggerDistance = 1500;
-#endif
+
 
 blck_mainThreadUpdateInterval = 60;
 blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
-diag_log "[blckeagls] Variables Loaded";
+//diag_log "[blckeagls] Variables Loaded";
 blck_variablesLoaded = true;

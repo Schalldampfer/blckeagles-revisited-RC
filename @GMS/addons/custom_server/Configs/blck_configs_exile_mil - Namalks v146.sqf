@@ -1,8 +1,6 @@
 /*
-	for ghostridergaming
 	By Ghostrider [GRG]
 	Copyright 2016
-	Last Modified 3-14-17
 	
 	--------------------------
 	License
@@ -14,12 +12,6 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";	
 
-#ifdef blck_milServer
-execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
-if (true) exitWith {};
-#endif
-
-diag_log "[blckeagls] Loading Exile-specific configs for Non-militarized servers: blck_configs_exile.sqf";
 ////////////
 // Exile-specific settings
 ////////////	
@@ -46,8 +38,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 **********************************************************************************/
 	
-	blck_blacklistSpawns = true;
-	blck_listConcreteMixerZones	= true;
+	blck_blacklistSpawns = false;
+	blck_listConcreteMixerZones	= false;
 	blck_AI_Side = EAST;
 
 	blck_crateMoneyBlue = [100,250];
@@ -92,7 +84,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 	_blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
-		"B_MBT_01_mlrs_F",
+		//"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
 		"O_MBT_02_cannon_F",
 		//"O_MBT_02_arty_F",
@@ -127,34 +119,34 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 	_blck_Tanks_CUP = [
 		"CUP_B_M2A3Bradley_USA_D",  
-		"CUP_B_M113_desert_USA",  
-		"CUP_B_M163_USA",  
+		//"CUP_B_M113_desert_USA",  
+		//"CUP_B_M163_USA",  
 		"CUP_B_M6LineBacker_USA_D",  
 		"CUP_B_M1A1_DES_US_Army",  
 		"CUP_B_M1A2_TUSK_MG_DES_US_Army",  
-		"CUP_B_AAV_USMC",  
-		"CUP_B_M270_DPICM_USA",  
+		//"CUP_B_AAV_USMC",  
+		//"CUP_B_M270_DPICM_USA",  
 		"CUP_B_ZSU23_CDF",  
-		"CUP_B_BMP2_CDF",  
+		//"CUP_B_BMP2_CDF",  
 		"CUP_B_T72_CDF",  
-		"CUP_I_T34_NAPA",  
+		//"CUP_I_T34_NAPA",  
 		"CUP_B_Challenger2_NATO",  
-		"CUP_B_FV432_Bulldog_GB_D_RWS",  
-		"CUP_B_FV432_Bulldog_GB_D",  
+		//"CUP_B_FV432_Bulldog_GB_D_RWS",  
+		//"CUP_B_FV432_Bulldog_GB_D",  
 		"CUP_B_FV510_GB_D_SLAT",  
-		"CUP_B_MCV80_GB_D_SLAT",  
-		"CUP_O_2S6_RU",  
+		//"CUP_B_MCV80_GB_D_SLAT",  
+		//"CUP_O_2S6_RU",  
 		"CUP_O_BMP3_RU",  
 		"CUP_O_T90_RU",  
-		"CUP_O_T55_SLA",  
-		"CUP_O_BMP1P_TKA",  
-		"CUP_B_M270_DPICM_USA",
-		"CUP_B_M2Bradley_USA_W",  
-		"CUP_B_FV510_GB_D",  
-		"CUP_B_MCV80_GB_D",  
-		"CUP_B_M7Bradley_USA_D",  
-		"CUP_O_2S6_RU",  
-		"CUP_O_BMP1_TKA"
+		"CUP_O_T55_SLA"  //,  
+		//"CUP_O_BMP1P_TKA",  
+		//"CUP_B_M270_DPICM_USA",
+		//"CUP_B_M2Bradley_USA_W",  
+		//"CUP_B_FV510_GB_D",  
+		//"CUP_B_MCV80_GB_D",  
+		//"CUP_B_M7Bradley_USA_D",  
+		//"CUP_O_2S6_RU",  
+		//"CUP_O_BMP1_TKA""
 	];
 	
 	blck_AIPatrolVehicles = 
@@ -196,12 +188,30 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Car_HMMWV_M2_Desert",
 		"B_LSV_01_armed_F"		
 	];
+
+	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
+	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3 + _blck_Tanks_CUP;
+	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
 	
-	blck_AIPatrolVehicles = ["Exile_Car_Offroad_Armed_Guerilla01","Exile_Car_Offroad_Armed_Guerilla02","Exile_Car_BTR40_MG_Green","Exile_Car_BTR40_MG_Camo","Exile_Car_HMMWV_M134_Green","Exile_Car_HMMWV_M134_Desert",/*"Exile_Car_HMMWV_M134_Desert","Exile_Car_HMMWV_M2_Desert",*/"B_LSV_01_armed_F"]; // Type of vehicle spawned to defend AI bases	
-	blck_AIPatrolVehiclesBlue = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesRed = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesGreen = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesOrange = blck_AIPatrolVehicles;
+	if (toLower(worldName) isEqualTo "namalsk") then
+	{
+		_blck_lightlyArmed_ARMA3 = [
+			"B_G_Offroad_01_armed_F", 
+			"O_G_Offroad_01_armed_F",
+			//"B_MRAP_01_gmg_F", 
+			"B_MRAP_01_hmg_F",
+			//"O_MRAP_02_gmg_F",  
+			"O_MRAP_02_hmg_F",
+			"I_MRAP_03_hmg_F" 
+			//"I_MRAP_03_gmg_F",
+			//"B_APC_Wheeled_01_cannon_F", 			
+			//"I_APC_Wheeled_03_cannon_F"	
+		];	
+		diag_log "blck)configs_exile_mil.sqf:: - > Using special settings for namalsk";
+		blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + blck_AIPatrolVehiclesBlue;
+		blck_AIPatrolVehiclesGreen = blck_AIPatrolVehiclesRed;
+		blck_AIPatrolVehiclesOrange = blck_AIPatrolVehiclesRed;		
+	};
 	
 	// Blacklisted itesm
 	blck_blacklistedOptics = ["optic_Nightstalker","optic_tws","optic_tws_mg"];
@@ -219,8 +229,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"optic_Nightstalker",
 		"optic_NVS",
 		"optic_SOS",
-		"optic_tws"
-		//"optic_tws_mg",
+		"optic_tws",
+		"optic_tws_mg"
 		];
 		
 	#ifdef useAPEX	
@@ -310,6 +320,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_WeaponList_Green = blck_WeaponList_Green + blck_apexWeapons;	
 	#endif
 	
+
+	
 	blck_backpacks = ["B_Carryall_ocamo","B_Carryall_oucamo","B_Carryall_mcamo","B_Carryall_oli","B_Carryall_khk","B_Carryall_cbr" ];  
 		
 	#ifdef useAPEX
@@ -318,7 +330,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"B_FieldPack_ghex_F","B_ViperHarness_blk_F","B_ViperHarness_ghex_F","B_ViperHarness_hex_F","B_ViperHarness_khk_F",
 		"B_ViperHarness_oli_F","B_ViperLightHarness_blk_F","B_ViperLightHarness_ghex_F","B_ViperLightHarness_hex_F","B_ViperLightHarness_khk_F","B_ViperLightHarness_oli_F"
 		];	
-	blck_backpacks = blck_ApexBackpacks + blck_backpacks;
+	blck_backpacks = blck_backpacks + blck_ApexBackpacks;
 	#endif
 	blck_backpacks_blue = blck_backpacks;
 	blck_backpacks_red = blck_backpacks;
@@ -568,7 +580,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_SkinList_red = blck_SkinList;
 	blck_SkinList_green = blck_SkinList;
 	blck_SkinList_orange = blck_SkinList;
-
+		
 	blck_vests = [
 		"V_Press_F",
 		"V_Rangemaster_belt",
@@ -631,7 +643,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_vests_blue = blck_vests;
 	blck_vests_red = blck_vests;
 	blck_vests_green = blck_vests;
-	blck_vests_orange = blck_vests;		
+	blck_vests_orange = blck_vests;	
 		
 	//CraftingFood
 	blck_Meats=[
@@ -662,6 +674,14 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Item_Moobar",
 		"Exile_Item_InstantCoffee"
 	];
+	
+	#ifdef useCUP
+	
+	#endif
+	
+	#ifdef useRHS
+	
+	#endif
 	blck_ConsumableItems = blck_Meats + blck_Drink + blck_Food;
 	blck_throwableExplosives = ["HandGrenade","MiniGrenade"];
 	blck_otherExplosives = ["1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"];
@@ -671,8 +691,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	
 	blck_NVG = ["NVGoggles","NVGoggles_INDEP","NVGoggles_OPFOR","Exile_Item_XM8"];
 	blck_buildingMaterials = ["Exile_Item_ExtensionCord","Exile_Item_JunkMetal","Exile_Item_LightBulb","Exile_Item_MetalBoard",
-			"Exile_Item_MetalPole","Exile_Item_MetalScrews","Exile_Item_Cement","Exile_Item_Sand"];	
-	blck_tools = ["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Melee_Axe","Exile_Melee_SledgeHammmer","Exile_Item_Handsaw","Exile_Item_Pliers"];
+			"Exile_Item_MetalPole","Exile_Item_MetalScrews","Exile_Item_Cement","Exile_Item_Sand","Exile_Item_MetalWire","Exile_Item_ExtensionCord","Exile_Item_JunkMetal"];	
+	blck_tools = ["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Melee_Axe","Exile_Melee_SledgeHammmer","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_CanOpener","Exile_Item_Shovel"];
 
 /***************************************************************************************
 DEFAULT CONTENTS OF LOOT CRATES FOR EACH MISSION
@@ -681,9 +701,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 ***************************************************************************************/			
 
 	// values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
-	blck_lootCountsOrange = [[6,8],[24,32],[5,10],[25,35],16,1];   // Orange
-	blck_lootCountsGreen = [[4,8],[20,30],[5,9],[15,18],18,1]; // Green
-	blck_lootCountsRed = [[4,6],[12,18],4,[6,12],6,1];  // Red	
+	blck_lootCountsOrange = [8,32,8,35,16,2];   // Orange
+	blck_lootCountsGreen = [7,24,6,25,18,2]; // Green
+	blck_lootCountsRed = [5,16,4,10,6,1];  // Red	
 	blck_lootCountsBlue = [4,12,3,6,6,1];   // Blue
 	
 	blck_BoxLoot_Orange = 
@@ -710,9 +730,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
-				["MMG_02_black_F","130Rnd_338_Mag"],
-				["MMG_02_camo_F","130Rnd_338_Mag"],
-				["MMG_02_sand_F","130Rnd_338_Mag"],
+				["MMG_02_black_F","150Rnd_93x64_Mag"],
+				["MMG_02_camo_F","150Rnd_93x64_Mag"],
+				["MMG_02_sand_F","150Rnd_93x64_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_F","10Rnd_338_Mag"],
 				["srifle_DMR_02_sniper_F","10Rnd_338_Mag"],
@@ -738,15 +758,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["3rnd_HE_Grenade_Shell",1,3],
 				["HandGrenade",1,5],
 				// Marksman Pack Ammo
-				["10Rnd_338_Mag",1,5],
-				["10Rnd_338_Mag",1,5],				
-				["10Rnd_127x54_Mag" ,1,5],
-				["10Rnd_127x54_Mag",1,5],
-				["10Rnd_93x64_DMR_05_Mag" ,1,5],
-				["10Rnd_93x64_DMR_05_Mag" ,1,5],
-				// Apex Ammo				
-				["130Rnd_338_Mag",1,3],
-				["150Rnd_93x64_Mag",1,3]				
+				["10Rnd_338_Mag",3,5],
+				["10Rnd_338_Mag",3,5],				
+				["10Rnd_127x54_Mag" ,3,5],
+				["10Rnd_127x54_Mag",3,5],
+				["10Rnd_93x64_DMR_05_Mag" ,3,5],
+				["10Rnd_93x64_DMR_05_Mag" ,3,5],
+				["150Rnd_93x64_Mag",3,5],
+				["130Rnd_338_Mag",3,5]				
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],
@@ -760,7 +779,8 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,10],["Exile_Item_LightBulb",1,10],["Exile_Item_MetalBoard",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_CamoTentKit",1,10],["Exile_Item_WorkBenchKit",1,10],
 				["Exile_Item_WoodWindowKit",1,10],["Exile_Item_WoodWallKit",1,10],["Exile_Item_WoodStairsKit",1,10],["Exile_Item_WoodGateKit",1,10],["Exile_Item_WoodDoorwayKit",1,10],["Exile_Item_MetalBoard",1,10],
-				["Exile_Item_MetalBoard",1,10],["Exile_Item_ExtensionCord",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_Sand",3,10],["Exile_Item_Cement",3,10],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10]
+				["Exile_Item_MetalBoard",1,10],["Exile_Item_ExtensionCord",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_Sand",3,10],["Exile_Item_Cement",3,10],["Exile_Item_Sand",3,10],["Exile_Item_Cement",3,10],
+				["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10]
 				//
 			],
 			[//Items
@@ -808,10 +828,6 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
-				["MMG_01_tan_F","150Rnd_93x64_Mag"],
-				["MMG_02_black_F","130Rnd_338_Mag"],
-				["MMG_02_camo_F","130Rnd_338_Mag"],
-				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_02_camo_F","10Rnd_338_Mag"],
 				["srifle_DMR_03_F","10Rnd_338_Mag"],		
 				["srifle_DMR_04_Tan_F","10Rnd_338_Mag"],
@@ -838,9 +854,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
-				// Apex Ammo				
-				["130Rnd_338_Mag",1,3],
-				["150Rnd_93x64_Mag",1,3]				
+				["130Rnd_338_Mag",3,5]
 			],			
 			[  // Optics
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Holosight",1,3],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -853,7 +867,8 @@ for examples of how you can do this see \Major\Compositions.sqf
 			[// Materials and supplies				
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,5],["Exile_Item_LightBulb",1,5],["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_CamoTentKit",1,5],["Exile_Item_WorkBenchKit",1,5],
-				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],["Exile_Item_Cement",2,5]
+				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],
+				["Exile_Item_Cement",2,8],["Exile_Item_Sand",2,8],["Exile_Item_Cement",2,8]
 			],
 			[//Items
 				["Exile_Item_InstaDoc",1,2],["NVGoggles",1,2],["Rangefinder",1,2],["Exile_Item_Bandage",1,6],["Exile_Item_Vishpirin",1,6],  
@@ -932,7 +947,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 			],
 			[// Materials and supplies				
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,3],["Exile_Item_ExtensionCord",1,2],["Exile_Item_FuelCanisterEmpty",1,2],
-				["Exile_Item_JunkMetal",1,6],["Exile_Item_LightBulb",1,6],["Exile_Item_MetalBoard",1,6],["Exile_Item_MetalPole",1,6],["Exile_Item_CamoTentKit",1,6]
+				["Exile_Item_JunkMetal",1,6],["Exile_Item_LightBulb",1,6],["Exile_Item_MetalBoard",1,6],["Exile_Item_MetalPole",1,6],["Exile_Item_CamoTentKit",1,6],["Exile_Item_MetalWire",1,4]
 			],
 			[//Items
 				["Exile_Item_InstaDoc",1,2],["NVGoggles",1,2],["Rangefinder",1,2],["Exile_Item_Bandage",1,3],["Exile_Item_Vishpirin",1,3],  
@@ -1008,7 +1023,8 @@ for examples of how you can do this see \Major\Compositions.sqf
 			[// Materials and supplies				
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,5],["Exile_Item_LightBulb",1,5],["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_CamoTentKit",1,5],["Exile_Item_WorkBenchKit",1,5],
-				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],["Exile_Item_Cement",2,5]
+				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],
+				["Exile_Item_Cement",2,5],["Exile_Item_Sand",2,5],["Exile_Item_Cement",2,5]
 			],
 			[//Items
 				["Exile_Item_InstaDoc",1,2],["NVGoggles",1,2],["Exile_Item_Energydrink",1,4],["Exile_Item_Beer",1,3],["Rangefinder",1,2],
@@ -1026,6 +1042,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 			]
 		];
 
+		
 
 blck_contructionLootExile = [  
 		[// Weapons	
@@ -1041,8 +1058,8 @@ blck_contructionLootExile = [
 			
 			//
 			["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
-			["Exile_Item_JunkMetal",4,10],["Exile_Item_LightBulb",1,10],["Exile_Item_MetalBoard",4,10],["Exile_Item_MetalPole",4,10],["Exile_Item_CamoTentKit",1,3],["Exile_Item_MetalScrews",3,10],
-			["Exile_Item_Sand",4,10],["Exile_Item_Cement",4,10],["Exile_Item_WaterCanisterDirtyWater",1,3],["Exile_Item_FuelCanisterFull",1,3]
+			["Exile_Item_JunkMetal",1,10],["Exile_Item_LightBulb",1,10],["Exile_Item_MetalBoard",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_CamoTentKit",1,10],["Exile_Item_MetalScrews",3,10],
+			["Exile_Item_MetalPole",1,10],["Exile_Item_Sand",2,10],["Exile_Item_Cement",2,10]
 		],
 		[//Items
 			"Exile_Item_Matches","Exile_Item_CookingPot","Exile_Item_CanOpener","Exile_Item_Handsaw","Exile_Item_Pliers","Exile_Item_Grinder","Exile_Item_Foolbox","Exile_Item_Hammer",
@@ -1100,8 +1117,7 @@ blck_highPoweredLoot = [
 			["srifle_DMR_06_camo_F","10Rnd_338_Mag"],				
 			["srifle_DMR_04_F","10Rnd_127x54_Mag"],
 			["srifle_DMR_05_blk_F","10Rnd_93x64_DMR_05_Mag"],
-			["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"] //,
-			/*
+			["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"],
 			["launch_NLAW_F","NLAW_F"],
 			["launch_RPG32_F","RPG7_F"],
 			["launch_B_Titan_F","Titan_AT"],
@@ -1112,11 +1128,9 @@ blck_highPoweredLoot = [
 			["launch_O_Titan_short_F","Titan_AA"],
 			["launch_RPG7_F","RPG32_F"],
 			["launch_O_Vorona_brown_F","vorona_HEAT"],
-			["launch_O_Vorona_green_F","Vorona_HE"]		
-			*/
+			["launch_O_Vorona_green_F","Vorona_HE"]									
 		],
 		[//Magazines
-			/*
 			["NLAW_F",1,3],
 			["RPG32_F",1,3],
 			["RPG32_HE_F",1,3],
@@ -1126,7 +1140,6 @@ blck_highPoweredLoot = [
 			["RPG7_F",1,3],
 			["vorona_HEAT",1,3],
 			["Vorona_HE",1,3],
-			*/
 			//["10Rnd_338_Mag",1,5],
 			["10Rnd_338_Mag",3,5],				
 			//["10Rnd_127x54_Mag" ,1,5],
@@ -1148,6 +1161,7 @@ blck_highPoweredLoot = [
 			
 		]
 ];
+	// Time the marker remains after completing the mission in seconds - experimental not yet implemented
 
 	blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
 		

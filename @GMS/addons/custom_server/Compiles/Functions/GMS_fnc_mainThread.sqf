@@ -12,10 +12,6 @@
 
 //diag_log format["starting _fnc_mainThread with time = %1",diag_tickTime];
 
-#ifdef GRGserver
-diag_log "running GRGserver version of _fnc_mainThread";
-#endif
-
 private["_timer1sec","_timer5sec","_timer20sec","_timer5min","_timer5min"];
 _timer1sec = diag_tickTime;
 _timer5sec = diag_tickTime;
@@ -30,9 +26,6 @@ while {true} do
 	if (diag_tickTime > _timer1sec) then 
 	{
 		[] call blck_fnc_vehicleMonitor;
-		#ifdef GRGserver
-		[] call blck_fnc_broadcastServerFPS;
-		#endif
 		_timer1sec = diag_tickTime + 1;
 		//diag_log format["[blckeagls] _fnc_mainThread 1 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
@@ -41,7 +34,6 @@ while {true} do
 		_timer5sec = diag_tickTime + 5;
 		[] call blck_fnc_missionGroupMonitor;
 		[] call blck_fnc_sm_missionPatrolMonitor;
-	
 		//diag_log format["[blckeagls] _fnc_mainThread 5 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if (diag_tickTime > _timer20sec) then
@@ -76,6 +68,7 @@ while {true} do
 		{
 			[] call blck_fnc_timeAcceleration;
 		};
+
 		#ifdef blck_debugMode
 		//diag_log format["_fnc_mainThread: active SQFscripts include: %1",diag_activeSQFScripts];
 		diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];

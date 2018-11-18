@@ -306,7 +306,7 @@ uisleep 3;
 if (count _garrisonedBuilding_ATLsystem > 0) then
 {
 	_temp = [_coords, _garrisonedBuilding_ATLsystem, _aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_garrisonBuilding_ATLsystem;
-	diag_log format["_missionspawner: garrisoned a building using ATL format, function returned %1",_temp];
+	//diag_log format["_missionspawner: garrisoned a building using ATL format, function returned %1",_temp];
 	//      _return = [_group,_buildingsSpawned,_staticsSpawned];
 	_objects append (_temp select 1);
 	blck_monitoredVehicles append (_temp select 2);
@@ -314,7 +314,7 @@ if (count _garrisonedBuilding_ATLsystem > 0) then
 };
 
 uiSleep 3;
-diag_log format["_missionSpawner:  _garrisonedBuildings_BuildingPosnSystem = %1",_garrisonedBuildings_BuildingPosnSystem];
+//diag_log format["_missionSpawner:  _garrisonedBuildings_BuildingPosnSystem = %1",_garrisonedBuildings_BuildingPosnSystem];
 if (count _garrisonedBuildings_BuildingPosnSystem > 0) then
 {
 	//     params["_center","_garrison","_aiDifficultyLevel","_uniforms","_headGear","_vests","_backpacks","_weaponList","_sideArms"];
@@ -456,7 +456,7 @@ if (_secureAsset) then
 while {_missionComplete isEqualTo -1} do
 {
 	#ifdef blck_debugMode
-	if (blck_debugLevel > 2) exitWith {uiSleep blck_triggerLoopCompleteTime;diag_log "_missionSpawner (492) scripted Mission End blck_debugLevel = 3";};
+	if (blck_debugLevel > 3) exitWith {uiSleep blck_triggerLoopCompleteTime;diag_log "_missionSpawner (492) scripted Mission End blck_debugLevel = 3";};
 	#endif
 	
 	if (_endIfPlayerNear) then

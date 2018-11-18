@@ -74,12 +74,9 @@ if (_missionPatrolVehicles isEqualTo []) then
 	{
 		_abort = true;
 	};
-	//if !(isNull _vehGroup) then
-	//{
-		//blck_monitoredMissionAIGroups pushBack _vehGroup;
-	//};
 
-	
+	blck_monitoredMissionAIGroups pushBack _vehGroup;
+		
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 1) then 
 	{
@@ -96,7 +93,7 @@ if (_missionPatrolVehicles isEqualTo []) then
 	#endif
 
 	//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",30],["_maxDis",45],["_group",grpNull]];
-	_patrolVehicle = [_coords,_spawnPos,_vehicle,30,45,_vehGroup,true] call blck_fnc_spawnVehiclePatrol;
+	_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true] call blck_fnc_spawnVehiclePatrol;
 	//_vehGroup setVariable["groupVehicle",_vehicle];
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 1) then

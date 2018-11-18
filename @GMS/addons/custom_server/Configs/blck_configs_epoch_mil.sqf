@@ -49,7 +49,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_allowSalesAtBlackMktTraders = true; // Allow vehicles to be sold at Halvjes black market traders.
 	
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = false;
+	blck_useConfigsGeneratedLoadouts = true;
 	blck_maximumItemPriceInAI_Loadouts = 100;
 	
 	_blck_lightlyArmed_ARMA3 = [
@@ -533,7 +533,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		blck_vests_green = blck_vests;
 		blck_vests_orange = blck_vests;
 		
-		//CraftingFood
+			//CraftingFood
         blck_Meats=[
             "SnakeCarcass_EPOCH","RabbitCarcass_EPOCH","ChickenCarcass_EPOCH","GoatCarcass_EPOCH","SheepCarcass_EPOCH","DogCarcass_EPOCH","ItemTrout","ItemSeaBass","ItemTuna"
         ];
