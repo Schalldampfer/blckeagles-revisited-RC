@@ -9,7 +9,6 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private _modType = call blck_fnc_getModType;
 blck_UMS_uniforms = 
 [
 	"U_I_Wetsuit",
@@ -37,7 +36,7 @@ blck_UMS_weapons =
 	"arifle_SDAR_F"
 ];
 
-if (_modType isEqualTo "Exile") then
+if ((tolower blck_modType) isEqualTo "exile") then
 {
 	blck_UMS_submarines =
 	[
@@ -52,7 +51,7 @@ if (_modType isEqualTo "Exile") then
 		"Exile_Container_SupplyBox"
 	];
 };
-if (_modType isEqualTo "Epoch") then
+if ((tolower blck_modType) isEqualTo "epoch") then
 {
 	blck_UMS_submarines =
 	[
