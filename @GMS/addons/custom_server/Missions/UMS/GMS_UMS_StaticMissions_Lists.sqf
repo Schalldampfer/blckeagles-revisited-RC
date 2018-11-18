@@ -20,4 +20,3 @@ _staticMissions = [
 	//["Exile","Altis","staticMissionExample2_Exile.sqf"]
 ];
 
-//diag_log "[blckeagls] GMS_UMS_StaticMissions_Lists.sqf <Loaded>";
