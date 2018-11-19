@@ -49,9 +49,7 @@ if (blck_simulationManager == 2) then
 
 blck_heliCrashSites = [];
 
-
-
 blck_mainThreadUpdateInterval = 60;
 blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
 //diag_log "[blckeagls] Variables Loaded";
-blck_variablesLoaded = true;
+

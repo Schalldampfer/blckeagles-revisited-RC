@@ -35,11 +35,10 @@ if (blck_debugLevel > 1) then
 
 
 
-if !(isNull _group) then 
-{  // exitWith {diag_log "[blckeagls] ERROR CONDITION:-->> NULL-GROUP Provided to _fnc_spawnVehiclePatrol"; objNull;};
+if !(isNull _group) then {
 	_veh = [_vehType,_pos] call blck_fnc_spawnVehicle;
-//	_veh addEventHandler["HandleDamage",{ [_this] call compile preprocessFileLineNumbers blck_EH_AIVehicle_HandleDamage}];
-	_veh addMPEventHandler["MPHit",{ [_this] call compile preprocessFileLineNumbers blck_EH_AIVehicle_HandleHit}];
+//	_veh addEventHandler["HandleDamage",{ [_this] call blck_EH_AIVehicle_HandleDamage}];
+	_veh addMPEventHandler["MPHit",{ [_this] call blck_EH_AIVehicle_HandleHit}];
 	_veh setVariable["blck_vehicleSearchRadius",blck_playerDetectionRangeGroundVehicle];
 	_veh setVariable["blck_vehiclePlayerDetectionOdds",blck_vehiclePlayerDetectionOdds];
 	

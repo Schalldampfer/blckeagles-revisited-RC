@@ -22,7 +22,7 @@
         _obj setDir _objDir;
         _unit = [_group] call blck_fnc_spawnUnit;
         _unit moveInGunner _unit;         
-        _wep addMPEventHandler["MPHit",{ [_this] call compile preprocessFileLineNumbers blck_EH_AIVehicle_HandleDamage}];
+        _wep addMPEventHandler["MPHit",{[_this] call blck_EH_AIVehicle_HandleDamage}];
         _wep setVariable["GRG_vehType","emplaced"];	
         [_wep,false] call blck_fnc_configureMissionVehicle;	        
     }forEach _emplaced;

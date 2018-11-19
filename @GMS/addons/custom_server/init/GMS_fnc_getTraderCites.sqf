@@ -10,26 +10,23 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-if (blck_modType isEqualTo "Epoch") then
+if ((tolower blck_modType) isEqualTo "epoch") then
 {
 	_blckListPrior = blck_locationBlackList;
 	private _config = configFile >> "CfgEpoch";
 	private _configWorld = _config >> worldname;
 	private _telePos = getArray(configFile >> "CfgEpoch" >> worldName >> "telePos" );
-	//diag_log format["[blckeagls] _fnc_getTraderCities:  _config = %1 | _configWorld = %2",_config,_configWorld];
-	//diag_log format["[blckegle] _fnc_getTraderCities: count _telePos = %1 || _telepos = %2",count _telePos,_telePos];
-	//if (true) exitWith {};
 	{
 		blck_locationBlackList pushback [_x select 3, 1000];
 		#ifdef blck_debugMode
 		if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getTraderCitiesEpoch:: -- >> Added epoch trader city location at %1", (_x select 3)];};
 		#endif
-	} foreach _telePos;  // (getArray(_configWorld >> "telePos"));
+	} foreach _telePos;
 	diag_log format["[blckeagls] blckListPrior = %1",_blckListPrior];
 	diag_log format["[blckeagls] ] blck_locationBlackList = %1",blck_locationBlackList];
 };
 
-if (blck_modType isEqualTo "Exile") then
+if ((tolower blck_modType) isEqualTo "exile") then
 {
 	if (blck_blacklistTraderCities || blck_blacklistSpawns || blck_listConcreteMixerZones) then 
 	{

@@ -61,7 +61,6 @@ while {true} do
 		{
 			[] call blck_fnc_timeAcceleration;
 		};
-
 		#ifdef blck_debugMode
 		//diag_log format["_fnc_mainThread: active SQFscripts include: %1",diag_activeSQFScripts];
 		diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];

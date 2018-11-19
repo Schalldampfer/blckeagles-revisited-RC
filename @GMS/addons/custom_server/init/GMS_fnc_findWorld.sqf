@@ -12,14 +12,8 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private["_blck_WorldName"];
-
-_blck_WorldName = toLower format ["%1", worldName];
-_blck_worldSize = worldSize;
-
-diag_log format["[blckeagls] Loading Map-specific settings with worldName = %1",_blck_WorldName];
-
-switch (_blck_WorldName) do 
+diag_log format["[blckeagls] Loading Map-specific settings with worldName = %1",worldName];
+switch (toLower worldName) do 
 {// These may need some adjustment - including a test for shore or water should help as well to avoid missions spawning on water.
 		case "altis":{
 			diag_log "[blckeagls] Altis-specific settings for Epoch loaded";
@@ -63,7 +57,5 @@ switch (_blck_WorldName) do
 		case "takistan":{blck_mapCenter = [5500, 6500, 0];blck_mapRange = 5000;};
 		case "lythium":{blck_mapCenter = [10000,10000,0];blck_mapRange = 8500;};
 		case "malden":{blck_mapCenter = [6000,7000,0];blck_mapRange = 5500;};
-		default {_blck_WorldName = "default";blck_mapCenter = [6322,7801,0]; blck_mapRange = 6000};
+				default {blck_mapCenter = [6322,7801,0]; blck_mapRange = 6000};
 };
-
-blck_worldSet = true;

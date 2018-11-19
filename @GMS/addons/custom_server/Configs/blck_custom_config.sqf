@@ -149,13 +149,13 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_maxSpawnedMissions = 15;
 	blck_mainThreadUpdateInterval = 10;
 	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = -1;
-	blck_enableRedMissions = -1;
-	blck_enableBlueMissions = -1;
-	blck_numberUnderwaterDynamicMissions = -3;	
-	blck_enableHunterMissions = -1;
-	blck_enableScoutsMissions = -1;
-	blck_maxCrashSites = -3; 
+	blck_enableGreenMissions = 1;
+	blck_enableRedMissions = 1;
+	blck_enableBlueMissions = 1;
+	blck_numberUnderwaterDynamicMissions = 3;	
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 1;
+	blck_maxCrashSites = 3; 
 	
 	//blck_killEmptyStaticWeapons = false;
 	//blck_killEmptyAIVehicles = true;
@@ -165,7 +165,7 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_vehicleDeleteTimer = 20; 
 	blck_MissionTimeout = 30;
 	
-	blck_noPatrolHelisOrange = 1;
+	//blck_noPatrolHelisOrange = 1;
 	//blck_chanceHeliPatrolOrange = 1;
 	//blck_chanceParaOrange = 1;
 	//blck_chanceHeliPatrolBlue = -1;
@@ -175,12 +175,12 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	//blck_paraTriggerDistanceBlue = 400;
 	
 	//blck_chanceHeliPatrolBlue = 1;
-	blck_SpawnEmplaced_Orange = 1; // Number of static weapons at Orange Missions
+	//blck_SpawnEmplaced_Orange = 1; // Number of static weapons at Orange Missions
 	//blck_SpawnEmplaced_Green = 1; // Number of static weapons at Green Missions
 	//blck_SpawnEmplaced_Blue = 1;  // Number of static weapons at Blue Missions
 	//blck_SpawnEmplaced_Red = 1; 
 
-	blck_SpawnVeh_Orange = 1; // Number of vehicles at Orange Missions
+	//blck_SpawnVeh_Orange = 1; // Number of vehicles at Orange Missions
 	//blck_SpawnVeh_Green = 1; // Number of vehicles at Green Missions
 	//blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
 	//blck_SpawnVeh_Red = 1;

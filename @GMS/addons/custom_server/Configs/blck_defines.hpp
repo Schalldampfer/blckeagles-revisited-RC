@@ -24,7 +24,7 @@
 //#define useDynamicSimulation
 //#define blck_debugMode
 //#define GRG_TestServer
-
+#define GRGserver
 #define blck_triggerLoopCompleteTime 40*60
 
 #define onFoot 1

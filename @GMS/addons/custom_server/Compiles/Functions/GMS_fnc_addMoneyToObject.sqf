@@ -19,7 +19,7 @@ params["_obj","_difficulty"];
 	diag_log format["_fnc_addMoneyToOject: _this select %1 = %2",_foreachindex, _this select _foreachindex];
 }forEach _this;
 #endif
-if ((tolower blck_modType) isEqualTo "exile") then
+if (blck_modType isEqualTo "Exile") then
 {
 	switch (_difficulty) do
 	{
@@ -33,7 +33,7 @@ if ((tolower blck_modType) isEqualTo "exile") then
 	};
 };
 
-if ((tolower blck_modType) isEqualTo "epoch") then
+if (blck_modType isEqualTo "Epoch") then
 {
 	switch (_difficulty) do
 	{

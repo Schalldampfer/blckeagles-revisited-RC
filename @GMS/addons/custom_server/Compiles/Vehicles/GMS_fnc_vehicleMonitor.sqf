@@ -11,7 +11,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private ["_vehList","_veh","_isEmplaced","_ownerIsPlayer","_allCrewDead","_deleteNow","_evaluate"];
+private ["_vehList"];
 _vehList = +blck_monitoredVehicles;
 
 #ifdef blck_debugMode
@@ -36,17 +36,18 @@ if (blck_debugLevel > 2) then {diag_log format["_fnc_vehicleMonitor:: function c
 
 	if (true) then
 	{
-		private["_veh","_isEmplaced","_ownerIsPlayer","_allCrewDead","_deleteNow","_evaluate"];
+		private["_veh","_isEmplaced","_ownerIsPlayer","_allCrewDead","_evaluate","_deleteat"];
 		_veh = _x; // (purely for clarity at this point, _x could be used just as well)
 		
 		_isEmplaced = _veh getVariable["GRG_vehType","none"] isEqualTo "emplaced";
-		_ownerIsPlayer = if (owner _veh > 2 && !(owner _veh in blck_connectedHCs)) then {true} else {false};
-		_allCrewDead = if (({alive _x} count (crew _veh)) == 0) then {true} else {false};
+		_ownerIsPlayer = owner _veh > 2 && !(owner _veh in blck_connectedHCs);
+		_allCrewDead = {alive _x} count (crew _veh) == 0;
 		_evaluate = 0;
-		if (_allCrewDead && _isEmplaced && (_veh getVariable["blck_deleteAt",0] == 0)) then {_evaluate = 1};		
-		if (_allCrewDead && !(_isEmplaced) && (_veh getVariable["blck_deleteAt",0] == 0)) then {_evaluate = 2};
-		if ((_veh getVariable["blck_deleteAt",0] > 0) && (diag_tickTime > (_veh getVariable["blck_deleteAt",0]))) then {_evaluate = 3};
-		if (/*_ownerIsPlayer*/  (owner _veh > 2) && !(owner _veh in blck_connectedHCs)) then {_evaluate = 4};
+		_deleteat = _veh getVariable ["blck_deleteAt",0];
+		if (_allCrewDead && _isEmplaced && _deleteat == 0) then {_evaluate = 1};		
+		if (_allCrewDead && !(_isEmplaced) && _deleteat == 0) then {_evaluate = 2};
+		if (_deleteat > 0 && diag_tickTime > _deleteat) then {_evaluate = 3};
+		if (_ownerIsPlayer) then {_evaluate = 4};
 		//diag_log format["_fnc_vehicleMonitor: vehicle = %1 | owner = %2 | crew = %2",_veh, owner _veh, {alive _x} count (crew _veh)];
 		switch (_evaluate) do
 		{

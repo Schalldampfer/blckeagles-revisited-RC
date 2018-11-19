@@ -80,9 +80,9 @@ if ( blck_VK_GunnerDamage ) then
 		if ((currentWeapon _killer) in blck_forbidenVehicleGuns) then {	_legal = false;};
 	};
 
-	if (blck_VK_Gear) then {[_unit] call _fn_deleteAIGear;};
 	if !(_legal) then
 	{
+		if (blck_VK_Gear) then {[_unit] call _fn_deleteAIGear;};
 		[_unit, vehicle _killer] call _fn_targetVehicle;
 		[vehicle _killer] call _fn_applyVehicleDamage;
 		[_killer] call _fn_msgIED;

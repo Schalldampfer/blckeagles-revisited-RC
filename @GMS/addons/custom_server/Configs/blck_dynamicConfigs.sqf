@@ -218,5 +218,3 @@ blck_backpacks_green = blck_backpacks;
 blck_backpacks_orange = blck_backpacks;
 	
 blck_explosives = 	_wpnThrow;
-
-blck_configsLoaded = true;

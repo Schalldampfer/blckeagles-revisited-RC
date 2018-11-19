@@ -26,25 +26,19 @@ _blck_loadingStartTime = diag_tickTime;
 diag_log format["[blckeagls] Loading Headless Client Version %2 Build Date %1",_blck_versionDate,_blck_version];
 
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
-waitUntil {(isNil "blck_variablesLoaded") isEqualTo false;};
-waitUntil{blck_variablesLoaded};
-blck_variablesLoaded = nil;
-//if !(blck_debugON) then {uiSleep 60;};
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
-waitUntil {(isNil "blck_functionsCompiled") isEqualTo false;};
-waitUntil{blck_functionsCompiled};
-blck_functionsCompiled = nil;
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
 
 execVM "\q\addons\custom_server\Configs\blck_configs.sqf";
-waitUntil {(isNil "blck_configsLoaded") isEqualTo false;};
-waitUntil{blck_configsLoaded};
-blck_configsLoaded = nil;
 
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
+
+#ifdef GRGserver
+diag_log "[blckeagls] Running GRG Version";
+#endif
 
 switch (blck_simulationManager) do
 	case 1: {diag_log "[blckeagls] dynamic simulation manager enabled"}; 
