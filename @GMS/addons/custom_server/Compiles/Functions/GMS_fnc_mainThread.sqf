@@ -10,8 +10,6 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-//diag_log format["starting _fnc_mainThread with time = %1",diag_tickTime];
-
 private["_timer1sec","_timer5sec","_timer20sec","_timer5min","_timer5min"];
 _timer1sec = diag_tickTime;
 _timer5sec = diag_tickTime;
@@ -22,19 +20,19 @@ _timer5min = diag_tickTime;
 while {true} do
 {
 	uiSleep 1;
-	//diag_log format["mainThread:: -- > time = %1",diag_tickTime];
 	if (diag_tickTime > _timer1sec) then 
 	{
 		[] call blck_fnc_vehicleMonitor;
+		#ifdef GRGserver
+		[] call blck_fnc_broadcastServerFPS;
+		#endif
 		_timer1sec = diag_tickTime + 1;
-		//diag_log format["[blckeagls] _fnc_mainThread 1 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if (diag_tickTime > _timer5sec) then
 	{
 		_timer5sec = diag_tickTime + 5;
 		[] call blck_fnc_missionGroupMonitor;
 		[] call blck_fnc_sm_missionPatrolMonitor;
-		//diag_log format["[blckeagls] _fnc_mainThread 5 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
@@ -42,26 +40,19 @@ while {true} do
 		[] call blck_fnc_cleanupObjects;
 		[] call blck_fnc_cleanupDeadAI;
 		[] call blck_fnc_scanForPlayersNearVehicles;		
-		//[] call blck_fnc_cleanEmptyGroups;
+		[] call blck_fnc_cleanEmptyGroups;
 		_timer20sec = diag_tickTime + 20;
-		//diag_log format["[blckeagls] _fnc_mainThread 20 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if ((diag_tickTime > _timer1min)) then
 	{
-		//diag_log format["_fnc_mainThread:  60 second events run at %1",diag_tickTime];
 		_timer1min = diag_tickTime + 60;
-		//diag_log format["_fnc_mainThread: blck_missionsRunning = %1 | blck_maxSpawnedMissions = %2", blck_missionsRunning,blck_maxSpawnedMissions];
 		[] call blck_fnc_spawnPendingMissions;
-		//diag_log format["_fnc_mainThread: blck_numberUnderwaterDynamicMissions = %1 | blck_dynamicUMS_MissionsRuning = %2",blck_numberUnderwaterDynamicMissions,blck_dynamicUMS_MissionsRuning];
 		if (blck_dynamicUMS_MissionsRuning < blck_numberUnderwaterDynamicMissions) then
 		{
-			//diag_log "Adding dynamic UMS Mission";
 			[] spawn blck_fnc_addDyanamicUMS_Mission;
 		};
-		//diag_log format["_fnc_mainThread:  control returned to _fnc_mainThread from _fnc_addDynamicUMS_Mission at %1",diag_tickTime];
 		if (blck_useHC) then
 		{
-			//diag_log format["_mainThread:: calling blck_fnc_passToHCs at diag_tickTime = %1",diag_tickTime];
 			[] call blck_fnc_HC_passToHCs;
 		};
 		if (blck_useTimeAcceleration) then
@@ -73,7 +64,6 @@ while {true} do
 		//diag_log format["_fnc_mainThread: active SQFscripts include: %1",diag_activeSQFScripts];
 		diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];
 		#endif
-		//diag_log format["[blckeagls] _fnc_mainThread 60 Second Timer Handled | Timstamp %1",diag_tickTime];
 	};
 	if (diag_tickTime > _timer5min) then 
 	{

@@ -12,14 +12,14 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 params["_obj","_difficulty"];
-private _mod = [] call blck_fnc_getModType;
+
 
 #ifdef blck_debugMode
 {
 	diag_log format["_fnc_addMoneyToOject: _this select %1 = %2",_foreachindex, _this select _foreachindex];
 }forEach _this;
 #endif
-if (_mod isEqualTo "Exile") then
+if ((tolower blck_modType) isEqualTo "exile") then
 {
 	switch (_difficulty) do
 	{
@@ -33,7 +33,7 @@ if (_mod isEqualTo "Exile") then
 	};
 };
 
-if (_mod isEqualTo "Epoch") then
+if ((tolower blck_modType) isEqualTo "epoch") then
 {
 	switch (_difficulty) do
 	{
