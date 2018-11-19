@@ -15,14 +15,13 @@
 #endif
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-if not (isNull( configFile >> "CfgPatches" >> "a3_epoch_server" )) then
+if ((tolower blck_modType) isEqualto "epoch") then
 {
-	[] execVM "\q\addons\custom_server\SLS\SLS_init_epoch.sqf";
+	call compile preprocessfilelinenumbers "\q\addons\custom_server\SLS\SLS_init_epoch.sqf";
 };
-
-if not (isNull ( configFile >> "CfgPatches" >> "exile_server" ) ) then
+if ((tolower blck_modType) isEqualto "exile") then
 {
-	[] execVM "\q\addons\custom_server\SLS\SLS_init_exile.sqf";
+	call compile preprocessfilelinenumbers "\q\addons\custom_server\SLS\SLS_init_exile.sqf";
 };
 diag_log "[blckeagls] SLS System: Static loot crates ran successfully!";
 blck_SLSComplete = true;

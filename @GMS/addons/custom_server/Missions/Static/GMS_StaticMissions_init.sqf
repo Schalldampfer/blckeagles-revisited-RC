@@ -23,12 +23,7 @@ blck_sm_patrolRespawnInterval = 30;
 {
 	if ((toLower worldName) isEqualTo toLower(_x select 1)) then
 	{
-		if ((blck_ModType isEqualTo "Epoch") && (toLower(_x select 0) isEqualTo "epoch")) then
-		{
-			call compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\Static\missions\%1",(_x select 2)];
-		};
-
-		if ((blck_ModType isEqualTo "Exile") && (toLower(_x select 0) isEqualTo "exile")) then
+		if ((toLower blck_modType) isEqualTo (toLower(_x select 0))) then
 		{
 			call compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\Static\missions\%1",(_x select 2)];
 		};

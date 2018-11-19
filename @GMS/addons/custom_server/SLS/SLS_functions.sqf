@@ -1,8 +1,6 @@
 /*
-	for ghostridergaming
 	By Ghostrider [GRG]
 	Copyright 2016
-	Last Modified 8-23-17
 	
 	--------------------------
 	License
@@ -71,7 +69,6 @@ _fn_spawnCrate = {
 	_crate = [[0,0,0],_selectedCrateType] call blck_fnc_spawnCrate;
 	_crate setPosATL _pos;
 	_crate setDir round(random(360));
-	//uiSleep 1;
 	_crate setVectorUp surfaceNormal _pos;
 	_crate
 };
@@ -81,7 +78,7 @@ _fn_setupCrates = {
 	private["_crate"];
 	
 	_crate = [_location,_randomPos] call _fn_SpawnCrate;
-	while {_lootType == 0} do {_lootType = round(random(3));};
+	_lootType = selectrandom [1,2,3];
 	switch(_lootType) do
 	{
 		// format here is [_arrayOfLoot, crateToLoad, magazinesToAddForEachWeaponLoaded]
@@ -102,37 +99,31 @@ _fn_setupCrates = {
 	_crate
 };
 //diag_log "[blckeagls] SLS System: Functions Initialized!";
-private["_cratePosnList","_no","_ar","_x","_cratePos","_lootType","_randomPos","_useSmoke"];
-
+private["_cratePos","_lootType","_randomPos","_useSmoke"];
 {
-		_map = _x select 0;
-		_name = _x select 1;
-		_no = _x select 2;
-		_ar = _x select 3;
-		private["_index"];
-		_index = 1;
-		if (blck_debugON) then
+	_x params ["_map","_name","_no","_ar"];
+	private["_index"];
+	_index = 1;
+	if (blck_debugON) then
+	{
+		diag_log format["[blckeagls] SLS :: main function: Location name = %3 |count _ar = %1 | _index = %2", count _ar, _index, _name];
+		diag_log format["[blckeagls] SLS :: main function: count _ar = %1", _ar];
+	};
+	if ((tolower _map) isEqualto (toLower(worldName))) then
+	{
+		for "_i" from 1 to _no do
 		{
-			diag_log format["[blckeagls] SLS :: main function: Location name = %3 |count _ar = %1 | _index = %2", count _ar, _index, _name];
-			diag_log format["[blckeagls] SLS :: main function: count _ar = %1", _ar];
-		};
-		if (_map isEqualto (toLower(worldName))) then
-		{
-			_usedLocations = [];
-			for "_i" from 1 to _no do
+			// Pick a random element and be sure it has not already been selected
+			_ar = _ar call Bis_fnc_arrayshuffle;
+			_crateParams = _ar deleteat 0;
+			if (blck_debugON) then
 			{
-				// Pick a random element and be sure it has not already been selected_crateParams
-				_crateParams = selectRandom _ar;
-				while {_crateParams in _usedLocations} do {_crateParams = selectRandom _ar;};  // selectRandom is about 5X faster than BIS_fnc_selectRandom in my testing.
-				if (blck_debugON) then
-				{
-					diag_log format["[blckeagls] SLS:: spawning crate spawning crate at location name %1 with parameters of %2 --->>> %1",_name,_crateParams];
-				};
-				_usedLocations pushback _crateParams;
-				_crateParams params["_cratePos","_lootType","_randomPos","_useSmoke"]; // params is about 5x faster in my testing over _this select 0 where many local variables are defined by parsing _this.
-				[_cratePos,_lootType,_randomPos,_useSmoke] call _fn_setupCrates;
+				diag_log format["[blckeagls] SLS:: spawning crate spawning crate at location name %1 with parameters of %2 --->>> %1",_name,_crateParams];
 			};
+//			_crateParams params["_cratePos","_lootType","_randomPos","_useSmoke"];
+			_crateParams call _fn_setupCrates;
 		};
+	};
 } forEach _lootBoxes; 
 							
 
