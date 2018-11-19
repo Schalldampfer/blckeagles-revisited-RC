@@ -18,7 +18,7 @@ if (blck_debugLevel > 2) then {diag_log format["fnc_cleanupDeadAI called at time
 private["_aiList","_ai"];
 _aiList = +blck_deadAI;
 {
-	if (diag_tickTime > _x getVariable ["blck_cleanupAt",0]) then 
+	if ( diag_tickTime > _x getVariable ["blck_cleanupAt",0] ) then //  DBD_DeleteAITimer
 	{
 		_ai = _x;
 		{

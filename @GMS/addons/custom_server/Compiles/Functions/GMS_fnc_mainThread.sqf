@@ -10,6 +10,8 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+//diag_log format["starting _fnc_mainThread with time = %1",diag_tickTime];
+
 private["_timer1sec","_timer5sec","_timer20sec","_timer5min","_timer5min"];
 _timer1sec = diag_tickTime;
 _timer5sec = diag_tickTime;
