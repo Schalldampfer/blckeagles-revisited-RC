@@ -28,7 +28,7 @@ while {diag_tickTime - _start < (_time)} do  // loop for 5 min accounting for th
 	{
 		_light = _lightSource createVehicle getPosATL _crate;
 		_light setPosATL (getPosATL _crate);
-		_light attachTo [_crate,[0,0,(_maxHeight + 0.35)]];
+		_light attachTo [_crate,[0,0,(0.55)]];
 	};
 	uiSleep 120;
 	detach _smoke;
