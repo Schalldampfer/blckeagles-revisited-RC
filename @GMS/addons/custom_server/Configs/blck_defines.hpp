@@ -13,7 +13,7 @@
 
 
 #define useAPEX 
-#define blck_milServer
+//#define blck_milServer
 //#define blck_useCUP
 //#define blck_useRHS
 
@@ -24,7 +24,7 @@
 //#define useDynamicSimulation
 //#define blck_debugMode
 //#define GRG_TestServer
-#define GRGserver
+//#define GRGserver
 #define blck_triggerLoopCompleteTime 40*60
 
 #define onFoot 1
