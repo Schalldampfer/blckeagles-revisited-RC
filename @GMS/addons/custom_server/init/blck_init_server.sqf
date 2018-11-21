@@ -14,24 +14,28 @@ if !(isNil "blck_Initialized") exitWith{};
 // find and set Mod
 blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {""}};
 publicVariable "blck_modType";
-/*
+
 if ((tolower blck_modType) isEqualto "epoch") then {
 	diag_log "[blckeagls] Waiting until EpochMod is ready...";
 	waituntil {!isnil "EPOCH_SERVER_READY"};
 };
-*/
+if ((toLower blck_modType) isEqualTo "exile") then
+{
+	diag_log "[blckeagls] Waiting until ExileMod is ready ...";
+	waitUntil {!isNil "PublicServerIsLoaded"};
+};
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
 
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
-diag_log format["[blckeagls] Loading Server Mission System Version %2 Build Date %1",_blck_versionDate,_blck_version];
+diag_log format["[blckeagls] Loading Server Mission System Version"];
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
 diag_log format["[blckeagls] functions compiled in %1 seconds",diag_tickTime-_blck_loadingStartTime];
 
 call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
+uiSleep 10;
 diag_log format["[blckeagls] blck_useHC = %1 | 	blck_simulationManager = %2 ",blck_useHC,blck_simulationManager];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
 
@@ -39,9 +43,13 @@ diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLev
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
 
-
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
-diag_log format["[blckeagls] blck_variables loaded at %1",diag_tickTime];
+
+if (blck_simulationManager == 2) then 
+{
+	"Group" setDynamicSimulationDistance 1800;
+	enableDynamicSimulationSystem true;
+};
 
 // spawn map addons to give the server time to position them before spawning in crates etc.
 if (blck_spawnMapAddons) then

@@ -39,7 +39,7 @@ private _functions = [
 	["blck_fnc_spawnMissionEmplacedRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionEmplacedRelative.sqf"],
 	["blck_fnc_spawnMissionLootBoxesRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLootBoxesRelative.sqf"],
 	["blck_fnc_spawnSingleObject","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnSingleObject.sqf"],
-	["blck_fnc_emptyObjectInventory","\q\addons\custom_server\Compiles\Functions\GMS_fnc_emptyObjectInventory.sqf"],
+	//["blck_fnc_emptyObjectInventory","\q\addons\custom_server\Compiles\Functions\GMS_fnc_emptyObjectInventory.sqf"],
 	["blck_fnc_spawnMissionLandscapeRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLandscapeRelative.sqf"],
 	["blck_fnc_nearestPlayers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_nearestPlayers.sqf"],
 
@@ -99,7 +99,9 @@ private _functions = [
 	["blck_fnc_cleanEmptyGroups","\q\addons\custom_server\Compiles\Groups\GMS_fnc_cleanEmptyGroups.sqf"],		 // GMS_fnc_cleanEmptyGroups
 	["blck_fnc_findNearestInfantryGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_findNearestInfantryGroup.sqf"],
 	["blck_fnc_create_AI_Group","\q\addons\custom_server\Compiles\Groups\GMS_fnc_create_AI_Group.sqf"],			// create a group for which other functions spawn AI.
-	 
+	["blck_fnc_blckSimulationManager","\q\addons\custom_server\Compiles\Groups\GMS_fnc_blckSimulationMonitor.sqf"], 
+	["bck_fnc_groupWaypointMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_groupWaypointMonitor.sqf"],
+	
 	// Functions specific to vehicles, whether wheeled, aircraft or static
 	["blck_fnc_spawnVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_spawnVehicle.sqf"],           
 	["blck_fnc_spawnVehiclePatrol","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_spawnVehiclePatrol.sqf"], 

@@ -10,6 +10,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
+//  Needs optimization for headless clients
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 	params["_veh"];
@@ -30,8 +31,7 @@
 		diag_log format["_fnc_releaseVehicleToPlayersl: locked state of vehicle %1 = ^%2",_veh, locked _veh];
 		//if ((_veh locked) isEqualTo "UNLOCKED" || (diag_tickTime - _timeIn) > 5) then {_locked = false};
 	};
-	//  {player setAmmo [primaryWeapon player, 1];} remoteExec ["bis_fnc_call", 0]; 
-	//{[_veh setVehicleLock "UNLOCKED"];} remoteExec ["BIS_fnc_call",(owner _veh)];
+
 	{
 		_veh removealleventhandlers _x;
 	} forEach ["GetIn","GetOut","fired","hit","hitpart","reloaded","dammaged","HandleDamage"];
@@ -47,4 +47,3 @@
 		diag_log format["_fnc_vehicleMonitor:: case of patrol vehicle released to players where vehicle = %1",_veh];
 	};
 	#endif
-//diag_log format["_fnc_vehicleMonitor:: case of patrol vehicle released to players where vehicle = %1",_veh];

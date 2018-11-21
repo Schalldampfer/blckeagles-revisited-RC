@@ -17,11 +17,10 @@
 		changing any of these variables may break the mission systemChat
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
-	blck_debugON = true;  //  Do not touch ... 
-	blck_debugLevel = 3;  //  Do not touch ... 
+	blck_debugON = false;  //  Do not touch ... 
+	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
-	execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
-	if (true) exitWith {};
+	if (true) exitWith {execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";};
 	#endif
 	
 	//diag_log "[blckeagls] Loading configurations for Non-militarized servers: blck_configs.sqf";
@@ -432,30 +431,20 @@
 	blck_maxMoneyBlue = 10;	
 	#endif
 	
-	private["_modType"];
-	_modType = [] call blck_fnc_getModType;
-	if (_modType isEqualTo "Epoch") then
+	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch.sqf";
-		waitUntil {(isNil "blck_configsEpochLoaded") isEqualTo false;};
-		waitUntil{blck_configsEpochLoaded};
-		blck_configsEpochLoaded = nil;
 	};
-	if (_modType isEqualTo "Exile") then
+	if (toLower(blck_modType)  isEqualTo "exile") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
-		waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		waitUntil{blck_configsExileLoaded};
 	};	
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagles] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
-		//waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		//waitUntil{blck_dynamicConfigsLoaded};
-		//blck_dynamicConfigsLoaded = nil;
 	};
-	uisleep 3;
+
 	blck_configsLoaded = true;

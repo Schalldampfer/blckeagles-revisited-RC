@@ -1166,4 +1166,3 @@ blck_highPoweredLoot = [
 		
 	diag_log format["[blckeagls] Configurations for Exile Loaded"];
 
-	blck_configsExileLoaded = true;

@@ -27,8 +27,8 @@ _objects pushBack _wreck;
 {
 	//Random Position Objects based on distance in array
 	//  https://community.bistudio.com/wiki/BIS_fnc_findSafePos
-	private _posX = ((_coords select 0) + ((random(_objectSpawnRange) + minObjectSpawnRadius) * (selectRandom[1,-1]));
-	private _posY = ((_coords select 1) + ((random(_objectSpawnRange) + minObjectSpawnRadius) * (selectRandom[1,-1]));
+	private _posX = ((_coords select 0) + ((random(_objectSpawnRange) + minObjectSpawnRadius) * (selectRandom[1,-1])));
+	private _posY = ((_coords select 1) + ((random(_objectSpawnRange) + minObjectSpawnRadius) * (selectRandom[1,-1])));
 	_pos = [_coords,_min,_max,_nearest,0,5,0] call BIS_fnc_findSafePos;
 	_wreck = createVehicle[_x, _pos, [], 2];
 	//diag_log format["_fnc_spawnRandomLandscape: _x = %1 | _wreck = %2",_x,_wreck];	

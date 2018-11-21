@@ -12,7 +12,7 @@
 */
 #include"\q\addons\custom_server\Configs\blck_defines.hpp";
 
-//diag_log "[blckeagls] loading variables";
+diag_log "[blckeagls] loading variables";
 
 blck_minFPS = 8; 
 
@@ -40,16 +40,9 @@ blck_activeMissions = [];
 blck_deadAI = [];
 blck_connectedHCs = [];
 blck_missionMarkers = [];
-
-if (blck_simulationManager == 2) then 
-{
-	"Group" setDynamicSimulationDistance 1800;
-	enableDynamicSimulationSystem true;
-};
-
 blck_heliCrashSites = [];
 
 blck_mainThreadUpdateInterval = 60;
 blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
-//diag_log "[blckeagls] Variables Loaded";
+diag_log "[blckeagls] Variables Loaded";
 

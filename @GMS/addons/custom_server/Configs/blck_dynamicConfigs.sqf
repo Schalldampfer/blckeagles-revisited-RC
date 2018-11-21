@@ -95,15 +95,15 @@ _baseClasses = [];
 
 _classnameList = [];
 diag_log format["blck_modType = %1",blck_modType];
-if (blck_modType isEqualTo "Epoch") then
+if (toLower(blck_modType) isEqualTo "epoch") then
 {
 	_classnameList = (missionConfigFile >> "CfgPricing" ) call BIS_fnc_getCfgSubClasses;
 };
-if (blck_modType isEqualTo "Exile") then
+if (toLower(blck_modType) isEqualTo "exile") then
 {
 	_classnameList = (missionConfigFile >> "CfgExileArsenal" ) call BIS_fnc_getCfgSubClasses;
 };
-//diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
+diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
 {
 	private _temp = [_x] call bis_fnc_itemType;
 	//diag_log _temp;
@@ -218,3 +218,5 @@ blck_backpacks_green = blck_backpacks;
 blck_backpacks_orange = blck_backpacks;
 	
 blck_explosives = 	_wpnThrow;
+
+diag_log format["Compilation of dynamic AI Loadouts complete at %1",diag_tickTime];

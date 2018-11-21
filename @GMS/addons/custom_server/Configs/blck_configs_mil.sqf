@@ -426,11 +426,9 @@
 	blck_maxMoneyBlue = 10;	
 	#endif
 	
-	private["_modType"];
-	_modType = [] call blck_fnc_getModType;
-	if (_modType isEqualTo "Epoch") then
+	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch_mil.sqf";
 		waitUntil {(isNil "blck_configsEpochLoaded") isEqualTo false;};
 		waitUntil{blck_configsEpochLoaded};
@@ -438,21 +436,16 @@
 		//diag_log "[blckeagls] Running getTraderCitiesEpoch to get location of trader cities";
 		//execVM "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitesEpoch.sqf";
 	};
-	if (_modType isEqualTo "Exile") then
+	if (toLower(blck_modType) isEqualTo "exile") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
-		waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		waitUntil{blck_configsExileLoaded};
-		blck_configsExileLoaded = nil;
 		//if (blck_blacklistTraderCities || blck_blacklistSpawns || blck_listConcreteMixerZones) then {execVM "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitesExile.sqf";};
 	};	
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagles] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
-				waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		waitUntil{blck_dynamicConfigsLoaded};
-		blck_dynamicConfigsLoaded = nil;
 	};	
 
+	blck_configsLoaded = true;

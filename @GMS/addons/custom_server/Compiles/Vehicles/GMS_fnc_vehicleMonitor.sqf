@@ -18,7 +18,7 @@ _vehList = +blck_monitoredVehicles;
 if (blck_debugLevel > 2) then {diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 and blck_monitoredVehicles %3",diag_tickTime,_vehList,blck_monitoredVehicles];};
 #endif
 //diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 ",diag_tickTime,_vehList,blck_monitoredVehicles];
-
+//  Needs debugging for HC operation.
 {
 	/*
 		Determine state of vehicle
