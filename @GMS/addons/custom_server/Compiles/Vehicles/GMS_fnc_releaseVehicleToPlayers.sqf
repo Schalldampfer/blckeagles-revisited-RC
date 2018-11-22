@@ -28,7 +28,7 @@
 															// a bit of bandwidth seems worth ensuring that vehicles do in fact get unlocked.
 		uiSleep 0.1;
 		_count = _count + 1;
-		diag_log format["_fnc_releaseVehicleToPlayersl: locked state of vehicle %1 = ^%2",_veh, locked _veh];
+		//diag_log format["_fnc_releaseVehicleToPlayersl: locked state of vehicle %1 = ^%2",_veh, locked _veh];
 		//if ((_veh locked) isEqualTo "UNLOCKED" || (diag_tickTime - _timeIn) > 5) then {_locked = false};
 	};
 

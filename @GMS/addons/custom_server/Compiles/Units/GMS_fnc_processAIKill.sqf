@@ -65,10 +65,10 @@ if (blck_useKillMessages) then
 		_message = format["[blck] %1 killed with %2 from %3 meters",name _killer,getText(configFile >> "CfgWeapons" >> _weapon >> "DisplayName"), round(_unit distance _killer)];
 	};
 	_message =_message + _killstreakMsg;
-	//diag_log format["[blck] unit killed message is %1",_message,""];
+	diag_log format["[blck] unit killed message is %1",_message,""];
 	[["aikilled",_message,"victory"],allPlayers] call blck_fnc_messageplayers;
 };
-
+//diag_log format["calling blck_fnc_rewardKiller for death of unit %1 and killer %2",_unit,_killer];
 [_unit,_killer] call blck_fnc_rewardKiller;
 if (blck_showCountAliveAI) then
 {
@@ -77,6 +77,5 @@ if (blck_showCountAliveAI) then
 		//diag_log format["_fnc_processAIKills: blck_missionMarkers itm %1 = %2",_forEachIndex,_x];
 		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;
 	} forEach blck_missionMarkers;
-	//call blck_fnc_updateAllMarkerAliveCounts;
 };
 

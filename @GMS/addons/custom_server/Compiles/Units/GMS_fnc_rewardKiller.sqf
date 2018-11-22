@@ -15,7 +15,7 @@
 
 params["_unit","_killer"];
 private["_reward","_maxReward","_dist","_killstreakReward","_distanceBonus","_newKillerScore","_newKillerFrags","_money"];
-if (toLower(blck_modType) isEqualTo "Epoch") then
+if (toLower(blck_modType) isEqualTo "epoch") then
 {
 	if ( (vehicle _killer) in blck_forbidenVehicles || (currentWeapon _killer) in blck_forbidenVehicleGuns ) then 
 	{
@@ -31,7 +31,8 @@ if (toLower(blck_modType) isEqualTo "Epoch") then
 		if (_dist < 100) then { _reward = _maxReward - (_maxReward / 1.5); _reward };
 		if (_dist < 800) then { _reward = _maxReward - (_maxReward / 2); _reward };
 		if (_dist > 800) then { _reward = _maxReward - (_maxReward / 4); _reward };
-		
+		//diag_log format["_fnc_rewardPlayer: _killer %1 | _dist %2 | _reward %3 ",_killer,_dist,_reward];
+		//diag_log format["_fnc_rewardPlayer: blck_addAIMoney %1 | blck_useKillScoreMessage %2",blck_addAIMoney,blck_useKillScoreMessage];
 		private _killstreakReward=+(_kills*2);
 		if (blck_addAIMoney) then
 		{
@@ -44,7 +45,7 @@ if (toLower(blck_modType) isEqualTo "Epoch") then
 	};
 };
 
-if (toLower(blck_modType) isEqualTo "Exile") then
+if (toLower(blck_modType) isEqualTo "exile") then
 {
 	private["_distanceBonus","_overallRespectChange","_newKillerScore","_newKillerFrags","_maxReward","_money","_message"];
 	if ( (isPlayer _killer) && (_killer getVariable["ExileHunger",0] > 0) && (_killer getVariable["ExileThirst",0] > 0) ) then

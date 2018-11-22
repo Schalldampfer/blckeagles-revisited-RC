@@ -28,20 +28,20 @@ if ((toLower blck_modType) isEqualTo "exile") then
 
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
-diag_log format["[blckeagls] Loading Server Mission System Version"];
+diag_log format["[blckeagls] Loading Server Mission System Version",blck_buildNumber];
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
 diag_log format["[blckeagls] functions compiled in %1 seconds",diag_tickTime-_blck_loadingStartTime];
 
 call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
-uiSleep 10;
+waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};
 diag_log format["[blckeagls] blck_useHC = %1 | 	blck_simulationManager = %2 ",blck_useHC,blck_simulationManager];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
 
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
-diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
+//diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
 
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
 
@@ -80,37 +80,26 @@ switch (blck_simulationManager) do
 	case 0: {diag_log "[blckeagls] simulation management disabled"};
 };
 
-
-#ifdef GRGserver
-// start the dynamic loot crate system
-compile preprocessfilelinenumbers "\q\addons\custom_server\DLS\DLS_init.sqf";
-#endif
-
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
 diag_log format["blckeagls] waiting for players to join ----    >>>>"];
-#ifdef GRGserver
-diag_log "[blckeagls] Running GhostriderGaming Version";
-#endif
 
-if !(blck_debugON || (blck_debugLevel isEqualTo 0)) then
+if ( !(blck_debugON) && (blck_debugLevel isEqualTo 0)) then
 {
 	waitUntil{{isPlayer _x}count allPlayers > 0};
 	diag_log "[blckeagls] Player Connected, spawning missions";
 } else {
-	diag_log "[blckeagls] spawning Missions";
+	diag_log "[blckeagls] Debug mode ON, proceding without players";
 };
 
 if (blck_spawnStaticLootCrates) then
 {
-	// Start the static loot crate spawner
-	//diag_log "[blckeagls] SLS::  -- >>  Static Loot Spawner Started";
 	call compile preprocessfilelinenumbers "\q\addons\custom_server\SLS\SLS_init.sqf";
 	diag_log "[blckeagls] SLS::  -- >>  Static Loot Spawner Done";
 }else{
 	diag_log "[blckeagls] SLS::  -- >>  Static Loot Spawner disabled";
 };
 
-if (true /*blck_blacklistTraderCities*/) then
+if (blck_blacklistTraderCities) then
 {
 	call compile preprocessfilelinenumbers "\q\addons\custom_server\init\GMS_fnc_getTraderCites.sqf";
 };
@@ -136,31 +125,6 @@ if (blck_enableBlueMissions > 0) then
 	//[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue] spawn blck_fnc_missionTimer;//Starts minor mission system (Blue Map Markers)
 	[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue,blck_enableBlueMissions] call blck_fnc_addMissionToQue;
 };
-
-#ifdef GRGserver
-
-diag_log format["[blckeagls] _init_server: blck_enableScoutsMissions = %1",blck_enableScoutsMissions];
-if (blck_enableScoutsMissions > 0) then
-{
-	//[_missionListScouts,_pathScouts,"ScoutsMarker","red",blck_TMin_Scouts,blck_TMax_Scouts] spawn blck_fnc_missionTimer;
-	[_missionListScouts,_pathScouts,"ScoutsMarker","red",blck_TMin_Scouts,blck_TMax_Scouts,blck_enableScoutsMissions,false] call blck_fnc_addMissionToQue;
-};
-
-diag_log format["[blckeagls] _init_server: blck_enableHunterMissions = %1",blck_enableHunterMissions];
-if (blck_enableHunterMissions > 0) then
-{
-	//[_missionListHunters,_pathHunters,"HunterMarker","green",blck_TMin_Hunter,blck_TMax_Hunter] spawn blck_fnc_missionTimer;
-	//  params["_missionList","_path","_marker","_difficulty","_tMin","_tMax","_noMissions"];
-	[_missionListHunters,_pathHunters,"HunterMarker","green",blck_TMin_Hunter,blck_TMax_Hunter,blck_enableHunterMissions,false] call blck_fnc_addMissionToQue;
-};
-
-// Running new version of Crash sites.
-diag_log format["[blckeagls] _init_server: blck_maxCrashSites = %1",blck_maxCrashSites];
-if (blck_maxCrashSites > 0) then
-{
-	[] execVM "\q\addons\custom_server\Missions\HeliCrashs\Crashes2.sqf";
-};
-#endif
 
 //  start the main thread for the mission system which monitors missions running and stuff to be cleaned up
 [] spawn blck_fnc_mainThread;

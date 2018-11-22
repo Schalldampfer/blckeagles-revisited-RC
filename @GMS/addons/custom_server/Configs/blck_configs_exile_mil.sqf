@@ -47,8 +47,6 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_crateMoneyGreen = [300, 500];
 	blck_crateMoneyOrange = [500, 750];
 
-	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = true;
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
 	_blck_armed_vehicles_Exile = [

@@ -20,10 +20,13 @@
 	blck_debugON = false;  //  Do not touch ... 
 	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
-	if (true) exitWith {execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";};
+	if (true) exitWith 
+	{
+		diag_log format["[blckeagls] Running configs for militarized servers build %1",blck_buildNumber];
+		execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
+	};
 	#endif
-	
-	//diag_log "[blckeagls] Loading configurations for Non-militarized servers: blck_configs.sqf";
+	diag_log format["[blckeagls] Loading configurations for Non-militarized servers build %1",blck_buildNumber];
 	/*
 		**************************************
 		Configurations begin here
@@ -104,7 +107,7 @@
 	blck_SmokeAtMissions = [false,"random"];  // set to [false,"anything here"] to disable this function altogether. 
 	blck_useSignalEnd = true; // When true a smoke grenade/chemlight will appear at the loot crate for 2 min after mission completion.
 	blck_missionEndCondition = "allKilledOrPlayerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
-	blck_killPercentage = 0.999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
+	blck_killPercentage = 0.999999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
 	blck_spawnCratesTiming = "atMissionSpawnGround"; // Choices: "atMissionSpawnGround","atMissionEndGround","atMissionEndAir". 
 							 // Crates spawned in the air will be spawned at mission center or the position(s) defined in the mission file and dropped under a parachute.
@@ -173,7 +176,7 @@
 	_blck_armed_hurons = ["B_Heli_Transport_03_F","B_Heli_Transport_03_black_F"];
 	_blck_armed_attackHelis = ["B_Heli_Attack_01_F"];
 	_blck_armed_heavyAttackHelis = ["O_Heli_Attack_02_F","O_Heli_Attack_02_black_F"];
-		_blck_fighters = [
+	_blck_fighters = [
 		"O_Plane_CAS_02_F",  // /ti-199 Neophron (CAS)
 		"I_Plane_Fighter_03_AA_F",  //  A-143 Buzzard (AA)
 		"I_Plane_Fighter_04_F",  //   	A-149 Gryphon
@@ -294,13 +297,13 @@
 	blck_SpawnEmplaced_Blue = 1;  // Number of static weapons at Blue Missions
 	blck_SpawnEmplaced_Red = 1;  // Number of static weapons at Red Missions	
 
-
-
 	/****************************************************************
 	
 	GENERAL AI SETTINGS
 	
 	****************************************************************/
+	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
+	blck_useConfigsGeneratedLoadouts = true;
 	
 	blck_groupBehavior = "SENTRY";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
@@ -318,7 +321,7 @@
 	blck_maximumPatrolRadius = 35;
 	
 	//This defines how long after an AI dies that it's body disappears.
-	blck_bodyCleanUpTimer = 60*40; // time in seconds after which dead AI bodies are deleted
+	blck_bodyCleanUpTimer = 60*60; // time in seconds after which dead AI bodies are deleted
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
 	// values are ordered as follows [blue, red, green, orange];
 	blck_AliveAICleanUpTimer = 60*20;  // Time after mission completion at which any remaining live AI are deleted.
@@ -433,17 +436,19 @@
 	
 	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch.sqf";
 	};
 	if (toLower(blck_modType)  isEqualTo "exile") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
 	};	
+	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
+	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
-		diag_log format["[blckeagles] Dynamic Configs Enabled"];
+		diag_log format["[blckeagls] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
 	};
 

@@ -11,7 +11,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 
-
+#define blck_buildNumber 164
 #define useAPEX 
 //#define blck_milServer
 //#define blck_useCUP
@@ -21,10 +21,7 @@
 //  Do not touch anything below this line
 ///////////////////////////
 
-//#define useDynamicSimulation
 //#define blck_debugMode
-//#define GRG_TestServer
-//#define GRGserver
 #define blck_triggerLoopCompleteTime 40*60
 
 #define onFoot 1

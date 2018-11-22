@@ -15,10 +15,12 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";	
 
 #ifdef blck_milServer
-execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
-if (true) exitWith {};
+if (true) exitWith 
+{
+	diag_log "[blckeagls] running blck_configs_exile_mil for militarized servers";
+	execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
+};
 #endif
-
 diag_log "[blckeagls] Loading Exile-specific configs for Non-militarized servers: blck_configs_exile.sqf";
 ////////////
 // Exile-specific settings
@@ -54,9 +56,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_crateMoneyRed = [175, 300];
 	blck_crateMoneyGreen = [300, 500];
 	blck_crateMoneyOrange = [500, 750];
-
-	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = true;
+	
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
 	_blck_armed_vehicles_Exile = [

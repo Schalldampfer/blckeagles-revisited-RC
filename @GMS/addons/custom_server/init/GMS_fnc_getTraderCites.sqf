@@ -22,8 +22,6 @@ if ((tolower blck_modType) isEqualTo "epoch") then
 		if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getTraderCitiesEpoch:: -- >> Added epoch trader city location at %1", (_x select 3)];};
 		#endif
 	} foreach _telePos;
-	diag_log format["[blckeagls] blckListPrior = %1",_blckListPrior];
-	diag_log format["[blckeagls] ] blck_locationBlackList = %1",blck_locationBlackList];
 };
 
 if ((tolower blck_modType) isEqualTo "exile") then

@@ -11,7 +11,7 @@
 */
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+diag_log format["[blckeagls] loading configurations for Epoch for blckeagls build %1",blck_buildNumber];
 ////////////
 // Epoch-specific settings
 ////////////	
@@ -47,8 +47,6 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	
 	blck_allowSalesAtBlackMktTraders = true; // Allow vehicles to be sold at Halvjes black market traders.
 	
-	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = true;
 	blck_maximumItemPriceInAI_Loadouts = 100;
 	
 	_blck_lightlyArmed_ARMA3 = [
@@ -1100,4 +1098,4 @@ blck_supportLoot = blck_BoxLoot_Orange;
 blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
 
 diag_log "[blckeagls] Configurations for Epoch Loaded";
-blck_configsEpochLoaded = true;
+
