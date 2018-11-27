@@ -21,11 +21,14 @@ _aiList = +blck_deadAI;
 	if ( diag_tickTime > _x getVariable ["blck_cleanupAt",0] ) then //  DBD_DeleteAITimer
 	{
 		_ai = _x;
-		{
-			deleteVehicle _x;
-		}forEach nearestObjects [getPos _ai,["WeaponHolderSimulated","GroundWeapoonHolder"],3];	
-		blck_deadAI = blck_deadAI - [_ai];
-		deleteVehicle _ai;
+		_nearplayer = (_ai nearEntities 1500) select {isplayer _x};
+		if (_nearplayer isequalto []) then {
+			{
+				deleteVehicle _x;
+			}forEach nearestObjects [getPos _ai,["WeaponHolderSimulated","GroundWeapoonHolder"],3];	
+			blck_deadAI = blck_deadAI - [_ai];
+			deleteVehicle _ai;
+		};
 	};
 } forEach _aiList;
 
