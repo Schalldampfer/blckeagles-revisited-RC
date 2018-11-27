@@ -157,30 +157,32 @@ _fn_monitorGroupWaypoints = {
 
 _fn_simulationMonitor = {
 	private["_playerType","_players"];
-
+	_playerType = ["LandVehicle","SHIP","AIR","TANK"];
 	if (blck_modType isEqualTo "Exile") then
 	{
-		_playerType = ["Exile_Unit_Player"];
+		_playerType = _playerType + ["Exile_Unit_Player"];
 	}else{
-		_playerType = ["Epoch_Male_F","Epoch_Female_F"];
+		_playerType = _playerType + ["Epoch_Male_F","Epoch_Female_F"];
 	};
 	{
-		_players = (leader _x) nearEntities [_playerType, blck_simulationEnabledDistance];
+		_players = ((leader _x) nearEntities [_playerType, blck_simulationEnabledDistance]) select {isplayer _x};
 		if (count _players > 0) then
 		{
-		  if !(simulationEnabled _x) then
-		  {
-			  	{
+			{
+				if !(simulationEnabled _x) then
+				{
 					_x enableSimulationGlobal  true;
 					(_players select 0) reveal _x;  //  Force simulation on
-				}forEach (units _x);
-		  };
+				};
+			}forEach (units _x);
 		}else{
 			// Be sure simulation is off for all units in the group.
-			if (simulationEnabled _x) then
 			{
-				{_x enableSimulationGlobal false}forEach (units _x);		
-			};
+				if (simulationEnabled _x) then
+				{
+					_x enableSimulationGlobal false;
+				};
+			}forEach (units _x);		
 		};
 	} forEach blck_monitoredMissionAIGroups;
 };
