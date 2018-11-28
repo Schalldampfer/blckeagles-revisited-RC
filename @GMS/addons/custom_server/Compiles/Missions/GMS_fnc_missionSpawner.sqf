@@ -444,14 +444,8 @@ private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
 } forEach _crates;
 
 private["_minNoAliveForCompletion","_result","_minPercentageKilled"];
-if (_secureAsset) then
-{
-	_minNoAliveForCompletion = round((1 - blck_killPercentage) * (({alive _x} count _blck_AllMissionAI) - 1));
-	if (_minNoAliveForCompletion < 2) then {_minNoAliveForCompletion = 2};
-} else {
-	_minNoAliveForCompletion = floor((1 - blck_killPercentage) * ({alive _x} count _blck_AllMissionAI));
-	if (_minNoAliveForCompletion == 0) then {_minNoAliveForCompletion = 1};
-};
+_minNoAliveForCompletion = (count _blck_AllMissionAI) - (round(blck_killPercentage * (count _blck_AllMissionAI)));
+if (_secureAsset) then {_minNoAliveForCompletion = _minNoAliveForCompletion + 1};
 
 while {_missionComplete isEqualTo -1} do
 {
