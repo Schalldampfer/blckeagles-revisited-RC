@@ -11,28 +11,31 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 private["_playerType","_players"];
-
+_playerType = ["LandVehicle","SHIP","AIR","TANK"];
 switch (toLower(blck_modType)) do
 {
-	case "exile": {_playerType = ["Exile_Unit_Player"]};
-	case "epoch": {_playerType = ["Epoch_Male_F","Epoch_Female_F"]};
+	case "exile": {_playerType = _playerType + ["Exile_Unit_Player"]};
+	case "epoch": {_playerType = _playerType + ["Epoch_Male_F","Epoch_Female_F"]};
 };
 {
-	private _players = (leader _x) nearEntities [_playerType, blck_simulationEnabledDistance];
-	if (count _players > 0) then
+	private _group = _x;
+	_players = ((leader _group) nearEntities [_playerType, blck_simulationEnabledDistance]) select {isplayer _x};
+	
+	if !(_players isEqualTo []) then
 	{
-		private _group = _x;
-		if (blck_revealMode isEqualTo "detailed") then
 		{	
-			{		
+			if !(simulationEnabled _x) then
+			{	
 				_x enableSimulationGlobal  true;
 				(_players select 0) reveal _x;  //  Force simulation on
-			}forEach (units _group);
-		} else {
-			_x enableSimulationGlobal  true;
-			(_players select 0) reveal _x;  //  Force simulation on
-		};
+			};
+		}forEach (units _group);
 	}else{
-			{_x enableSimulationGlobal false}forEach (units _x);	
+		{
+			if (simulationEnabled _x) then
+			{	
+				_x enableSimulationGlobal false;
+			};
+		}forEach (units _x);
 	};
 } forEach blck_monitoredMissionAIGroups;

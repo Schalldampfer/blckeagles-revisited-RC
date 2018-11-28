@@ -23,9 +23,9 @@ diag_log format["_fnc_missionGroupMonitor (4/29:4:09 PM)::-->> running function 
 #ifdef blck_debugMode
 if (blck_debugLevel > 2) then {diag_log format["_fnc_missionGroupMonitor: executing function at %1",diag_tickTime];};
 #endif
-[] call blck_fnc_cleanEmptyGroups;
+//[] call blck_fnc_cleanEmptyGroups;
 uiSleep 0.1;
 //[] call bck_fnc_groupWaypointMonitor;
 
-if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {call blck_fnc_blckSimulationManager};
+//if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {call blck_fnc_blckSimulationManager};
 

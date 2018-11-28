@@ -25,6 +25,9 @@ while {true} do
 	if (diag_tickTime > _timer1sec) then 
 	{
 		[] call blck_fnc_vehicleMonitor;
+		#ifdef GRGserver
+		[] call blck_fnc_broadcastServerFPS;
+		#endif
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then
