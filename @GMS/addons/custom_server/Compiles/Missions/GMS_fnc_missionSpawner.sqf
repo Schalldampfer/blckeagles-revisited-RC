@@ -189,24 +189,8 @@ private _params = [_coords,_minNoAI,_maxNoAI,_missionGroups,_aiDifficultyLevel,_
 
 _temp = [_coords, _minNoAI,_maxNoAI,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnMissionAI;
 
-#ifdef blck_debugMode
-if  (blck_debugLevel > 2) then {
-	diag_log format["missionSpawner :: (264) blck_fnc_spawnMissionAI returned a value of _temp = %1",_temp]; uiSleep 1;
-};
-
 _abort = _temp select 1;
-if  (blck_debugLevel > 2) then {
-	diag_log format["missionSpawner :: (269) blck_fnc_spawnMissionAI returned a value of _abort = %1",_abort]; uiSleep 1;
-};
-#endif
 
-if (_abort) exitWith
-{
-	if (blck_debugLevel > 1) then {
-		diag_log "missionSpawner:: (277) grpNull returned, mission termination criteria met, calling blck_fnc_endMission"
-	};
-	[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass,  1] call blck_fnc_endMission;
-};
 if !(_abort) then 
 {
 	_blck_AllMissionAI append (_temp select 0);
@@ -223,41 +207,17 @@ _assetSpawned = objNull;
 if !(_hostageConfig isEqualTo []) then
 {
 	_temp = [_coords,_hostageConfig] call blck_fnc_spawnHostage;
-	//diag_log format["_fnc_missionSpawner: _fnc_spawnHostage returned %1",_temp];
 	_assetSpawned = _temp select 0;
 	_objects pushBack (_temp select 1);
-	//diag_log format["_fnc_missionSpawner: _assetSpawned = %1",_assetSpawned];
-	//diag_log format["_fnc_missionSpawner:  _fnc_spawnHostage returned object %1",_temp select 1];
 	_blck_AllMissionAI pushBack _assetSpawned;
 };
 
 if !(_enemyLeaderConfig isEqualTo []) then
 {
 	_temp = [_coords,_enemyLeaderConfig] call blck_fnc_spawnLeader;
-	//diag_log format["_fnc_missionSpawner: _fnc_spawnLeader return _temp = %1",_temp];
 	_assetSpawned = _temp select 0;
 	_objects pushBack (_temp select 1);	
-	//diag_log format["_fnc_missionSpawner: _assetSpawned = %1",_assetSpawned];
-	//diag_log format["_fnc_missionSpawner: building spawned by _fnc_spawnLeader = %1",_temp select 1];
 	_blck_AllMissionAI pushBack _assetSpawned;
-	//diag_log format["_fnc_missionSpawner (261): _blck_AllMissionAI",_blck_AllMissionAI];
-};
-
-#ifdef blck_debugMode
-	if  (blck_debugLevel >= 1) then {
-		diag_log format["_fnc_missionSpawner: _assetSpawned = %1",_assetSpawned];
-	};
-#endif
-
-uiSleep  delayTime;
-_temp = [[],[],false];
-_abort = false;
-
-
-
-if (_abort) exitWith 
-{
-	[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass,  1] call blck_fnc_endMission;
 };
 
 uiSleep  delayTime;
@@ -266,19 +226,7 @@ _abort = false;
 
 //  Deal with helicopter patrols
 _temp = [];
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then
-{
-	diag_log format["[blckeagls] missionSpawner:: (351) calling in heli patrol: Current mission: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
-};
-#endif
-
 _noChoppers = [_noChoppers] call blck_fnc_getNumberFromRange;
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["_missionSpawner(322):: _noChoppers = %1  && _chancePara = %2",_noChoppers,_chancePara]};
-#endif
 if (_noChoppers > 0) then
 {
 	for "_i" from 1 to (_noChoppers) do
@@ -290,13 +238,11 @@ if (_noChoppers > 0) then
 			if (typeName _temp isEqualTo "ARRAY") then
 			{
 				_abort = _temp select 2;
-				blck_monitoredVehicles pushBack (_temp select 0);
-				_blck_AllMissionAI append (_temp select 1);
-			};
-			if (_abort) then
-			{
-				_objects pushback (_temp select 0);
-				[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass,  1] call blck_fnc_endMission;
+				if !(_abort) then
+				{
+					blck_monitoredVehicles pushBack (_temp select 0);
+					_blck_AllMissionAI append (_temp select 1);
+				};
 			};
 		};
 	};
@@ -306,35 +252,23 @@ uisleep 3;
 if (count _garrisonedBuilding_ATLsystem > 0) then
 {
 	_temp = [_coords, _garrisonedBuilding_ATLsystem, _aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_garrisonBuilding_ATLsystem;
-	//diag_log format["_missionspawner: garrisoned a building using ATL format, function returned %1",_temp];
-	//      _return = [_group,_buildingsSpawned,_staticsSpawned];
 	_objects append (_temp select 1);
 	blck_monitoredVehicles append (_temp select 2);
 	_blck_AllMissionAI append (units (_temp select 0));
 };
 
 uiSleep 3;
-//diag_log format["_missionSpawner:  _garrisonedBuildings_BuildingPosnSystem = %1",_garrisonedBuildings_BuildingPosnSystem];
 if (count _garrisonedBuildings_BuildingPosnSystem > 0) then
 {
-	//     params["_center","_garrison","_aiDifficultyLevel","_uniforms","_headGear","_vests","_backpacks","_weaponList","_sideArms"];
 	_temp = [_coords, _garrisonedBuildings_BuildingPosnSystem, _aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_garrisonBuilding_RelPosSystem;
-	diag_log format["_missionspawner: garrisoned a building using relPos format, function returned %1",_temp];
-	//      _return = [_group,_buildingsSpawned,_staticsSpawned];
 	_objects append (_temp select 1);
 	blck_monitoredVehicles append (_temp select 2);
 	_blck_AllMissionAI append (units (_temp select 0));
 };
 
-//////////////////////////
-// Spawn Crates and Emplaced Weapons Last to try to force them to correct positions relative to spawned buildinga or other objects.
-#ifdef blck_debugMode
-if (blck_debugLevel > 0) then {diag_log format["missionSpawner:: (389) preparing to spawn emplaced weapons for _coords %4 | _markerClass %3 | blck_useStatic = %1 | _noEmplacedWeapons = %2",blck_useStatic,_noEmplacedWeapons,_markerClass,_coords];};
-#endif
 uiSleep 15;
 private["_noEmplacedToSpawn"];
 _noEmplacedToSpawn = [_noEmplacedWeapons] call blck_fnc_getNumberFromRange;
-//diag_log format["_fnc_missionSpawner: -> _noEmplacedToSpawn = %1 | blck_useStatic = %2",_noEmplacedToSpawn,blck_useStatic];
 if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 {
 	_temp = [_coords,_missionEmplacedWeapons,useRelativePos,_noEmplacedToSpawn,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnEmplacedWeaponArray;
@@ -350,10 +284,7 @@ if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 		_blck_AllMissionAI append (_temp select 1);
 	};
 };
-if (_abort) exitWith 
-{
-	[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass,  1] call blck_fnc_endMission;
-};
+
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
 if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
 {
@@ -413,7 +344,6 @@ if (_noPara > 0 && (random(1) < _chancePara) && _paraTriggerDistance == 0) then
 	};
 };
 
-// Define Triggers for mission end
 private["_missionComplete","_endIfPlayerNear","_endIfAIKilled","_secureAsset","_crateStolen","_locations"];
 _missionComplete = -1;
 _startTime = diag_tickTime;
@@ -425,7 +355,7 @@ switch (_endCondition) do
 	case "allKilledOrPlayerNear": {_secureAsset = false; _endIfPlayerNear = true;_endIfAIKilled = true;};
 	case "assetSecured": {_secureAsset = true; _endIfPlayerNear = false; _endIfAIKilled = false;};
 };
-//diag_log format["_fnc_missionSpawner:  _secureAsset = %1",_secureAsset];
+
 if (blck_showCountAliveAI) then
 {
 	if !(_marker isEqualTo "") then
@@ -444,7 +374,6 @@ private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
 } forEach _crates;
 
 private["_minNoAliveForCompletion","_result","_minPercentageKilled"];
-//diag_log format["_missionSpawner (447): count _blck_AllMissionAI = %2 || (round(blck_killPercentage * (count _blck_AllMissionAI))) = %1",  round(blck_killPercentage * (count _blck_AllMissionAI)), count _blck_AllMissionAI];
 _minNoAliveForCompletion = (count _blck_AllMissionAI) - (round(blck_killPercentage * (count _blck_AllMissionAI)));
 if (_secureAsset) then {_minNoAliveForCompletion = _minNoAliveForCompletion + 1};
 
@@ -463,17 +392,20 @@ while {_missionComplete isEqualTo -1} do
 	{
 		if (({alive _x} count _blck_AllMissionAI) <= _minNoAliveForCompletion) then {_missionComplete = 1};
 	};
-	if (_spawnCratesTiming isEqualTo "atMissionSpawn") then
+
+	if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 	{
-		// Re-evaluate this - may not need the forEach
-		//{
-			if ({[_x] call blck_fnc_crateMoved} count _crates > 0) then
+		{
+			private _d = _x distance (_x getVariable ["crateSpawnPos",_coords]);
+			diag_log format["crate %1 moved %2 at %3",_x,_d,diag_tickTime];
+			if (_d > 25) exitWith
 			{
 				_missionComplete = 1;
 				_crateStolen = true;
 			};
-		//}forEach _crates;
+		}forEach _crates;
 	};
+	
 	if (_secureAsset) then
 	{
 		if !(alive _assetSpawned) then 
@@ -527,15 +459,9 @@ while {_missionComplete isEqualTo -1} do
 
 if (_crateStolen) exitWith
 {
-	diag_log format["missionSpawner:: (542) Crate Stolen Callening _fnc_endMission - > players near = %1 and ai alive = %2 and crates stolen = %3",[_locations,10,true] call blck_fnc_playerInRangeArray, {alive _x} count _blck_AllMissionAI, _crateStolen];
 	[_mines,_objects,_crates, _blck_AllMissionAI,"Crate Removed from Mission Site Before Mission Completion: Mission Aborted",_blck_localMissionMarker,_coords,_markerClass,  2] call blck_fnc_endMission;
 };
-/*
-if ((_secureAsset) && !(alive _assetSpawned)) exitWith
-{
-	[_mines,_objects,_crates, _blck_AllMissionAI,_assetKilledMsg,_blck_localMissionMarker,_coords,_markerClass, 2] call blck_fnc_endMission;
-};
-*/
+
 if (_spawnCratesTiming in ["atMissionEndGround","atMissionEndAir"]) then
 {
 	if (!(_secureAsset) || (_secureAsset && (alive _assetSpawned))) then
@@ -575,15 +501,6 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround" && _loadCratesTiming isE
 	};
 };
 
-#ifdef blck_debugMode
-if (blck_debugLevel > 0) then
-{
-	diag_log format["[blckeagls] missionSpawner:: (586) Mission completion criteria fulfilled: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
-	diag_log format["missionSpawner :: (587) _endIfPlayerNear = %1 _endIfAIKilled= %2",_endIfPlayerNear,_endIfAIKilled];
-	diag_log format["[blckeagls] missionSpawner:: (588) calling endMission: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
-};
-#endif
-
 private["_result"];
 // Force passing the mission name for informational purposes.
 _blck_localMissionMarker set [2, _markerMissionName];
@@ -595,20 +512,15 @@ if (blck_showCountAliveAI) then
 	}forEach blck_missionMarkers;
 };
 
-//diag_log format["_fnc_missionSpawner (557) Build 123: _secureAsset = %1 | {alive _assetSpawned} = %2 | assetType = %3",_secureAsset,alive _assetSpawned, _assetSpawned getVariable["assetType",-1]];
-
 if (_secureAsset && (alive _assetSpawned)) then
 {
 	if (_assetSpawned getVariable["assetType",0] isEqualTo 1) then
 	{
-		//diag_log "Processing Mission End for Hostage Rescue";
-		//_assetSpawned setCaptive false;
 		_assetSpawned setVariable["GMSAnimations",[""],true];
 		[_assetSpawned,""] remoteExec["switchMove",-2];;
 		uiSleep 0.1;
 		_assetSpawned enableAI "ALL";
 		private _newPos = (getPos _assetSpawned) getPos [1000, random(360)];
-		//diag_log format["processing domove for hostage with current pos = %1 and new pos = %2",getPos _assetSpawned, _newPos];
 		(group _assetSpawned) setCurrentWaypoint [group _assetSpawned, 0];
 		[group _assetSpawned,0] setWaypointPosition [_newPos,0];
 		[group _assetSpawned,0] setWaypointType "MOVE";
@@ -616,7 +528,6 @@ if (_secureAsset && (alive _assetSpawned)) then
 
 	if (_assetSpawned getVariable["assetType",0] isEqualTo 2) then
 	{
-		//diag_log format["Processing Mission End for Arrest of Leader %1 with endAnimation %2",_assetSpawned,_assetSpawned getVariable["endAnimation",""]];
 		[_assetSpawned,""] remoteExec["switchMove",-2];
 		_assetSpawned setVariable["GMSAnimations",_assetSpawned getVariable["endAnimation",["AidlPercMstpSnonWnonDnon_AI"]],true];
 		[_assetSpawned,selectRandom(_assetSpawned getVariable["endAnimation",["AidlPercMstpSnonWnonDnon_AI"]])] remoteExec["switchMove",-2];
@@ -626,7 +537,7 @@ if (_secureAsset && !(alive _assetSpawned)) then
 {
 	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_assetKilledMsg,_blck_localMissionMarker,_coords,_markerClass, -1] call blck_fnc_endMission;
 };
-//diag_log format["_fnc_missionSpawner (579) Build 123: <calling blck_fnc_endMission> _secureAsset = %1 | {alive _assetSpawned} = %2 | assetType = %3",_secureAsset,alive _assetSpawned, _assetSpawned getVariable["assetType",-1]];
+
 if (!(_secureAsset) || (_secureAsset && (alive _assetSpawned))) then
 {
 	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass, 0] call blck_fnc_endMission;
