@@ -115,7 +115,8 @@ if (blck_debugLevel > 1) then
 	};
 	#endif
 	
-	_wep setVariable["GRG_vehType","emplaced"];	
+	_wep setVariable["GRG_vehType","emplaced"];
+	_wep setdir (random 359);
 	_wep setPos _pos;
 	_wep setdir (random 359);
 	[_wep,false] call blck_fnc_configureMissionVehicle;	

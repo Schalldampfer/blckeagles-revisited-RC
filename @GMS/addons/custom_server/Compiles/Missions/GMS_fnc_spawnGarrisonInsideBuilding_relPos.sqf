@@ -37,6 +37,7 @@ for "_i" from 1 to _statics do
 	_allBldPsn = _allBldPsn - [_pos];
 	_staticClassName = selectRandom _typesStatics;
 	_obj = [_staticClassName, [0,0,0], true] call blck_fnc_spawnVehicle;  
+	_obj setdir (random 359);
 	_obj setVariable["GRG_vehType","emplaced"];
 	_staticsSpawned pushBack _obj;
 	//diag_log format["_fnc_spawnGarrisonInsideBuilding_relPos: _obj = %1 | _staticsSpawned = %2",_obj,_staticsSpawned];

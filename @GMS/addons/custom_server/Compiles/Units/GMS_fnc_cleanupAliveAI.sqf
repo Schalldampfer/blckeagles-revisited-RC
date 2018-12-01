@@ -12,7 +12,6 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
 for "_i" from 1 to (count blck_liveMissionAI) do {
 	if ((_i) <= count blck_liveMissionAI) then {
 		_units = blck_liveMissionAI deleteat 0;
