@@ -11,8 +11,8 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 	
-	params["_veh"];
-	clearWeaponCargoGlobal    _veh;
-	clearMagazineCargoGlobal  _veh;
-	clearBackpackCargoGlobal  _veh;
-	clearItemCargoGlobal      _veh;
+params["_veh"];
+clearWeaponCargoGlobal    _veh;
+clearMagazineCargoGlobal  _veh;
+clearBackpackCargoGlobal  _veh;
+clearItemCargoGlobal      _veh;

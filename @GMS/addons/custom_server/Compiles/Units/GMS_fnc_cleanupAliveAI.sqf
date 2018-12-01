@@ -12,41 +12,16 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
-/*
-_fn_deleteAIfromList = {
-	params["_aiList"];
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 0) then {diag_log format["_fn_deleteAIfromList:: _aiList = %1",_aiList];};
-	#endif
-
-	{
-		#ifdef blck_debugMode
-		if (blck_debugLevel > 1) then {diag_log format["_fn_deleteAIfromList:: -> deleteing AI Unit %1",_x];};
-		#endif
-
-		[_x] call blck_fnc_deleteAI;
-	}forEach _aiList;
-};
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["_fnc_cleanupAliveAI called at %1",diag_tickTime];};
-#endif
-*/
-for "_i" from 1 to (count blck_liveMissionAI) do
-{
-	if ((_i) <= count blck_liveMissionAI) then
-	{
+for "_i" from 1 to (count blck_liveMissionAI) do {
+	if ((_i) <= count blck_liveMissionAI) then {
 		_units = blck_liveMissionAI deleteat 0;
 		_units params ["_unitsarr","_timer"];
 		if (diag_tickTime > _timer) then {
 			{
-				if (alive _x) then {
-					if (!isNull objectParent _x) then {
-						[objectParent _x] call blck_fnc_deleteAIvehicle;
-					};
-					[_x] call blck_fnc_deleteAI;
+				if ((alive _x) && !(isNull objectParent _x)) then {
+					[objectParent _x] call blck_fnc_deleteAIvehicle;
 				};
+				[_x] call blck_fnc_deleteAI;
 			} forEach _unitsarr;
 			uiSleep 0.1;
 			#ifdef blck_debugMode
@@ -58,4 +33,3 @@ for "_i" from 1 to (count blck_liveMissionAI) do
 		};
 	};
 };
-

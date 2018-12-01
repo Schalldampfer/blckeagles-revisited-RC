@@ -15,10 +15,12 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";	
 
 #ifdef blck_milServer
-execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
-if (true) exitWith {};
+if (true) exitWith 
+{
+	diag_log "[blckeagls] running blck_configs_exile_mil for militarized servers";
+	execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
+};
 #endif
-
 diag_log "[blckeagls] Loading Exile-specific configs for Non-militarized servers: blck_configs_exile.sqf";
 ////////////
 // Exile-specific settings
@@ -54,9 +56,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_crateMoneyRed = [175, 300];
 	blck_crateMoneyGreen = [300, 500];
 	blck_crateMoneyOrange = [500, 750];
-
-	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = false;
+	
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
 	_blck_armed_vehicles_Exile = [
@@ -662,6 +662,25 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Item_Moobar",
 		"Exile_Item_InstantCoffee"
 	];
+	#ifdef blck_addCarParts
+	blck_carParts = [
+		"Exile_Item_CarWheel",
+		"DDR_Item_Tailrotor",
+		"DDR_Item_Main_Rotor",
+		"DDR_Item_Engine",
+		"DDR_Item_Glass",
+		"DDR_Item_Fuel_Tank",
+		"DDR_Item_Fishing_Net",
+		"DDR_Item_Fiberglass"
+	];
+	#endif 	
+	#ifdef useCUP
+	
+	#endif
+	
+	#ifdef useRHS
+	
+	#endif	
 	blck_ConsumableItems = blck_Meats + blck_Drink + blck_Food;
 	blck_throwableExplosives = ["HandGrenade","MiniGrenade"];
 	blck_otherExplosives = ["1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"];
@@ -673,7 +692,18 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_buildingMaterials = ["Exile_Item_ExtensionCord","Exile_Item_JunkMetal","Exile_Item_LightBulb","Exile_Item_MetalBoard",
 			"Exile_Item_MetalPole","Exile_Item_MetalScrews","Exile_Item_Cement","Exile_Item_Sand"];	
 	blck_tools = ["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Melee_Axe","Exile_Melee_SledgeHammmer","Exile_Item_Handsaw","Exile_Item_Pliers"];
-
+	#ifdef blck_addCarParts
+	blck_carParts = [
+		"Exile_Item_CarWheel",
+		"DDR_Item_Tailrotor",
+		"DDR_Item_Main_Rotor",
+		"DDR_Item_Engine",
+		"DDR_Item_Glass",
+		"DDR_Item_Fuel_Tank",
+		"DDR_Item_Fishing_Net",
+		"DDR_Item_Fiberglass"
+	];
+	#endif 
 /***************************************************************************************
 DEFAULT CONTENTS OF LOOT CRATES FOR EACH MISSION
 Note however that these configurations can be used in any way you like or replaced with mission-specific customized loot arrays
@@ -700,14 +730,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				#endif
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag_Tracer"],
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
 				["LMG_Mk200_F","200Rnd_65x39_cased_Box_Tracer"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
 				["MMG_02_black_F","130Rnd_338_Mag"],
@@ -799,14 +829,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag"],
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag_Tracer"],
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
 				["LMG_Mk200_F","200Rnd_65x39_cased_Box_Tracer"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
 				["MMG_02_black_F","130Rnd_338_Mag"],
@@ -894,7 +924,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Hgun_PDW2000_F","30Rnd_9x21_Mag"],
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag_Tracer"],
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
@@ -974,14 +1004,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["Hgun_PDW2000_F","30Rnd_9x21_Mag"],
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag_Tracer"],
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
 				["LMG_Mk200_F","200Rnd_65x39_cased_Box_Tracer"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["srifle_DMR_04_Tan_F","10Rnd_338_Mag"],
 				["srifle_DMR_06_camo_F","10Rnd_338_Mag"]
@@ -1152,5 +1182,3 @@ blck_highPoweredLoot = [
 	blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
 		
 	diag_log format["[blckeagls] Configurations for Exile Loaded"];
-
-	blck_configsExileLoaded = true;

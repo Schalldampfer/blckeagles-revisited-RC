@@ -11,7 +11,7 @@
 */
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+diag_log format["[blckeagls] loading configurations for Epoch for blckeagls build %1",blck_buildNumber];
 ////////////
 // Epoch-specific settings
 ////////////	
@@ -47,8 +47,6 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	
 	blck_allowSalesAtBlackMktTraders = true; // Allow vehicles to be sold at Halvjes black market traders.
 	
-	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = false;
 	blck_maximumItemPriceInAI_Loadouts = 100;
 	
 	_blck_lightlyArmed_ARMA3 = [
@@ -517,7 +515,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		blck_vests_green = blck_vests;
 		blck_vests_orange = blck_vests;
 		
-		//CraftingFood
+			//CraftingFood
         blck_Meats=[
             "SnakeCarcass_EPOCH","RabbitCarcass_EPOCH","ChickenCarcass_EPOCH","GoatCarcass_EPOCH","SheepCarcass_EPOCH","DogCarcass_EPOCH","ItemTrout","ItemSeaBass","ItemTuna"
         ];
@@ -525,7 +523,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
             "WhiskeyNoodle","ItemSodaAlpineDude","ItemSodaOrangeSherbet","ItemSodaPurple","ItemSodaMocha","ItemSodaBurst","ItemSodaRbull","FoodWalkNSons"
         ];
         blck_Food = [
-            "HotAxeSauce_epoch","gyro_wrap_epoch","icecream_epoch","redburger_epoch","bluburger_epoch","krypto_candy_epoch","ItemBakedBeans","ItemRiceBox","ItemPowderMilk","ItemCereals","FoodBioMeat","FoodMeeps","FoodSnooter","sardines_epoch","meatballs_epoch","scam_epoch","sweetcorn_epoch","honey_epoch","CookedSheep_EPOCH","CookedGoat_EPOCH","SnakeMeat_EPOCH",
+            "HotAxeSauce_epoch","gyro_wrap_epoch","icecream_epoch","redburger_epoch","bluburger_epoch","krypto_candy_epoch","ItemBakedBeans","ItemRiceBox","ItemPowderMilk","ItemCereals",
+			"FoodBioMeat","FoodMeeps","FoodSnooter","sardines_epoch","meatballs_epoch","scam_epoch","sweetcorn_epoch","honey_epoch","CookedSheep_EPOCH","CookedGoat_EPOCH","SnakeMeat_EPOCH",
             "CookedRabbit_EPOCH","CookedChicken_EPOCH","CookedDog_EPOCH","ItemTroutCooked","ItemSeaBassCooked","ItemTunaCooked","TacticalBacon"
         ];
         blck_ConsumableItems = blck_Meats + blck_Drink + blck_Food;
@@ -588,13 +587,13 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
 				["m107_EPOCH","5Rnd_127x108_Mag"],
 				["m107Tan_EPOCH","5Rnd_127x108_Mag"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
 				["MMG_02_black_F","130Rnd_338_Mag"],
@@ -726,14 +725,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
 				["m107_EPOCH","5Rnd_127x108_Mag"],
 				["m107Tan_EPOCH","5Rnd_127x108_Mag"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
 				["LMG_Mk200_F","200Rnd_65x39_cased_Box_Tracer"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["MMG_01_tan_F","150Rnd_93x64_Mag"],
 				["MMG_02_black_F","130Rnd_338_Mag"],
@@ -874,7 +873,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
 				["m107_EPOCH","5Rnd_127x108_Mag"],
 				["m107Tan_EPOCH","5Rnd_127x108_Mag"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
@@ -1000,7 +999,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
 				["m107_EPOCH","5Rnd_127x108_Mag"],
 				["m107Tan_EPOCH","5Rnd_127x108_Mag"],				
-				["srifle_DMR_01_F","10Rnd_762x51_Mag"],
+				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
 				["srifle_LRR_F","7Rnd_408_Mag"],
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["srifle_GM6_F","5Rnd_127x108_APDS_Mag"],
@@ -1009,7 +1008,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["LMG_Mk200_F","200Rnd_65x39_cased_Box_Tracer"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"],
-				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"],
+				["LMG_Zafir_F","150Rnd_762x54_Box"],
 				["MMG_01_hex_F","150Rnd_93x64_Mag"],
 				["srifle_DMR_04_Tan_F","10Rnd_338_Mag"],
 				["srifle_DMR_06_camo_F","10Rnd_338_Mag"]
@@ -1099,4 +1098,4 @@ blck_supportLoot = blck_BoxLoot_Orange;
 blck_crateTypes = ["Box_FIA_Ammo_F","Box_FIA_Support_F","Box_FIA_Wps_F","I_SupplyCrate_F","Box_NATO_AmmoVeh_F","Box_East_AmmoVeh_F","IG_supplyCrate_F","Box_NATO_Wps_F","I_CargoNet_01_ammo_F","O_CargoNet_01_ammo_F","B_CargoNet_01_ammo_F"];  // Default crate type.
 
 diag_log "[blckeagls] Configurations for Epoch Loaded";
-blck_configsEpochLoaded = true;
+

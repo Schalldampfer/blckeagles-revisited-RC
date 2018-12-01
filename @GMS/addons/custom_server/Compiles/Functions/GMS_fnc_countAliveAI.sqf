@@ -21,7 +21,7 @@ switch (_returnMode) do
 	case 0:{_return = (_alive / _total)};
 	case 1:{_return  = [_alive,_total]};
 };
-//diag_log format["_fnc_countAliveAI:  _alive = %1 | _total = %2 | _return = %3",_alive,_total,_return];
+
 _return
 
 

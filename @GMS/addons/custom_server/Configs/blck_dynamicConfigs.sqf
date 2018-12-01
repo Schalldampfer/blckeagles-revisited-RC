@@ -94,12 +94,12 @@ _misc = [];
 _baseClasses = [];	
 
 _classnameList = [];
-diag_log format["blck_modType = %1",blck_modType];
-if (blck_modType isEqualTo "Epoch") then
+//diag_log format["blck_modType = %1",blck_modType];
+if (toLower(blck_modType) isEqualTo "epoch") then
 {
 	_classnameList = (missionConfigFile >> "CfgPricing" ) call BIS_fnc_getCfgSubClasses;
 };
-if (blck_modType isEqualTo "Exile") then
+if (toLower(blck_modType) isEqualTo "exile") then
 {
 	_classnameList = (missionConfigFile >> "CfgExileArsenal" ) call BIS_fnc_getCfgSubClasses;
 };
@@ -110,18 +110,16 @@ if (blck_modType isEqualTo "Exile") then
 	_itemCategory = _temp select 0;
 	_itemType = _temp select 1;
 	_price = blck_maximumItemPriceInAI_Loadouts;
-	if (blck_modType isEqualTo "Epoch") then
+	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		_price = getNumber(missionConfigFile >> "CfgPricing" >> _x >> "price");
 	};
-	if (blck_modType isEqualTo "Exile") then
+	if (toLower(blck_modType)  isEqualTo "exile") then
 	{
 		_price = getNumber(missionConfigFile >> "CfgExileArsenal" >> _x >> "price");
 	};
-	//diag_log format["_fnc_dynamicConfigsConfigurator: _price = %1",_price];
 	if (_price < blck_maximumItemPriceInAI_Loadouts) then
 	{
-	//if (_itemCategory != "") then {diag_log format["_fnc_dynamicConfigsConfigurator: _itemCategory = %1 | _itemType = %2",_itemCategory,_itemType]};
 	if (_itemCategory isEqualTo "Weapon") then
 	{
 		switch (_itemType) do
@@ -136,14 +134,11 @@ if (blck_modType isEqualTo "Exile") then
 			case "Launcher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}};
 			case "RocketLauncher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}};
 			case "Throw": {if !(_x in blck_blacklistedItems) then {_wpnThrow pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
 		};
 	};
 	
 	if (_itemCategory isEqualTo "Item") then
 	{
-		//diag_log format["Evaluating Item class name %1",_x];
 		switch (_itemType) do
 		{
 			case "AccessoryMuzzle": {if !(_x in blck_blacklistedAttachments) then {_wpnMuzzles pushBack _x}};
@@ -153,22 +148,13 @@ if (blck_modType isEqualTo "Exile") then
 			case "Binocular": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
 			case "Compass": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
 			case "GPS": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
-			case "NVGoggles": {if !(_x in blck_blacklistedItems) then {_NVG pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};
-			//case "": {if !(_x in ) then { pushBack _x}};			
+			case "NVGoggles": {if !(_x in blck_blacklistedItems) then {_NVG pushBack _x}};		
 		};
 	};
 	
 	
 	if (_itemCategory isEqualTo "Equipment") then
 	{
-		//diag_log format["Evaluating Equipment class name %1",_x];
 		switch (_itemType) do
 		{
 			case "Glasses": {if !(_x in blck_blacklistedItems) then {_glasses pushBack _x}};
@@ -219,4 +205,4 @@ blck_backpacks_orange = blck_backpacks;
 	
 blck_explosives = 	_wpnThrow;
 
-blck_configsLoaded = true;
+diag_log format["Compilation of dynamic AI Loadouts complete at %1",diag_tickTime];

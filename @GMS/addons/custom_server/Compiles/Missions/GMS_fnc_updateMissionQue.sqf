@@ -31,13 +31,13 @@ private["_index","_element","_waitTime"];
 if (_index > -1) then
 {	
 	#ifdef blck_debugMode
-	if (blck_debuglevel > 2) then {diag_log format ["_fnc_updateMissionQue :: blck_pendingMissions began as %1",blck_pendingMissions];};
+	if (blck_debuglevel > 4) then {diag_log format ["_fnc_updateMissionQue :: blck_pendingMissions began as %1",blck_pendingMissions];};
 	#endif
 
 	_element = blck_pendingMissions select _index;
 
 	#ifdef blck_debugMode
-	if (blck_debuglevel > 2) then {diag_log format["_fnc_updateMissionQue::  -- >> _element before update = %1",_element];}; 
+	if (blck_debuglevel > 3) then {diag_log format["_fnc_updateMissionQue::  -- >> _element before update = %1",_element];}; 
 	#endif
 						// 0		  1		                 2			3	4		5		6		
 	//_mission = [_missionList,format["%1%2",_marker,_i],_difficulty,_tMin,_tMax,_waitTime,[0,0,0]];
@@ -59,7 +59,7 @@ if (_index > -1) then
 	blck_pendingMissions set [_index, _element];
 
 	#ifdef blck_debugMode
-	if (blck_debuglevel > 2) then {diag_log format ["_fnc_updateMissionQue :: blck_pendingMissions after update = %1",blck_pendingMissions];};	
+	if (blck_debuglevel > 4) then {diag_log format ["_fnc_updateMissionQue :: blck_pendingMissions after update = %1",blck_pendingMissions];};	
 	#endif
 }; 
 

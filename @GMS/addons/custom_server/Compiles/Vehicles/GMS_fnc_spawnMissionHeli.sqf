@@ -21,12 +21,6 @@ if (_backpacks  isEqualTo []) 		then {_backpacks = [_skillAI] call blck_fnc_sele
 if (_weaponList  isEqualTo []) 	then {_weaponList = [_skillAI] call blck_fnc_selectAILoadout};
 if (_sideArms isEqualTo []) 		then {[_skillAI] call blck_fnc_selectAISidearms};
 
-/*
-{
-	diag_log format["_fnc_spawnMissionHeli: parameter %1 = %2",_foreachIndex,_x];
-}forEach [_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms];
-*/
-
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then
 {
@@ -44,19 +38,6 @@ if (isNull _grpPilot) then
 
 if !(isNull _grpPilot)  then
 {
-	_grpPilot setBehaviour "COMBAT";
-	_grpPilot setCombatMode "RED";
-	_grpPilot setSpeedMode "NORMAL";
-	_grpPilot allowFleeing 0;
-	_grpPilot setVariable["patrolCenter",_coords];
-	_grpPilot setVariable["minDis",15];
-	_grpPilot setVariable["maxDis",30];
-	_grpPilot setVariable["timeStamp",diag_tickTime];
-	_grpPilot setVariable["arc",0];
-	_grpPilot setVariable["wpRadius",30];
-	_grpPilot setVariable["wpMode","SAD"];
-	//  		[_pos,_minDist,_maxDist,_groupSpawned,"random","SAD","infantry"] spawn blck_fnc_setupWaypoints;
-	diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
 	switch (toLower(_skillAI)) do
 	{
 		case "blue": {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisBlue};
@@ -65,8 +46,22 @@ if !(isNull _grpPilot)  then
 		case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
 		default {_minDist = 150; _maxDist = 500};
 	};
-		diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
+	_grpPilot setBehaviour "COMBAT";
+	_grpPilot setCombatMode "RED";
+	_grpPilot setSpeedMode "NORMAL";
+	_grpPilot allowFleeing 0;
+	_grpPilot setVariable["patrolCenter",_coords];
+	_grpPilot setVariable["minDis",_minDist];
+	_grpPilot setVariable["maxDis",_maxDist];
+	_grpPilot setVariable["timeStamp",diag_tickTime];
+	_grpPilot setVariable["arc",0];
+	_grpPilot setVariable["wpRadius",30];
+	_grpPilot setVariable["wpMode","SAD"];
+	//diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
+	//diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
 	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","pilot"] call blck_fnc_setupWaypoints;
+
+
 	blck_monitoredMissionAIGroups pushBack _grpPilot;
 	//create helicopter and spawn it
 	if (( typeName _helis) isEqualTo "ARRAY") then 
@@ -79,7 +74,8 @@ if !(isNull _grpPilot)  then
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 1) then
 	{
-		diag_log format["_fnc_spawnMissionHeli (78):: _chopperType selected = %1",_chopperType];
+			diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
+			diag_log format["_fnc_spawnMissionHeli (78):: _chopperType selected = %1",_chopperType];
 	};
 	#endif
 

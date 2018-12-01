@@ -21,4 +21,5 @@ _chute setPos [getPos _chute select 0, getPos _chute select 1, _dropHeight];
 _crate setPos (getPos _chute);
 _crate attachTo [_chute, [0,0,0]];	
 if (_crateVisualMarker) then {[_crate] spawn blck_fnc_crateMarker};
+_chute
 

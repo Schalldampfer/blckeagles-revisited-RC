@@ -80,7 +80,7 @@ if !(_soldierType isEqualTo "emplaced") then
 	_wp setWaypointStatements ["true","this call blck_fnc_changeToMoveWaypoint;"];	
 	#endif
 	#ifdef blck_debugMode
-	if (blck_debugLevel >= 2) then
+	if (blck_debugLevel >= 3) then
 	{
 		_marker = createMarker [format["GroupMarker%1",_group],_newPos];
 		_group setVariable["wpMarker",_marker,true];
@@ -90,7 +90,7 @@ if !(_soldierType isEqualTo "emplaced") then
 		//diag_log format["_fnc_setupWaypoints: configuring weapoints for group %2 mobile patrol with _soldierType = %1",_solderType,_group];
 		diag_log format["_fnc_setupWaypoints: soldier type for mobile _group %1 set to %2",_group, (_group getVariable["soldierType","null"])];
 		diag_log format["_fnc_setupWaypoints: all variables for the group have been set for group %1",_group];		
-		diag_log format["_fnc_setupWaypoints:: -- >> wpMode %1 _dir %2 _dis 3",_group getVariable["wpMode","random"], _dir, _dis];
+		diag_log format["_fnc_setupWaypoints:: -- >> wpMode %1 _dir %2 _dis %3",_group getVariable["wpMode","random"], _dir, _dis];
 		diag_log format["_fnc_setupWaypoints:: -- >> group to update is %1 and new position is %2",_group, _newPos];		
 		diag_log format["_fnc_setupWaypoints:: -- >> Waypoint statements for group %1 have been configured as %2",_group, waypointStatements _wp];
 		diag_log format["_fnc_setupWaypoints:: -- >> Waypoint marker for group %1 have been configured as %2 with text set to %3",_group, _group getVariable "wpMarker", markerText (_group getVariable "wpMarker")];

@@ -20,11 +20,13 @@
 	blck_debugON = false;  //  Do not touch ... 
 	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
-	execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
-	if (true) exitWith {};
+	if (true) exitWith 
+	{
+		diag_log format["[blckeagls] Running configs for militarized servers build %1",blck_buildNumber];
+		execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
+	};
 	#endif
-	
-	//diag_log "[blckeagls] Loading configurations for Non-militarized servers: blck_configs.sqf";
+	diag_log format["[blckeagls] Loading configurations for Non-militarized servers build %1",blck_buildNumber];
 	/*
 		**************************************
 		Configurations begin here
@@ -42,7 +44,7 @@
 
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
-	blck_simulationManager = blck_useBlckeaglsSimulationManagement; 
+	blck_simulationManager = blck_useBlckeaglsSimulationManager; 
 	diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
 	/*
 		blck_simulationManagementOff  - no simulation management occurs
@@ -51,7 +53,7 @@
 	*/
 
 	// Note that you can define map-specific variants in custom_server\configs\blck_custom_config.sqf
-	blck_useTimeAcceleration = false; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
+	blck_useTimeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
 	blck_timeAccelerationDay = 0.25;  // Daytime time accelearation
 	blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
 	blck_timeAccelerationNight = 12;  // Nighttim time acceleration	
@@ -71,7 +73,7 @@
 	***********************************************************/
 	////////
 	//  Headless Client Configurations
-	blck_useHC = false; // Experimental (do not use if you allow players to claim mission vehicles).
+	blck_useHC = true; // Experimental (death messages and rewards not yet working).
 	
 	///////////////////////////////
 	//  Kill message configurations
@@ -211,19 +213,17 @@
 	// Enable / Disable Missions
 	////////////////////
 	
-
+	// Maximum number of missions shown on the map at any one time.
+	// Change this value to reduce the number of spawned missions at any one time.
+	blck_maxSpawnedMissions = 4;
+	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
 	blck_enableGreenMissions = 1;
 	blck_enableRedMissions = 2;
-	blck_enableBlueMissions = 2;
+	blck_enableBlueMissions = 1;
 	blck_numberUnderwaterDynamicMissions = 3;  // Values from -1 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
 
-	// Maximum number of missions shown on the map at any one time.	
-	// Change this value to reduce the number of spawned missions at any one time.
-	//blck_maxSpawnedMissions = 9;  // Set this to a value lower than the total number of missions if you want only some of the types of missions running at any one time.
-	blck_maxSpawnedMissions = blck_enableOrangeMissions + blck_enableGreenMissions + blck_enableRedMissions + blck_enableBlueMissions + blck_numberUnderwaterDynamicMissions;
-	
 	////////////////////
 	// MISSION TIMERS
 	////////////////////
@@ -240,7 +240,7 @@
 	blck_TMax_Green = 300;
 	blck_TMax_Blue = 200;
 	blck_TMax_Red = 250;
-	blck_TMax_UMS = 200;
+	blck_TMax_UMS = 400;
 	
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
@@ -283,6 +283,8 @@
 	GENERAL AI SETTINGS
 	
 	****************************************************************/
+	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
+	blck_useConfigsGeneratedLoadouts = true;
 	
 	blck_groupBehavior = "SENTRY";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
@@ -298,8 +300,7 @@
 	blck_launcherCleanup = true;// When true, launchers and launcher ammo are removed from dead AI.
 	blck_minimumPatrolRadius = 22;  // AI will patrol within a circle with radius of approximately min-max meters. note that because of the way waypoints are completed they may more more or less than this distance.
 	blck_maximumPatrolRadius = 35;
-
-
+	
 	//This defines how long after an AI dies that it's body disappears.
 	blck_bodyCleanUpTimer = 60*40; // time in seconds after which dead AI bodies are deleted
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
@@ -360,33 +361,22 @@
 	blck_maxMoneyRed = 15;
 	blck_maxMoneyBlue = 10;
 
-	private["_modType"];
-	_modType = [] call blck_fnc_getModType;
-	if (_modType isEqualTo "Epoch") then
+		if (toLower(blck_modType) isEqualTo "epoch") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch.sqf";
-		waitUntil {(isNil "blck_configsEpochLoaded") isEqualTo false;};
-		waitUntil{blck_configsEpochLoaded};
-		blck_configsEpochLoaded = nil;
-		//diag_log "[blckeagles] Running getTraderCitiesEpoch to get location of trader cities";
-		execVM "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitesEpoch.sqf";
 	};
-	if (_modType isEqualTo "Exile") then
+	if (toLower(blck_modType)  isEqualTo "exile") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",_modType];
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
-		waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		waitUntil{blck_configsExileLoaded};
-		blck_configsExileLoaded = nil;
-		if (blck_blacklistTraderCities || blck_blacklistSpawns || blck_listConcreteMixerZones) then {execVM "\q\addons\custom_server\Compiles\Functions\GMS_fnc_getTraderCitesExile.sqf";};
 	};	
+	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
+	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
-		diag_log format["[blckeagles] Dynamic Configs Enabled"];
+		diag_log format["[blckeagls] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
-		//waitUntil {(isNil "blck_configsExileLoaded") isEqualTo false;};
-		//waitUntil{blck_dynamicConfigsLoaded};
-		//blck_dynamicConfigsLoaded = nil;
 	};
+
 	blck_configsLoaded = true;

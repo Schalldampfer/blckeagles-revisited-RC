@@ -4,10 +4,16 @@ Loosely based on the AI mission system by blckeagls ver 2.0.2
 Contributions by Narines: bug fixes, testing, infinite ammo fix.
 Ideas or code from that by He-Man, Vampire and KiloSwiss have been used for certain functions.
 Many thanks for new Coding and ideas from Grahame.
+A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve coding efficiency.
 
 Significant Changes:
 =====================
-6.86 Build 155
+6.88 Build 167
+This update consists primarily of a set of bug fixes and code tweaks.
+Many thanks to HeMan for his time in effort spent going through the scripts to troublehsoot and improve them.
+The most important bug fix has been resolution of issues with use of headless clients.
+
+6.86 Build 156
 Added support for spawning infantry and statics inside buildings for forming a garrison using either of two methods.
 	1. by placing a marker object such as a sphere in the building you define it as having units/statics inside 
 	2. by placing units or statics in it you determine the garrison to be placed at mission spawn.
@@ -18,7 +24,8 @@ Added: code that forces air, land and sea vehicles to detect nearby players whic
 Changed: code for blckeagls simulation manager to force simulation when groups are awoken.
 Added: additional settings for simulation management (see blck_configs.sqf for details)
 Changed: Simulation management is now set using the new variable blck_simulationManager which is defined in blck_configs.sqf
-Fixed: issues with AI not throwing smoke when healing themselves.
+Fixed: Heli's just hovered over missions.
+Fixed: GRG code that locked up the mission system was removed from the public RC.
 
 6.84 Build 145
 Added Option to load weapons, pistols, uniforms, headgear, vests and backpacks from CfgPricing (Epoch) or the Arsenal (Exile) and exclude items above a certain price

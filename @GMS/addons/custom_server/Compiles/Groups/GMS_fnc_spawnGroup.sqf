@@ -12,9 +12,9 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private["_numbertospawn","_groupSpawned","_safepos","_useLauncher","_launcherType"];	
+private["_numbertospawn","_groupSpawned","_safepos","_useLauncher","_launcherType","_infantryType"];	
 // _newGroup = [_groupSpawnPos,_minAI,_maxAI,_skillLevel,_coords,_minPatrolRadius,_maxPatrolRadius,_uniforms,_headGear,_vests,_backpacks,_weapons,_sideArms,true,_isScubaGroup]
-params["_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",20], ["_maxDist",35],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false]];
+params["_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false]];
 if (_weaponList isEqualTo []) then {_weaponList = [_skillLevel] call blck_fnc_selectAILoadout};
 if (_sideArms isEqualTo [])  then {_sideArms = [_skillLevel] call blck_fnc_selectAISidearms};
 if (_uniforms isEqualTo [])  then {_uniforms = [_skillLevel] call blck_fnc_selectAIUniforms};
@@ -96,9 +96,8 @@ if !(isNull _groupSpawned) then
 	if (_configureWaypoints) then
 	{
 		if (_scuba) then {_infantryType = "scuba"} else {_infantryType = "infantry"};
-		[_pos,_minDist,_maxDist,_groupSpawned,"random","SAD","infantry"] spawn blck_fnc_setupWaypoints;
+		[_pos,_minDist,_maxDist,_groupSpawned,"random","SAD",_infantryType] spawn blck_fnc_setupWaypoints;
 	};
-	//[_pos,_minDist,_maxDist,_groupSpawned,"random","SENTRY"] spawn blck_fnc_setupWaypoints;
 	//diag_log format["_fnc_spawnGroup: blck_fnc_setupWaypoints called for group %1",_groupSpawned];
 	#ifdef blck_debugMode
 	if (blck_debugLevel >= 1) then

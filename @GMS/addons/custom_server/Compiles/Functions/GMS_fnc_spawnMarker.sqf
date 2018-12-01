@@ -14,9 +14,7 @@
 private["_blck_fn_configureRoundMarker"];
 _blck_fn_configureRoundMarker = {
 	//diag_log format["_blck_fn_configureRoundMarker: _this = %1",_this];
-	//  [[""OrangeMarker1"",[11736.1,9272.76,0],""Soylent Green"",""center"",""ColorPink"",[""ellipse"",[250,250],""Cross""]]]"
 	private["_name","_pos","_color","_size","_MainMarker","_arrowMarker","_labelMarker","_labelType"];
-	// [_missionType,_markerPos,_markerColor,_markerLabel, _mSize,_markerLabelType,_mShape,_mBrush]
 	params["_name","_pos","_color","_text","_size","_labelType","_mShape","_mBrush"];
 	if ((_pos distance [0,0,0]) < 10) exitWith {};
 	
@@ -74,7 +72,7 @@ _blck_fn_configureIconMarker = {
 params["_mArray"];
 private["_marker"];
 _mArray params["_missionMarkerName","_markerPos","_markerLabel","_markerLabelType","_markerColor","_markerTypeInfo"];
-//  add defaults to provide backward compatibility for older missions that do not specify a brush.
+
 _markerTypeInfo params["_mShape",["_mSize",[0,0]],["_mBrush","GRID"]];
 //diag_log format["spawnMarker.sqf::  --  >> _missionMarkerName %1 | _markerPos %2 | _markerLabel %3 | _markerLabelType %4 | _markerColor %5 | _markerTypeInfo %6 | _mShape %7",_missionMarkerName,_markerPos,_markerLabel,_markerLabelType,_markerColor,_markerTypeInfo,_mShape];
 

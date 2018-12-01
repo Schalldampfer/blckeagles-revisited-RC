@@ -15,12 +15,9 @@
 private["_group","_isLegal","_weapon","_lastkill","_kills","_message","_killstreakMsg"];
 params["_unit","_killer","_isLegal"];
 
-// if blck_cleanupAt > 0 then the death was already processed.
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};
 
-//diag_log format["_fnc_processAIKills:: function called with _this = %1",_this];
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer, true];
-//diag_log format["_fnc_processAIKills: _unit = %1 | vehicle unit = %2",_unit, vehicle _unit];
 
 blck_deadAI pushback _unit;
 _group = group _unit;
@@ -51,7 +48,6 @@ if ((diag_tickTime - _lastkill) < 240) then
 	_killer setVariable["blck_kills",0];
 };
 
-//_unit action ["Eject", vehicle _unit];
 [_unit, ["Eject", vehicle _unit]] remoteExec ["action",(owner _unit)];
 if (blck_useKillMessages) then
 {
@@ -65,18 +61,14 @@ if (blck_useKillMessages) then
 		_message = format["[blck] %1 killed with %2 from %3 meters",name _killer,getText(configFile >> "CfgWeapons" >> _weapon >> "DisplayName"), round(_unit distance _killer)];
 	};
 	_message =_message + _killstreakMsg;
-	//diag_log format["[blck] unit killed message is %1",_message,""];
 	[["aikilled",_message,"victory"],allPlayers] call blck_fnc_messageplayers;
 };
 
 [_unit,_killer] call blck_fnc_rewardKiller;
 if (blck_showCountAliveAI) then
 {
-	//diag_log "_fnc_processAIKills: Updating Map Marker AI Counts - blck_missionMarkers items are";
 	{
-		//diag_log format["_fnc_processAIKills: blck_missionMarkers itm %1 = %2",_forEachIndex,_x];
 		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;
 	} forEach blck_missionMarkers;
-	//call blck_fnc_updateAllMarkerAliveCounts;
 };
 

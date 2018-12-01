@@ -1,8 +1,6 @@
 /*
-   call as [] call blck_fnc_cleanEmptyGroups;
-   Deletes any empty groups and thereby prevents errors resulting from createGroup returning nullGroup.
+	removes empty or null groups from blck_monitoredMissionAIGroups
    By Ghostrider [GRG]
-  3/18/17
 	--------------------------
 	License
 	--------------------------
@@ -12,19 +10,14 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then
+for "_i" from 0 to ((count blck_monitoredMissionAIGroups) - 1) do
 {
-	diag_log format ["_fnc_cleanEmptyGroups:: -- >> group count = %1 ",(count allGroups)];
-	diag_log format ["_fnc_cleanEmptyGroups:: -- >> Group count AI side = %1", call blck_fnc_groupsOnAISide];
-};
-#endif
+	if (_i >= (count blck_monitoredMissionAIGroups)) exitWith {};
+	_grp = blck_monitoredMissionAIGroups deleteat 0;
 
-private _grp = allGroups;
-{
-	//diag_log format["_fnc_cleanEmptyGroups:: - >> type of object _x = %1",typeName _x];
-	if ((count units _x) isEqualTo 0) then {deleteGroup _x};
-}forEach _grp;
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then {diag_log "_fnc_cleanEmptyGroups::  -- >> exiting function";};
-#endif
+	//if (!(_grp isEqualTo grpNull) then
+	//{ 
+	if ({alive _x} count units _grp > 0) then {	blck_monitoredMissionAIGroups pushBack _grp};
+	//};
+};
+

@@ -62,12 +62,6 @@ _fn_missionCleanup = {
 			diag_log format["_fnc_endMission: Mission Aborted, setting all timers to 0"];
 		};
 		#endif
-		/*
-		if (_endCondition == 2) then
-		{
-			[["warning",_endMsg,_blck_localMissionMarker select 2]] call blck_fnc_messageplayers;
-		};
-		*/
 		[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;
 		_cleanupCompositionTimer = 0;
 		_cleanupAliveAITimer = 0;

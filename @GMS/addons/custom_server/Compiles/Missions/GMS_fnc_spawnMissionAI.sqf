@@ -70,7 +70,7 @@ if ( (count _missionGroups > 0) && _noAIGroups > 0) then
 		else
 		{
 			_newAI = units _newGroup;
-			//blck_monitoredMissionAIGroups pushback _newGroup;
+			blck_monitoredMissionAIGroups pushback _newGroup;
 			#ifdef blck_debugMode
 			if (blck_debugLevel >= 2) then
 			{
@@ -152,6 +152,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					{
 						_newAI = units _newGroup;
 
+						blck_monitoredMissionAIGroups pushback _newGroup;
 						#ifdef blck_debugMode
 						if (blck_debugLevel >= 2) then
 						{
@@ -181,6 +182,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 				{
 					_newAI = units _newGroup;
 
+					blck_monitoredMissionAIGroups pushback _newGroup;
 					#ifdef blck_debugMode
 					if (blck_debugLevel >= 2) then
 					{
@@ -201,6 +203,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 						{
 							_newAI = units _newGroup;
 
+							blck_monitoredMissionAIGroups pushback _newGroup;
 							#ifdef blck_debugMode
 							if (blck_debugLevel >= 2) then
 							{
@@ -229,6 +232,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 				};
 				_newAI = units _newGroup;
 				
+				blck_monitoredMissionAIGroups pushback _newGroup;
 				#ifdef blck_debugMode
 				if (blck_debugLevel >= 2) then
 				{
@@ -247,6 +251,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					else 
 					{
 						_newAI = units _newGroup;
+						blck_monitoredMissionAIGroups pushback _newGroup;
 						#ifdef blck_debugMode
 						if (blck_debugLevel > 2) then
 						{

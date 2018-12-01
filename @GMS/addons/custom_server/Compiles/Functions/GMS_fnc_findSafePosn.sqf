@@ -132,33 +132,4 @@ if ((count _coords) > 2) then
 };
 _coords;
 
-/*
-while {_findNew} do {
-
-
-
-	// test for water nearby
-	_dist = 100;
-	for [{_i=0}, {_i<360}, {_i=_i+20}] do
-	{
-		_xpos = (_coords select 0) + sin (_i) * _dist;
-		_ypos = (_coords select 1) + cos (_i) * _dist;
-		_newPos = [_xpos,_ypos,0];
-		if (surfaceIsWater _newPos) then
-		{
-			_findNew = true;
-			_i = 361;
-		};
-	};
-	
-	if (toLower(worldName) isEqualTo "taviana") then 
-	{
-		_tavTest = createVehicle ["SmokeShell",_coords,[], 0, "CAN_COLLIDE"];
-		_tavHeight = (getPosASL _tavTest) select 2;
-		deleteVehicle _tavTest;
-		if (_tavHeight > 100) then {_FindNew = true;};
-	};
-	_tries = _tries + 1;
-};
-
 

@@ -1,11 +1,6 @@
 /*
-	spawn a crate at a specific location 
-	returns the object (crate) that was created.
-	for ghostridergaming
 	By Ghostrider [GRG]
 	Copyright 2016
-	Last updated 12-5-17
-	
 	--------------------------
 	License
 	--------------------------
@@ -24,7 +19,7 @@ _crate allowDamage false;
 _crate enableRopeAttach false;
 [_crate] call blck_fnc_emptyObject;
 uiSleep 1;
-_crate setPosATL _coords;
+_crate setPosATL [_coords select 0, _coords select 1, (_coords select 2) + 0.25];
 _crate setDir _crateDir;
 //_crate setVectorUp [0,0,1];
 _crate setVectorUp surfaceNormal position _crate;

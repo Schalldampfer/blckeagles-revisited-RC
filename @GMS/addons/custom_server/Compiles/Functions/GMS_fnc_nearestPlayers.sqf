@@ -1,4 +1,17 @@
 
+/*
+	for ghostridergaming
+	By Ghostrider [GRG]
+	Copyright 2016
+	
+	--------------------------
+	License
+	--------------------------
+	All the code and information provided here is provided under an Attribution Non-Commercial ShareAlike 4.0 Commons License.
+
+	http://creativecommons.org/licenses/by-nc-sa/4.0/	
+*/
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 //diag_log format["_fnc_nearestPlayers: _this = %1",_this];
 params["_coords","_range"];
 private["_return","_playerClassNames","_epochClasses","_exileClasses"];

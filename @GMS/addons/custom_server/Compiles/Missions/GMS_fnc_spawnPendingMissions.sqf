@@ -68,11 +68,7 @@ if (count _readyToSpawnQue > 0) then
 	// 	_mission = [_compiledMissionsList,format["%1%2",_marker,_i],_difficulty,_tMin,_tMax,_waitTime,[0,0,0]];
 	_missionMarker = _missionToSpawn select 1;
 	_missionDifficulty = _missionToSpawn select 2;
-	//diag_log format["_fnc_spawnPendingMissions: _missionMarker %1",_missionMarker];
-	//diag_log format["_fnc_spawnPendingMissions: _missionDifficulty %1",_missionDifficulty];
-	//diag_log format["_fnc_spawnPendingMissions: _compiledMission %1",_compiledMission];
 	[_coords,_missionMarker,_missionDifficulty] spawn _compiledMission;
-	//diag_log format["_fnc_spawnPendingMissions: blck_missionsRunning = %1", blck_missionsRunning];
 };
 
 true

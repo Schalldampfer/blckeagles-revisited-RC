@@ -193,9 +193,9 @@ if (blck_debugLevel > 2) then
 };
 #endif
 
-_unit addEventHandler ["Reloaded", {_this call compile preprocessfilelinenumbers blck_EH_unitWeaponReloaded;}];
-_unit addMPEventHandler ["MPKilled", {[(_this select 0), (_this select 1)] call compile preprocessfilelinenumbers blck_EH_AIKilled;}]; // changed to reduce number of concurrent threads, but also works as spawn blck_AIKilled; }];
-_unit addMPEventHandler ["MPHit",{ [_this] call compile preprocessFileLineNumbers blck_EH_AIHit;}];
+_unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];
+_unit addMPEventHandler ["MPKilled", {[(_this select 0), (_this select 1)] call blck_EH_AIKilled;}];
+_unit addMPEventHandler ["MPHit",{[_this] call blck_EH_AIHit;}];
 
 switch (_skillLevel) do 
 {

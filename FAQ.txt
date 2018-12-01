@@ -2,13 +2,14 @@ This addon includes several modules which will be discussed in the following ord
 1. The core, dynamic mission system
 2. A static mission system
 3. A custom time acceleration module
-4. A module to execute scripts for custom bases (map addons) and so forths.
+4. A module to execute scripts for custom bases (map addons) and so forth.
 5. A module to spawn loot crates in specific locations at server startup.
+6. Tools to export mission layouts designed in the editor for use with mission templates. This allows you to quickly add content to your server. Tools are available for both static and dynamic missions.
 
 1. Core Mission System.
 
-The core mission system is configured to run 4 different classes of mission (Blue, Red, Green and Orange) simultaneously.
-Reducing value for 	...\custom_serer\configs\blck_configs.sqf\blck_maxSpawnedMissions will reduce the number of missions running on the server.
+The core mission system is configured to run 5 different classes of mission (Blue, Red, Green and Orange, and underwater/surface) simultaneously.
+Reducing value for 	...\custom_serer\configs\blck_configs.sqf\blck_maxSpawnedMissions will reduce the number of missions running on the server at any one time.
 
 General settings include:
 	the ability set whether and how messages to players regarding missions spawned or completed are displayed,
@@ -29,6 +30,7 @@ General settings include:
 	Loot can also be configured for each mission class or mission. You can modify the number of weapons, magazines, items, construction materials, etc. 
 	You can also adjust the choices for each of these types of items.
 	The equipment selected for each class of mission can also be specified(uniforms, vests, headgear, backpcks, weapons, pistols).
+	Alternatively, AI loadouts can be determined by the mission system based on what is available at server startup. When loadouts are dynamically configured the items spawned in CfgLoot are used. Note that an upper limit on price is available.
 	Whether kills by guns mounted on vehicles are to be penalized (gunes that are prohobited are listed in blck_config.sys).
 	Whether to spawn a smoking wreck near the mission to be used as a visual landmark.
 	Whether to spawn mines (recommended only when no vehcle patrols are spawned).
@@ -39,17 +41,17 @@ Where possible, I have tried group weapons based on desirability from low rank (
 
 The missions themselves are spawned from templates which can be used to define most aspects of the missions including:
  the messages sent to players; 
- text used to label the mark
- type of marker used to label the map
- number of AI groups and number of AI and, if desired their spawn locations.
+ Text used to label the mark
+ Type of marker used to label the map
+ Number of AI groups and number of AI and, if desired their spawn locations.
  (optional) loot chest positions and loot to be loaded
- type and location of any objects, buildings, or other entities that give the mission character
- number and (optional) locations of static weapons
- number, type, and spawn location(s) of vehicle patrols
+ Type and location of any objects, buildings, or other entities that give the mission character
+ Number and (optional) locations of static weapons
+ Number, type, and spawn location(s) of vehicle patrols
  
  To create and run new missions simply: 
 	layout an AI base in the Arma 3 editor, 
-	export the base as an .sqf using Maca's EDEN PLuging uing relative positions.
+	export the base as an .sqf using the tools provided.
 	Define the above parameters (nu. AI groups, No AI, etc)
 	add this information to the mission template and modify any messages accordingly
 	Add the name of the file (e.g., "newAImission" to the list of missions to be spawned of that class in ...\custom)server\missions\GMS_missionLists.sqf
@@ -66,8 +68,8 @@ You can shorten the time after which bodies or scenery are deleted if you believ
 Additional Modules Available:
 
 Suport is provided for groups of AI, vehicles, aircraft, static weapons, subs, surface vessels.
-The positions of these is defined by templates (see custom_server\Missions\Static\Missions folder for examples) or by calls to functions to add these elements.
-The recommended way to place static units of various types is to add their spawn information to a new template then add the name/mod to custom_server\Missions\Static\GMS_StaticMissions_Lists.sqf.
+The positions of these are defined by templates (see custom_server\Missions\Static\Missions folder for examples) or by calls to functions to add these elements.
+The recommended way to place static units of various types is to lay out their positions in the editor then export the data using the tools provided to create a new mission with these definitions.
 Alternatively you can set up calls to the functions that initialize spawns for these units in blck_custom_configs.sqf or an include that is incorporated into it.
 See the directions for creating static missions for more information.
 

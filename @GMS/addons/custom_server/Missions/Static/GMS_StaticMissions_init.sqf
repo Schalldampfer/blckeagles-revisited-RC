@@ -17,26 +17,17 @@
 #include "\q\addons\custom_server\Missions\Static\Code\GMS_fnc_sm_init_functions.sqf";
 #include "\q\addons\custom_server\Missions\Static\GMS_StaticMissions_Lists.sqf";
 
-private["_mod","_map","_missionMod","_missionMap","_missionLocation","_missionDataFile"];
 blck_sm_monitoring = 0;
 blck_sm_groupDespawnTime = 30;
 blck_sm_patrolRespawnInterval = 30;
-uiSleep 10;
-_map = toLower worldName;
 {
-	if ((_map) isEqualTo toLower(_x select 1)) then
+	if ((toLower worldName) isEqualTo toLower(_x select 1)) then
 	{
-		if ((blck_ModType isEqualTo "Epoch") && (toLower(_x select 0) isEqualTo "epoch")) then
-		{
-			call compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\Static\missions\%1",(_x select 2)];
-		};
-
-		if ((blck_ModType isEqualTo "Exile") && (toLower(_x select 0) isEqualTo "exile")) then
+		if ((toLower blck_modType) isEqualTo (toLower(_x select 0))) then
 		{
 			call compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\Static\missions\%1",(_x select 2)];
 		};
 	};
-	uiSleep 1;
 }forEach _staticMissions;
 diag_log "[blckeagls] GMS_StaticMissions Initialized.sqf <Loaded>";
 
