@@ -4,12 +4,14 @@ Loosely based on the AI mission system by blckeagls ver 2.0.2
 Contributions by Narines: bug fixes, testing, infinite ammo fix.
 Ideas or code from that by He-Man, Vampire and KiloSwiss have been used for certain functions.
 Many thanks for new Coding and ideas from Grahame.
+A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve coding efficiency.
 
 Significant Changes:
 =====================
-6.88 
+6.88 Build 167
 This update consists primarily of a set of bug fixes and code tweaks.
 Many thanks to HeMan for his time in effort spent going through the scripts to troublehsoot and improve them.
+The most important bug fix has been resolution of issues with use of headless clients.
 
 6.86 Build 156
 Added support for spawning infantry and statics inside buildings for forming a garrison using either of two methods.

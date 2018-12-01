@@ -42,8 +42,11 @@ _wp setWaypointCompletionRadius (_group getVariable["wpRadius",30]);
 _wp setWaypointType "MOVE";
 _wp setWaypointName "move";
 _wp setWaypointBehaviour "COMBAT";
-_wp setWaypointCombatMode "YELLOW";
-_wp setWaypointTimeout [1,1.1,1.2];
+_wp setWaypointCombatMode "RED";
+_wp setWaypointTimeout [10,15,20];
+_wp setWaypointLoiterRadius (_group getVariable["wpRadius",30]);
+_wp setWaypointLoiterType "CIRCLE";
+_wp setWaypointSpeed "LIMITED";
 _group setCurrentWaypoint _wp;
 #ifdef blck_debugMode
 if (blck_debugLevel > 2) then

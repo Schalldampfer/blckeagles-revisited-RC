@@ -15,35 +15,24 @@
 
 	params["_veh"];
 	blck_monitoredVehicles = blck_monitoredVehicles - [_veh];
-	//diag_log format["_fnc_releaseVehicleToPlayersl: _veh = %1 | (owner _veh) = %2",_veh,(owner _veh)];
-	//diag_log format["_fnc_releaseVehicleToPlayersl: initial lock state of vehicle 51 = %2",_veh,locked _veh];
-	//_veh setVehicleLock "UNLOCKED" ;
-	_locked = true;
-	_count = 0;
-	_timeIn = diag_tickTime;
-	while {_count < 2} do 
-	{
-		//diag_log format["_fnc_releaseVehicleToPlayersl: attempting to unlock vehicle %1",_veh];
-		[_veh,"UNLOCKED"] remoteExec ["setVehicleLock",0];  //  unlock on all clients so we don't have to worry about any change of ownership when the driver is ejected. 
-															// a bit of bandwidth seems worth ensuring that vehicles do in fact get unlocked.
-		uiSleep 0.1;
-		_count = _count + 1;
-		//diag_log format["_fnc_releaseVehicleToPlayersl: locked state of vehicle %1 = ^%2",_veh, locked _veh];
-		//if ((_veh locked) isEqualTo "UNLOCKED" || (diag_tickTime - _timeIn) > 5) then {_locked = false};
-	};
-
+	//diag_log format["_fnc_releaseVehicleToPlayersl: _veh = %1 | isLocal _veh = %3 | (owner _veh) = %2",_veh,(owner _veh),Local _veh];
+    if (local _veh) then {
+        _veh lock false;
+    }
+    else {
+        if (isserver) then {
+            [_veh,false] remoteExecCall ["lock",_veh];    // let the machine, where the vehicle is local unlock it (only the server knows, who the owner is!!!)
+        }
+        else {
+            [[_veh,false],["lock",_veh]] remoteExecCall ["remoteExecCall", 2];    // If run on HC, move to the server. Server will remoteexec on local machine
+        };
+    };
+	//diag_log format["_fnc_releaseVehicleToPlayers: _veh=%1 | owner = %2 | lock = %3",_veh,owner _veh, locked _veh];
 	{
 		_veh removealleventhandlers _x;
 	} forEach ["GetIn","GetOut","fired","hit","hitpart","reloaded","dammaged","HandleDamage"];
 	{
 		_veh removeAllMPEventHandlers _x;
 	} forEach ["MPHit","MPKilled"];
-	_veh setVariable["blck_DeleteAt",diag_tickTime + blck_vehicleDeleteTimer,true];
+	_veh setVariable["blck_DeleteAt",nil];
 	if ((damage _veh) > 0.6) then {_veh setDamage 0.6};
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 2) then
-	{
-		diag_log format["_fnc_vehicleMonitor:: case of patrol vehicle released to players where vehicle = %1",_veh];
-	};
-	#endif

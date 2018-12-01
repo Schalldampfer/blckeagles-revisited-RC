@@ -148,14 +148,14 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 
 	blck_maxSpawnedMissions = 15;
 	blck_mainThreadUpdateInterval = 10;
-	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = 1;
+	blck_enableOrangeMissions = -1;  
+	blck_enableGreenMissions = -1;
 	blck_enableRedMissions = 1;
-	blck_enableBlueMissions = 1;
-	blck_numberUnderwaterDynamicMissions = 3;	
-	blck_enableHunterMissions = 1;
-	blck_enableScoutsMissions = 1;
-	blck_maxCrashSites = 3; 
+	blck_enableBlueMissions = -1;
+	blck_numberUnderwaterDynamicMissions = -3;	
+	blck_enableHunterMissions = -1;
+	blck_enableScoutsMissions = -1;
+	blck_maxCrashSites = -3; 
 	
 	//blck_killEmptyStaticWeapons = false;
 	//blck_killEmptyAIVehicles = true;
@@ -163,7 +163,7 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_AliveAICleanUpTimer = 20;  // Time after mission completion at which any remaining live AI are deleted.
 	blck_bodyCleanUpTimer = 20;
 	blck_vehicleDeleteTimer = 20; 
-	blck_MissionTimeout = 30;
+	//blck_MissionTimeout = 30;
 	
 	//blck_noPatrolHelisOrange = 1;
 	//blck_chanceHeliPatrolOrange = 1;
@@ -183,7 +183,7 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	//blck_SpawnVeh_Orange = 1; // Number of vehicles at Orange Missions
 	//blck_SpawnVeh_Green = 1; // Number of vehicles at Green Missions
 	//blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
-	//blck_SpawnVeh_Red = 1;
+	blck_SpawnVeh_Red = 1;
 	
 	blck_TMin_Blue = 7;
 	blck_TMin_Red = 10;

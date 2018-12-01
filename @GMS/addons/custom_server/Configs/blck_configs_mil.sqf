@@ -64,7 +64,7 @@
 	// When set to true,"dot", ext will be to the right of a black dot at the center the mission marker. 
 	blck_labelMapMarkers = [true,"center"];  
 	blck_preciseMapMarkers = false;  // Map markers are/are not centered at the loot crate
-	blck_showCountAliveAI = false;	
+	blck_showCountAliveAI = true;	
 
 	//Minimum distance between missions
 	blck_MinDistanceFromMission = 1500;
@@ -84,7 +84,7 @@
 	blck_missionEndCondition = "playerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
 	blck_killPercentage = 0.99999999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
-	blck_spawnCratesTiming = "atMissionEndAir"; // Choices: "atMissionSpawnGround","atMissionStartAir","atMissionEndGround","atMissionEndAir". 
+	blck_spawnCratesTiming = "atMissionSpawnGround"; // Choices: "atMissionSpawnGround","atMissionStartAir","atMissionEndGround","atMissionEndAir". 
 							 // Crates spawned in the air will be spawned at mission center or the position(s) defined in the mission file and dropped under a parachute.
 							 //  This sets the default value but can be overridden by defining  _spawnCrateTiming in the file defining a particular mission.
 	blck_loadCratesTiming = "atMissionSpawn"; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
@@ -204,7 +204,7 @@
 	// Maximum number of missions shown on the map at any one time.
 	// Change this value to reduce the number of spawned missions at any one time.
 	blck_maxSpawnedMissions = 4;
-	
+
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
 	blck_enableGreenMissions = 1;
@@ -222,7 +222,7 @@
 	blck_TMin_Blue = 120;
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
-
+	
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
 	blck_TMax_Green = 300;
@@ -346,21 +346,18 @@
 	blck_maxMoneyRed = 30;
 	blck_maxMoneyBlue = 20;
 
-		if (toLower(blck_modType) isEqualTo "epoch") then
+	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch_mil.sqf";
-		waitUntil {(isNil "blck_configsEpochLoaded") isEqualTo false;};
-		waitUntil{blck_configsEpochLoaded};
-		blck_configsEpochLoaded = nil;
 	};
 	if (toLower(blck_modType) isEqualTo "exile") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
 	};	
-	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"}:
-	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"}:
+	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
+	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagls] Dynamic Configs Enabled"];

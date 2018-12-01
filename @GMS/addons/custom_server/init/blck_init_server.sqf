@@ -28,7 +28,7 @@ if ((toLower blck_modType) isEqualTo "exile") then
 
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
-diag_log format["[blckeagls] Loading Server Mission System Version",blck_buildNumber];
+diag_log format["[blckeagls] Loading Server Mission System Version"];
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
@@ -80,7 +80,7 @@ switch (blck_simulationManager) do
 	case 0: {diag_log "[blckeagls] simulation management disabled"};
 };
 
-diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",_blck_versionDate,_blck_version,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
+diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
 diag_log format["blckeagls] waiting for players to join ----    >>>>"];
 
 if ( !(blck_debugON) && (blck_debugLevel isEqualTo 0)) then

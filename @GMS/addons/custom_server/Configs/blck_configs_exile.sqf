@@ -662,6 +662,25 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Item_Moobar",
 		"Exile_Item_InstantCoffee"
 	];
+	#ifdef blck_addCarParts
+	blck_carParts = [
+		"Exile_Item_CarWheel",
+		"DDR_Item_Tailrotor",
+		"DDR_Item_Main_Rotor",
+		"DDR_Item_Engine",
+		"DDR_Item_Glass",
+		"DDR_Item_Fuel_Tank",
+		"DDR_Item_Fishing_Net",
+		"DDR_Item_Fiberglass"
+	];
+	#endif 	
+	#ifdef useCUP
+	
+	#endif
+	
+	#ifdef useRHS
+	
+	#endif	
 	blck_ConsumableItems = blck_Meats + blck_Drink + blck_Food;
 	blck_throwableExplosives = ["HandGrenade","MiniGrenade"];
 	blck_otherExplosives = ["1Rnd_HE_Grenade_shell","3Rnd_HE_Grenade_shell","DemoCharge_Remote_Mag","SatchelCharge_Remote_Mag"];
@@ -673,7 +692,18 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_buildingMaterials = ["Exile_Item_ExtensionCord","Exile_Item_JunkMetal","Exile_Item_LightBulb","Exile_Item_MetalBoard",
 			"Exile_Item_MetalPole","Exile_Item_MetalScrews","Exile_Item_Cement","Exile_Item_Sand"];	
 	blck_tools = ["Exile_Item_Matches","Exile_Item_CookingPot","Exile_Melee_Axe","Exile_Melee_SledgeHammmer","Exile_Item_Handsaw","Exile_Item_Pliers"];
-
+	#ifdef blck_addCarParts
+	blck_carParts = [
+		"Exile_Item_CarWheel",
+		"DDR_Item_Tailrotor",
+		"DDR_Item_Main_Rotor",
+		"DDR_Item_Engine",
+		"DDR_Item_Glass",
+		"DDR_Item_Fuel_Tank",
+		"DDR_Item_Fishing_Net",
+		"DDR_Item_Fiberglass"
+	];
+	#endif 
 /***************************************************************************************
 DEFAULT CONTENTS OF LOOT CRATES FOR EACH MISSION
 Note however that these configurations can be used in any way you like or replaced with mission-specific customized loot arrays

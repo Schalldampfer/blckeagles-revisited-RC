@@ -63,17 +63,12 @@ You can use blck_custom_config.sqf to code any overrides you like. An example fo
 
 ////////////////////////
 // What is this blck_debugON variable about?
-It turns on accelerated mission spawning by default and activates additional logging.
-You can turn it on or of in custom_server\Compiles\blck_variables.sqf.
-Be careful about what you change in this file. 
+I use it to speed things up for debugging. Best to leave this one alone.
 
 ///////////////////////////////////////////
 // Further customization
 
-Just about anything about the missions can be modified. The mission template (see Missions\Orange\supply_camp.sqf and Missions\Blue\default.sqf for examples) allows you to define mission specific parameters.
-To create a new mission, make a copy of a mission template (e.g., custom_server\Blue\default.sqf). Edit the parameters to your liking and rename to file appropriately.
-To add a new mission, create a new mission template, then add the file name (e.g., "newmissions.sqf") to the mission list found in custom_server\Missions. 
-That mission will now be spawned whenever it is selected from teh list.
+Just about anything about the missions can be modified. 
 
 Please see the FAQ for more information
 

@@ -11,19 +11,19 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 
-#define blck_buildNumber 164
+
 #define useAPEX 
 //#define blck_milServer
 //#define blck_useCUP
 //#define blck_useRHS
-
+//#define blck_addCarParts (For Exile should you wish to use some of the advanced repair scripts).
 ////////////////////////////
 //  Do not touch anything below this line
 ///////////////////////////
 
 //#define blck_debugMode
-#define blck_triggerLoopCompleteTime 40*60
 
+#define blck_triggerLoopCompleteTime 40*60
 #define onFoot 1
 #define inVehicle 2
 
@@ -56,3 +56,6 @@
 #define blck_turnBackRadiusVehicles 1000
 #define blck_turnBackRadiusHelis 1000
 #define blck_turnBackRadiusJets 1500
+
+#define blck_buildNumber 167
+#define blck_versionNumber 6.88

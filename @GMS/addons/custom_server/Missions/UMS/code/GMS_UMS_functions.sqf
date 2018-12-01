@@ -19,4 +19,4 @@ blck_fnc_findShoreLocation = compileFinal preprocessFileLineNumbers "q\addons\cu
 blck_fnc_addDyanamicUMS_Mission = compileFinal preprocessFileLineNumbers "q\addons\custom_server\Missions\UMS\code\GMS_fnc_addDynamicUMS_Mission.sqf";
 blck_fnc_findWaterDepth  = compileFinal preprocessFileLineNumbers "q\addons\custom_server\Missions\UMS\code\GMS_UMS_fnc_findWaterDepth.sqf";
 
-diag_log "<GMS_UMS_functions.sqf>  Functions compiled";
+diag_log "[blckeagls] UMS functions Functions compiled";

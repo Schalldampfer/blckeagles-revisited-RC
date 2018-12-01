@@ -397,7 +397,7 @@ while {_missionComplete isEqualTo -1} do
 	{
 		{
 			private _d = _x distance (_x getVariable ["crateSpawnPos",_coords]);
-			diag_log format["crate %1 moved %2 at %3",_x,_d,diag_tickTime];
+			//diag_log format["crate %1 moved %2 at %3",_x,_d,diag_tickTime];
 			if (_d > 25) exitWith
 			{
 				_missionComplete = 1;

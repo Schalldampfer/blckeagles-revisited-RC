@@ -88,7 +88,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		//"O_MBT_02_arty_F",
 		"I_MBT_03_cannon_F"
 	];
-	
+	#ifdef useCUP
 	_blck_APC_CUP = [
 		"CUP_B_Mastiff_GMG_GB_D",  
 		"CUP_B_Mastiff_HMG_GB_D",  
@@ -146,7 +146,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		//"CUP_O_2S6_RU",  
 		//"CUP_O_BMP1_TKA""
 	];
-	
+	#endif
 	blck_AIPatrolVehicles = 
 	[
 	//"Exile_Car_Offroad_Armed_Guerilla01",
@@ -187,9 +187,11 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"B_LSV_01_armed_F"		
 	];
 
+	#ifdef useCUP
 	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
 	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3 + _blck_Tanks_CUP;
 	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
+	#endif
 	
 	if (toLower(worldName) isEqualTo "namalsk") then
 	{
@@ -672,7 +674,18 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Item_Moobar",
 		"Exile_Item_InstantCoffee"
 	];
-	
+	#ifdef blck_addCarParts
+	blck_carParts = [
+		"Exile_Item_CarWheel",
+		"DDR_Item_Tailrotor",
+		"DDR_Item_Main_Rotor",
+		"DDR_Item_Engine",
+		"DDR_Item_Glass",
+		"DDR_Item_Fuel_Tank",
+		"DDR_Item_Fishing_Net",
+		"DDR_Item_Fiberglass"
+	];
+	#endif 	
 	#ifdef useCUP
 	
 	#endif
@@ -773,7 +786,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
-			[// Materials and supplies				
+			[// Materials and supplies	
+				#ifdef blck_addCarParts
+				["Exile_Item_CarWheel",3,6],["DDR_Item_Tailrotor",1,3],["DDR_Item_Main_Rotor",1,3],["DDR_Item_Engine",2,4],["DDR_Item_Glass",3,6],["DDR_Item_Fuel_Tank",2,4],["DDR_Item_Fiberglass",3,6],
+				#endif			
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,10],["Exile_Item_LightBulb",1,10],["Exile_Item_MetalBoard",1,10],["Exile_Item_MetalPole",1,10],["Exile_Item_CamoTentKit",1,10],["Exile_Item_WorkBenchKit",1,10],
 				["Exile_Item_WoodWindowKit",1,10],["Exile_Item_WoodWallKit",1,10],["Exile_Item_WoodStairsKit",1,10],["Exile_Item_WoodGateKit",1,10],["Exile_Item_WoodDoorwayKit",1,10],["Exile_Item_MetalBoard",1,10],
@@ -864,7 +880,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
-			[// Materials and supplies				
+			[// Materials and supplies	
+				#ifdef blck_addCarParts
+				["Exile_Item_CarWheel",3,6],["DDR_Item_Tailrotor",1,3],["DDR_Item_Main_Rotor",1,3],["DDR_Item_Engine",2,4],["DDR_Item_Glass",3,6],["DDR_Item_Fuel_Tank",2,4],["DDR_Item_Fiberglass",3,6],
+				#endif						
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,5],["Exile_Item_LightBulb",1,5],["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_CamoTentKit",1,5],["Exile_Item_WorkBenchKit",1,5],
 				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],["Exile_Item_Cement",2,5]
@@ -945,6 +964,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_AMS_khk",1,3],["optic_AMS_snd",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],
 			[// Materials and supplies				
+				#ifdef blck_addCarParts
+				["Exile_Item_CarWheel",3,6],["DDR_Item_Tailrotor",1,3],["DDR_Item_Main_Rotor",1,3],["DDR_Item_Engine",2,4],["DDR_Item_Glass",3,6],["DDR_Item_Fuel_Tank",2,4],["DDR_Item_Fiberglass",3,6],
+				#endif			
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,3],["Exile_Item_ExtensionCord",1,2],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,6],["Exile_Item_LightBulb",1,6],["Exile_Item_MetalBoard",1,6],["Exile_Item_MetalPole",1,6],["Exile_Item_CamoTentKit",1,6],["Exile_Item_MetalWire",1,4]
 			],
@@ -1019,7 +1041,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["optic_tws",1,3],["optic_tws_mg",1,3],["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3],
 				["optic_AMS_khk",1,3],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],["optic_KHS_tan",1,3]
 			],			
-			[// Materials and supplies				
+			[// Materials and supplies	
+				#ifdef blck_addCarParts
+				["Exile_Item_CarWheel",3,6],["DDR_Item_Tailrotor",1,3],["DDR_Item_Main_Rotor",1,3],["DDR_Item_Engine",2,4],["DDR_Item_Glass",3,6],["DDR_Item_Fuel_Tank",2,4],["DDR_Item_Fiberglass",3,6],
+				#endif						
 				["Exile_Item_Matches",1,2],["Exile_Item_CookingPot",1,2],["Exile_Item_Rope",1,2],["Exile_Item_DuctTape",1,8],["Exile_Item_ExtensionCord",1,8],["Exile_Item_FuelCanisterEmpty",1,2],
 				["Exile_Item_JunkMetal",1,5],["Exile_Item_LightBulb",1,5],["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_CamoTentKit",1,5],["Exile_Item_WorkBenchKit",1,5],
 				["Exile_Item_MetalBoard",1,5],["Exile_Item_MetalWire",3,10],["Exile_Item_MetalScrews",3,10],["Exile_Item_ExtensionCord",1,5],["Exile_Item_MetalPole",1,5],["Exile_Item_Sand",2,5],["Exile_Item_Cement",2,5]

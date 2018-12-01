@@ -150,10 +150,10 @@ private _functions = [
 
 	// HC support functions
 	["blck_fnc_HC_XferGroup","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_XferGroup.sqf"],
-	["blck_fnc_onPlayerDisconnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_onPlayerDisconnected.sqf"],
-	["blck_fnc_HC_monitor","\q\addons\custom_server\Compiles\HC\GMS_fnc_HCmonitor.sqf"],
+	//["blck_fnc_onPlayerDisconnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_onPlayerDisconnected.sqf"],
+	//["blck_fnc_HC_monitor","\q\addons\custom_server\Compiles\HC\GMS_fnc_HCmonitor.sqf"],
 	["blck_fnc_HC_passToHCs","\q\addons\custom_server\Compiles\HC\GMS_fnc_passToHCs.sqf"],
-	["blck_fnc_HC_getListConnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_getListConnected.sqf"],
+	//["blck_fnc_HC_getListConnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_getListConnected.sqf"],
 	["blck_fnc_HC_leastBurdened","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_leastBurdened.sqf"],
 	["blck_fnc_HC_countGroupsAssigned","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_countGroupsAssigned.sqf"]
 ];
@@ -162,11 +162,6 @@ private _functions = [
 	_x params ["_name","_path"];
 	missionnamespace setvariable [_name,compileFinal  preprocessFileLineNumbers _path];
 } foreach  _functions;
-
-#ifdef GRGserver	
-blck_fnc_broadcastServerFPS = compileFinal  preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_broadcastServerFPS.sqf"; 
-diag_log "blck_functions loaded using GRGserver settings ---- >>>> ";
-#endif
 
 onPlayerDisconnected {[_name,_owner] call blck_fnc_onPlayerDisconnected;};
 
