@@ -23,10 +23,6 @@ for "_i" from 1 to (count blck_liveMissionAI) do {
 				};
 				[_x] call blck_fnc_deleteAI;
 			} forEach _unitsarr;
-			uiSleep 0.1;
-			#ifdef blck_debugMode
-			if (blck_debugLevel > 1) then {diag_log format["_fnc_mainTread:: blck_liveMissionAI updated to %1",blck_liveMissionAI];};
-			#endif
 		}
 		else {
 			blck_liveMissionAI pushback _units;

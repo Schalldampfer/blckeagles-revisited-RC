@@ -11,64 +11,61 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private ["_vehList"];
-_vehList = +blck_monitoredVehicles;
-
-//diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 ",diag_tickTime,_vehList,blck_monitoredVehicles];
-
+//diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 ",diag_tickTime,blck_monitoredVehicles];
+private _serverIDs =  ([2] + (entities "HeadlessClient_F"));
+for "_i" from 1 to (count blck_monitoredVehicles) do
 {
-	private["_veh","_isEmplaced","_allCrewDead","_evaluate","_deleteAtTime"];
-	_veh = _x; // (purely for clarity at this point, _x could be used just as well)
-	
-	_isEmplaced = _veh getVariable["GRG_vehType","none"] isEqualTo "emplaced";
-	_allCrewDead = {alive _x} count (crew _veh) == 0;
-	_evaluate = 0;
-	_deleteAtTime = _veh getVariable ["blck_deleteAtTime",diag_tickTime + 1];
-
-	if (diag_tickTime > _deleteAtTime) then 
+	if (_i > (count blck_monitoredVehicles)) exitWith {};
+	private _veh = blck_monitoredVehicles deleteAt 0;
+	if !(_veh isEqualTo objNull) then
 	{
-		_evaluate = 3;
-	} else {
-		if (_allCrewDead) then
+		// if the owner is a player do not add back for further monitoring
+		if ((owner _veh) in (_serverIDs)) then 
 		{
-			_evaluate = if (_isEmplaced) then {1} else {2};
-		};
-	};
-
-	//diag_log format["_fnc_vehicleMonitor: vehicle = %1 | owner = %2 | crew = %3 | _evaluate = %4",_veh, owner _veh, {alive _x} count (crew _veh), _evaluate];
-	switch (_evaluate) do
-	{
-		case 0:{[_veh] call blck_fnc_reloadVehicleAmmo;};
-		case 1:{
-			if (blck_killEmptyStaticWeapons) then
+			//diag_log format["_fnc_vehicleMonitor: vehicle %1 to be deleted at %2",_veh,(_veh getVariable ["blck_deleteAtTime",0])];
+			if ((_veh getVariable ["blck_deleteAtTime",0]) > 0) then
 			{
-				if (blck_debugLevel > 2) then {diag_log format["_fnc_vehicleMonitor:: case of destroyed where vehicle = %1",_veh];};
-				_veh setDamage 1;
-				_veh setVariable["blck_deleteAtTime",diag_tickTime + 60];
-			}else {
-				//diag_log format["_fnc_vehicleMonitor: calling _fnc_releaseVehicleToPlayers for vehicle %1",_veh];
-				[_veh] call blck_fnc_releaseVehicleToPlayers;
-			};
-		};
-		case 2:{
-			if (blck_killEmptyAIVehicles) then
-			{
-				//if (blck_debugLevel > 2) then {diag_log format["_fnc_vehicleMonitor:: case of destroyed where vehicle = %1",_veh];};
-				_veh setDamage 0.7;
-				_veh setFuel 0;
-				_veh setVariable["blck_deleteAtTime",diag_tickTime + 60];
+				if (diag_tickTime > ( _veh getVariable ["blck_deleteAtTime",0])) then
+				{
+					//diag_log format["_fnc_vehicleMonitor: deleting vehicle and crew for %1",_veh];
+					[_veh] call blck_fnc_destroyVehicleAndCrew;				
+				} else {
+					blck_monitoredVehicles pushBack _veh;
+				};
 			} else {
-				//diag_log format["_fnc_vehicleMonitor: calling _fnc_releaseVehicleToPlayers for vehicle %1",_veh];					
-				[_veh] call blck_fnc_releaseVehicleToPlayers;
+				if ({alive _veh} count (crew _veh) == 0) then
+				{	
+					if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
+					{
+						if (blck_killEmptyStaticWeapons) then
+						{
+							//diag_log format["_fnc_vehicleMonitor: disabling static %1 and setting its delete time",_veh];
+							_veh setDamage 1;
+							_veh setVariable["blck_deleteAtTime",diag_tickTime + 60,true];
+						}else {
+							//diag_log format["_fnc_vehicleMonitor: releasing static %1 to players and setting a default delete timer",_veh];
+							[_veh] call blck_fnc_releaseVehicleToPlayers;
+							_veh setVariable["blck_DeleteAt",diag_tickTime + blck_vehicleDeleteTimer,true];
+						};			
+					} else {
+						if (blck_killEmptyAIVehicles) then
+						{
+							//diag_log format["_fnc_vehicleMonitor: disabling vehicle %1 and setting a delete time",_veh];
+							_veh setDamage 0.7;
+							_veh setFuel 0;
+							_veh setVariable["blck_deleteAtTime",diag_tickTime + 60];
+						} else {
+							//diag_log format["-------->_fnc_vehicleMonitor: releasing vehicle %1 to players and setting a default delete timer",_veh];
+							_veh setVariable["blck_deleteAtTime",diag_tickTime + blck_vehicleDeleteTimer,true];	
+							[_veh] call blck_fnc_releaseVehicleToPlayers;
+						};
+					};
+					
+				};
+				blck_monitoredVehicles pushBack _veh;
 			};
+		} else {
+			//diag_log format["_fnc_vehicleMonitor:  owner of vehicle %1 is a player, discontinuing further monitoring",_veh];
 		};
-		case 3:{
-			//diag_log format["_fnc_releaseVehicleToPlayers: destroying vehicle and crew for vehicle %1 at time %2",_veh,diag_tickTime];
-			[_veh] call blck_fnc_destroyVehicleAndCrew;				
-		};
-
 	};
-}forEach _vehList;
-
-
-
+};
