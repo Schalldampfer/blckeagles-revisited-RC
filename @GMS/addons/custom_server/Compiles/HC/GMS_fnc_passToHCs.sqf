@@ -20,7 +20,7 @@ blck_fnc_countGroupsAssigned = {
 };
 
 private["_numTransfered","_clientId","_allGroups","_groupsOwned","_idHC","_id","_swap","_rc"];
-//_numTransfered = 0;
+_numTransfered = 0;
 _idHC = -2;
 blck_connectedHCs = entities "HeadlessClient_F";  
 //diag_log format["_fnc_passToHCs:: blck_connectedHCs = %1 | count _HCs = %2 | server FPS = %3",blck_connectedHCs,count blck_connectedHCs,diag_fps];
@@ -36,7 +36,7 @@ if !(blck_connectedHCs isEqualTo []) then
 				if (_sgor) then
 				{
 					[_x] remoteExec["blck_fnc_HC_XferGroup",_idHC];
-					//_numTransfered = _numTransfered + 1;
+					_numTransfered = _numTransfered + 1;
 				};
 			};
 		};

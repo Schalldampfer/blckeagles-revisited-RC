@@ -1,9 +1,7 @@
 
 /*
-	for ghostridergaming
 	By Ghostrider [GRG]
-	Fill a crate with items
-	
+
 	--------------------------
 	License
 	--------------------------
