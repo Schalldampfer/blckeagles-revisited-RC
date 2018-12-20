@@ -73,7 +73,7 @@ while {_findNew} do
 			{
 				_findNew = true;
 			};
-		}forEach  nearestObjects[blck_mapCenter, [_pole], blck_minDistanceToBases];		
+		}forEach (allmissionobjects _pole);		
 	};		
 	if !(_findNew) then
 	{
