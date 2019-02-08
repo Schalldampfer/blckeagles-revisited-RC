@@ -28,9 +28,11 @@ if (count _allmkr == 0) then
 	diag_log format["_mk = %1",_mk];
 	systemChat format["marker shape = %1",markerShape _mk];
 	systemChat format["marker type = %1",markerType _mk];
-	
+	systemChat format["marker size = %1",markerSize _mk];
+	systemChat format["markerColor = %1",markerColor _mk];
+	systemChat format["marker brush = %1",markerBrush _mk];
 	//systemChat
-	switch (markerShape _mk) do
+	switch (toUpper(markerShape _mk)) do
 	{
 		case "ELLIPSE": {
 			_cb = _cb + format['_markerType = ["%1",%2,"%3"];%4',toUpper(MarkerShape _mk),getMarkerSize _mk,toUpper(markerBrush _mk),endl];
@@ -39,13 +41,12 @@ if (count _allmkr == 0) then
 			_cb = _cb + format['_markerType = ["%1",%2,"%3"];%4',toUpper(MarkerShape _mk),getMarkerSize _mk,toUpper(markerBrush _mk),endl];
 		};
 		case "ICON": {
-			_cb = _cb + format['_markerType = ["%1",[0,0]];%2',getMarkerType _mk,endl];
+			_cb = _cb + format['_markerType = ["%1"];%2',getMarkerType _mk,endl];
 		};
 	};
 
 	_cb = _cb + format['_markerColor = "%1";%2',markerColor _mk,endl];
-	_cb = _cb + format['_markerMissionName = "%1";%2',MarkerText _mk,endl];
-	_cb = _cb + format['_markerLabel = "%1";%2',"",endl];		
+	_cb = _cb + format['_markerLabel = "%1";%2',MarkerText _mk,endl];	
 	_cb = _cb + format["%1%1",endl];	
 };
 
