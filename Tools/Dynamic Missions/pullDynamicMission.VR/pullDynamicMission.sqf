@@ -1,5 +1,3 @@
-
-
 _fn_isInside = {  // returns true if an object is inside, underneath or on top of a building otherwise returns false.
 	//////////////////////
 	//  Determin if a unit is inside a building using two separate checkVisibility
@@ -99,16 +97,16 @@ diag_log "==========  <START>  ==========================";
 ///////////////////
 //  Define the coordinates of the center of the mission.
 ///////////////////
-
-if (isNil "CENTER") then {CENTER isEqualTo [0,0,0]};
-
+if (isNil "CENTER") then
+{
+	CENTER = [0,0,0];
+};
 if (CENTER isEqualTo [0,0,0]) then 
 {
-	hint parseText "Please define a center point for your mission,br/>Using position of nearest flashing road cone as the center";
+	hint "Please define a center point for your mission";
 	_obj = allMissionObjects objectAtMissionCenter;
 	_obj1 = _obj select 0;	
 	diag_log format["Determining position of first roadcone found which is located at %1 with player found at %2",getPos _obj1,position Player];
-	systemChat format["Setting Mission Center at That of Nearest Road Cone"];
 	if (count _obj > 0) then
 	{
 		CENTER = [3,3,0] vectorAdd (getPosATL _obj1);
@@ -117,6 +115,7 @@ if (CENTER isEqualTo [0,0,0]) then
 	diag_log format["Position of Road Cone at %1 used to define mission center",CENTER];	
 	diag_log format["Player located at position %1",position player];
 };
+diag_log format["CENTER Set to %1",CENTER];
 
 ///////////////////
 // Identify any buildings in which a garrison should be spawned using the Arma building positions.
@@ -134,31 +133,8 @@ _cb = "";
 //    Note **  Only the first marker placed will be processed  ** 
 // 	  Configure Marker
 /////////////////
-/*
- _markerType = ["ELIPSE",[175,175],"GRID"];
- _markerType = ["mil_triangle",[0,0]];
-*/
-_allmkr = allMapMarkers;
-diag_log format["_allmkr = %1",_allmkr];
-if (count _allmkr == 0) then
-//if !(typeName _mk isEqualTo "STRING") then 
-{
-	hint "No Marker Found, no Marker Definitions Will Be generated";
-	uiSleep 5;
-} else {
-	_mk = _allmkr select 0;
-	diag_log format["_mk = %1",_mk];
 
-	if ((getMarkerType _mk) in ["ELIPSE","RECTANGLE"]) then
-	{
-		_cb = _cb + format['_markerType = ["%1",%2,%3];%4',getMarkerType _mk,getMarkerSize _mk,markerBrush _mk,endl];
-	} else {
-		_cb = _cb + format['_markerType = ["%1",[0,0]];%2',getMarkerType _mk,endl];
-	};
-	_cb = _cb + format['_markerColor = "%1";%2',markerColor _mk,endl];
-	_cb = _cb + format['_markerLabel = "%1";%2',MarkerText _mk,endl];	
-	_cb = _cb + format["%1%1",endl];	
-};
+diag_log format["<<  ----  pullDynamicMision: START  %1  ----  >>",diag_tickTime];
 
 ////////////////////////
 //   Begin pulling data here
@@ -195,11 +171,12 @@ _helpers = allMissionObjects garrisonMarkerObject;
 _cb = _cb + format["%1];%1%1",endl];
 
 _logging = format["_garrisonedBuildings = %1",_garrisonedBuildings];
-//diag_log _logging;
+diag_log _logging;
 systemChat _logging;
 //diag_log format["_cb = %1%2",endl,_cb];
 
 _configuredStatics = [];
+_configuredStaticsPositions = [];
 _configuredUnits = [];
 /*
 	This bit will set up the garrison for each building having units and / or statics inside it or on top.
@@ -223,7 +200,7 @@ _fn_configureGarrisonForBuildingATL = {
 			if (_b isEqualTo _building) then
 			{
 				_configuredStatics pushBackUnique _x;
-				
+				//_configuredStaticsPositions pushBack  (getPosATL _x) vectorDiff CENTER;
 				if (_staticsText isEqualTo "") then
 				{
 					_staticsText = format['["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff (getPosATL _b),getDir _x];
@@ -262,7 +239,7 @@ _fn_configureGarrisonForBuildingATL = {
 	_buildingGarrisonATL
 };
 
-_counter = 0;
+private _count = 0;
 _cb = _cb + "_garrisonedBuilding_ATLsystem = [";
 {
 	private _isInside = [_x] call _fn_isInside;
@@ -272,29 +249,30 @@ _cb = _cb + "_garrisonedBuilding_ATLsystem = [";
 		private _include = if ( !(_building in _garrisonedBuildings) && !((typeOf _building) isEqualTo unitMarkerObject) && !((typeOf _building) isEqualTo garrisonMarkerObject)) then {true} else {false};
 		if (_include) then
 		{
-			diag_log format["_x = %1 | _building = %1",_x,_building];
-			systemChat format["_x = %1 | _building = %1",_x,_building];
+			//diag_log format["_x = %1 | _building = %1",_x,_building];
 			private _buildingGarrisonInformation = [_building] call _fn_configureGarrisonForBuildingATL;
-			//diag_log format["_buildingGarrisonInformation = %1",_buildingGarrisonInformation];
-			if (_counter == 0) then
+			diag_log format["_buildingGarrisonInformation = %1",_buildingGarrisonInformation];
+			if !(_buildingGarrisonInformation isEqualTo "") then
 			{
-				_cb = _cb + format["%1%2",endl,_buildingGarrisonInformation];
-			} else {
-				_cb = _cb + format[",%1%2",endl,_buildingGarrisonInformation];
+				if (_count == 0) then
+				{
+					_cb = _cb + format["%1%2",endl,_buildingGarrisonInformation];
+				} else {
+					_cb = _cb + format[",%1%2",endl,_buildingGarrisonInformation];
+				};
+				_count = _count + 1;
 			};
-
-			_counter = _counter + 1;
 		};
 	};
 		
-} forEach ((allMissionObjects "StaticWeapon") + (allMissionObjects unitMarkerObject));
+} forEach ((allMissionObjects "StaticWeapon") + (allMissionObjects "Man") + (allMissionObjects unitMarkerObject));
 _cb = _cb + format["%1];%1%1",endl];
-uiSleep 10;
+
 ///////////////////
 // Configure info remaining mission landscape
 ///////////////////
-_counter = 0;
 _land = allMissionObjects "Static";
+_count = 0;
 _cb = _cb + format["_missionLandscape = [",endl];
 {
 	diag_log format["evaluating mission landscape: _x = %1 | typeOf _x = %1",_x, typeOf _x];
@@ -303,13 +281,13 @@ _cb = _cb + format["_missionLandscape = [",endl];
 	{
 		_line = format['     ["%1",%2,%3,%4,%5]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x, 'true','true'];
 		systemChat _line;
-		if (_counter == 0 && !(_line isEqualTo "")) then
+		if (_count == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};	
-		_counter = _counter + 1;
+		_count = _count + 1;
 	};
 }forEach allMissionObjects "Static";
 _cb = _cb + format["%1];%1%1",endl];
@@ -317,18 +295,16 @@ _cb = _cb + format["%1];%1%1",endl];
 ///////////////////
 // Configure loot boxes
 ///////////////////
-_counter = 0;
 _cb = _cb + "_missionLootBoxes = [";
 {
 	_line = format['     ["%1",%2,%3,%4,%5]',typeOf _x,(getPosATL _x) vectorDiff CENTER, '_crateLoot','_lootCounts',getDir _x];
 	systemChat _line;
-	if (_counter == 0 && !(_line isEqualTo "")) then
+	if (_forEachIndex == 0) then
 	{
 		_cb = _cb + format["%1%2",endl,_line];
 	} else {
 		_cb = _cb + format[",%1%2",endl,_line];
 	};	
-	_counter = _counter + 1;
 }forEach ((allMissionObjects "ReammoBox") + (allMissionObjects "ReammoBox_F"));
 _cb = _cb + format["%1];%1%1",endl];
 
@@ -339,7 +315,6 @@ _missionLootVehicles = [];
 _missionVehicles = ((allMissionObjects "Car") + (allMissionObjects "Tank") + allMissionObjects "Ship");
 _lootVehicleMarkers = allMissionObjects lootVehicleMarker;
 diag_log format["_lootVehicleMarkers = %1",_lootVehicleMarkers];
-_counter = 0;
 _cb = _cb + format["_missionLootVehicles = ["];
 {
 	_kindOf = "nothing";
@@ -355,13 +330,12 @@ _cb = _cb + format["_missionLootVehicles = ["];
 		_missionLootVehicles pushBack _object;
 		_line = format['     ["%1",%2,%3,%4,%5]',typeOf _object,(getPosATL _x) vectorDiff CENTER, '_crateLoot','_lootCounts',getDir _x];
 		systemChat _line;
-		if (_counter == 0 && !(_line isEqualTo "")) then
+		if (_forEachIndex == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};	
-		_counter = _counter + 1;
 	};		
 } forEach allMissionObjects lootVehicleMarker;
 _cb = _cb + format["%1];%1%1",endl];
@@ -369,38 +343,34 @@ _cb = _cb + format["%1];%1%1",endl];
 ///////////////////
 // Setup Info for vehicle patrols
 ///////////////////
-_counter = 0;
 _cb = _cb + format["_missionPatrolVehicles = ["];
 {
 	if ( !((typeOf _x) isKindOf "SDV_01_base_F") && !(_x in _missionLootVehicles) ) then
 	{
 		_line = format['     ["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x];
 		systemChat _line;
-		if (_counter == 0 && !(_line isEqualTo "")) then
+		if (_forEachIndex == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};	
-		_counter = _counter + 1;
 	};
 }forEach ((allMissionObjects "Car") + (allMissionObjects "Tank") + allMissionObjects "Ship");
 _cb = _cb + format["%1];%1%1",endl];
 
-_counter = 0;
 _cb = _cb + "_submarinePatrolParameters = [";
 {
 	if ((typeOf _x) isKindOf "SDV_01_base_F") then
 	{
 		_line = format['     ["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x];
 		systemChat _line;
-		if (_counter == 0 && !(_line isEqualTo "")) then
+		if (_forEachIndex == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};
-		_counter= _counter + 1;
 	};
 }forEach allMissionObjects "Ship";
 _cb = _cb + format["%1];%1%1",endl];
@@ -408,49 +378,49 @@ _cb = _cb + format["%1];%1%1",endl];
 ///////////////////
 // Configs for Air Patrols
 ///////////////////
-_counter = 0;
 _cb = _cb + "_airPatrols = [";
 	//[selectRandom _aircraftTypes,[22830.2,16618.1,11.4549],"blue",1000,60]
 {
 	_line = format['     ["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x, 'true','true'];
 	systemChat _line;
-	if (_counter == 0 && !(_line isEqualTo "")) then
+	if (_forEachIndex == 0) then
 	{
 		_cb = _cb + format["%1%2",endl,_line];
 	} else {
 		_cb = _cb + format[",%1%2",endl,_line];
-	};	
-	_counter = _counter + 1;	
+	};		
 }forEach allMissionObjects "Air";
 _cb = _cb + format["%1];%1%1",endl];
 
 ///////////////////
 // Setup info for remaining static/emplaced weapons
 ///////////////////
-_counter = 0;
+_count = 0;
 _cb = _cb + format["_missionEmplacedWeapons = ["];
 {
 	
-	if !(_x in _configuredStatics) then
-	{	
+	//if !(_x in _configuredStatics) then
+	private _isInside = [_x] call _fn_isInside;
+	if !(_isInside) then
+	{
 		// 	["B_HMG_01_high_F",[22883.5,16757.6,6.31652],"blue",0,10]
 		_line = format['     ["%1",%2,%3]',typeOf _x,(getPosATL _x) vectorDiff CENTER,getDir _x, 'true','true'];	
 		systemChat _line;	
-		if (_counter == 0 && !(_line isEqualTo "")) then
+		if (_count == 0) then
 		{
 			_cb = _cb + format["%1%2",endl,_line];
 		} else {
 			_cb = _cb + format[",%1%2",endl,_line];
 		};
-		_counter =  _counter + 1;
+		_count = _count + 1;
 	};
+
 }forEach allMissionObjects "StaticWeapon";
 _cb = _cb + format["%1];%1%1",endl];
 
 ///////////////////
 // Setup information for infantry groups spawning outside buildings
 ///////////////////
-_counter = 0;
 _cb = _cb + format["_missionGroups = ["];
 {
 		//[[22920.4,16887.3,3.19144],"red",[1,2], 75,120],
@@ -463,22 +433,20 @@ _cb = _cb + format["_missionGroups = ["];
 		{
 			_line = format['     [%1,%2,%3,"%4",%5,%6]',(getPosATL _x) vectorDiff CENTER,minAI,maxAI,aiDifficulty,minPatrolRadius,maxPatrolRadius];
 			systemChat _line;
-			if (_counter == 0 && !(_line isEqualTo "")) then
+			if (_forEachIndex == 0) then
 			{
 				_cb = _cb + format["%1%2",endl,_line];
 			} else {
 				_cb = _cb + format[",%1%2",endl,_line];
 			};
-			_counter = _counter + 1;
 		};
 	};
 }forEach allMissionObjects "Man";
 _cb = _cb + format["%1];%1%1",endl];
 
-_counter = 0;
 _cb = _cb + "_scubaGroupParameters = [";
 {
-	//[[22920.4,16887.3,3.19144],"red",[1,2], 75,120],
+		//[[22920.4,16887.3,3.19144],"red",[1,2], 75,120],
 	_isInside = [_x] call _fn_isInside;
 	_isInfantry = [_x] call _fn_isInfantry;
 	//diag_log format["_missionGroups: _unit %1 | _isInside %2 _isInfantry %3",_x,_isInside,_isInfantry];
@@ -488,13 +456,12 @@ _cb = _cb + "_scubaGroupParameters = [";
 		{
 			_line = format['     [%1,%2,%3,"%4",%5,%6]',(getPosATL _x) vectorDiff CENTER,minAI,maxAI,aiDifficulty,minPatrolRadius,maxPatrolRadius];
 			systemChat _line;
-			if (_counter == 0 && !(_line isEqualTo "")) then
+			if (_forEachIndex == 0) then
 			{
 				_cb = _cb + format["%1%2",endl,_line];
 			} else {
 				_cb = _cb + format[",%1%2",endl,_line];
 			};
-			_counter = _counter + 1;			
 		};
 	};
 }forEach allMissionObjects "Man";
