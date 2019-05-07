@@ -115,8 +115,7 @@ if (blck_debugLevel > 1) then
 	};
 	#endif
 	
-	_wep setVariable["GRG_vehType","emplaced"];
-	_wep setdir (random 359);
+	_wep setVariable["GRG_vehType","emplaced"];	
 	_wep setPos _pos;
 	_wep setdir (random 359);
 	[_wep,false] call blck_fnc_configureMissionVehicle;	
@@ -124,6 +123,8 @@ if (blck_debugLevel > 1) then
 	_units = units _empGroup;
 	_gunner = _units select 0;
 	_gunner moveingunner _wep;
+	_gunner setVariable["GRG_vehType","emplaced"];
+	_gunner setVariable["GRG_vehicle",_wep];
 	_emplacedAI append _units;
 
 	#ifdef blck_debugMode

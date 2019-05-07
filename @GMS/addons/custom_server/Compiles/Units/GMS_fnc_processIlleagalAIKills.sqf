@@ -10,89 +10,42 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+// assumptions:
+// 1) if the muzzle that killed the AI was forbbiden then the kill does not count 
+// 2) if the vehicle the player was in when the player killed the AI, the kill does not count.
+// data to check: blck_forbidenVehicles
+// and blck_forbidenVehicleGuns
+// blck_VK_RunoverDamage
+// blck_RunGear
 private["_missionType","_wasRunover","_launcher","_legal"];
 params["_unit","_killer"];
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["##-processIlleagalAIKills.sqf-## processing illeagal kills for unit %1",_unit]};
-#endif
-_launcher = _unit getVariable ["Launcher",""];
 _legal = true;
 
-_fn_targetVehicle = {  // force AI to fire on the vehicle with launchers if equiped
-	params["_unit","_vk"];
-	private["_unit"];
-	{
-		if ( ( (getPos _vk) distance2d (getPos _x) ) < 500 ) then 
-		{
-			_x reveal [_vk, 4];
-			_x dowatch _vk; 
-			_x doTarget _vk; 
-		};
-	} forEach (call blck_fnc_allPlayers);
-};
-
-_fn_applyVehicleDamage = {  // apply a bit of damage 
-	private["_vd"];
-	params["_vk"];
-	_vd = getDammage _vk;
-	_vk setDamage (_vd + blck_RunGearDamage);
-};
-
-_fn_deleteAIGear = {
-	params["_ai"];
-	{deleteVehicle _x}forEach nearestObjects [(getPosATL _ai), ['GroundWeaponHolder','WeaponHolderSimulated','WeaponHolder'], 3];   //Adapted from the AI cleanup logic by KiloSwiss
-	[_ai] call blck_fnc_removeGear;
-};
-
-_fn_msgIED = {
-	params["_killer"];
-	//diag_log format["fn_msgIED:: -- >> msg = %1 and owner _killer = %2",blck_Message, (owner _killer)];
-	[["IED","",0,0],[_killer]] call blck_fnc_MessagePlayers;
-};
-
-if (typeOf _killer != typeOf (vehicle _killer)) then  // AI was killed by a vehicle
+if (vehicle _killer == _killer) exitWith {true};  // Player not in vehicle, no further checks needed.
+if (_killer == (driver (vehicle _killer))) then //  If the killer is also the driver then the killer must have run the AI over
 {
-	if(_killer == driver(vehicle _killer))then{  // The AI was runover
-		if(blck_RunGear) then {  // If we are supposed to delete gear from AI that were run over then lets do it. 
-			[_unit] call _fn_deleteAIGear;
-			#ifdef blck_debugMode
-			if (blck_debugLevel > 2) then
-			{
-				diag_log format["<<--->> Unit %1 was run over by %2",_unit,_killer];
-			};
-			#endif
-		};
-		if (blck_VK_RunoverDamage) then {//apply vehicle damage
-			[vehicle _killer] call _fn_applyVehicleDamage;
-			if (blck_debugON) then{diag_log format[">>---<< %1's vehicle has had damage applied",_killer];};			
-			[_killer] call _fn_msgIED;
-		};
-		[_unit, vehicle _killer] call _fn_targetVehicle;
+	[_unit, vehicle _killer] call GMS_fnc_revealVehicleToUnits;
+	if(blck_RunGear && !((vehicle _killer) isKindOf "Air")) then // assume aircraft are too fragile to kill AI by moving close to ground
+	{   
+		[_unit] call GMS_fnc_removeAllAIgear;
+		if (blck_VK_RunoverDamage) then 
+		{//apply vehicle damage
+			[vehicle _killer] call GMS_fnc_applyVehicleDamagePenalty;	
+			[_killer] call GMS_fnc_msgIED;
+		};		
 		_legal = false;
 	};
-};
-
-if ( blck_VK_GunnerDamage ) then
-{
-	if ((typeOf vehicle _killer) in blck_forbidenVehicles) then 
-	{_legal = false;}
-	else {
-		if ((currentWeapon _killer) in blck_forbidenVehicleGuns) then {	_legal = false;};
-	};
-
-	if !(_legal) then
+} else {
+	if ( blck_VK_GunnerDamage ) then
 	{
-		if (blck_VK_Gear) then {[_unit] call _fn_deleteAIGear;};
-		[_unit, vehicle _killer] call _fn_targetVehicle;
-		[vehicle _killer] call _fn_applyVehicleDamage;
-		[_killer] call _fn_msgIED;
-		#ifdef blck_debugMode		
-		if (blck_debugLevel > 1) then
+		if ((typeOf vehicle _killer) in blck_forbidenVehicles || (currentWeapon _killer) in blck_forbidenVehicleGuns) then 
 		{
-			diag_log format["!!---!! Unit was killed by a forbidden vehicle or gun",_unit];
+			if (blck_VK_Gear) then {[_unit] call GMS_fnc_removeAllAIgear;};
+			[_unit, vehicle _killer] call GMS_fnc_revealVehicleToUnits;
+			[vehicle _killer] call GMS_fnc_applyVehicleDamagePenalty;
+			[_killer] call GMS_fnc_msgIED;
+			_legal = false;
 		};
-		#endif		
 	};
 };
-
 _legal

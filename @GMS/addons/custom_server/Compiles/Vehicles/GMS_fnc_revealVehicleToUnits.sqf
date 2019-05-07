@@ -1,5 +1,4 @@
 /*
-	Killed handler for _units
 	By Ghostrider-GRG-
 
 	--------------------------
@@ -9,8 +8,11 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-params["_markerName"];
-deleteMarker _markerName;
-deleteMarker ("label" + _markerName);
 
+	params["_unit","_vk"];
+	private["_unit"];
+	{
+			_x reveal [_vk, 4];
+			_x dowatch _vk; 
+			_x doTarget _vk; 
+	} forEach ([getPos _unit, 500] call blck_fnc_allPlayers);  // get all players within 500 m

@@ -17,6 +17,6 @@
 
 params["_startTime",["_timeoutTime",blck_MissionTimeout]];
 private["_return"];
-if ((diag_tickTime - _startTime) > _timeoutTime) then {_return = true} else {_return = false};
-//diag_log format["fnc_timedOut:: blck_MissionTimeout = %2 || _return = %1",_return,blck_MissionTimeout];
+//if ((diag_tickTime - _startTime) > _timeoutTime) then {_return = true} else {_return = false};
+_return = ((diag_tickTime - _startTime) > _timeoutTime) ;
 _return;

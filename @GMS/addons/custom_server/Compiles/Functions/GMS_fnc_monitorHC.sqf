@@ -15,8 +15,6 @@
 //  blck_connectedHCs  // list of connected HCs at last check.
 _HCs = entities "HeadlessClient_F";  //  currently connected HCs.
 
-
-
 {
 	if ([_x] call _fn_HC_disconnected) then
 	{

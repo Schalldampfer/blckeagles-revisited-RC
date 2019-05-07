@@ -11,20 +11,20 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_data"];
-_value = objNull;
+_value = 0;
 if (typeName _data isEqualTo "ARRAY") then
 {
-	_min = _data select 0;
-	_max = _data select 1;
+	params["_min","_max"];
 	if (_max > _min) then 
 	{
 		_value = _min + round(random(_max - _min));
 	} else {
 		_value = _min;
 	};
-};
-if (typeName _data isEqualTo "SCALAR") then
-{
-	_value = _data;
+} else {
+	if (typeName _data isEqualTo "SCALAR") then
+	{
+		_value = _data;
+	};
 };
 _value

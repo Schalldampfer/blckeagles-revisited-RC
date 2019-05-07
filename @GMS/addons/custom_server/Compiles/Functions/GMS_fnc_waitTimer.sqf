@@ -20,8 +20,5 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 private["_wait","_Tstart"];
 params["_min","_max"];
-
-_wait = round( _min + (_max - _min) );
-uiSleep _wait;
-
+uiSleep round( _min + (_max - _min) );
 true

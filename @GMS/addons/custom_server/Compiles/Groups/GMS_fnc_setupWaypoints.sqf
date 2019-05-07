@@ -13,40 +13,10 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then
-{
-	diag_log format["_fnc_setupWaypoints: ->  -This = %1",_this];
-};
-#endif
 private["_dir","_arc","_noWp","_newpos","_wpradius","_wp"];
 params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAD"],["_soldierType","null"] ];
 _wp = [_group, 0];
-#ifdef blck_debugMode
-if (blck_debugLevel >= 2) then
-{
-	diag_log format["_fnc_setupWaypoints (4/29/17): configuring waypoints for group %1: _mode = %2 | _wpPatrolMode = %3 _soldierType = %4",_group, _mode, _wpPatrolMode,_soldierType];
-};
-#endif
-if (_soldierType isEqualTo "emplaced") then
-{
-	_wp setWaypointType "SENTRY";
-	_wp setWPPos (getPos leader _group);
-	_wp setWaypointCompletionRadius 100;
-	_wp setWaypointBehaviour "COMBAT";
-	_wp setWaypointCombatMode "RED";
-	_wp setWaypointTimeout [1,1.1,1.2];
-	//_wp setWaypointTimeout [0.1,0.1100,0.1200];	
-	_group setCurrentWaypoint _wp;	
-	_group setVariable["soldierType",_soldierType,true];
-	#ifdef blck_debugMode
-	_wp setWaypointStatements ["true","this call blck_fnc_emplacedWeaponWaypoint; diag_log format['====Updating timestamp for group %1 and changing its WP to an emplaced weapon Waypoint',group this];"];
-	if (blck_debugLevel > 2) then {diag_log format["_fnc_setupWaypoints: configuring weapoints for group %2 for emplaced weapon with _soldierType = %1",_soldierType,_group];};
-	#else
-	_wp setWaypointStatements ["true","this call blck_fnc_emplacedWeaponWaypoint;"];
-	#endif
-};
-if !(_soldierType isEqualTo "emplaced") then 
+if !(_soldierType isEqualTo "emplaced") then
 {
 	_arc = 360/5;
 	_group setcombatmode "YELLOW";
@@ -96,4 +66,20 @@ if !(_soldierType isEqualTo "emplaced") then
 		diag_log format["_fnc_setupWaypoints:: -- >> Waypoint marker for group %1 have been configured as %2 with text set to %3",_group, _group getVariable "wpMarker", markerText (_group getVariable "wpMarker")];
 	};
 	#endif
+} else {
+	_wp setWaypointType "SENTRY";
+	_wp setWPPos (getPos leader _group);
+	_wp setWaypointCompletionRadius 100;
+	_wp setWaypointBehaviour "COMBAT";
+	_wp setWaypointCombatMode "RED";
+	_wp setWaypointTimeout [1,1.1,1.2];
+	//_wp setWaypointTimeout [0.1,0.1100,0.1200];	
+	_group setCurrentWaypoint _wp;	
+	_group setVariable["soldierType",_soldierType,true];
+	#ifdef blck_debugMode
+	_wp setWaypointStatements ["true","this call blck_fnc_emplacedWeaponWaypoint; diag_log format['====Updating timestamp for group %1 and changing its WP to an emplaced weapon Waypoint',group this];"];
+	if (blck_debugLevel > 2) then {diag_log format["_fnc_setupWaypoints: configuring weapoints for group %2 for emplaced weapon with _soldierType = %1",_soldierType,_group];};
+	#else
+	_wp setWaypointStatements ["true","this call blck_fnc_emplacedWeaponWaypoint;"];
+	#endif	
 };

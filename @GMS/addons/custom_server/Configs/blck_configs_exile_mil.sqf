@@ -186,14 +186,11 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Car_HMMWV_M2_Desert",
 		"B_LSV_01_armed_F"		
 	];
+
 	#ifdef useCUP
 	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
 	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3 + _blck_Tanks_CUP;
 	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
-	#else
-	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3;
-	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3;
-	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3;	
 	#endif
 	
 	if (toLower(worldName) isEqualTo "namalsk") then

@@ -26,18 +26,11 @@ if (toLower(blck_modType) isEqualTo "epoch") then
 		_maxReward = 50;
 		_dist = _unit distance _killer;
 		_reward = 0;
-
-		if (_dist < 50) then { _reward = _maxReward - (_maxReward / 1.25); _reward };
-		if (_dist < 100) then { _reward = _maxReward - (_maxReward / 1.5); _reward };
-		if (_dist < 800) then { _reward = _maxReward - (_maxReward / 2); _reward };
-		if (_dist > 800) then { _reward = _maxReward - (_maxReward / 4); _reward };
-		//diag_log format["_fnc_rewardPlayer: _killer %1 | _dist %2 | _reward %3 ",_killer,_dist,_reward];
-		//diag_log format["_fnc_rewardPlayer: blck_addAIMoney %1 | blck_useKillScoreMessage %2",blck_addAIMoney,blck_useKillScoreMessage];
+		_distanceBonus = floor((_unit distance _killer)/100);
+		_killstreakBonus = 3 * (_killer getVariable["blck_kills",0]);
+		_reward = 25 + _distanceBonus + _killstreakBonus;
 		private _killstreakReward=+(_kills*2);
-		if (blck_addAIMoney) then
-		{
-			[_killer,_reward + _killstreakReward] call blck_fnc_giveTakeCrypto;
-		};
+		[_killer,_reward + _killstreakReward] call blck_fnc_giveTakeCrypto;
 		if (blck_useKillScoreMessage) then
 		{
 			[["showScore",[_reward,"",_kills],""],[_killer]] call blck_fnc_messageplayers;

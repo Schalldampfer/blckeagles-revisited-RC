@@ -1,5 +1,3 @@
-//////////////////////////////////////////////////////
-// Returns an array of all players on the server
 /*
 
 	By Ghostrider [GRG]
@@ -13,16 +11,6 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-/////////////////////////////////////////////////////
 
-private ["_result"];
-
-/*
-_result = [];
-{
-	if (isPlayer _x && alive _x) then { _result pushback _x };
-} forEach allPlayers;
-*/
-_result = allPlayers;
-
+private _result = allPlayers;
 _result

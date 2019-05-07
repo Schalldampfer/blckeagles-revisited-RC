@@ -42,6 +42,8 @@ private _functions = [
 	//["blck_fnc_emptyObjectInventory","\q\addons\custom_server\Compiles\Functions\GMS_fnc_emptyObjectInventory.sqf"],
 	["blck_fnc_spawnMissionLandscapeRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLandscapeRelative.sqf"],
 	["blck_fnc_nearestPlayers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_nearestPlayers.sqf"],
+	["GMS_fnc_msgIED","\q\addons\custom_server\Compiles\Functions\GMS_fnc_msgIED.sqf"],
+
 
 	// Player-related functions
 	["blck_fnc_rewardKiller","\q\addons\custom_server\Compiles\Units\GMS_fnc_rewardKiller.sqf"],
@@ -121,6 +123,11 @@ private _functions = [
 	["blck_fnc_reloadVehicleAmmo","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_reloadVehicleAmmo.sqf"],
 	["blck_fnc_scanForPlayersNearVehicles","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_scanForPlayersNearVehicles.sqf"],
 	["blck_fnc_revealNearbyPlayers","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_revealNearbyPlayers.sqf"],
+	["GMS_fnc_unlockServerVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_unlockServerVehicle.sqf"],
+	["GMS_fnc_applyVehicleDamagePenalty","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_applyVehicleDamagePenalty.sqf"],		
+	["GMS_fnc_revealVehicleToUnits","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_revealVehicleToUnits.sqf"],	
+	["GMS_fnc_handleEmptyStaticWeapon","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleEmptyStaticWeapon.sqf"],	
+	//  GMS_fnc_handleEmptyStaticWeapon
 
 	// functions to support Units
 	["blck_fnc_removeGear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeGear.sqf"],			// Strip an AI unit of all gear.
@@ -147,6 +154,8 @@ private _functions = [
 	["blck_fnc_spawnParaUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnParaUnits.sqf"],
 	["blck_fnc_nextAnim","\q\addons\custom_server\Compiles\Units\GMS_fnc_nextAnim.sqf"],
 	["blck_fnc_placeCharacterInBuilding","\q\addons\custom_server\Compiles\Units\GMS_fnc_placeCharacterInBuilding.sqf"],
+	["GMS_fnc_removeAllAIgear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeAllAIgear.sqf"],
+	["GMS_fnc_alertGroupUnits","\q\addons\custom_server\Compiles\Functions\GMS_fnc_alertGroupUnits.sqf"],	
 
 	// HC support functions
 	["blck_fnc_HC_XferGroup","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_XferGroup.sqf"],

@@ -1,7 +1,4 @@
 /*
-	Killed handler for _units
-	By Ghostrider-GRG-
-
 	--------------------------
 	License
 	--------------------------
@@ -9,8 +6,6 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-params["_markerName"];
-deleteMarker _markerName;
-deleteMarker ("label" + _markerName);
 
+	params["_killer"];
+	[["IED","",0,0],[_killer]] call blck_fnc_MessagePlayers;

@@ -18,4 +18,4 @@ _objects = [];
     _obj = [_objClassName, _objRelPos vectorAdd _center, _objDir,enableSimulationForObject,enableDamageForObject,enableRopesforObject,"CAN_COLLIDE"] call blck_fnc_spawnSingleObject;
     _objects pushBack _obj;
 }forEach _landscape;
-_landscape
+_objects

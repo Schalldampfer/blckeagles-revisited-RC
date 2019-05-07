@@ -23,8 +23,7 @@ while {true} do
 {
 	uiSleep 1;
 	if (diag_tickTime > _timer1sec) then 
-	{
-		[] call blck_fnc_vehicleMonitor;
+	{		
 		#ifdef GRGserver
 		[] call blck_fnc_broadcastServerFPS;
 		#endif
@@ -36,13 +35,14 @@ while {true} do
 		//[] call blck_fnc_missionGroupMonitor;
 		if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {call blck_fnc_blckSimulationManager};
 		[] call blck_fnc_sm_missionPatrolMonitor;
+		[] call blck_fnc_vehicleMonitor;		
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
 		[] call blck_fnc_cleanupAliveAI;
 		[] call blck_fnc_cleanupObjects;
 		[] call blck_fnc_cleanupDeadAI;
-		[] call blck_fnc_scanForPlayersNearVehicles;		
+		[] call blck_fnc_scanForPlayersNearVehicles;				
 		//[] call blck_fnc_cleanEmptyGroups;
 		_timer20sec = diag_tickTime + 20;
 	};

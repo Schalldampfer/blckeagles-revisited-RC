@@ -9,8 +9,8 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-params["_markerName"];
-deleteMarker _markerName;
-deleteMarker ("label" + _markerName);
 
+	private["_vd"];
+	params["_vk"];
+	_vd = getDammage _vk;
+	_vk setDamage (_vd + blck_RunGearDamage);

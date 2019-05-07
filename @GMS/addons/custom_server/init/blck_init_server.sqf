@@ -128,5 +128,6 @@ if (blck_enableBlueMissions > 0) then
 
 //  start the main thread for the mission system which monitors missions running and stuff to be cleaned up
 [] spawn blck_fnc_mainThread;
-
+blck_pvs_version = blck_versionNumber;
+publicVariable "blck_pvs_version";
 diag_log "[blckeagls] < MISSION SYSTEM FULLY INITIALIZED AND RUNNING >";

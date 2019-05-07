@@ -150,9 +150,9 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_mainThreadUpdateInterval = 10;
 	blck_enableOrangeMissions = -1;  
 	blck_enableGreenMissions = -1;
-	blck_enableRedMissions = 1;
-	blck_enableBlueMissions = -1;
-	blck_numberUnderwaterDynamicMissions = -3;	
+	blck_enableRedMissions = -1;
+	blck_enableBlueMissions = 1;
+	blck_numberUnderwaterDynamicMissions = 3;	
 	blck_enableHunterMissions = -1;
 	blck_enableScoutsMissions = -1;
 	blck_maxCrashSites = -3; 
@@ -203,9 +203,9 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_TMax_Crashes = 15;
 	blck_TMax_UMS = 25;
 
-	blck_MinAI_Orange = 1;
-	blck_MaxAI_Orange = 2;
-	blck_AIGrps_Orange = 0;
+	//blck_MinAI_Orange = 1;
+	//blck_MaxAI_Orange = 2;
+	//blck_AIGrps_Orange = 0;
 	
 	//blck_MinAI_Blue = 1;	
 	//blck_MaxAI_Blue = 2;

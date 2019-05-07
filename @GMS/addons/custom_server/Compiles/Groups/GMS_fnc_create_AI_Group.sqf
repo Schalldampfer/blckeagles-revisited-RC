@@ -13,6 +13,8 @@
 private["_groupSpawned"];
 
 _groupSpawned = createGroup [blck_AI_Side, true]; 
+if (isNull _groupSpawned) exitWith{"ERROR:-> Null Group created by blck_fnc_spawnGroup";};
+
 if (blck_simulationManager == blck_useDynamicSimulationManagement) then 
 {
 	_groupSpawned enableDynamicSimulation true;
@@ -24,9 +26,5 @@ _groupSpawned allowfleeing 0;
 _groupSpawned setspeedmode "FULL";
 _groupSpawned setFormation blck_groupFormation; 
 _groupSpawned setVariable ["blck_group",true,true];
-
-#ifdef blck_debugMode
-if (blck_debugLevel >= 2) then {diag_log format["_fnc_create_AI_Group: _groupSpawned = %1",_groupSpawned]};
-#endif
 
 _groupSpawned

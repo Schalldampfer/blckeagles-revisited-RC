@@ -11,8 +11,8 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 
-	#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+	#include "\q\addons\custom_server\Configs\blck_defines.hpp"
+	#include "\q\addons\custom_server\init\build.sqf"
 	/*
 		changing any of these variables may break the mission systemChat
 	*/
@@ -176,7 +176,7 @@
 	_blck_armed_hurons = ["B_Heli_Transport_03_F","B_Heli_Transport_03_black_F"];
 	_blck_armed_attackHelis = ["B_Heli_Attack_01_F"];
 	_blck_armed_heavyAttackHelis = ["O_Heli_Attack_02_F","O_Heli_Attack_02_black_F"];
-		_blck_fighters = [
+	_blck_fighters = [
 		"O_Plane_CAS_02_F",  // /ti-199 Neophron (CAS)
 		"I_Plane_Fighter_03_AA_F",  //  A-143 Buzzard (AA)
 		"I_Plane_Fighter_04_F",  //   	A-149 Gryphon
