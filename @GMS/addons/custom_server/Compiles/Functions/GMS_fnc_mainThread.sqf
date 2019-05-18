@@ -42,7 +42,9 @@ while {true} do
 		[] call blck_fnc_cleanupAliveAI;
 		[] call blck_fnc_cleanupObjects;
 		[] call blck_fnc_cleanupDeadAI;
-		[] call blck_fnc_scanForPlayersNearVehicles;				
+		[] call blck_fnc_scanForPlayersNearVehicles;
+		[] call GMS_fnc_cleanupTemporaryMarkers;
+		[] call GMS_fnc_updateCrateSignals;				
 		//[] call blck_fnc_cleanEmptyGroups;
 		_timer20sec = diag_tickTime + 20;
 	};

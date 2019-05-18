@@ -88,8 +88,9 @@ _fnc_dropMissionCrates = {
 				_location = getPos _x;
 				_blck_localMissionMarker = [format["crateMarker%1%2",_location select 0, _location select 1],_location,"","","ColorBlack",["mil_dot",[]]];
 				_marker = [_blck_localMissionMarker] call blck_fnc_spawnMarker;
-				_markers pushBack _marker; 
-				uiSleep 0.5;
+				//_markers pushBack _marker; 
+				blck_temporaryMarkers pushBack [_marker,diag_tickTime + 300];
+				//uiSleep 0.5;
 				_curPosCrate = getPos _x;
 				_x setPos [_curPosCrate select 0, _curPosCrate select 1, 0.3];
 				//_x setVectorDirAndUp[[0,1,0],[0,0,1]];
@@ -97,11 +98,11 @@ _fnc_dropMissionCrates = {
 		} forEach _crates;
 	};
 
-	uisleep 300;
+	//uisleep 300;
 	
-	{
-		deleteMarker _x;
-	}forEach _markers
+	//{
+		//deleteMarker _x;
+	//}forEach _markers
 };
 
 if (_spawnCrateTiming in ["atMissionEndAir","atMissionStartAir"]) then 

@@ -14,17 +14,24 @@
 // assumptions: this is always run on the server rgardless if th event is triggered on an HC or other client.
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private["_group","_isLegal","_weapon","_lastkill","_kills","_message","_killstreakMsg"];
-params["_unit","_killer"/*,"_instigator"*/];
-if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};
+params["_unit","_killer","_instigator"];
+diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2 | _instigator = %3" ,_unit,_killer,_instigator];
+if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
 blck_deadAI pushback _unit;
-_group = group _unit;
+private _group = group _unit;
 [_unit] joinSilent grpNull;
-if (count(units _group) < 1) then 
+if (count(units _group) == 0) then 
 {
 	deleteGroup _group;
 };
+diag_log format[
+	"_fnc_processAIKill: _killer = %1 | vehicle _killer = %2 | typeOf (vehicle _killer = %3) | driver(vehicle _killer) = %4",
+	_killer,
+	vehicle _killer,
+	typeOf(vehicle _killer),
+	driver(vehicle _killer)
+	];
 
 if !((vehicle _unit) isEqualTo _unit) then 
 {
@@ -35,6 +42,7 @@ if !((vehicle _unit) isEqualTo _unit) then
 		diag_log format["_processAIKill: no units alive in vehicle %1 of type %2",_veh, typeOf _veh];
 		if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 		{
+			diag_log format["_fnc_processAIKill: emplaced weapon %1 being handled",_veh];
 			[_veh] call GMS_fnc_handleEmptyStaticWeapon;			
 		} else {
 			if (blck_killEmptyAIVehicles) then
@@ -58,48 +66,28 @@ if !((vehicle _unit) isEqualTo _unit) then
 	};
 };
 
-if (blck_launcherCleanup) then {[_unit] call blck_fnc_removeLaunchers;};
-if (blck_removeNVG) then {[_unit] call blck_fnc_removeNVG;};
+if (blck_launcherCleanup) then {[_unit] call blck_fnc_removeLaunchers};
+if (blck_removeNVG) then {[_unit] call blck_fnc_removeNVG};
 if !(isPlayer _killer) exitWith {};
 
 [_unit,_killer] call blck_fnc_alertGroupUnits;
 [_killer] call blck_fnc_alertNearbyVehicles;
-_wp = [_group, currentWaypoint _group];
+if (vehicle _killer != _killer) then 
+{
+	[_unit, vehicle _killer] call GMS_fnc_revealVehicleToUnits;
+};
+private _wp = [_group, currentWaypoint _group];
 _wp setWaypointBehaviour "COMBAT";
 _group setCombatMode "RED";
 _wp setWaypointCombatMode "RED";
-_isLegal = [_unit,_killer] call blck_fnc_processIlleagalAIKills;
-if !(_isLegal) exitWith {};
-_lastkill = _killer getVariable["blck_lastkill",diag_tickTime];
-_killer setVariable["blck_lastkill",diag_tickTime];
-_kills = (_killer getVariable["blck_kills",0]) + 1;
-if ((diag_tickTime - _lastkill) < 240) then
-{
-	_killer setVariable["blck_kills",_kills];
-} else {
-	_killer setVariable["blck_kills",0];
-};
 
-if (blck_useKillMessages) then
-{
-	_weapon = currentWeapon _killer;
-	_killstreakMsg = format[" %1X KILLSTREAK",_kills];
-
-	if (blck_useKilledAIName) then
-	{
-		_message = format["[blck] %2: killed by %1 from %3m",name _killer,name _unit,round(_unit distance _killer)];
-	}else{
-		_message = format["[blck] %1 killed with %2 from %3 meters",name _killer,getText(configFile >> "CfgWeapons" >> _weapon >> "DisplayName"), round(_unit distance _killer)];
-	};
-	_message =_message + _killstreakMsg;
-	[["aikilled",_message,"victory"],allPlayers] call blck_fnc_messageplayers;
-};
-
-[_unit,_killer] call blck_fnc_rewardKiller;
 if (blck_showCountAliveAI) then
 {
 	{
 		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;
 	} forEach blck_missionMarkers;
 };
-
+private _isLegal = [_unit,_killer] call blck_fnc_processIlleagalAIKills;
+diag_log format["_fnc_processAIKill: _isLegal = %1",_isLegal];
+if !(_isLegal) exitWith {};
+[_unit,_killer] call GMS_fnc_handlePlayerUpdates;

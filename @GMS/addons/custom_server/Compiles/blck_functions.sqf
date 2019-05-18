@@ -2,7 +2,6 @@
 	AI Mission for Epoch Mod for Arma 3
 	By Ghostrider
 	Functions and global variables used by the mission system.
-	Last modified 3/20/17
 	
 	--------------------------
 	License
@@ -36,17 +35,13 @@ private _functions = [
 	["blck_fnc_deleteMarker","\q\addons\custom_server\Compiles\Functions\GMS_fnc_deleteMarker.sqf"],
 	["blck_fnc_updateMarkerAliveCount","\q\addons\custom_server\Compiles\Functions\GMS_fnc_updateMarkerAliveCount.sqf"],
 	["blck_fnc_addMoneyToObject","\q\addons\custom_server\Compiles\Functions\GMS_fnc_addMoneyToObject.sqf"],
-	["blck_fnc_spawnMissionEmplacedRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionEmplacedRelative.sqf"],
-	["blck_fnc_spawnMissionLootBoxesRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLootBoxesRelative.sqf"],
-	["blck_fnc_spawnSingleObject","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnSingleObject.sqf"],
-	//["blck_fnc_emptyObjectInventory","\q\addons\custom_server\Compiles\Functions\GMS_fnc_emptyObjectInventory.sqf"],
-	["blck_fnc_spawnMissionLandscapeRelative","\q\addons\custom_server\Compiles\Functions\GMS_fnc_spawnMissionLandscapeRelative.sqf"],
 	["blck_fnc_nearestPlayers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_nearestPlayers.sqf"],
 	["GMS_fnc_msgIED","\q\addons\custom_server\Compiles\Functions\GMS_fnc_msgIED.sqf"],
-
+	["GMS_fnc_cleanupTemporaryMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_cleanupTemporaryMarkers.sqf"],
+	["GMS_fnc_updateCrateSignals","\q\addons\custom_server\Compiles\Functions\GMS_fnc_updateCrateSignals.sqf"],
 
 	// Player-related functions
-	["blck_fnc_rewardKiller","\q\addons\custom_server\Compiles\Units\GMS_fnc_rewardKiller.sqf"],
+	["GMS_fnc_handlePlayerUpdates","\q\addons\custom_server\Compiles\Units\GMS_fnc_handlePlayerUpdates.sqf"],
 	["blck_fnc_MessagePlayers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_AIM.sqf"],	 // Send messages to players regarding Missions
 
 	// Mission-related functions
@@ -159,10 +154,7 @@ private _functions = [
 
 	// HC support functions
 	["blck_fnc_HC_XferGroup","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_XferGroup.sqf"],
-	//["blck_fnc_onPlayerDisconnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_onPlayerDisconnected.sqf"],
-	//["blck_fnc_HC_monitor","\q\addons\custom_server\Compiles\HC\GMS_fnc_HCmonitor.sqf"],
 	["blck_fnc_HC_passToHCs","\q\addons\custom_server\Compiles\HC\GMS_fnc_passToHCs.sqf"],
-	//["blck_fnc_HC_getListConnected","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_getListConnected.sqf"],
 	["blck_fnc_HC_leastBurdened","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_leastBurdened.sqf"],
 	["blck_fnc_HC_countGroupsAssigned","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_countGroupsAssigned.sqf"]
 ];
@@ -177,6 +169,6 @@ blck_fnc_broadcastServerFPS = compileFinal  preprocessFileLineNumbers "\q\addons
 diag_log "blck_functions loaded using GRGserver settings ---- >>>> ";
 #endif
 
-onPlayerDisconnected {[_name,_owner] call blck_fnc_onPlayerDisconnected;};
+//onPlayerDisconnected {[_name,_owner] call blck_fnc_onPlayerDisconnected;};
 
 

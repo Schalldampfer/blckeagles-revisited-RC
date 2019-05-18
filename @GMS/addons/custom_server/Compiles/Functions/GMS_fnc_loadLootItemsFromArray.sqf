@@ -29,23 +29,10 @@
 
 
 	params["_loadout","_crate",["_addAmmo",0]];
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 2) then
-	{
-		diag_log format["blck_fnc_loadLootFromItemsArray:: _this %1",_this];
-		diag_log format["blck_fnc_loadLootFromItemsArray:: _crate %1 | _addAmmo %2 | _loadout %3",_crate,_addAmmo,_loadout];
-	};
-	#endif
 	if ((_loadout select 0) isEqualTo []) exitWith {};
 	{
 		private["_tries","_q","_item"];
 		_tries = 0;
-		#ifdef blck_debugMode
-		if (blck_debugLevel > 2) then
-		{		
-			diag_log format["blck_fnc_loadLootFromItemsArray:: -- >> now loading for %1",_x];
-		};
-		#endif
 		_q = _x select 1; // this can be a number or array.
 		_tries = [_q] call blck_fnc_getNumberFromRange;
 		for "_i" from 1 to _tries do

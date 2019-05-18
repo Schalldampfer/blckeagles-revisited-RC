@@ -14,7 +14,7 @@ params["_data"];
 _value = 0;
 if (typeName _data isEqualTo "ARRAY") then
 {
-	params["_min","_max"];
+	_data params["_min","_max"];
 	if (_max > _min) then 
 	{
 		_value = _min + round(random(_max - _min));

@@ -17,7 +17,6 @@ if (blck_modType == "Epoch") then {_units = (_pos) nearEntities ["I_Soldier_EPOC
 if (blck_modType == "Exile") then {_units = (_pos) nearEntities ["i_g_soldier_unarmed_f", 100]};
 _nearestGroup = group (_units select 0);
 {
-	
 	if ((group _x) != _group) then
 	{
 		if ( _x distance (leader _group) < ((leader _nearestGroup) distance (leader _group)) ) then

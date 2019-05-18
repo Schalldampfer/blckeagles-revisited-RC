@@ -96,25 +96,10 @@ if (blck_debugLevel > 1) then
 	[(_x select 1),0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
 	if (isNull _empGroup) exitWith {_abort = true};
 
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnEmplacedWeaponArray(82):: typeName _empGroup = %1 and _empGroup = %2 and _x = %3",typeName _empGroup, _empGroup,_x];
-	};
-	#endif
-
 	// params["_vehType","_pos",["_clearInventory",true]];
-	_wep = [(_x select 0),[0,0,0],false,true] call blck_fnc_spawnVehicle;
+	private _wep = [(_x select 0),[0,0,0],false,true] call blck_fnc_spawnVehicle;
 	_wep addMPEventHandler ["MPHit",{[_this] call blck_EH_AIVehicle_HandleDamage}];
-	//_empGroup setVariable["groupVehicle",_wep];
 	_wep setVariable["vehicleGroup",_empGroup];
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnEmplacedWeaponArray (94) spawnVehicle returned value of _wep = %1",_wep];
-	};
-	#endif
-	
 	_wep setVariable["GRG_vehType","emplaced"];	
 	_wep setPos _pos;
 	_wep setdir (random 359);
@@ -125,25 +110,8 @@ if (blck_debugLevel > 1) then
 	_gunner moveingunner _wep;
 	_gunner setVariable["GRG_vehType","emplaced"];
 	_gunner setVariable["GRG_vehicle",_wep];
-	_emplacedAI append _units;
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnEmplacedWeaponArray(110):: position of emplaced weapon = %1 and targetd position is %2",getPos _wep, _pos];
-		diag_log format["_fnc_spawnEmplacedWeaponArray(111):: _gunner = %1 and crew _wep = %2",_gunner, crew _wep];
-	};
-	#endif
-		
+	_emplacedAI append _units;		
 } forEach _missionEmplacedWeapons;
 blck_monitoredVehicles append _emplacedWeps;
 _return = [_emplacedWeps,_emplacedAI,_abort];
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then
-{
-	diag_log format["_fnc_spawnEmplacedWeaponArray:: returning with _return = _emplacedWeps = %1",_return];
-};
-#endif
-
 _return

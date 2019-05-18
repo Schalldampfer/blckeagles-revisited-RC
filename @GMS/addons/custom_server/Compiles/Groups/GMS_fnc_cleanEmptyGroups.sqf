@@ -14,10 +14,6 @@ for "_i" from 0 to ((count blck_monitoredMissionAIGroups) - 1) do
 {
 	if (_i >= (count blck_monitoredMissionAIGroups)) exitWith {};
 	_grp = blck_monitoredMissionAIGroups deleteat 0;
-
-	//if (!(_grp isEqualTo grpNull) then
-	//{ 
 	if ({alive _x} count units _grp > 0) then {	blck_monitoredMissionAIGroups pushBack _grp};
-	//};
 };
 

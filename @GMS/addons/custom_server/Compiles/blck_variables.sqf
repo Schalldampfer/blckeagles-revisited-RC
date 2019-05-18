@@ -41,7 +41,8 @@ blck_deadAI = [];
 blck_connectedHCs = [];
 blck_missionMarkers = [];
 blck_heliCrashSites = [];
-
+blck_temporaryMarkers = [];
+blck_illuminatedCrates = []; // [crate,duration,freq of replacement]
 blck_mainThreadUpdateInterval = 60;
 blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
 diag_log "[blckeagls] Variables Loaded";

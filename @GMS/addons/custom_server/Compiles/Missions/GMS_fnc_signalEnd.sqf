@@ -19,23 +19,14 @@ _start = diag_tickTime;
 //diag_log format["signalEnd.sqf: _this = %1, _crate = %2",_this, _crate];
 _smokeShell = selectRandom ["SmokeShellOrange","SmokeShellBlue","SmokeShellPurple","SmokeShellRed","SmokeShellGreen","SmokeShellYellow"];
 _lightSource = selectRandom ["Chemlight_green","Chemlight_red","Chemlight_yellow","Chemlight_blue"];
-while {diag_tickTime - _start < (_time)} do  // loop for 5 min accounting for the fact that smoke grenades do not last very long
+_light  = objNull;
+_smoke = _smokeShell createVehicle getPosATL _crate;
+_smoke setPosATL (getPosATL _crate);
+_smoke attachTo [_crate,[0,0,(0.5)]]; // put the smoke a fixed distance above the top of any object to make it as visible as possible
+if(sunOrMoon < 0.2) then
 {
-	_smoke = _smokeShell createVehicle getPosATL _crate;
-	_smoke setPosATL (getPosATL _crate);
-	_smoke attachTo [_crate,[0,0,(0.5)]]; // put the smoke a fixed distance above the top of any object to make it as visible as possible
-	if(sunOrMoon < 0.2) then
-	{
-		_light = _lightSource createVehicle getPosATL _crate;
-		_light setPosATL (getPosATL _crate);
-		_light attachTo [_crate,[0,0,(0.55)]];
-	};
-	uiSleep 120;
-	detach _smoke;
-	deleteVehicle _smoke;
-	if(sunOrMoon < 0.2) then
-	{
-		detach _light;
-		deleteVehicle _light;
-	};
+	_light = _lightSource createVehicle getPosATL _crate;
+	_light setPosATL (getPosATL _crate);
+	_light attachTo [_crate,[0,0,(0.55)]];
 };
+blck_illuminatedCrates  pushBack [_crate,_smoke,_light,_smokeShell,_lightSource,diag_tickTime + 120, diag_tickTime + 300];	
