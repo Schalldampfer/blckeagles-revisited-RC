@@ -15,7 +15,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_unit","_killer","_instigator"];
-diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2 | _instigator = %3" ,_unit,_killer,_instigator];
+//diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2 | _instigator = %3" ,_unit,_killer,_instigator];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
 blck_deadAI pushback _unit;
@@ -25,6 +25,7 @@ if (count(units _group) == 0) then
 {
 	deleteGroup _group;
 };
+/*
 diag_log format[
 	"_fnc_processAIKill: _killer = %1 | vehicle _killer = %2 | typeOf (vehicle _killer = %3) | driver(vehicle _killer) = %4",
 	_killer,
@@ -32,8 +33,9 @@ diag_log format[
 	typeOf(vehicle _killer),
 	driver(vehicle _killer)
 	];
-
-if !((vehicle _unit) isEqualTo _unit) then 
+*/
+diag_log format["+fnc_processAIKill: (vehicle _killer) isKindOf Man = %1",(vehicle _killer) isKindOf "Man"];
+if !((vehicle _unit) isKindOf "Man") then 
 {
 	private _veh = vehicle _unit;
 	diag_log format["_processAIKill: _unit %1 is in vehicle %2",_unit,_veh];

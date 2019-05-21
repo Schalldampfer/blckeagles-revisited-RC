@@ -13,46 +13,6 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-blck_blacklistedVests = [
-
-];
-
-blck_blacklistedUniforms = [
-
-];
-
-blck_blacklistedBackpacks = [
-
-];
-
-blck_blacklistedHeadgear = [
-
-];
-
-blck_blacklistedPrimaryWeapons = [
-
-];
-
-blck_blacklistedSecondaryWeapons = [
-
-];
-
-blck_blacklistedLaunchersAndSwingWeapons = [
-
-];
-
-blck_blacklistedOptics = [
-
-];
-
-blck_blacklistedAttachments = [
-
-];
-
-blck_blacklistedItems = [
-
-];
-
 blck_headgearList = [];
 blck_SkinList = [];
 blck_vests = [];

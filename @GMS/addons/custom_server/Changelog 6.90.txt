@@ -1,0 +1,20 @@
+Added new settings to blck_config.sqf and blck_config_mil.sqf
+
+1.  
+    // global settings for this parameters
+    // Determine the number of crew plus driver per vehicle; excess crew are ignored.
+    // This can be a value or array of [_min, _max];
+	blck_vehCrew_blue = 3;
+	blck_vehCrew_red = 3;
+	blck_vehCrew_green = 3;
+	blck_vehCrew_orange = 3;
+
+    You can also define this value in missions by adding the following variable definition to the mission template:
+
+    _vehicleCrewCount = 3 //
+
+2.  
+    lists of items to be excluded from dynamically generated loadouts has been moved to:
+    blck_config.sqf
+    blck_config_mil.sqf
+    

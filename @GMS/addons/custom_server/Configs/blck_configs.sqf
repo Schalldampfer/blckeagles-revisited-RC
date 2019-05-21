@@ -260,6 +260,11 @@
 	blck_SpawnVeh_Blue = 1;  // Number of static weapons at Blue Missions
 	blck_SpawnVeh_Red = 1;  // Number of static weapons at Red Missions
 
+	blck_vehCrew_blue = 3;
+	blck_vehCrew_red = 3;
+	blck_vehCrew_green = 3;
+	blck_vehCrew_orange = 3;
+
 	///////////////////////////////
 	// AI STATIC WEAPON PARAMETERS	
 	///////////////////////////////
@@ -287,7 +292,48 @@
 	****************************************************************/
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
 	blck_useConfigsGeneratedLoadouts = true;
-	
+	// lists of black-listed items to be excluded from dynamic loadouts
+		blck_blacklistedVests = [
+
+		];
+
+		blck_blacklistedUniforms = [
+
+		];
+
+		blck_blacklistedBackpacks = [
+
+		];
+
+		blck_blacklistedHeadgear = [
+
+		];
+
+		blck_blacklistedPrimaryWeapons = [
+
+		];
+
+		blck_blacklistedSecondaryWeapons = [
+
+		];
+
+		blck_blacklistedLaunchersAndSwingWeapons = [
+
+		];
+
+		blck_blacklistedOptics = [
+
+		];
+
+		blck_blacklistedAttachments = [
+
+		];
+
+		blck_blacklistedItems = [
+
+		];	
+	/////////////////////////////////////////////
+
 	blck_groupBehavior = "SENTRY";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
