@@ -65,6 +65,7 @@ if (toLower(blck_modType) isEqualTo "exile") then
 };
 //diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
 {
+
 	private _temp = [_x] call bis_fnc_itemType;
 	//diag_log _temp;
 	_itemCategory = _temp select 0;
@@ -80,50 +81,50 @@ if (toLower(blck_modType) isEqualTo "exile") then
 	};
 	if (_price < blck_maximumItemPriceInAI_Loadouts) then
 	{
-	if (_itemCategory isEqualTo "Weapon") then
-	{
-		switch (_itemType) do
+		if (_itemCategory isEqualTo "Weapon") then
 		{
-			case "AssaultRifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnAR pushBack _x}};
-			case "MachineGun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnLMG pushBack _x}};
-			case "SubmachineGun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnSMG pushBack _x}};
-			case "Shotgun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnShotGun pushBack _x}};
-			case "Rifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnAR pushBack _x}};
-			case "SniperRifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnSniper pushBack _x}};
-			case "Handgun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnHandGun pushBack _x}};
-			case "Launcher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}};
-			case "RocketLauncher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}};
-			case "Throw": {if !(_x in blck_blacklistedItems) then {_wpnThrow pushBack _x}};
+			switch (_itemType) do
+			{
+				case "AssaultRifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnAR pushBack _x} else {if (blck_logBlacklistedItems) then {diag_log format["Assualt Rifle %1 Excluded: blacklisted Item",_x]}}};
+				case "MachineGun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnLMG pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Machine Gun %1 Excluded: blacklisted Item",_x]}}};
+				case "SubmachineGun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnSMG pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Submachinegun %1 Excluded: blacklisted Item",_x]}}};
+				case "Shotgun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnShotGun pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Shotgun %1 Excluded: blacklisted Item",_x]}}};
+				case "Rifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnAR pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Rifle %1 Excluded: blacklisted Item",_x]}}};
+				case "SniperRifle": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnSniper pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Sniper Rifle %1 Excluded: blacklisted Item",_x]}}};
+				case "Handgun": {if !(_x in blck_blacklistedSecondaryWeapons) then {_wpnHandGun pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Handgun %1 Excluded: blacklisted Item",_x]}}};
+				case "Launcher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Launcher %1 Excluded: blacklisted Item",_x]}}};
+				case "RocketLauncher": {if !(_x in blck_blacklistedLaunchersAndSwingWeapons) then {_wpnLauncher pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Rocket Launcer %1 Excluded: blacklisted Item",_x]}}};
+				case "Throw": {if !(_x in blck_blacklistedItems) then {_wpnThrow pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Throw %1 Excluded: blacklisted Item",_x]}}};
+			};
 		};
-	};
-	
-	if (_itemCategory isEqualTo "Item") then
-	{
-		switch (_itemType) do
+		
+		if (_itemCategory isEqualTo "Item") then
 		{
-			case "AccessoryMuzzle": {if !(_x in blck_blacklistedAttachments) then {_wpnMuzzles pushBack _x}};
-			case "AccessoryPointer": {if !(_x in blck_blacklistedAttachments) then {_wpnPointers pushBack _x}};
-			case "AccessorySights": {if !(_x in blck_blacklistedOptics) then {_wpnOptics pushBack _x}};
-			case "AccessoryBipod": {if !(_x in blck_blacklistedAttachments) then {_wpnUnderbarrel pushBack _x}};
-			case "Binocular": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
-			case "Compass": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
-			case "GPS": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}};
-			case "NVGoggles": {if !(_x in blck_blacklistedItems) then {_NVG pushBack _x}};		
+			switch (_itemType) do
+			{
+				case "AccessoryMuzzle": {if !(_x in blck_blacklistedAttachments) then {_wpnMuzzles pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Muzzle %1 Excluded: blacklisted Item",_x]}}};
+				case "AccessoryPointer": {if !(_x in blck_blacklistedAttachments) then {_wpnPointers pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Pointer %1 Excluded: blacklisted Item",_x]}}};
+				case "AccessorySights": {if !(_x in blck_blacklistedOptics) then {_wpnOptics pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Optic %1 Excluded: blacklisted Item",_x]}}};
+				case "AccessoryBipod": {if !(_x in blck_blacklistedAttachments) then {_wpnUnderbarrel pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Bipod %1 Excluded: blacklisted Item",_x]}}};
+				case "Binocular": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Binocular/Rangefinder/Binocular %1 Excluded: blacklisted Item",_x]}}};
+				case "Compass": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Compass %1 Excluded: blacklisted Item",_x]}}};
+				case "GPS": {if !(_x in blck_blacklistedItems) then {_misc pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["GPS %1 Excluded: blacklisted Item",_x]}}};
+				case "NVGoggles": {if !(_x in blck_blacklistedItems) then {_NVG pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["NVG %1 Excluded: blacklisted Item",_x]}}};		
+			};
 		};
-	};
-	
-	
-	if (_itemCategory isEqualTo "Equipment") then
-	{
-		switch (_itemType) do
+		
+		
+		if (_itemCategory isEqualTo "Equipment") then
 		{
-			case "Glasses": {if !(_x in blck_blacklistedItems) then {_glasses pushBack _x}};
-			case "Headgear": {if !(_x in blck_blacklistedHeadgear) then {_headgear pushBack _x}};
-			case "Vest": {if !(_x in blck_blacklistedVests) then {_vests pushBack _x}};
-			case "Uniform": {if !(_x in blck_blacklistedUniforms) then {_uniforms pushBack _x}};
-			case "Backpack": {if !(_x in blck_blacklistedBackpacks) then {_backpacks pushBack _x}};
+			switch (_itemType) do
+			{
+				case "Glasses": {if !(_x in blck_blacklistedItems) then {_glasses pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Glasses %1 Excluded: blacklisted Item",_x]}}};
+				case "Headgear": {if !(_x in blck_blacklistedHeadgear) then {_headgear pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Headgear %1 Excluded: blacklisted Item",_x]}}};
+				case "Vest": {if !(_x in blck_blacklistedVests) then {_vests pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Vest %1 Excluded: blacklisted Item",_x]}}};
+				case "Uniform": {if !(_x in blck_blacklistedUniforms) then {_uniforms pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Uniform %1 Excluded: blacklisted Item",_x]}}};
+				case "Backpack": {if !(_x in blck_blacklistedBackpacks) then {_backpacks pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Backpack %1 Excluded: blacklisted Item",_x]}}};
+			};
 		};
-	};
 	};
 } forEach _classnameList;
 

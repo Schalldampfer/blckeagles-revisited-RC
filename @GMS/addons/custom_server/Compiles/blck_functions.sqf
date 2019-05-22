@@ -39,6 +39,7 @@ private _functions = [
 	["GMS_fnc_msgIED","\q\addons\custom_server\Compiles\Functions\GMS_fnc_msgIED.sqf"],
 	["GMS_fnc_cleanupTemporaryMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_cleanupTemporaryMarkers.sqf"],
 	["GMS_fnc_updateCrateSignals","\q\addons\custom_server\Compiles\Functions\GMS_fnc_updateCrateSignals.sqf"],
+	["GMS_fnc_isClass","\q\addons\custom_server\Compiles\Functions\GMS_fnc_isClass.sqf"],
 
 	// Player-related functions
 	["GMS_fnc_handlePlayerUpdates","\q\addons\custom_server\Compiles\Units\GMS_fnc_handlePlayerUpdates.sqf"],
@@ -89,7 +90,7 @@ private _functions = [
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]
 	["blck_fnc_setupWaypoints","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setupWaypoints.sqf"],			// Set default waypoints for a group
-	["blck_fnc_missionGroupMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_missionGroupMonitor.sqf"], // Monitors active groups for those that are stuck in an SAD waypoint but not in combat
+	//["blck_fnc_missionGroupMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_missionGroupMonitor.sqf"], // Monitors active groups for those that are stuck in an SAD waypoint but not in combat
 	["blck_fnc_changeToSADWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSADWaypoint.sqf"],
 	["blck_fnc_changeToMoveWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToMoveWaypoint.sqf"],
 	["blck_fnc_changeToSentryWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSentryWaypoint.sqf"],
@@ -150,8 +151,7 @@ private _functions = [
 	["blck_fnc_spawnParaUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnParaUnits.sqf"],
 	["blck_fnc_nextAnim","\q\addons\custom_server\Compiles\Units\GMS_fnc_nextAnim.sqf"],
 	["blck_fnc_placeCharacterInBuilding","\q\addons\custom_server\Compiles\Units\GMS_fnc_placeCharacterInBuilding.sqf"],
-	["GMS_fnc_removeAllAIgear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeAllAIgear.sqf"],
-	["GMS_fnc_alertGroupUnits","\q\addons\custom_server\Compiles\Functions\GMS_fnc_alertGroupUnits.sqf"],	
+	["GMS_fnc_removeAllAIgear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeAllAIgear.sqf"],	
 
 	// HC support functions
 	["blck_fnc_HC_XferGroup","\q\addons\custom_server\Compiles\HC\GMS_fnc_HC_XferGroup.sqf"],

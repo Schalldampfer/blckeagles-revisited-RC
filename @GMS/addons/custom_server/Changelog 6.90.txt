@@ -1,6 +1,5 @@
-Added new settings to blck_config.sqf and blck_config_mil.sqf
-
-1.  
+1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
+  
     // global settings for this parameters
     // Determine the number of crew plus driver per vehicle; excess crew are ignored.
     // This can be a value or array of [_min, _max];
@@ -13,8 +12,9 @@ Added new settings to blck_config.sqf and blck_config_mil.sqf
 
     _vehicleCrewCount = 3 //
 
-2.  
-    lists of items to be excluded from dynamically generated loadouts has been moved to:
+2.  Lists of items to be excluded from dynamically generated loadouts has been moved to:
     blck_config.sqf
     blck_config_mil.sqf
-    
+
+3. Added a new setting that specifies whether logging of blacklisted items is done (handy for debugging)
+    blck_logBlacklistedItems = true;  // set to false to disable logging 

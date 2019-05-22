@@ -11,6 +11,7 @@
 */
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
+#include "\q\addons\custom_server\init\build.sqf";
 diag_log format["[blckeagls] loading configurations for Epoch for blckeagls build %1",blck_buildNumber];
 ////////////
 // Epoch-specific settings

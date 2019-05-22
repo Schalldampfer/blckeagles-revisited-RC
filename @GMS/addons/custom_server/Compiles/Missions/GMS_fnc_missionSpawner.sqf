@@ -289,7 +289,7 @@ if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
 if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
 {
-	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnMissionVehiclePatrols;
+	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false,_vehicleCrewCount] call blck_fnc_spawnMissionVehiclePatrols;
 
 	if (typeName _temp isEqualTo "ARRAY") then
 	{

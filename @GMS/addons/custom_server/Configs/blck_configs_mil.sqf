@@ -276,6 +276,8 @@
 	****************************************************************/
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
 	blck_useConfigsGeneratedLoadouts = true;
+	blck_logblacklisteditems = true;
+	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
 
@@ -404,8 +406,9 @@
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
 	};	
-	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
-	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
+	//waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
+	//waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
+	uiSleep 10;
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagls] Dynamic Configs Enabled"];

@@ -152,7 +152,7 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_enableGreenMissions = -1;
 	blck_enableRedMissions = -1;
 	blck_enableBlueMissions = 1;
-	blck_numberUnderwaterDynamicMissions = 3;	
+	blck_numberUnderwaterDynamicMissions = 1;	
 	blck_enableHunterMissions = -1;
 	blck_enableScoutsMissions = -1;
 	blck_maxCrashSites = -3; 

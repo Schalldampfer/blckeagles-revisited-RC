@@ -51,6 +51,7 @@ if (isNil "_chanceLoot") 		then {_chanceLoot = 0};
 if (isNil "_paraTriggerDistance") then {_paraTriggerDistance = 400;};
 if (isNil "_paraLoot") 			then {_paraLoot = blck_BoxLoot_Blue};
 if (isNil "_paraLootCounts") 	then {_paraLootCounts = blck_lootCountsRed};
+if (isNil "_vehicleCrewCount") then {_vehicleCrewCount = [_aiDifficultyLevel] call GMS_fnc_selectVehicleCrewCount};
 
 _objects = [];
 _mines = [];
@@ -259,7 +260,7 @@ _vehToSpawn = 0;
 if (blck_useVehiclePatrols &&  count _vehiclePatrolParameters > 0) then
 {
 	// params["_coords","_noVehiclePatrols","_aiDifficultyLevel","_missionPatrolVehicles",["_useRelativePos",true],["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_weaponList",[]],["_sideArms",blck_Pistols], ["_isScubaGroup",false]];
-	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_vehiclePatrolParameters,true,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false /*,blck_UMS_weapons,blck_UMS_vests,isScubaMission*/ ] call blck_fnc_spawnMissionVehiclePatrols;
+	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_vehiclePatrolParameters,true,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false,_vehicleCrewCount /*,blck_UMS_weapons,blck_UMS_vests,isScubaMission*/ ] call blck_fnc_spawnMissionVehiclePatrols;
 	#ifdef blck_debugMode
 	if  (blck_debugLevel > 1) then {
 			diag_log format["dynamicUMSspawner :: (251) blck_fnc_spawnMissionVehiclePatrols returned _temp = %1",_temp]; 

@@ -18,7 +18,7 @@
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
 	blck_debugON = true;  //  Do not touch ... 
-	blck_debugLevel = 0;  //  Do not touch ... 
+	blck_debugLevel = 3;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
 	{
@@ -292,29 +292,35 @@
 	****************************************************************/
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
 	blck_useConfigsGeneratedLoadouts = true;
+	blck_logBlacklistedItems = true;
+	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
-
+			"V_Press_F"
 		];
 
 		blck_blacklistedUniforms = [
-
+			"U_I_Protagonist_VR",
+			"U_C_Protagonist_VR",			
+			"U_O_Protagonist_VR",
+			"U_B_Protagonist_VR"
 		];
 
 		blck_blacklistedBackpacks = [
-
+			"B_ViperLightHarness_blk_F"
 		];
 
 		blck_blacklistedHeadgear = [
-
+			"H_HelmotO_ViperSP_ghex_F",
+			"H_HelmetO_VierSP_hex"
 		];
 
 		blck_blacklistedPrimaryWeapons = [
-
+			"srifle_LRR_tna_F"
 		];
 
 		blck_blacklistedSecondaryWeapons = [
-
+			"hgun_Pistol_heav_02_F"
 		];
 
 		blck_blacklistedLaunchersAndSwingWeapons = [
@@ -322,7 +328,7 @@
 		];
 
 		blck_blacklistedOptics = [
-
+			"optic_tws"
 		];
 
 		blck_blacklistedAttachments = [
@@ -419,12 +425,20 @@
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
 	};	
-	waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
-	waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
+	uiSleep 10;
+	//waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
+	//diag_log format["blck_maximumItemPriceInAI_Loadouts defined as %1",blck_maximumItemPriceInAI_Loadouts];
+	//waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagls] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
+	} else {
+		if (blck_verifyClassNames) then 
+		{
+
+		};
 	};
 
 	blck_configsLoaded = true;
+	diag_log format["<--- blck_configs loaded at %1 --->",diag_tickTime];

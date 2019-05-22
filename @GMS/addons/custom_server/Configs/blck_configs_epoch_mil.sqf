@@ -46,6 +46,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_crateMoneyGreen = [300, 500];
 	blck_crateMoneyOrange = [500, 750];
 	
+	blck_maximumItemPriceInAI_Loadouts = 100;
+
 	blck_allowSalesAtBlackMktTraders = true; // Allow vehicles to be sold at Halvjes black market traders.
 	
 	_blck_lightlyArmed_ARMA3 = [

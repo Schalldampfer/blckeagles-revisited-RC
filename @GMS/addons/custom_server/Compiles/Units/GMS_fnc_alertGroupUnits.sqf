@@ -1,6 +1,5 @@
 /*
 	by Ghostrider
-	7-27-17
 	Alerts the leader of a group of the location of an enemy.
 	 
 	--------------------------

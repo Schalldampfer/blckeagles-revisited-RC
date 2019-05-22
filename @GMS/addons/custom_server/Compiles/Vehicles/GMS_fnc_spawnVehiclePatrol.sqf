@@ -16,15 +16,6 @@
 
 private["_vehType","_safepos","_veh","_unitNumber"];
 params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true]];
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then
-{
-	private _params = ["_center","_pos","_vehType","_minDis","_maxDis","_group","_setWaypoints"];
-	{
-		diag_log format["_fnc_spawnMissionVehiclePatrol:: param %1 | isEqualTo %2 | _forEachIndex %3",_params select _forEachIndex,_this select _forEachIndex, _forEachIndex];
-	}forEach _this;
-};
-#endif
 
 //_center  Center of the mission area - this is usuall the position treated as the center by the mission spawner. Vehicles will patrol the perimeter of the mission area.
 // _pos the approximate spawn point for the vehicle
@@ -32,8 +23,6 @@ if (blck_debugLevel > 1) then
 //_minDis = minimum distance from the center of the mission for vehicle waypoints
 //_maxDis = maximum distance from the center of the mission for vehicle waypoints
 //_groupForVehiclePatrol = The group with which to man the vehicle
-
-
 
 if !(isNull _group) then {
 	_veh = [_vehType,_pos] call blck_fnc_spawnVehicle;
@@ -43,12 +32,6 @@ if !(isNull _group) then {
 	_veh setVariable["blck_vehiclePlayerDetectionOdds",blck_vehiclePlayerDetectionOdds];
 	
 	//_group setVariable["groupVehicle",_veh];
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["spawnVehiclePatrol:: vehicle spawned is %1 of typeof %2",_veh, typeOf _veh];
-	};
-	#endif
 
 	_unitNumber = 0;
 
@@ -60,7 +43,7 @@ if !(isNull _group) then {
 				default {_x moveInCargo _veh;};
 			};
 			_unitNumber = _unitNumber + 1;
-	}forEach (units _group);
+	}forEach (units _group);  //  TODO: add check for empty crew slots and delete excess crew
 
 	// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAD"],["_soldierType","null"] ];
 	_group setcombatmode "RED";
