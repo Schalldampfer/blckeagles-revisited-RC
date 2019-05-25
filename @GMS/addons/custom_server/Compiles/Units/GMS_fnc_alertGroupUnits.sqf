@@ -12,8 +12,9 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params["_unit","_target"];
-diag_log format["_fnc_alertGroupUnits: _unit = %1 | _target = %2",_unit,_target];
+params[["_unit",objNull],["_target",objNull]];
+if (isNull _unit) exitWith {};
+//diag_log format["_fnc_alertGroupUnits: _unit = %1 | _target = %2",_unit,_target];
 {
 	_x reveal [_target,(_x knowsAbout _target) + (_unit getVariable ["intelligence",1])];
 }forEach (units (group _unit));

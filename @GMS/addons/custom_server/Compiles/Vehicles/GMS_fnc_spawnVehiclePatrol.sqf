@@ -33,7 +33,7 @@ if !(isNull _group) then {
 	//_group setVariable["groupVehicle",_veh];
 	private _seats = [_vehType,true] call BIS_fnc_crewCount; 
 	_unitNumber = 0;
-	diag_log format["_fnc_spawnVehiclePatrol: _veh = %1 | _maxCrew = %2 | _seats = %3",_veh,_maxCrew,_seats];
+	//diag_log format["_fnc_spawnVehiclePatrol: _veh = %1 | _maxCrew = %2 | _seats = %3",_veh,_maxCrew,_seats];
 	
 	{
 			switch (_forEachIndex) do
@@ -46,8 +46,8 @@ if !(isNull _group) then {
 					};  // delete any excess AI
 				default {_x moveInCargo _veh;};
 			};
-			//if (_forEachIndex == (_seats - 1)) exitWith{diag_log format["_fnc_spawnVeiclePatrol: _veh = %1 | _forEachIndex = %2 | _seats = %3",_veh,_forEachIndex,_seats]};
-	}forEach (units _group);  //  TODO: add check for empty crew slots and delete excess crew
+			
+	}forEach (units _group);  //  
 
 
 	_group setcombatmode "RED";

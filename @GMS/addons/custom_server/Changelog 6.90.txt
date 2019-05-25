@@ -10,7 +10,7 @@
 
     You can also define this value in missions by adding the following variable definition to the mission template:
 
-    _vehicleCrewCount = 3 //
+    _vehicleCrewCount = [3,6]; // min/max number of AI to load including driver. see the missions\blue\template.sqf and blck_configs.sqf for more info.
 
 2.  Lists of items to be excluded from dynamically generated loadouts has been moved to:
     blck_config.sqf

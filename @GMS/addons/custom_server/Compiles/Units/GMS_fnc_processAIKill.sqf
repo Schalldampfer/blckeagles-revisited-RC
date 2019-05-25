@@ -14,7 +14,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_unit","_killer","_instigator"];
-diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
+//diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
 blck_deadAI pushback _unit;
@@ -34,17 +34,17 @@ if !((vehicle _unit) isKindOf "Man") then
 		//diag_log format["_processAIKill: no units alive in vehicle %1 of type %2",_veh, typeOf _veh];
 		if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 		{
-			diag_log format["_fnc_processAIKill: emplaced weapon %1 being handled",_veh];
+			//diag_log format["_fnc_processAIKill: emplaced weapon %1 being handled",_veh];
 			[_veh] call GMS_fnc_handleEmptyStaticWeapon;			
 		} else {
 			if (blck_killEmptyAIVehicles) then
 			{
-				diag_log format["_processAIKill: disabling vehicle %1 and setting a delete time",_veh];
+				//diag_log format["_processAIKill: disabling vehicle %1 and setting a delete time",_veh];
 				_veh setDamage 0.7;
 				_veh setFuel 0;
 				_veh setVariable["blck_deleteAtTime",diag_tickTime + 60];
 			} else {
-				diag_log format["_processAIKill: releasing vehicle %1 to players and setting a default delete timer",_veh];
+				//diag_log format["_processAIKill: releasing vehicle %1 to players and setting a default delete timer",_veh];
 				_veh setVariable["blck_deleteAtTime",diag_tickTime + blck_vehicleDeleteTimer,true];	
 				[_veh] call blck_fnc_releaseVehicleToPlayers;
 			};

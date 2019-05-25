@@ -7,6 +7,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
+	//diag_log format["_EH_AIHit: _this = %1",_this];
 	_this remoteExec["blck_fnc_processAIHit",2];
 
 

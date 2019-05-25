@@ -8,7 +8,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 if ( !(isServer) || hasInterface) exitWith{};
 if !(isNil "blck_Initialized") exitWith{};
 // find and set Mod
@@ -24,11 +24,10 @@ if ((toLower blck_modType) isEqualTo "exile") then
 	diag_log "[blckeagls] Waiting until ExileMod is ready ...";
 	waitUntil {!isNil "PublicServerIsLoaded"};
 };
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
-diag_log format["[blckeagls] Loading Server Mission System Version"];
+diag_log format["[blckeagls] Loading Server Mission System"];
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
@@ -44,6 +43,8 @@ call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blc
 //diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
 
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
+
+uiSleep 15;
 
 if (blck_simulationManager == 2) then 
 {

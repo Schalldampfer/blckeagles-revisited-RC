@@ -15,7 +15,7 @@ private ["_veh","_instigator","_group","_wp"];
 
 _veh = _this select 0 select 0;
 _instigator = _this select 0 select 3;
-diag_log format["_fnc_HandleAIVehicleHit:  _veh = %1 | _instigator = %2",_veh,_instigator];
+//diag_log format["_fnc_HandleAIVehicleHit:  _veh = %1 | _instigator = %2",_veh,_instigator];
 if (!(isPlayer _instigator)) exitWith {};
 _crew = crew _veh;
 _group = group (_crew select 0);

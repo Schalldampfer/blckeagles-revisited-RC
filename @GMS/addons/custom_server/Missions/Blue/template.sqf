@@ -96,6 +96,8 @@ _maxNoAI = blck_MaxAI_Blue;  // Setting this in the mission file overrides the d
 _noAIGroups = blck_AIGrps_Blue;  // Setting this in the mission file overrides the defaults 
 _noVehiclePatrols = blck_SpawnVeh_Blue;  // Setting this in the mission file overrides the defaults 
 _noEmplacedWeapons = blck_SpawnEmplaced_Blue;  // Setting this in the mission file overrides the defaults 
+_vehicleCrewCount = [3,5]; // min / max number of crew including driver and gunners to be loaded into a vehicle
+
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = blck_useMines;  // Setting this in the mission file overrides the defaults 
 _uniforms = blck_SkinList;  // Setting this in the mission file overrides the defaults 
