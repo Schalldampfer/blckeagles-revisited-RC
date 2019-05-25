@@ -11,7 +11,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params[["_target",objNull];
+params[["_target",objNull]];
 if (isnull _target) exitWith {objNull};
 private _nearestVehicles = (nearestObjects [getPos _target,["Car","Truck","Tank","Ship"],300]);
 if (_nearestVehicles isEqualTo []) exitWith 

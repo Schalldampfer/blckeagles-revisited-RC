@@ -18,9 +18,6 @@ if ((tolower blck_modType) isEqualTo "epoch") then
 	private _telePos = getArray(configFile >> "CfgEpoch" >> worldName >> "telePos" );
 	{
 		blck_locationBlackList pushback [_x select 3, 1000];
-		#ifdef blck_debugMode
-		if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getTraderCitiesEpoch:: -- >> Added epoch trader city location at %1", (_x select 3)];};
-		#endif
 	} foreach _telePos;
 };
 
@@ -31,26 +28,16 @@ if ((tolower blck_modType) isEqualTo "exile") then
 		private _traderCites = allMapMarkers;
 		private _tc = [];
 		{
-			//if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getExileLocations :: -- >> Evaluating Markertype of %1", (getMarkerType _x)];};
 			if (getMarkerType _x isEqualTo "ExileTraderZone" && blck_blacklistTraderCities) then {
 				blck_locationBlackList pushback [(getMarkerPos _x),1000];
-				#ifdef blck_debugMode
-				if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getExileLocations :: -- >> Added Exile Trader location at %1", (getMarkerPos _x)];};
-				#endif
 			};
 				
 			if ((getMarkerType _x isEqualTo "ExileSpawnZone") && blck_blacklistSpawns) then {
-				blck_locationBlackList pushback [(getMarkerPos _x),1000];
-				#ifdef blck_debugMode
-				if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getExileLocations :: -- >> Added Exile Spawn location at %1", (getMarkerPos _x)];};
-				#endif			
+				blck_locationBlackList pushback [(getMarkerPos _x),1000];			
 			};
 			//  
 			if (getMarkerType _x isEqualTo "ExileConcreteMixerZone" && blck_listConcreteMixerZones) then {
-				blck_locationBlackList pushback [(getMarkerPos _x),1000];
-				#ifdef blck_debugMode
-				if (blck_debugON) then {diag_log format["[blckeagls]  _fnc_getExileLocations :: -- >> Added Exile Concrete Mixer location at %1", (getMarkerPos _x)];};
-				#endif			
+				blck_locationBlackList pushback [(getMarkerPos _x),1000];		
 			};	
 		}forEach _traderCites;
 	};

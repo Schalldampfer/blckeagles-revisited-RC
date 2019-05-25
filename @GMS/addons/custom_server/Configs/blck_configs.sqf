@@ -17,7 +17,7 @@
 		changing any of these variables may break the mission systemChat
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
-	blck_debugON = true;  //  Do not touch ... 
+	blck_debugON = false;  //  Do not touch ... 
 	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
@@ -45,7 +45,7 @@
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
 	blck_simulationManager = blck_useBlckeaglsSimulationManager; 
-	diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
+	//diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
 	/*
 		blck_simulationManagementOff  - no simulation management occurs
 		blck_useBlckeaglsSimulationManager - simulation is enabled/disabled by periodic checks for nearby players; a 'wake' function is included when a units simulation is turned on
@@ -426,18 +426,12 @@
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
 	};	
 	uiSleep 10;
-	//waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
-	//diag_log format["blck_maximumItemPriceInAI_Loadouts defined as %1",blck_maximumItemPriceInAI_Loadouts];
-	//waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	if (blck_useConfigsGeneratedLoadouts) then
 	{
 		diag_log format["[blckeagls] Dynamic Configs Enabled"];
 		execVM "\q\addons\custom_server\Configs\blck_dynamicConfigs.sqf";
 	} else {
-		if (blck_verifyClassNames) then 
-		{
 
-		};
 	};
 
 	blck_configsLoaded = true;

@@ -31,7 +31,7 @@ diag_log format["[blckeagls] Loading Server Mission System"];
 
 // compile functions
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
-diag_log format["[blckeagls] functions compiled in %1 seconds",diag_tickTime-_blck_loadingStartTime];
+diag_log format["[blckeagls] functions compiled"];
 
 call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
 waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};

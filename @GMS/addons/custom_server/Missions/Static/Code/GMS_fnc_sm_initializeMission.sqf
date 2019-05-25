@@ -16,11 +16,11 @@ if (isNil "_markerColor") then {_markerColor = "ColorBlack"};
 if (isNil "_markerType") then {_markerType = ["mil_box",[]]};
 if (isNil "_missionLandscape") then {_missionLandscape = []};
 if (isNil "_garrisonedBuilding_ASLsystem") then {
-	diag_log "_fnc_sm_initializeMission: _garrisonedBuilding_ASLsystem set to []";
+	//diag_log "_fnc_sm_initializeMission: _garrisonedBuilding_ASLsystem set to []";
 	_garrisonedBuilding_ASLsystem = [];
 	};
 if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {
-	diag_log "_fnc_sm_initializeMission: _garrisonedBuildings_BuildingPosnSystem set to []";
+	//diag_log "_fnc_sm_initializeMission: _garrisonedBuildings_BuildingPosnSystem set to []";
 	_garrisonedBuildings_BuildingPosnSystem = [];
 	};
 if (isNil "_airPatrols") then {_airPatrols = []};
