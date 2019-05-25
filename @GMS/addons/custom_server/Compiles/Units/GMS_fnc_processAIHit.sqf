@@ -29,10 +29,10 @@ if (!(alive _unit)) exitWith {[_unit, _instigator] call blck_fnc_processAIKill};
 if (damage _unit > 0.95) exitWith {_unit setDamage 1.2; [_unit, _instigator] call blck_fnc_processAIKill};
 
 if (!(isPlayer _instigator)) exitWith {};
-[_unit,_instigator] call blck_fnc_alertGroupUnits;
+diag_log format["_processAIHit: calling [_unit,_instigator] call blck_fnc_alertGroupUnits with _unit = %1 and _instigator = %2",_unit,_instigator];
+[_unit,_instigator,50] call GMS_fnc_alertNearbyGroups;
 [_instigator] call blck_fnc_alertNearbyVehicles;
 _group = group _unit;
-//_group setBehavior "COMBAT";
 _wp = [_group, currentWaypoint _group];
 _wp setWaypointBehaviour "COMBAT";
 _group setCombatMode "RED";
@@ -47,11 +47,7 @@ if ((damage _unit) > 0.1 ) then
 		diag_log format["_EH_AIHit::-->> Healing unit %1",_unit];
 	};
 	_unit setVariable["hasHealed",true,true];
-	/*
-	_unit  addMagazine "SmokeShellOrange";
-	_unit fire "SmokeShellMuzzle";
-	*/
-	"SmokeShellRed" createVehicle ((position _unit) getPos[3,_unit getRelDir _instigator];
+	"SmokeShellRed" createVehicle (position _unit);
 	_unit addItem "FAK";
 	_unit action ["HealSoldierSelf",  _unit];
 	_unit setDamage 0;

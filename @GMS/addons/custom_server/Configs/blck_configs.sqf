@@ -18,7 +18,7 @@
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
 	blck_debugON = true;  //  Do not touch ... 
-	blck_debugLevel = 3;  //  Do not touch ... 
+	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
 	{
@@ -291,7 +291,7 @@
 	
 	****************************************************************/
 	// When true, AI loadouts will be set from the class names in CfgPricing rather than the settings in the mod-specific configuration files
-	blck_useConfigsGeneratedLoadouts = true;
+	blck_useConfigsGeneratedLoadouts = false;
 	blck_logBlacklistedItems = true;
 	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts

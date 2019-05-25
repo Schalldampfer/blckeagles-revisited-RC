@@ -1,6 +1,7 @@
 /*
+	_fnc_alertGroupUnits
 	by Ghostrider
-	Alerts the leader of a group of the location of an enemy.
+	Alerts the units of a group of the location of an enemy.
 	 
 	--------------------------
 	License
@@ -11,14 +12,10 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private["_knowsAbout","_intelligence","_group"];
 params["_unit","_target"];
-//diag_log format["_fnc_alertGroupUnits called _unit = %1 and _targert = %2",_unit,_target];
-_intelligence = _unit getVariable ["intelligence",1];
-_group = group _unit;
+diag_log format["_fnc_alertGroupUnits: _unit = %1 | _target = %2",_unit,_target];
 {
-	_knowsAbout = _x knowsAbout _target;
-	_x reveal [_target,_knowsAbout + _intelligence];
-}forEach units _group;
+	_x reveal [_target,(_x knowsAbout _target) + (_unit getVariable ["intelligence",1])];
+}forEach (units (group _unit));
 
 

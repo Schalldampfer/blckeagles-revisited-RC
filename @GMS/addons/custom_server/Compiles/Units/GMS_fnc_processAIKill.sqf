@@ -1,6 +1,5 @@
 /*
 	Handle AI Deaths
-	Last Modified 7/27/17
 	By Ghostrider [GRG]
 	Copyright 2016
 	--------------------------
@@ -15,7 +14,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_unit","_killer","_instigator"];
-//diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2 | _instigator = %3" ,_unit,_killer,_instigator];
+diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
 blck_deadAI pushback _unit;
@@ -25,23 +24,14 @@ if (count(units _group) == 0) then
 {
 	deleteGroup _group;
 };
-/*
-diag_log format[
-	"_fnc_processAIKill: _killer = %1 | vehicle _killer = %2 | typeOf (vehicle _killer = %3) | driver(vehicle _killer) = %4",
-	_killer,
-	vehicle _killer,
-	typeOf(vehicle _killer),
-	driver(vehicle _killer)
-	];
-*/
-diag_log format["+fnc_processAIKill: (vehicle _killer) isKindOf Man = %1",(vehicle _killer) isKindOf "Man"];
+
 if !((vehicle _unit) isKindOf "Man") then 
 {
 	private _veh = vehicle _unit;
-	diag_log format["_processAIKill: _unit %1 is in vehicle %2",_unit,_veh];
+	//diag_log format["_processAIKill: _unit %1 is in vehicle %2",_unit,_veh];
 	if ({alive _x} count (crew _veh) == 0) then
 	{	
-		diag_log format["_processAIKill: no units alive in vehicle %1 of type %2",_veh, typeOf _veh];
+		//diag_log format["_processAIKill: no units alive in vehicle %1 of type %2",_veh, typeOf _veh];
 		if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 		{
 			diag_log format["_fnc_processAIKill: emplaced weapon %1 being handled",_veh];
@@ -71,13 +61,8 @@ if !((vehicle _unit) isKindOf "Man") then
 if (blck_launcherCleanup) then {[_unit] call blck_fnc_removeLaunchers};
 if (blck_removeNVG) then {[_unit] call blck_fnc_removeNVG};
 if !(isPlayer _killer) exitWith {};
-
-[_unit,_killer] call blck_fnc_alertGroupUnits;
+[_unit,_killer,50] call GMS_fnc_alertNearbyGroups;
 [_killer] call blck_fnc_alertNearbyVehicles;
-if (vehicle _killer != _killer) then 
-{
-	[_unit, vehicle _killer] call GMS_fnc_revealVehicleToUnits;
-};
 private _wp = [_group, currentWaypoint _group];
 _wp setWaypointBehaviour "COMBAT";
 _group setCombatMode "RED";
@@ -90,6 +75,6 @@ if (blck_showCountAliveAI) then
 	} forEach blck_missionMarkers;
 };
 private _isLegal = [_unit,_killer] call blck_fnc_processIlleagalAIKills;
-diag_log format["_fnc_processAIKill: _isLegal = %1",_isLegal];
-if !(_isLegal) exitWith {};
-[_unit,_killer] call GMS_fnc_handlePlayerUpdates;
+if (_isLegal) then {
+	[_unit,_killer] call GMS_fnc_handlePlayerUpdates;
+};

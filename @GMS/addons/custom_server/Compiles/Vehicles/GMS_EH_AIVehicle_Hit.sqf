@@ -1,7 +1,6 @@
 /*
+	_EH_AHVehicle_Hit
 	By Ghostrider [GRG]
-	Last Modified 7-27-17
-
 	Handles the case where a vehicle is hit.
 
 	--------------------------

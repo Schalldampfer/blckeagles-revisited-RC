@@ -18,3 +18,5 @@
 
 3. Added a new setting that specifies whether logging of blacklisted items is done (handy for debugging)
     blck_logBlacklistedItems = true;  // set to false to disable logging 
+
+4. Hit and Killed event handlers extensively reworked. Methods for notification of nearby AI and Vehicles of the killers whereabouts were revised to be more inclusive of neighboring AI.

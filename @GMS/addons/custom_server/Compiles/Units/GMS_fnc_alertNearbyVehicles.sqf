@@ -1,4 +1,5 @@
 /*
+	_fnc_alertNearbyVehicles
 	by Ghostrider
 	 
 	--------------------------
@@ -11,11 +12,11 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_target"];
-private["_vehGroup"];
-{
-	_vehGroup = _x getVariable["vehicleGroup",grpNull];
-	if (_target distance2D (leader _vehGroup) < 1000) then {[_vehGroup,_target] call blck_fnc_alertGroupUnits;};
-}forEach blck_monitoredVehicles;
+
+private _nearestVehicle = (nearestObjects [getPos _target,["Car","Truck","Tank","Ship"],300]) select 0;
+diag_log format["_fnc_alertNearbyVehicles: _target = %1 | _nearestVehicle = %2",_target,_nearestVehicle];
+[(crew _nearestVehicle) select 0,_target] call blck_fnc_alertGroupUnits;
+
 
 
 

@@ -136,8 +136,9 @@ private _functions = [
 	["blck_fnc_processAIKill","\q\addons\custom_server\Compiles\Units\GMS_fnc_processAIKill.sqf"],
 	["blck_fnc_removeLaunchers","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeLaunchers.sqf"],
 	["blck_fnc_removeNVG","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeNVG.sqf"],
-	["blck_fnc_alertNearbyUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_alertNearbyUnits.sqf"],
+	//["blck_fnc_alertNearbyUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_alertNearbyUnits.sqf"],
 	["blck_fnc_alertGroupUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_alertGroupUnits.sqf"],
+	["GMS_fnc_alertNearbyGroups","\q\addons\custom_server\Compiles\Units\GMS_fnc_alertNearbyGroups.sqf"],
 	["blck_fnc_alertNearbyVehicles","\q\addons\custom_server\Compiles\Units\GMS_fnc_alertNearbyVehicles.sqf"],
 	["blck_fnc_processIlleagalAIKills","\q\addons\custom_server\Compiles\Units\GMS_fnc_processIlleagalAIKills.sqf"],
 	["blck_fnc_cleanupDeadAI","\q\addons\custom_server\Compiles\Units\GMS_fnc_cleanupDeadAI.sqf"],		// handles deletion of AI bodies and gear when it is time.
@@ -150,7 +151,7 @@ private _functions = [
 	["blck_fnc_spawnCharacter","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnCharacter.sqf"],
 	["blck_fnc_spawnParaUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnParaUnits.sqf"],
 	["blck_fnc_nextAnim","\q\addons\custom_server\Compiles\Units\GMS_fnc_nextAnim.sqf"],
-	["blck_fnc_placeCharacterInBuilding","\q\addons\custom_server\Compiles\Units\GMS_fnc_placeCharacterInBuilding.sqf"],
+	["blck_fnc_placeCharacterInBuilding","\q\addons\custom_server\Compiles\Units\GMS_fnc_placeCharacterInBuilding.sqf"],	
 	["GMS_fnc_removeAllAIgear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeAllAIgear.sqf"],	
 
 	// HC support functions

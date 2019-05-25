@@ -1,6 +1,7 @@
 
 /*
-	Killed handler for _units
+	_EH_VehicleKilled
+	Killed handler for destruction of vehicles
 	By Ghostrider-GRG-
 
 	--------------------------

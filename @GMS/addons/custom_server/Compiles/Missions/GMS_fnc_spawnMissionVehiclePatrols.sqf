@@ -62,8 +62,8 @@ if (_missionPatrolVehicles isEqualTo []) then
 
 	blck_monitoredMissionAIGroups pushBack _vehGroup;
 
-	//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",30],["_maxDis",45],["_group",grpNull]];
-	_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true] call blck_fnc_spawnVehiclePatrol;
+	//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true],["_crewCount",4]];
+	_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true,_crewCount] call blck_fnc_spawnVehiclePatrol;  //  
 
 	if !(isNull _patrolVehicle) then
 	{

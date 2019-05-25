@@ -1,16 +1,11 @@
+
+Todo:
 For V 6.90:
-  1. Sort out the issue with the handling of unit kills not separating killer from the killer's vehicle.  DONE
+
   2. Test new unlock fix on HC
   3. Write a claim vehicle function.
   4. End of development most likely.
   5. be sure AI do heal when wounded but not killed.
   6. test that ai toss smoke when healing
-  7. Set up queue for markers needing to be deleted.  DONE
-    need to call something that quickly scans for markers that need to be deleted
-    need to push temp markers to the cue with delete times.  DONE
-  8. add a quick thing for refreshing flares on crates to replace all those uisleeps
-    do this in _signalEnd and _crateMarker  DONE
-    replace _crateMarker with calls to signalEnd.  DONE
-  9. Check that trader zones are detected properly in Exile.
-Todo:
-  ☐ Item: add check for empty crew slots and delete excess crew
+  7. Check that functions for allerting units, groups and vehicles function properly in all situations.
+  ☐ Item: add check for empty crew slots and delete excess crew: note - use BIS_fnc_crewCount to get the number of slots.

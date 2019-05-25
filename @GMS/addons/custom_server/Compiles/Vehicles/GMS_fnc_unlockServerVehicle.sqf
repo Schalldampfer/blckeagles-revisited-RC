@@ -14,7 +14,7 @@
 params["_vehicle"];
 if !(local _vehicle) then
 {
-	private _return = _vehicle setOwner 2;
+	_vehicle setOwner 2;
 };
 _vehicle setVehicleLock "UNLOCKED";
 diag_log format["_fn_unlockServerVehicle: owner of vehicle %1 = %2",_vehicle, owner _vehicle];

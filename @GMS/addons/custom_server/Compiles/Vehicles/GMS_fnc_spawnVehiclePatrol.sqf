@@ -1,7 +1,6 @@
 /*
 	By Ghostrider [GRG]
 	Copyright 2016
-	Last updated 3-17-17
 	
 	spawns a vehicle of _vehType and mans it with units in _group.
 	returns _veh, the vehicle spawned.
@@ -14,8 +13,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private["_vehType","_safepos","_veh","_unitNumber"];
-params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true]];
+params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true],["_crewCount",4]];
 
 //_center  Center of the mission area - this is usuall the position treated as the center by the mission spawner. Vehicles will patrol the perimeter of the mission area.
 // _pos the approximate spawn point for the vehicle
@@ -23,42 +21,44 @@ params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_
 //_minDis = minimum distance from the center of the mission for vehicle waypoints
 //_maxDis = maximum distance from the center of the mission for vehicle waypoints
 //_groupForVehiclePatrol = The group with which to man the vehicle
+// _crewCount = the number of AI including driver and gunners to place in the vehicle
 
+private["_veh"];
 if !(isNull _group) then {
 	_veh = [_vehType,_pos] call blck_fnc_spawnVehicle;
-//	_veh addEventHandler["HandleDamage",{ [_this] call blck_EH_AIVehicle_HandleDamage}];
 	_veh addMPEventHandler["MPHit",{ [_this] call blck_EH_AIVehicle_HandleHit}];
 	_veh setVariable["blck_vehicleSearchRadius",blck_playerDetectionRangeGroundVehicle];
 	_veh setVariable["blck_vehiclePlayerDetectionOdds",blck_vehiclePlayerDetectionOdds];
-	
+	private _maxCrew = [_crewCount] call blck_fnc_getNumberFromRange;
 	//_group setVariable["groupVehicle",_veh];
-
+	private _seats = [_vehType,true] call BIS_fnc_crewCount; 
 	_unitNumber = 0;
-
+	diag_log format["_fnc_spawnVehiclePatrol: _veh = %1 | _maxCrew = %2 | _seats = %3",_veh,_maxCrew,_seats];
+	
 	{
-			switch (_unitNumber) do
+			switch (_forEachIndex) do
 			{
 				case 0: {_x moveingunner _veh;};
 				case 1: {_x moveindriver _veh;};
+				case {_forEachIndex == _seats - 1}: {
+					diag_log format["_fnc_spawnVeiclePatrol: deleteing excess crew: _veh = %1 | _forEachIndex = %2 | _seats = %3",_veh,_forEachIndex,_seats];
+					deleteVehicle _x;
+					};  // delete any excess AI
 				default {_x moveInCargo _veh;};
 			};
-			_unitNumber = _unitNumber + 1;
+			//if (_forEachIndex == (_seats - 1)) exitWith{diag_log format["_fnc_spawnVeiclePatrol: _veh = %1 | _forEachIndex = %2 | _seats = %3",_veh,_forEachIndex,_seats]};
 	}forEach (units _group);  //  TODO: add check for empty crew slots and delete excess crew
 
-	// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAD"],["_soldierType","null"] ];
+
 	_group setcombatmode "RED";
 	_group setBehaviour "COMBAT";
 	if (_setWaypoints) then
 	{
+		// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAD"],["_soldierType","null"] ];
 		[_center,_minDis,_maxDis,_group,"perimeter","SAD","vehicle"] spawn blck_fnc_setupWaypoints;
 	};
 };
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then
-{
-	diag_log format["_fnc_spawnVehiclePatrol::->> _veh = %1",_veh];
-};
-#endif
+
 _veh
 
 
