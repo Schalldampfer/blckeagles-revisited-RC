@@ -17,7 +17,8 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private ["_result","_players"];
-params["_pos","_dist",["_onFootOnly",false]];
+params[["_pos",[0,0,0]],["_dist",0],["_onFootOnly",false]];
+if (_pos isEqualTo [0,0,0]) exitWith {false};
 _players = call blck_fnc_allPlayers;
 _result = false;
 if !(_onFootOnly) then

@@ -34,7 +34,7 @@ while {true} do
 		_timer5sec = diag_tickTime + 5;
 		//[] call blck_fnc_missionGroupMonitor;
 		if (blck_simulationManager == blck_useBlckeaglsSimulationManagement) then {call blck_fnc_blckSimulationManager};
-		[] call blck_fnc_sm_missionPatrolMonitor;
+		[] call blck_fnc_sm_staticPatrolMonitor;
 		[] call blck_fnc_vehicleMonitor;		
 	};
 	if (diag_tickTime > _timer20sec) then
