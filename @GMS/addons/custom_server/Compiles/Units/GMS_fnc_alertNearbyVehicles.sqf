@@ -23,4 +23,3 @@ private _nearestVehicle = _nearestVehicles select 0;
 
 
 
-

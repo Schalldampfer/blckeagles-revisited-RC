@@ -10,6 +10,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
+// TODO: Make sure all groups are captured in the list o factive groups
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 #define delayTime 1
 private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_blck_localMissionMarker","_assetKilledMsg","_enemyLeaderConfig",

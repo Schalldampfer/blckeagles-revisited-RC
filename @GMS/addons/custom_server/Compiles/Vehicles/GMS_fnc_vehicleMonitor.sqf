@@ -23,6 +23,7 @@ for "_i" from 1 to (count blck_monitoredVehicles) do
 		if ((owner _veh) in (_serverIDs)) then 
 		{
 			//diag_log format["_fnc_vehicleMonitor: vehicle %1 to be deleted at %2",_veh,(_veh getVariable ["blck_deleteAtTime",0])];
+			
 			if ((_veh getVariable ["blck_deleteAtTime",0]) > 0) then
 			{
 				if (diag_tickTime > ( _veh getVariable ["blck_deleteAtTime",0])) then
