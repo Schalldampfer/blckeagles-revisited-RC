@@ -11,7 +11,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params["_coords","_missionLootVehicles",["_loadCrateTiming","atMissionSpawn"]];
+params["_coords","_missionLootVehicles",["_loadCrateTiming","atMissionSpawn"],["_lock",0]];
 if (count _coords == 2) then {_coords pushBack 0};
 private _vehs = [];
 {
@@ -21,11 +21,9 @@ private _vehs = [];
 	_pos = _coords vectorAdd _vehOffset;
 	_veh = [_vehType, _pos] call blck_fnc_spawnVehicle;
 	_veh setDir _dir;
-	[_veh] call blck_fnc_emptyObject;
-	_veh setVehicleLock "UNLOCKED";
-	{
-		_veh removeAllEventHandlers _x;
-	}forEach ["getin","getout"];
+	//[_veh] call blck_fnc_emptyObject;
+	//_veh setVehicleLock "UNLOCKED";
+	_veh lock _lock;
 	if (_loadCrateTiming isEqualTo "atMissionSpawn") then
 	{
 		//diag_log format["blck_fnc_spawnMissionLootVehicles::-> loading loot at mission spawn for veh %1",_x];

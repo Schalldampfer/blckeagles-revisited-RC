@@ -32,18 +32,21 @@ if (_backpacks  isEqualTo []) then {_backpacks = [_aiDifficultyLevel] call blck_
 private["_group","_buildingsSpawned","_staticsSpawned","_g","_building","_return"];
 _buildingsSpawned = [];
 _staticsSpawned = [];
-_group = call blck_fnc_create_AI_Group;
+_group = call blck_fnc_createGroup;
+if !(isNull _group) then 
 {
-    _g = _x;
-    //       ["Land_Unfinished_Building_02_F",[-21.8763,-45.978,-0.00213432],0,true,true,0.67,3,[],4],
-    _g params["_bldClassName","_bldRelPos","_bldDir","_s","_d","_p","_noStatics","_typesStatics","_noUnits"];
-    if (_typesStatics isEqualTo []) then {_typesStatics = ["B_HMG_01_high_F"]};
-    _building = createVehicle[_bldClassName,[0,0,0],[],0,"CAN_COLLIDE"];
-    _buildingsSpawned pushBack _building;
-    _building setPosATL (_bldRelPos vectorAdd _center);
-    _building setDir _bldDir;
-    _staticsSpawned = [_building,_group,_noStatics,_typesStatics,_noUnits,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,"none",_weaponList,_sideArms] call blck_fnc_spawnGarrisonInsideBuilding_relPos;
-}forEach _garrisonedBuilding_relPosSystem;
+    {
+        _g = _x;
+        //       ["Land_Unfinished_Building_02_F",[-21.8763,-45.978,-0.00213432],0,true,true,0.67,3,[],4],
+        _g params["_bldClassName","_bldRelPos","_bldDir","_s","_d","_p","_noStatics","_typesStatics","_noUnits"];
+        if (_typesStatics isEqualTo []) then {_typesStatics = ["B_HMG_01_high_F"]};
+        _building = createVehicle[_bldClassName,[0,0,0],[],0,"CAN_COLLIDE"];
+        _buildingsSpawned pushBack _building;
+        _building setPosATL (_bldRelPos vectorAdd _center);
+        _building setDir _bldDir;
+        _staticsSpawned = [_building,_group,_noStatics,_typesStatics,_noUnits,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,"none",_weaponList,_sideArms] call blck_fnc_spawnGarrisonInsideBuilding_relPos;
+    }forEach _garrisonedBuilding_relPosSystem;
+};
 _return = [_group,_buildingsSpawned,_staticsSpawned];
 _return
 

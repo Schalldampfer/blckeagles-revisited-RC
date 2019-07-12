@@ -67,7 +67,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Car_Offroad_Armed_Guerilla01"			
 	];
 	
-	_blck_lightlyArmed_ARMA3 = [
+	blck_lightlyArmed_ARMA3 = [
 		"B_G_Offroad_01_armed_F", 
 		"O_G_Offroad_01_armed_F",
 		"B_MRAP_01_gmg_F", 

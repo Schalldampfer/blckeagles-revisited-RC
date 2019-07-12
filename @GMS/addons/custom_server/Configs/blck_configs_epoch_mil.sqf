@@ -50,7 +50,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 	blck_allowSalesAtBlackMktTraders = true; // Allow vehicles to be sold at Halvjes black market traders.
 	
-	_blck_lightlyArmed_ARMA3 = [
+	blck_lightlyArmed_ARMA3 = [
 		"B_G_Offroad_01_armed_F", 
 		"O_G_Offroad_01_armed_F",
 		"B_MRAP_01_gmg_F", 
@@ -63,7 +63,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_Wheeled_03_cannon_F"	
 	];
 
-	_blck_tracked_APC_ARMA3 = [
+	blck_tracked_APC_ARMA3 = [
 		"B_APC_Tracked_01_rcws_F",
 		"B_APC_Tracked_01_CRV_F",
 		"B_APC_Tracked_01_AA_F",
@@ -73,7 +73,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_tracked_03_cannon_F"
 	];
 
-	_blck_Tanks_ARMA3 = [
+	blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
 		"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
@@ -82,7 +82,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_MBT_03_cannon_F"
 	];
 	
-	_blck_APC_CUP = [
+	blck_APC_CUP = [
 		"CUP_B_Mastiff_GMG_GB_D",  
 		"CUP_B_Mastiff_HMG_GB_D",  
 		"CUP_B_Ridgback_HMG_GB_D",  

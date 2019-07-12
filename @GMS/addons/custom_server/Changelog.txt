@@ -1,3 +1,14 @@
+v 6.92
+
+1. Added code needed to use Claim Vehicle scripts on Exile Servers.
+2. Added simulation management for dead AI when blck_useBlckeaglsSimulationManagement == true;
+3. Deleted unused files.
+4. A monitor to catch wandering units and send them back to the mission was added.
+
+
+
+
+
 1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
   
     // global settings for this parameters

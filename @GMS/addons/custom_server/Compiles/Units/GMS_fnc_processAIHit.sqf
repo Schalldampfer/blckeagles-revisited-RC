@@ -52,7 +52,10 @@ if ((damage _unit) > 0.2 ) then
 {
 	//diag_log format["_EH_AIHit::-->> Healing unit %1",_unit];
 	_unit setVariable["hasHealed",true,true];
-	"SmokeShellRed" createVehicle (position _unit);
+	if (blck_useSmokeWhenHealing) then 
+	{
+		"SmokeShellRed" createVehicle (position _unit getPos[1,random(359)]);
+	};
 	_unit addItem "FAK";
 	_unit action ["HealSoldierSelf",  _unit];
 	_unit setDamage 0;

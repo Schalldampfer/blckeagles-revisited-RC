@@ -17,4 +17,4 @@ params["_vehicle"];
 if !((owner _vehicle) isEqualTo 2) then {_vehicle setOwner 2};
 _vehicle lock 0;
 //diag_log format["_fn_unlockServerVehicle: owner of vehicle %1 = %2",_vehicle, owner _vehicle];
-//diag_log format["_fn_unlockServerVehicle: vehicle %1 lock state set to %2",_vehicle,locked _vehicle];
+diag_log format["_fn_unlockServerVehicle: vehicle %1 lock state set to %2",_vehicle,locked _vehicle];

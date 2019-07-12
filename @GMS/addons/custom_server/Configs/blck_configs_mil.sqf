@@ -50,6 +50,11 @@
 	////////
 	//  Headless Client Configurations
 	blck_useHC = true; // 
+	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_ai_offload_notifyClient = true;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+										// TODO: set to false before release
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
 	
 	///////////////////////////////
 	//  Kill message configurations
@@ -82,6 +87,10 @@
 	// It's position can be either "center" or "random".  smoking wreck will be spawned at a random location between 15 and 50 m from the mission.
 	blck_SmokeAtMissions = [false,"random"];  // set to [false,"anything here"] to disable this function altogether. 
 	blck_useSignalEnd = true; // When true a smoke grenade/chemlight will appear at the loot crate for 2 min after mission completion.
+	
+	///////////////////////////////
+	// General Mission Completion and Loot Settings
+	///////////////////////////////		
 	blck_missionEndCondition = "playerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
 	blck_killPercentage = 0.99999999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
@@ -91,7 +100,8 @@
 	blck_loadCratesTiming = "atMissionSpawn"; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
 							// Pertains only to crates spawned at mission spawn.
 							// This sets the default but can be overridden for specific missions by defining _loadCratesTiming
-	
+	blck_allowClaimVehicle = true; // Set this to true if you wish to allow players to claim vehicles using one of the claim vehicle scripts floating around.
+
 	///////////////////////////////
 	// PLAYER PENALTIES
 	///////////////////////////////	
@@ -203,15 +213,25 @@
 	////////////////////
 	
 	// Maximum number of missions shown on the map at any one time.
+	#ifdef GRGserver
+	blck_maxSpawnedMissions = 15;
+	#else
 	// Change this value to reduce the number of spawned missions at any one time.
 	blck_maxSpawnedMissions = 4;
-
+	#endif
+	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
 	blck_enableGreenMissions = 1;
 	blck_enableRedMissions = 2;
 	blck_enableBlueMissions = 2;
 	blck_numberUnderwaterDynamicMissions = 2;  // Values from 0 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
+
+	#ifdef GRGserver
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 2;
+	blck_maxcrashsites = 3;
+	#endif
 
 	////////////////////
 	// MISSION TIMERS
@@ -223,6 +243,12 @@
 	blck_TMin_Blue = 120;
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
+	#ifdef GRGserver
+	blck_TMin_Hunter = 120;
+	blck_TMin_Scouts = 115;
+	blck_TMin_Crashes = 115;
+
+	#endif
 	
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
@@ -230,6 +256,11 @@
 	blck_TMax_Blue = 200;
 	blck_TMax_Red = 250;
 	blck_TMax_UMS = 200;
+	#ifdef GRGserver
+	blck_TMax_Hunter = 200;
+	blck_TMax_Scouts = 200;
+	blck_TMax_Crashes = 200;
+	#endif
 	
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
@@ -247,10 +278,10 @@
 	blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
 	blck_SpawnVeh_Red = 2;  // Number of vehicles at Red Missions
 
-	blck_vehCrew_blue = 3;
-	blck_vehCrew_red = 3;
-	blck_vehCrew_green = 3;
-	blck_vehCrew_orange = 3;
+	blck_vehCrew_blue = 5;
+	blck_vehCrew_red = 5;
+	blck_vehCrew_green = 4;
+	blck_vehCrew_orange = 5;
 
 	///////////////////////////////
 	// AI STATIC WEAPON Settings	
@@ -323,6 +354,8 @@
 	blck_groupBehavior = "SAD";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
+
+	blck_useSmokeWhenHealing = true;  // when true, injured AI will toss a smoke when they attempt to heal.	
 	blck_addAIMoney = true;
 	blck_chanceBackpack = 0.3;  // Chance AI will be spawned with a backpack
 	blck_useNVG = true; // When true, AI will be spawned with NVG if is dark
@@ -337,6 +370,11 @@
 	
 	//This defines how long after an AI dies that it's body disappears.
 	blck_bodyCleanUpTimer = 80*60; // time in seconds after which dead AI bodies are deleted
+	#ifdef GRGserver
+	#ifdef blck_milServer
+	blck_bodyCleanUpTimer = 80*60;  //  Trying to reduce lag with player counts > 20
+	#endif
+	#endif
 	
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
 	// values are ordered as follows [blue, red, green, orange];
@@ -396,6 +434,60 @@
 	blck_maxMoneyRed = 30;
 	blck_maxMoneyBlue = 20;
 
+	#ifdef GRGserver
+	blck_AIAlertDistance = [250,425,650,800];  //  Radius within which AI will be notified of enemy activity. Depricated as a group-sed system is used now. The group is informed of the enemy location when a group member is hit or killed.
+	//blck_AIAlertDistance = [150,225,400,500];
+	// How precisely player locations will be revealed to AI after an AI kill
+	// values are ordered as follows [blue, red, green, orange];
+	blck_AIIntelligence = [0.3, 0.5, 0.7, 0.9];  
+	
+	blck_baseSkill = 1;  // The overal skill of the AI - range 0.1 to 1.0.
+	
+	/***************************************************************
+	
+	MISSION TYPE SPECIFIC AI SETTINGS
+	
+	**************************************************************/
+	//This defines the skill, minimum/Maximum number of AI and how many AI groups are spawned for each mission type
+	// Orange Missions
+	blck_MinAI_Orange = 30;
+	blck_MaxAI_Orange = 35;
+	blck_AIGrps_Orange = 5;
+	blck_SkillsOrange = [
+		["aimingAccuracy",0.6],["aimingShake",0.9],["aimingSpeed",0.9],["endurance",1.00],["spotDistance",1.0],["spotTime",1.0],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",1.00]
+	];
+	
+	// Green Missions
+	blck_MinAI_Green = 26;
+	blck_MaxAI_Green = 31;
+	blck_AIGrps_Green = 4;
+	blck_SkillsGreen = [
+		["aimingAccuracy",0.55],["aimingShake",0.75],["aimingSpeed",0.85],["endurance",0.9],["spotDistance",0.9],["spotTime",0.9],["courage",0.9],["reloadSpeed",0.9],["commanding",0.9],["general",0.75]
+	];
+	
+	// Red Missions
+	blck_MinAI_Red = 12;
+	blck_MaxAI_Red = 18;
+	blck_AIGrps_Red = 3;
+	blck_SkillsRed = [
+		["aimingAccuracy",0.4],["aimingShake",0.6],["aimingSpeed",0.6],["endurance",0.80],["spotDistance",0.7],["spotTime",0.8],["courage",0.80],["reloadSpeed",0.70],["commanding",0.8],["general",0.70]
+	];
+	
+	// Blue Missions
+	blck_MinAI_Blue = 8;	
+	blck_MaxAI_Blue = 14;
+	blck_AIGrps_Blue = 2;
+	blck_SkillsBlue = [
+		["aimingAccuracy",0.12],["aimingShake",0.3],["aimingSpeed",0.5],["endurance",0.50],["spotDistance",0.6],["spotTime",0.6],["courage",0.60],["reloadSpeed",0.60],["commanding",0.7],["general",0.60]
+	];
+		
+	// Add some money to AI; only works with Exile for now.
+	blck_maxMoneyOrange = 25;
+	blck_maxMoneyGreen = 20;
+	blck_maxMoneyRed = 15;
+	blck_maxMoneyBlue = 10;	
+	#endif
+	
 	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];

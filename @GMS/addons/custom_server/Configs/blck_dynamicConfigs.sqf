@@ -65,7 +65,6 @@ if (toLower(blck_modType) isEqualTo "exile") then
 };
 //diag_log format["_fnc_dynamicConfigsConfigurator: count _classnameList = %1",count _classnameList];
 {
-
 	private _temp = [_x] call bis_fnc_itemType;
 	//diag_log _temp;
 	_itemCategory = _temp select 0;
@@ -79,7 +78,7 @@ if (toLower(blck_modType) isEqualTo "exile") then
 	{
 		_price = getNumber(missionConfigFile >> "CfgExileArsenal" >> _x >> "price");
 	};
-	if (_price < blck_maximumItemPriceInAI_Loadouts) then
+	if (_price < blck_maximumItemPriceInAI_Loadouts && !(["base",_x] call BIS_fnc_inString)) then
 	{
 		if (_itemCategory isEqualTo "Weapon") then
 		{
@@ -125,6 +124,8 @@ if (toLower(blck_modType) isEqualTo "exile") then
 				case "Backpack": {if !(_x in blck_blacklistedBackpacks) then {_backpacks pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Backpack %1 Excluded: blacklisted Item",_x]}}};
 			};
 		};
+	} else {
+		if (["base",_x] call BIS_fnc_inString) then {diag_log format["_dynamicConfigs: excluding class %1",_x]};
 	};
 } forEach _classnameList;
 

@@ -56,7 +56,7 @@ if (count _readyToSpawnQue > 0) then
 	{
 		if (blck_debugLevel > 2) then
 		{
-			if (_foreachindex > 0) then {diag_log format["_fnc_spawnPendingMissions: _missionToSpawn %1 = %2",_foreachindex, _missionToSpawn select _foreachindex]};
+			//if (_foreachindex > 0) then {diag_log format["_fnc_spawnPendingMissions: _missionToSpawn %1 = %2",_foreachindex, _missionToSpawn select _foreachindex]};
 		};
 	}forEach _missionToSpawn;
 	#endif

@@ -40,6 +40,10 @@ private _functions = [
 	["GMS_fnc_cleanupTemporaryMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_cleanupTemporaryMarkers.sqf"],
 	["GMS_fnc_updateCrateSignals","\q\addons\custom_server\Compiles\Functions\GMS_fnc_updateCrateSignals.sqf"],
 	["GMS_fnc_isClass","\q\addons\custom_server\Compiles\Functions\GMS_fnc_isClass.sqf"],
+	["blck_fnc_findShoreLocation","q\addons\custom_server\Compiles\Functions\GMS_UMS_fnc_findShoreLocation.sqf"],  
+	["blck_fnc_findWaterDepth","q\addons\custom_server\Compiles\Functions\GMS_UMS_fnc_findWaterDepth.sqf"],
+	["blck_fnc_setAILocality","\q\addons\custom_server\Compiles\Functions\GMS_fnc_setAILocality.sqf"],
+	["blck_fnc_ai_offloadToClients","\q\addons\custom_server\Compiles\Functions\GMS_fnc_ai_offloadToClients.sqf"],	
 
 	// Player-related functions
 	["GMS_fnc_handlePlayerUpdates","\q\addons\custom_server\Compiles\Units\GMS_fnc_handlePlayerUpdates.sqf"],
@@ -86,6 +90,37 @@ private _functions = [
 	["blck_fnc_spawnGarrisonInsideBuilding_ATL","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnGarrisonInsideBuilding_ATL.sqf"],
 	["blck_fnc_spawnGarrisonInsideBuilding_relPos","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnGarrisonInsideBuilding_relPos.sqf"],
 	["GMS_fnc_selectVehicleCrewCount","\q\addons\custom_server\Compiles\Missions\GMS_fnc_selectVehicleCrewCount.sqf"],	
+	["blck_fnc_addDyanamicUMS_Mission","q\addons\custom_server\Compiles\Missions\GMS_fnc_addDynamicUMS_Mission.sqf"], 
+	["blck_fnc_sm_monitorInfantry","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorInfantry.sqf"],
+	["blck_fnc_sm_monitorScuba","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorScuba.sqf"],
+	["blck_fnc_sm_monitorVehicles","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorVehicles.sqf"],
+	["blck_fnc_sm_monitorAircraft","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorAircraft.sqf"],
+	["blck_fnc_sm_monitorShips","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorShips.sqf"],
+	["blck_fnc_sm_monitorSubs","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorSubs.sqf"],
+	["blck_fnc_sm_monitorEmplaced","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorEmplaced.sqf"],
+	["blck_fnc_sm_monitorGarrisonsASL","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorGarrisonsASL.sqf"],
+	["blck_fnc_sm_monitorGarrisons_relPos","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorGarrisons_relPos.sqf"],	
+	//["blck_fnc_sm_spawnVehiclePatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnVehiclePatrol.sqf"],
+	["blck_fnc_sm_spawnAirPatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrol.sqf"],
+	["blck_fnc_sm_spawnEmplaced","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnEmplaced.sqf"],
+//	["blck_fnc_sm_spawnInfantryPatrol","\q\addons\custom_server\Compiles\Missions\GMS_sm_spawnInfantryPatrol.sqf"],
+	["blck_fnc_sm_staticPatrolMonitor","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_staticPatrolMonitor.sqf"],
+//	["blck_fnc_sm_checkForPlayerNearMission","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_checkForPlayerNearMission.sqf"],
+	["blck_fnc_sm_spawnAirPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrols.sqf"],
+	//["blck_fnc_sm_spawnEmplaceds","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnEmplaced.sqf"],
+	["blck_fnc_sm_spawnInfantryPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnInfantryPatrols.sqf"],
+	["blck_fnc_sm_spawnLootContainers","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnLootContainers.sqf"],
+	["blck_fnc_sm_spawnObjects","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnObjects.sqf"],
+	["blck_fnc_sm_spawnVehiclePatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnVehiclePatrols.sqf"],
+	["blck_fnc_sm_spawnBuildingGarrison_ASL","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnBuildingGarrisonASL.sqf"],
+	["blck_fnc_sm_spawnBuildingGarrison_relPos","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnBuildingGarrison_relPos.sqf"],
+	["blck_fnc_sm_spawnObjectASLVectorDirUp","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnObjectASLVectorDirUp.sqf"],
+	["blck_fnc_spawnScubaGroup","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnScubaGroup.sqf"],
+	["blck_fnc_spawnSDVPatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnSDVPatrol.sqf"],
+	["blck_fnc_spawnSurfacePatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnSurfacePatrol.sqf"],
+	//["blck_fnc_sm_AddScubaGroup","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddScubaGroup.sqf"],
+	//["blck_fnc_sm_AddSurfaceVehicle","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddSurfaceVehicle.sqf"],
+	["blck_fnc_sm_AddSDVVehicle","\q\addons\custom_server\Compiles\Missions\GMS_sm_AddSDVVehicle.sqf"],
 
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]
@@ -97,9 +132,11 @@ private _functions = [
 //	["blck_fnc_setNextWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setNextWaypoint.sqf"],
 	["blck_fnc_cleanEmptyGroups","\q\addons\custom_server\Compiles\Groups\GMS_fnc_cleanEmptyGroups.sqf"],		 // GMS_fnc_cleanEmptyGroups
 	["blck_fnc_findNearestInfantryGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_findNearestInfantryGroup.sqf"],
-	["blck_fnc_create_AI_Group","\q\addons\custom_server\Compiles\Groups\GMS_fnc_create_AI_Group.sqf"],			// create a group for which other functions spawn AI.
-	["blck_fnc_blckSimulationManager","\q\addons\custom_server\Compiles\Groups\GMS_fnc_blckSimulationMonitor.sqf"], 
-	["bck_fnc_groupWaypointMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_groupWaypointMonitor.sqf"],
+	["blck_fnc_createGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_create_AI_Group.sqf"],			// create a group for which other functions spawn AI.
+	["blck_fnc_simulationManager","\q\addons\custom_server\Compiles\Groups\GMS_fnc_simulationMonitor.sqf"], 
+	["blck_fnc_groupWaypointMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_groupWaypointMonitor.sqf"],
+	["blck_fnc_checkgroupwaypointstatus","\q\addons\custom_server\Compiles\Groups\GMS_fnc_checkgroupwaypointstatus.sqf"],
+	// blck_fnc_checkgroupwaypointstatus
 	
 	// Functions specific to vehicles, whether wheeled, aircraft or static
 	["blck_fnc_spawnVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_spawnVehicle.sqf"],           
@@ -128,7 +165,7 @@ private _functions = [
 	["blck_fnc_handleVehicleGetOut","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleVehicleGetOut.sqf"],	
 	["blck_fnc_checkForEmptyVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_checkForEmptyVehicle.sqf"],		
 	["blck_fnc_handleEmptyVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleEmptyVehicle.sqf"],		
-
+	["blck_fnc_loadVehicleCrew","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_loadVehicleCrew.sqf"],
 
 	// functions to support Units
 	["blck_fnc_removeGear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeGear.sqf"],			// Strip an AI unit of all gear.
@@ -136,7 +173,7 @@ private _functions = [
 	["blck_EH_AIKilled","\q\addons\custom_server\Compiles\Units\GMS_EH_AIKilled.sqf"], 					// Event handler to process AI deaths	
 	["blck_EH_AIHit","\q\addons\custom_server\Compiles\Units\GMS_EH_AIHit.sqf"],
 	["blck_EH_unitWeaponReloaded","\q\addons\custom_server\Compiles\Units\GMS_EH_unitWeaponReloaded.sqf"],
-	["blck_EH_animDone","\q\addons\custom_server\Compiles\Units\GMS_EH_animDone.sqf"],
+	//["blck_EH_animDone","\q\addons\custom_server\Compiles\Units\GMS_EH_animDone.sqf"],
 	["blck_fnc_processAIKill","\q\addons\custom_server\Compiles\Units\GMS_fnc_processAIKill.sqf"],
 	["blck_fnc_removeLaunchers","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeLaunchers.sqf"],
 	["blck_fnc_removeNVG","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeNVG.sqf"],
@@ -154,7 +191,7 @@ private _functions = [
 	["blck_fnc_spawnLeader","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnLeader.sqf"],
 	["blck_fnc_spawnCharacter","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnCharacter.sqf"],
 	["blck_fnc_spawnParaUnits","\q\addons\custom_server\Compiles\Units\GMS_fnc_spawnParaUnits.sqf"],
-	["blck_fnc_nextAnim","\q\addons\custom_server\Compiles\Units\GMS_fnc_nextAnim.sqf"],
+	//["blck_fnc_nextAnim","\q\addons\custom_server\Compiles\Units\GMS_fnc_nextAnim.sqf"],
 	["blck_fnc_placeCharacterInBuilding","\q\addons\custom_server\Compiles\Units\GMS_fnc_placeCharacterInBuilding.sqf"],	
 	["GMS_fnc_removeAllAIgear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeAllAIgear.sqf"],	
 

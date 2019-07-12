@@ -51,28 +51,25 @@ if (_missionPatrolVehicles isEqualTo []) then
 		_spawnPos = _x select 1;
 	};
 	_vehicle = _x select 0;
-	//private _crewCount = [skillAI] call GMS_fnc_selectVehicleCrewCount;
-	// params["_pos",  "_center", _numai1,  _numai2,  _skillLevel, _minDist, _maxDist, _configureWaypoints, _uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms, _scuba ];
-	_vehGroup = [_spawnPos,_coords,_crewCount,_crewCount,_skillAI,1,2,false,_uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms,_isScubaGroup] call blck_fnc_spawnGroup;
-	if (isNull _vehGroup) exitWith 
+
+	_vehGroup = [] call blck_fnc_createGroup;
+	_vehGroup setVariable["soldierType","vehicle"];
+	if !(isNull _vehGroup) then 
 	{
-		_abort = true;
-	};
+		[_vehGroup,_spawnPos,_coords,_crewCount,_crewCount,_skillAI,1,2,false,_uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms,_isScubaGroup] call blck_fnc_spawnGroup;
+		blck_monitoredMissionAIGroups pushBack _vehGroup;
+		//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true],["_crewCount",4]];
+		_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true,_crewCount] call blck_fnc_spawnVehiclePatrol; 
 
-	blck_monitoredMissionAIGroups pushBack _vehGroup;
-
-	//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true],["_crewCount",4]];
-	_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true,_crewCount] call blck_fnc_spawnVehiclePatrol;  //  
-
-	if !(isNull _patrolVehicle) then
-	{
-		_patrolVehicle setVariable["vehicleGroup",_vehGroup];
-		_vehicles pushback _patrolVehicle;
-		blck_monitoredVehicles pushBack _patrolVehicle;
-		_missionAI append (units _vehGroup);
+		if !(isNull _patrolVehicle) then
+		{
+			_patrolVehicle setVariable["vehicleGroup",_vehGroup];
+			_vehicles pushback _patrolVehicle;
+			//blck_monitoredVehicles pushBack _patrolVehicle;
+			_missionAI append (units _vehGroup);
+		};
 	};
 } forEach _missionPatrolVehicles;
- 
+blck_monitoredVehicles append _vehicles;
 _return = [_vehicles, _missionAI, _abort];
-
 _return

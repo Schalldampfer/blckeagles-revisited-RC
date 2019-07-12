@@ -11,41 +11,38 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private["_grpPilot","_chopperType","_patrolHeli","_launcherType","_unitPilot","_unitCrew","_mags","_turret","_return","_abort","_supplyHeli","_minDist","_maxDist"];
-params["_coords","_skillAI","_helis",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]],["_Launcher","none"]];
+private["_chopperType","_patrolHeli","_launcherType","_unitPilot","_unitCrew","_mags","_turret","_return","_abort","_supplyHeli","_minDist","_maxDist"];
+params["_coords","_skillAI","_helis",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]],["_Launcher","none"],["_crewCount",4]];
 
 if (_uniforms isEqualTo []) 		then {_uniforms = [_skillAI] call blck_fnc_selectAIUniforms};
 if (_headGear  isEqualTo [])		then {_headGear = [_skillAI] call blck_fnc_selectAIHeadgear};
 if (_vests isEqualTo []) 			then {_vests = [_skillAI] call blck_fnc_selectAIVests};
 if (_backpacks  isEqualTo []) 		then {_backpacks = [_skillAI] call blck_fnc_selectAIBackpacks};
-if (_weaponList  isEqualTo []) 	then {_weaponList = [_skillAI] call blck_fnc_selectAILoadout};
+if (_weaponList  isEqualTo []) 		then {_weaponList = [_skillAI] call blck_fnc_selectAILoadout};
 if (_sideArms isEqualTo []) 		then {[_skillAI] call blck_fnc_selectAISidearms};
 
-#ifdef blck_debugMode
-if (blck_debugLevel > 0) then
+// params["_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], 
+//["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false]];
+switch (toLower(_skillAI)) do
 {
-	diag_log format["_fnc_spawnMissionHeli (38):: _helis = %1",_helis];
+	case "blue": {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisBlue};
+	case "red" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisRed};
+	case "green" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisGreen};
+	case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
+	default {_minDist = 150; _maxDist = 500};
+};
+private _grpPilot = [] call blck_fnc_createGroup;
+[_grpPilot,_coords,_coords,_crewCount,_crewCount,_skillAI,_minDist,_maxDist,true,_uniforms,_headgear,_vests,_backpacks,_weaponList,_sideArms,false] call blck_fnc_spawnGroup;
+#ifdef blck_debugMode 
+if (blck_debugLevel > 2) then 
+{
+	diag_log format["_fnc_spawnMissionHeli: _group = %1 | units _grpPilot = %2 | _crewCount = %3",_grpPilot, units _grpPilot,_crewCount];
 };
 #endif
-
-_abort = false;
-_grpPilot  = createGroup blck_AI_Side; 
-if (isNull _grpPilot) then 
-{
-		diag_log "BLCK_ERROR: _fnc_spawnMissionHeli::_->> NULL GROUP Returned for _grpPilot";
-		_abort = true;
-};
-
+_abort = if (isNull _grpPilot) then{true} else {false};
 if !(isNull _grpPilot)  then
 {
-	switch (toLower(_skillAI)) do
-	{
-		case "blue": {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisBlue};
-		case "red" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisRed};
-		case "green" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisGreen};
-		case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
-		default {_minDist = 150; _maxDist = 500};
-	};
+
 	_grpPilot setBehaviour "COMBAT";
 	_grpPilot setCombatMode "RED";
 	_grpPilot setSpeedMode "NORMAL";
@@ -57,9 +54,14 @@ if !(isNull _grpPilot)  then
 	_grpPilot setVariable["arc",0];
 	_grpPilot setVariable["wpRadius",30];
 	_grpPilot setVariable["wpMode","SAD"];
-	//diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
-	//diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
-	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","pilot"] call blck_fnc_setupWaypoints;
+	#ifdef blck_debugMode 
+	if (blck_debugLevel > 2) then 
+	{
+		diag_log format["_fnc_spawnMissionHeli - max radii are: blue %1 | red %2 | green %3 | orange %4",blck_maxPatrolRadiusHelisBlue,blck_maxPatrolRadiusHelisRed,blck_maxPatrolRadiusHelisGreen,blck_maxPatrolRadiusHelisOrange];
+		diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
+	};
+	#endif
+	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","aircraft"] call blck_fnc_setupWaypoints;
 
 
 	blck_monitoredMissionAIGroups pushBack _grpPilot;
@@ -79,85 +81,32 @@ if !(isNull _grpPilot)  then
 	};
 	#endif
 
-	_patrolHeli = createVehicle [_chopperType, _coords, [], 90, "FLY"];
-	_patrolHeli setVariable["blck_vehicle",true];
+	//_patrolHeli = createVehicle [_chopperType, _coords, [], 90, "FLY"];
+	_patrolHeli = [_chopperType,_coords,"FLY"] call blck_fnc_spawnVehicle;
+	#ifdef blck_debugMode 
+	if (blck_debugLevel > 2) then 
+	{
+		diag_log format["_fnc_spawnMissionHeli (75): _patrolHeli = %1 | getPosATL _patrolHeli = %2",_patrolHeli,getposATL _patrolHeli];
+	};
+	#endif 
+	[_patrolHeli,2] call blck_fnc_configureMissionVehicle;
+	//_patrolHeli setVariable["blck_vehicle",true];
 	_patrolHeli setVariable["blck_vehicleSearchRadius",blck_playerDetectionRangeAir];
 	_patrolHeli setVariable["blck_vehiclePlayerDetectionOdds",blck_vehiclePlayerDetectionOdds];
-	_patrolHeli addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
-	[_patrolHeli] call blck_fnc_protectVehicle;
+	//_patrolHeli addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
+	//[_patrolHeli] call blck_fnc_protectVehicle;
 	_patrolHeli setFuel 1;
 	_patrolHeli engineOn true;
 	_patrolHeli flyInHeight 100;
-	_patrolHeli setVehicleLock "LOCKED";
+	//_patrolHeli setVehicleLock "LOCKED";
+	// params["_veh","_group",["_crewCount",4]];
+	[_patrolHeli,_grpPilot,_crewCount] call blck_fnc_loadVehicleCrew;
 	
 	#ifdef blck_debugMode
 	if (blck_debugLevel > 1) then
 	{
-		diag_log format["_fnc_spawnMissionHeli (93):: heli %1 spawned",_patrolHeli];
-	};
-	#endif
-
-	[_patrolHeli] call blck_fnc_emptyObject;
-
-	_launcherType = "none";
-	//params["_pos","_aiGroup",["_skillLevel","red"],["_uniforms", []],["_headGear",[]],["_vests",[]],["_backpacks",[]],["_Launcher","none"],["_weaponList",[]],["_sideArms",[]],["_scuba",false]];
-	_unitPilot = [[100,100,100],_grpPilot,_skillAI,_uniforms,_headGear,_vests,_backpacks,_Launcher,_weaponList,_sideArms] call blck_fnc_spawnUnit;
-	_unitPilot setSkill 1;
-	_unitPilot setVariable["GRG_vehicle",_patrolHeli];
-	//_unitPilot addEventHandler["GetOutman",{_this remoteExec["blck_EH_vehcleManGetOut",2]}]; 
-	_unitPilot assignAsDriver _patrolHeli;
-	_unitPilot moveInDriver _patrolHeli;
-	_grpPilot selectLeader _unitPilot;
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnMissionHeli (113):: pilot %1 spawned",_unitPilot];
-	};
-	#endif
-
-	_turrets = allTurrets [_patrolHeli,false];
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log "_fnc_spawnMissionHeli (103): preparing to clear out blacklisted turrets";
-	};
-	#endif
-
-	{
-		if ( (_patrolHeli weaponsTurret _x) in blck_blacklisted_heli_weapons) then 
-		{
-			private["_mags","_turret"];
-			_mags = _patrolHeli magazinesTurret _x;
-			_turret = _x;
-			{
-				_patrolHeli removeMagazines [_x,_turret];
-			} forEach _mags;
-			_patrolHeli removeWeaponTurret _turret;
-			if (blck_debugLevel > 1) then
-			{
-				diag_log format["_fnc_spawnMissionHeli (118)::-->> weapon %1 and its ammo removed from heli %2 for turret %3",_patrolHeli weaponsTurret _x,_patrolHeli, _x];
-			};
-		}
-		else
-		{
-			//params["_pos","_aiGroup",["_skillLevel","red"],["_uniforms", blck_SkinList],["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_Launcher","none"],["_weaponList",[]],["_sideArms",[]],["_scuba",false]];
-			//_unitCrew = [(getPosATL _patrolHeli),_grpPilot,_skillAI,_uniforms,_headGear] call blck_fnc_spawnUnit;
-			_unitCrew = [(getPosATL _patrolHeli),_grpPilot,_skillAI,_uniforms,_headGear,_vests,_backpacks,_Launcher,_weaponList,_sideArms] call blck_fnc_spawnUnit;
-			_unitCrew assignAsTurret [_patrolHeli, _x];
-			_unitCrew moveInTurret [_patrolHeli, _x];
-			_unitCrew setVariable["GRG_vehicle",_patrolHeli];
-			//_unitCrew addEventHandler["GetOutman",{_this remoteExec["blck_EH_vehcleManGetOut",2]}]; 	
-			#ifdef blck_debugMode
-			diag_log format["_fnc_spawnMissionHeli (12798)::-- >> unit %1 moved into turret %2 of vehicle %3",_unitCrew,_x,_patrolHeli];
-			#endif
-		};
-	}forEach _turrets;
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
+		diag_log format["_fnc_spawnMissionHeli (93):: heli %1 spawned with crew count of %2 | desired crew count = %3",_patrolHeli,count(crew _patrolHeli),_crewCount];
+		diag_log format["_fnc_spawnMissionHeli (89): _patrolHeli = %1 | getPosATL _patrolHeli = %2 | driver _patrolHeli = %4",_patrolHeli,getposATL _patrolHeli,driver _patrolHeli];
 		diag_log format["_fnc_spawnMissionHeli (133)::-->> Heli %1 outfited with a crew numbering %2",_patrolHeli, crew _patrolHeli];
 	};
 	#endif
@@ -171,5 +120,4 @@ if (blck_debugLevel > 0) then
 	diag_log format["_fnc_spawnMissionHeli:: function returning value for _return of %1",_return];
 };
 #endif
-//diag_log format["_fnc_spawnMissionHeli:: function returning value for _return of %1",_return];
 _return;

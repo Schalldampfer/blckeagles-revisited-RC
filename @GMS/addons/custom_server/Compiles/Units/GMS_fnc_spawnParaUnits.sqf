@@ -29,7 +29,7 @@ private _params = ["_pos","_numAI","_skillAI"];
 	diag_log format["_fnc_spawnParaUnits: %1 = %2",_x, _this select _forEachIndex];
 }forEach _params;
 #endif
-_paraGroup = call blck_fnc_create_AI_Group;
+_paraGroup = [] call blck_fnc_createGroup;
 //diag_log format["_fnc_spawnParaUnits: _paraGroup = %1",_paraGroup];
 //  [_pos,_minDist,_maxDist,_groupSpawned,"random","SAD"] spawn blck_fnc_setupWaypoints;
 [_pos,20,30,_paraGroup,"random","SAD","paraUnits"] call blck_fnc_setupWaypoints;

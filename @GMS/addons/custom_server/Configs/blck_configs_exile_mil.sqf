@@ -49,7 +49,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
-	_blck_armed_vehicles_Exile = [
+	blck_armed_vehicles_Exile = [
 		"Exile_Car_BTR40_MG_Green",
 		"Exile_Car_HMMWV_M134_Green",
 		"Exile_Car_HMMWV_M2_Green",
@@ -57,7 +57,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Car_Offroad_Armed_Guerilla01"			
 	];
 	
-	_blck_lightlyArmed_ARMA3 = [
+	blck_lightlyArmed_ARMA3 = [
 		"B_G_Offroad_01_armed_F", 
 		"O_G_Offroad_01_armed_F",
 		"B_MRAP_01_gmg_F", 
@@ -70,17 +70,27 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_Wheeled_03_cannon_F"	
 	];
 
-	_blck_tracked_APC_ARMA3 = [
+	blck_light_AT_ARMA3 = [
+		"O_G_Offroad_01_AT_F", 
+		"B_G_Offroad_01_AT_F", 
+		"O_T_LSV_02_AT_F", 
+		"O_LSV_02_AT_F", 
+		"B_T_LSV_01_AT_F", 
+		"B_LSV_01_AT_F"
+	];
+	blck_tracked_AA_ARMA3 = [
+		"O_APC_Tracked_02_AA_F",
+		"B_APC_Tracked_01_AA_F"	
+	];
+	blck_tracked_APC_ARMA3 = [
 		"B_APC_Tracked_01_rcws_F",
 		"B_APC_Tracked_01_CRV_F",
-		"B_APC_Tracked_01_AA_F",
 		"O_APC_Tracked_02_cannon_F", 
-		"O_APC_Tracked_02_AA_F",
 		"O_APC_Wheeled_02_rcws_F", 
 		"I_APC_tracked_03_cannon_F"
 	];
 
-	_blck_Tanks_ARMA3 = [
+	blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
 		//"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
@@ -158,7 +168,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	//"Exile_Car_HMMWV_M134_Desert",
 	"Exile_Car_HMMWV_M2_Desert",
 	"B_LSV_01_armed_F",
-	"_MRAP_02_gmg_ghex_F",
+	//"B_MRAP_02_gmg_ghex_F",
 	//"O_MRAP_02_hmg_ghex_F",
 	"O_MRAP_03_gmg_ghex_F",
 	//"O_MRAP_03_hmg_ghex_F",	
@@ -187,15 +197,22 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"B_LSV_01_armed_F"		
 	];
 
+	blck_AIPatrolVehiclesBlue = blck_AIPatrolVehicles;
+
+
 	#ifdef useCUP
-	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
-	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3 + _blck_Tanks_CUP;
-	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
+	blck_AIPatrolVehiclesRed = blck_lightlyArmed_ARMA3 + blck_APC_CUP;
+	blck_AIPatrolVehiclesGreen = blck_Tanks_ARMA3 + blck_Tanks_CUP;
+	blck_AIPatrolVehiclesOrange =  blck_Tanks_ARMA3 + blck_Tanks_CUP;	
+	#else
+	blck_AIPatrolVehiclesRed = blck_lightlyArmed_ARMA3;
+	blck_AIPatrolVehiclesGreen = blck_Tanks_ARMA3;
+	blck_AIPatrolVehiclesOrange =  blck_Tanks_ARMA3;	
 	#endif
 	
 	if (toLower(worldName) isEqualTo "namalsk") then
 	{
-		_blck_lightlyArmed_ARMA3 = [
+		blck_lightlyArmed_ARMA3 = [
 			"B_G_Offroad_01_armed_F", 
 			"O_G_Offroad_01_armed_F",
 			//"B_MRAP_01_gmg_F", 
@@ -208,7 +225,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 			//"I_APC_Wheeled_03_cannon_F"	
 		];	
 		diag_log "blck)configs_exile_mil.sqf:: - > Using special settings for namalsk";
-		blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + blck_AIPatrolVehiclesBlue;
+		blck_AIPatrolVehiclesRed = blck_lightlyArmed_ARMA3 + blck_AIPatrolVehiclesBlue;
 		blck_AIPatrolVehiclesGreen = blck_AIPatrolVehiclesRed;
 		blck_AIPatrolVehiclesOrange = blck_AIPatrolVehiclesRed;		
 	};
@@ -729,6 +746,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				"arifle_SPAR_01_GL_blk_F","arifle_SPAR_01_GL_khk_F","arifle_SPAR_01_GL_snd_F","arifle_SPAR_02_blk_F","arifle_SPAR_02_khk_F","arifle_SPAR_02_snd_F","arifle_SPAR_03_blk_F",
 				"arifle_SPAR_03_khk_F","arifle_SPAR_03_snd_F","arifle_MX_khk_F","arifle_MX_GL_khk_F","arifle_MXC_khk_F","arifle_MXM_khk_F",
 				#endif
+				#ifdef blck_useLAGO
+				"LAGO_KU3K","LAGO_KU3K",
+				#endif
 				["arifle_MXM_F","30Rnd_65x39_caseless_mag_Tracer"],
 				["arifle_MXM_Black_F","30Rnd_65x39_caseless_mag_Tracer"],				
 				["srifle_DMR_01_F","10Rnd_762x54_Mag"],
@@ -758,6 +778,19 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"]				
 			],
 			[//Magazines
+				#ifdef blck_useLAGO
+				["AP_MAG",3,6],
+				["HE_MAG",3,6],
+				["LAGO_KU3K_magazine",3,6],
+				//["LAGO_KU5K_MAG_T",3,6],
+				//["LAGO_KU5K_MAG_H",3,6],
+				//["LAGO_KU5K_MAG_buck",3,6],
+				//["KUoooK_MAG",3,6],
+				//["KUoooK_MAG_buck",3,6],
+				//["KUoooK_MAG_Cluster",3,6],
+				//["KUoooK_MAG_HE",3,6],
+				//["LAGO_TWP_magazine",3,6],
+				#endif
 				["3rnd_HE_Grenade_Shell",3,6],				
 				["30Rnd_65x39_caseless_green",3,6],
 				["30Rnd_556x45_Stanag",3,6],
@@ -824,6 +857,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				"arifle_SPAR_01_GL_blk_F","arifle_SPAR_01_GL_khk_F","arifle_SPAR_01_GL_snd_F","arifle_SPAR_02_blk_F","arifle_SPAR_02_khk_F","arifle_SPAR_02_snd_F","arifle_SPAR_03_blk_F",
 				"arifle_SPAR_03_khk_F","arifle_SPAR_03_snd_F","arifle_MX_khk_F","arifle_MX_GL_khk_F","arifle_MXC_khk_F","arifle_MXM_khk_F",
 				#endif
+				#ifdef blck_useLAGO
+				"LAGO_KU3K","LAGO_KU3K",
+				#endif				
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
 				["arifle_Katiba_GL_F","30Rnd_65x39_caseless_green"],
 				["arifle_MX_F","30Rnd_65x39_caseless_mag"],
@@ -848,6 +884,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["srifle_DMR_06_camo_F","10Rnd_338_Mag"]				
 			],
 			[//Magazines
+				#ifdef blck_useLAGO
+				["LAGO_KU3K_magazine",3,6],
+				#endif			
 				// Format is ["Magazine name, Minimum number to add, Maximum number to add],
 				["3rnd_HE_Grenade_Shell",2,4],
 				["30Rnd_65x39_caseless_green",3,6],
@@ -909,6 +948,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Blue = 
 		[
 			[// Weapons
+				#ifdef blck_useLAGO
+				"LAGO_KU3K","LAGO_KU3K",
+				#endif			
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
 				["arifle_Katiba_GL_F","30Rnd_65x39_caseless_green"],
 				["arifle_Mk20_F","30Rnd_556x45_Stanag"],
@@ -937,6 +979,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["LMG_Zafir_F","150Rnd_762x51_Box_Tracer"]		
 			],
 			[//Magazines
+				#ifdef blck_useLAGO
+				["LAGO_KU3K_magazine",3,6],
+				#endif			
 				["3rnd_HE_Grenade_Shell",1,2],
 				["30Rnd_65x39_caseless_green",3,6],
 				["30Rnd_556x45_Stanag",3,6],
@@ -991,6 +1036,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Red = 
 		[	
 			[// Weapons
+				#ifdef blck_useLAGO
+				"LAGO_KU3K","LAGO_KU3K",
+				#endif			
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
 				["arifle_Katiba_GL_F","30Rnd_65x39_caseless_green"],
 				["arifle_Mk20_F","30Rnd_556x45_Stanag"],
@@ -1023,7 +1071,9 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["srifle_DMR_06_camo_F","10Rnd_338_Mag"]
 			],
 			[//Magazines
-		
+				#ifdef blck_useLAGO
+				["LAGO_KU3K_magazine",3,6],
+				#endif		
 				["3rnd_HE_Grenade_Shell",1,5],["30Rnd_65x39_caseless_green",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_45ACP_Mag_SMG_01",3,6],["20Rnd_556x45_UW_mag",3,6],
 				["10Rnd_762x51_Mag",3,6],["20Rnd_762x51_Mag",3,7],["200Rnd_65x39_cased_Box",3,6],["100Rnd_65x39_caseless_mag_Tracer",3,6],
 				// Marksman Pack Ammo				
@@ -1153,6 +1203,9 @@ blck_highPoweredLoot = [
 			["launch_O_Vorona_green_F","Vorona_HE"]									
 		],
 		[//Magazines
+			#ifdef blck_useLAGO
+			["LAGO_KU3K_magazine",3,6],
+			#endif		
 			["NLAW_F",1,3],
 			["RPG32_F",1,3],
 			["RPG32_HE_F",1,3],
