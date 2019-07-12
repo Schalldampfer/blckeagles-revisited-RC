@@ -8,6 +8,24 @@ A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve cod
 
 Significant Changes:
 =====================
+v 6.92
+
+1. Added code needed to use Claim Vehicle scripts on Exile Servers.
+2. Added simulation management for dead AI when blck_useBlckeaglsSimulationManagement == true;
+3. Deleted unused files.
+4. A monitor to catch wandering units and send them back to the mission was added.
+5. Some issues with vehicles not being unlocked when AI hop out.
+6. Added a setting to disable deployment of smoke when AI heal.
+	blck_useSmokeWhenHealing = true;  // when true, injured AI will toss a smoke when they attempt to heal.
+TODO: distribute AI to clients (work in progress)
+Settings for this:
+	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+										// TODO: set to false before release
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
+	
+
 V 6.90  Build 175
 1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
   
