@@ -59,7 +59,7 @@ if ((tolower blck_modType) isEqualTo "epoch") then
 		
 		"B_SDV_01_EPOCH"
 	];
-	blck_UMS_crates = blck_crateTypes;
+	blck_UMS_crates = ["container_epoch"];
 };
 blck_UMS_unarmedSurfaceVessels = 
 [
