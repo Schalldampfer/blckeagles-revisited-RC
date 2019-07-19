@@ -51,7 +51,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_useConfigsGeneratedLoadouts = true;
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
-	blck_armed_vehicles_Exile = [
+	_blck_armed_vehicles_Exile = [
 		"Exile_Car_BTR40_MG_Green",
 		"Exile_Car_HMMWV_M134_Green",
 		"Exile_Car_HMMWV_M2_Green",
@@ -59,7 +59,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"Exile_Car_Offroad_Armed_Guerilla01"			
 	];
 	
-	blck_lightlyArmed_ARMA3 = [
+	_blck_lightlyArmed_ARMA3 = [
 		"B_G_Offroad_01_armed_F", 
 		"O_G_Offroad_01_armed_F",
 		"B_MRAP_01_gmg_F", 
@@ -72,7 +72,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_Wheeled_03_cannon_F"	
 	];
 
-	blck_tracked_APC_ARMA3 = [
+	_blck_tracked_APC_ARMA3 = [
 		"B_APC_Tracked_01_rcws_F",
 		"B_APC_Tracked_01_CRV_F",
 		"B_APC_Tracked_01_AA_F",
@@ -82,7 +82,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_tracked_03_cannon_F"
 	];
 
-	blck_Tanks_ARMA3 = [
+	_blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
 		//"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
@@ -189,13 +189,13 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"B_LSV_01_armed_F"		
 	];
 
-	blck_AIPatrolVehiclesRed = blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
-	blck_AIPatrolVehiclesGreen = blck_Tanks_ARMA3 + _blck_Tanks_CUP;
-	blck_AIPatrolVehiclesOrange =  blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
+	blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + _blck_APC_CUP;
+	blck_AIPatrolVehiclesGreen = _blck_Tanks_ARMA3 + _blck_Tanks_CUP;
+	blck_AIPatrolVehiclesOrange =  _blck_Tanks_ARMA3 + _blck_Tanks_CUP;	
 	
 	if (toLower(worldName) isEqualTo "namalsk") then
 	{
-		 = [
+		_blck_lightlyArmed_ARMA3 = [
 			"B_G_Offroad_01_armed_F", 
 			"O_G_Offroad_01_armed_F",
 			//"B_MRAP_01_gmg_F", 
@@ -208,7 +208,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 			//"I_APC_Wheeled_03_cannon_F"	
 		];	
 		diag_log "blck)configs_exile_mil.sqf:: - > Using special settings for namalsk";
-		blck_AIPatrolVehiclesRed = blck_lightlyArmed_ARMA3 + blck_AIPatrolVehiclesBlue;
+		blck_AIPatrolVehiclesRed = _blck_lightlyArmed_ARMA3 + blck_AIPatrolVehiclesBlue;
 		blck_AIPatrolVehiclesGreen = blck_AIPatrolVehiclesRed;
 		blck_AIPatrolVehiclesOrange = blck_AIPatrolVehiclesRed;		
 	};

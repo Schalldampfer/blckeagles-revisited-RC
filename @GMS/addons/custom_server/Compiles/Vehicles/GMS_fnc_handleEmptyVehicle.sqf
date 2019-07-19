@@ -14,7 +14,7 @@ params["_veh"];
 //diag_log format["_fnc_handleEmptyVehicle: vehicle %1 | count(crew _veh) = %2 | typoeOf _veh = %3 | description _veh = %4",_veh,count(crew _veh),typeOf _veh,gettext(configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
 if ({alive _x} count (crew _veh) == 0 || crew(_veh) isEqualTo []) then
 {	
-	diag_log format["_fnc_handleEmptyVehicle: no units alive in vehicle %1",_veh, typeOf _veh,gettext (configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
+	//diag_log format["_fnc_handleEmptyVehicle: no units alive in vehicle %1",_veh, typeOf _veh,gettext (configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
 	if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 	{
 		//diag_log format["_fnc_handleEmptyVehicle: emplaced weapon %1 being handled",_veh];
@@ -36,7 +36,7 @@ if ({alive _x} count (crew _veh) == 0 || crew(_veh) isEqualTo []) then
 			_veh setFuel 0;
 			_veh setVariable["blck_deleteAtTime",diag_tickTime + 60];
 		} else {
-			diag_log format["_fnc_handleEmptyVehicle: releasing vehicle %1 to players and setting a default delete timer",_veh];
+			//diag_log format["_fnc_handleEmptyVehicle: releasing vehicle %1 to players and setting a default delete timer",_veh];
 			_veh setVariable["blck_deleteAtTime",diag_tickTime + blck_vehicleDeleteTimer,true];	
 			[_veh] call blck_fnc_releaseVehicleToPlayers;
 		};
