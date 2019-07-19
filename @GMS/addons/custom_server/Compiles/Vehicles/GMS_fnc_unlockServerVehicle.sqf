@@ -14,7 +14,17 @@
 params["_vehicle"];
 //diag_log format["_fnc+unlockServerVehicle: _vehicle = %1 | typeOf _vehicle = %2 | crewCount _vehicle = %3",_vehicle,typeOf _vehicle,count(crew _vehicle)];
 //[_vehicle,"UNLOCKED"] remoteExec["setVehicleLock", owner _vehicle];
-if !((owner _vehicle) isEqualTo 2) then {_vehicle setOwner 2};
-_vehicle lock 0;
+
+
+//if !((owner _vehicle) isEqualTo 2) then {_vehicle setOwner 2};
+//_vehicle lock 0;
+if (local _vehicle) then
+{
+	_vehicle lock 1;
+}
+else
+{
+	[_vehicle, 1] remoteExecCall ["lock", _vehicle];
+};
 //diag_log format["_fn_unlockServerVehicle: owner of vehicle %1 = %2",_vehicle, owner _vehicle];
 diag_log format["_fn_unlockServerVehicle: vehicle %1 lock state set to %2",_vehicle,locked _vehicle];

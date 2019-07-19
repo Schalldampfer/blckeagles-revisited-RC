@@ -16,7 +16,7 @@
 */
 
 private _AI = param [0,objNull,[objNull,grpNull]];
-
+//diag_log format["_fnc_setAILocality: _this = %1",_this];
 if (isNull _AI) exitWith
 {
 	diag_log format ["blckeagls ERROR :: Calling blck_fnc_SetAILocality with null parameter; _this: %1",_this];

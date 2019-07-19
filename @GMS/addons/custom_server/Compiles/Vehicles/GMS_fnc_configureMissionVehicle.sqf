@@ -21,6 +21,9 @@ _veh lock _locked;
 _veh addMPEventHandler["MPHit",{ _this call blck_EH_AIVehicle_HandleHit}];
 _veh addMPEventHandler["MPKilled",{_this call blck_EH_vehicleKilled}];
 _veh addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
+//_veh addEventHandler["Local", {if (isServer) then {_this call blck_EH_changeLocality}}];
+
+blck_monitoredVehicles pushBackUnique _veh;
 if (blck_modType isEqualTo "Epoch") then
 {
 	if (blck_allowSalesAtBlackMktTraders) then {_veh setVariable["HSHALFPRICE",1,true]};

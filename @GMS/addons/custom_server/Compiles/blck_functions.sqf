@@ -149,6 +149,7 @@ private _functions = [
 	["blck_EH_AIVehicle_HandleHit","\q\addons\custom_server\Compiles\Vehicles\GMS_EH_AIVehicle_Hit.sqf"],
 	["blck_fnc_HandleAIVehicleHit","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_HandleAIVehicleHit.sqf"],
 	["blck_EH_VehicleKilled","\q\addons\custom_server\Compiles\Vehicles\GMS_EH_VehicleKilled.sqf"],
+	["blck_EH_changeLocality","\q\addons\custom_server\Compiles\Vehicles\GMS_EH_changeLocality.sqf"],
 	["blck_fnc_processAIVehicleKill","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_processAIVehicleKill.sqf"],
 	["blck_fnc_selectPatrolVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_selectPatrolVehicle.sqf"],
 	["blck_fnc_releaseVehicleToPlayers","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_releaseVehicleToPlayers.sqf"],

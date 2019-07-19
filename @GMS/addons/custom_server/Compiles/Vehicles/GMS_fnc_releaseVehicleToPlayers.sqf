@@ -17,7 +17,7 @@ diag_log format["_fnc_releaseVehicleToPlayers: _veh = %1",_veh];
 [_veh] call GMS_fnc_unlockServerVehicle;
 {
 	_veh removealleventhandlers _x;
-} forEach ["GetIn","GetOut","fired","hit","hitpart","reloaded","dammaged","HandleDamage"];
+} forEach ["Local","GetIn","GetOut","fired","hit","hitpart","reloaded","dammaged","HandleDamage"];
 {
 	_veh removeAllMPEventHandlers _x;
 } forEach ["MPHit","MPKilled"];
