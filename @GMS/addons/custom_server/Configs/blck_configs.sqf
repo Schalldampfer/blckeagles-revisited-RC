@@ -77,7 +77,6 @@
 	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
 	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
 	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
-										// TODO: set to false before release
 	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
 
 	///////////////////////////////
@@ -135,19 +134,17 @@
 	///////////////////////////////
 	// PLAYER PENALTIES
 	///////////////////////////////	
-	
+
 	blck_RunGear = true;	// When set to true, AI that have been run over will ve stripped of gear, and the vehicle will be given blck_RunGearDamage of damage.
 	blck_RunGearDamage = 0.2; // Damage applied to player vehicle for each AI run over
-	blck_VK_Gear = false; // When set to true, AI that have been killed by a player in a vehicle in the list of forbidden vehicles or using a forbiden gun will be stripped of gear and the vehicle will be given blck_RunGearDamage of damage
+	blck_VK_Gear = true; // When set to true, AI that have been killed by a player in a vehicle in the list of forbidden vehicles or using a forbiden gun will be stripped of gear and the vehicle will be given blck_RunGearDamage of damage
 	blck_VK_RunoverDamage = true; // when the AI was run over blck_RunGearDamage of damage will be applied to the killer's vehicle.
 	blck_VK_GunnerDamage = false; // when the AI was killed by a gunner on a vehicle that is is in the list of forbidden vehicles, blck_RunGearDamage of damage will be applied to the killer's vehicle each time an AI is killed with a vehicle's gun.
-	//blck_forbidenVehicles = ["B_MRAP_01_hmg_F","O_MRAP_02_hmg_F","I_MRAP_03_hmg_F","B_MRAP_01_hmg_F","O_MRAP_02_hmg_F"]; // Add any vehicles for which you wish to forbid vehicle kills	
-	blck_forbidenVehicles = [];
-	
+	blck_forbidenVehicles = ["B_MRAP_01_hmg_F","O_MRAP_02_hmg_F","I_MRAP_03_hmg_F","B_MRAP_01_hmg_F","O_MRAP_02_hmg_F"]; // Add any vehicles for which you wish to forbid vehicle kills	
 	// For a listing of the guns mounted on various land vehicles see the following link: https://community.bistudio.com/wiki/Arma_3_CfgWeapons_Vehicle_Weapons
 	// HMG_M2 is mounted on the armed offroad that is spawned by Epoch	
-	//blck_forbidenVehicleGuns = ["LMG_RCWS","LMG_M200","HMG_127","HMG_127_APC","HMG_M2","HMG_NSVT","GMG_40mm","GMG_UGV_40mm","autocannon_40mm_CTWS","autocannon_30mm_CTWS","autocannon_35mm","LMG_coax","autocannon_30mm","HMG_127_LSV_01"]; // Add any vehicles for which you wish to forbid vehicle kills, o
-	blck_forbidenVehicleGuns = [];
+	blck_forbidenVehicleGuns = ["LMG_RCWS","LMG_M200","HMG_127","HMG_127_APC","HMG_M2","HMG_NSVT","GMG_40mm","GMG_UGV_40mm","autocannon_40mm_CTWS","autocannon_30mm_CTWS","autocannon_35mm","LMG_coax","autocannon_30mm","HMG_127_LSV_01"]; // Add any vehicles for which you wish to forbid vehicle kills, o
+	
 
 	///////////////////////////////
 	// MISC MISSION PARAMETERS
@@ -307,18 +304,20 @@
 	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
-			"V_Press_F"
+			//"V_Press_F"
 		];
 
 		blck_blacklistedUniforms = [
 			"U_I_Protagonist_VR",
 			"U_C_Protagonist_VR",			
 			"U_O_Protagonist_VR",
-			"U_B_Protagonist_VR"
+			"U_B_Protagonist_VR",
+			"Exile_Uniform_BambiOverall",
+			"Exile_Uniform_ExileCustoms"
 		];
 
 		blck_blacklistedBackpacks = [
-			"B_ViperLightHarness_blk_F"
+			//"B_ViperLightHarness_blk_F"
 		];
 
 		blck_blacklistedHeadgear = [
@@ -327,7 +326,7 @@
 		];
 
 		blck_blacklistedPrimaryWeapons = [
-			"srifle_LRR_tna_F"
+			//"srifle_LRR_tna_F"
 		];
 
 		blck_blacklistedSecondaryWeapons = [
@@ -339,7 +338,7 @@
 		];
 
 		blck_blacklistedOptics = [
-			"optic_tws"
+			//"optic_tws"
 		];
 
 		blck_blacklistedAttachments = [
@@ -350,8 +349,8 @@
 
 		];	
 	/////////////////////////////////////////////
-
-	blck_groupBehavior = "SENTRY";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
+	
+	blck_groupBehavior = "SAD";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
 
@@ -422,7 +421,7 @@
 		["aimingAccuracy",0.1],["aimingShake",0.5],["aimingSpeed",0.5],["endurance",0.50],["spotDistance",0.6],["spotTime",0.6],["courage",0.60],["reloadSpeed",0.60],["commanding",0.7],["general",0.60]
 	];
 		
-	// Add some money to AI; only works with Exile for now.
+	// Add some money to AI;  
 	blck_maxMoneyOrange = 25;
 	blck_maxMoneyGreen = 20;
 	blck_maxMoneyRed = 15;

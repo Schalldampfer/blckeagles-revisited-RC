@@ -22,7 +22,7 @@ for "_i" from 1 to (count blck_monitoredVehicles) do
 		// if the owner is a player do not add back for further monitoring
 		if ((owner _veh) in (_serverIDs)) then 
 		{
-			diag_log format["_fnc_vehicleMonitor: vehicle %1 to be deleted at %2",_veh,(_veh getVariable ["blck_deleteAtTime",0])];
+			//diag_log format["_fnc_vehicleMonitor: vehicle %1 to be deleted at %2",_veh,(_veh getVariable ["blck_deleteAtTime",0])];
 			if ((_veh getVariable ["blck_deleteAtTime",0]) > 0) then
 			{
 				if (diag_tickTime > ( _veh getVariable ["blck_deleteAtTime",0])) then
@@ -37,7 +37,12 @@ for "_i" from 1 to (count blck_monitoredVehicles) do
 				blck_monitoredVehicles pushBack _veh;
 			};
 		} else {
-			diag_log format["_fnc_vehicleMonitor:  owner of vehicle %1 is a player, discontinuing further monitoring",_veh]
+			#ifdef blck_debugMode
+			if (blck_debugOn) then 
+			{
+				diag_log format["_fnc_vehicleMonitor:  owner of vehicle %1 is a player, discontinuing further monitoring",_veh];
+			};
+			#endif
 		};
 	};
 };

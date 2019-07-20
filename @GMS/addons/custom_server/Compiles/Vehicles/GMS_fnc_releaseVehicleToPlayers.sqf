@@ -13,7 +13,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_veh"];
-diag_log format["_fnc_releaseVehicleToPlayers: _veh = %1",_veh];
+//diag_log format["_fnc_releaseVehicleToPlayers: _veh = %1",_veh];
 [_veh] call GMS_fnc_unlockServerVehicle;
 {
 	_veh removealleventhandlers _x;

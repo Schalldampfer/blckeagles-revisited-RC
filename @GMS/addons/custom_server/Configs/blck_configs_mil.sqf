@@ -52,8 +52,7 @@
 	blck_useHC = true; // 
 	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
 	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
-	blck_ai_offload_notifyClient = true;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
-										// TODO: set to false before release
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
 	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
 	
 	///////////////////////////////
@@ -290,27 +289,33 @@
 	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
-
+			//"V_Press_F"
 		];
 
 		blck_blacklistedUniforms = [
-
+			"U_I_Protagonist_VR",
+			"U_C_Protagonist_VR",			
+			"U_O_Protagonist_VR",
+			"U_B_Protagonist_VR",
+			"Exile_Uniform_BambiOverall",
+			"Exile_Uniform_ExileCustoms"
 		];
 
 		blck_blacklistedBackpacks = [
-
+			//"B_ViperLightHarness_blk_F"
 		];
 
 		blck_blacklistedHeadgear = [
-
+			"H_HelmotO_ViperSP_ghex_F",
+			"H_HelmetO_VierSP_hex"
 		];
 
 		blck_blacklistedPrimaryWeapons = [
-
+			//"srifle_LRR_tna_F"
 		];
 
 		blck_blacklistedSecondaryWeapons = [
-
+			"hgun_Pistol_heav_02_F"
 		];
 
 		blck_blacklistedLaunchersAndSwingWeapons = [
@@ -318,7 +323,7 @@
 		];
 
 		blck_blacklistedOptics = [
-
+			//"optic_tws"
 		];
 
 		blck_blacklistedAttachments = [
