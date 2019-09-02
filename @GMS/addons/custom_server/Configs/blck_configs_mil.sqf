@@ -48,8 +48,16 @@
 	
 	***********************************************************/
 	////////
-	//  Headless Client Configurations
-	blck_useHC = true; // 
+	//  Client Offloading and Headless Client Configurations
+	blck_useHC = true; // Experimental (should be working).
+	
+										//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+										// *******************************************************
+										//  Experimental; may cause issues with waypoints 
+										// *******************************************************
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
 	
 	///////////////////////////////
 	//  Kill message configurations
@@ -82,6 +90,10 @@
 	// It's position can be either "center" or "random".  smoking wreck will be spawned at a random location between 15 and 50 m from the mission.
 	blck_SmokeAtMissions = [false,"random"];  // set to [false,"anything here"] to disable this function altogether. 
 	blck_useSignalEnd = true; // When true a smoke grenade/chemlight will appear at the loot crate for 2 min after mission completion.
+	
+	///////////////////////////////
+	// General Mission Completion and Loot Settings
+	///////////////////////////////		
 	blck_missionEndCondition = "playerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
 	blck_killPercentage = 0.99999999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
@@ -91,7 +103,8 @@
 	blck_loadCratesTiming = "atMissionSpawn"; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
 							// Pertains only to crates spawned at mission spawn.
 							// This sets the default but can be overridden for specific missions by defining _loadCratesTiming
-	
+	blck_allowClaimVehicle = true; // Set this to true if you wish to allow players to claim vehicles using one of the claim vehicle scripts floating around.
+
 	///////////////////////////////
 	// PLAYER PENALTIES
 	///////////////////////////////	
@@ -247,7 +260,7 @@
 	blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
 	blck_SpawnVeh_Red = 2;  // Number of vehicles at Red Missions
 
-	blck_vehCrew_blue = 3;
+	blck_vehCrew_blue = 3;  //  can be formated as a single value or a range such as [3,5];
 	blck_vehCrew_red = 3;
 	blck_vehCrew_green = 3;
 	blck_vehCrew_orange = 3;
@@ -280,27 +293,33 @@
 	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
-
+			//"V_Press_F"
 		];
 
 		blck_blacklistedUniforms = [
-
+			"U_I_Protagonist_VR",
+			"U_C_Protagonist_VR",			
+			"U_O_Protagonist_VR",
+			"U_B_Protagonist_VR",
+			"Exile_Uniform_BambiOverall",
+			"Exile_Uniform_ExileCustoms"
 		];
 
 		blck_blacklistedBackpacks = [
-
+			//"B_ViperLightHarness_blk_F"
 		];
 
 		blck_blacklistedHeadgear = [
-
+			"H_HelmotO_ViperSP_ghex_F",
+			"H_HelmetO_VierSP_hex"
 		];
 
 		blck_blacklistedPrimaryWeapons = [
-
+			//"srifle_LRR_tna_F"
 		];
 
 		blck_blacklistedSecondaryWeapons = [
-
+			"hgun_Pistol_heav_02_F"
 		];
 
 		blck_blacklistedLaunchersAndSwingWeapons = [
@@ -308,7 +327,7 @@
 		];
 
 		blck_blacklistedOptics = [
-
+			//"optic_tws"
 		];
 
 		blck_blacklistedAttachments = [
@@ -320,9 +339,11 @@
 		];	
 	/////////////////////////////////////////////
 
-	blck_groupBehavior = "SAD";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
+	blck_groupBehavior = "SAFE";  // https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
+
+	blck_useSmokeWhenHealing = true;  // when true, injured AI will toss a smoke when they attempt to heal.	
 	blck_addAIMoney = true;
 	blck_chanceBackpack = 0.3;  // Chance AI will be spawned with a backpack
 	blck_useNVG = true; // When true, AI will be spawned with NVG if is dark

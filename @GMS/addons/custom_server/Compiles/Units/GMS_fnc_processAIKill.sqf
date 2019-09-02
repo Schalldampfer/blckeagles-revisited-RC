@@ -9,7 +9,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-
+//  TODO: check that emplaced weapons that should be deleted are added to the scheduler.
 // assumptions: this is always run on the server rgardless if th event is triggered on an HC or other client.
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 if !(isServer) exitWith {};
@@ -17,6 +17,10 @@ params["_unit","_killer","_instigator"];
 //diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
+_unit disableAI "ALL";
+{
+	_unit removeAllMPEventHandlers _x;
+}forEach["MPHit","MPKilled"];
 blck_deadAI pushback _unit;
 if (count(units (group _unit)) isEqualTo 0) then 
 {
@@ -25,18 +29,8 @@ if (count(units (group _unit)) isEqualTo 0) then
 [_unit] joinSilent grpNull;
 if !(_unit isKindOf "Man") then 
 {
-	//diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
+	diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
 	[_unit, ["Eject", vehicle _unit]] remoteExec ["action",(owner _unit)];
-	//[vehicle _unit,_unit] call blck_fnc_checkForEmptyVehicle;
-/*
-} else {
-	if !(_unit getVariable["GRG_vehicle","none"] isEqualTo "none") then 
-	{
-		diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1",vehicle _unit];
-		[_unit, ["Eject", vehicle _unit]] remoteExec ["action",(owner _unit)];
-		[vehicle _unit,_unit] call blck_fnc_checkForEmptyVehicle;
-	};
-*/
 };
 
 if (blck_launcherCleanup) then {[_unit] call blck_fnc_removeLaunchers};

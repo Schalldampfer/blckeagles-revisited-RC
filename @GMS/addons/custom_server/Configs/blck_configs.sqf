@@ -54,7 +54,7 @@
 
 	// Note that you can define map-specific variants in custom_server\configs\blck_custom_config.sqf
 	blck_useTimeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
-	blck_timeAccelerationDay = 0.25;  // Daytime time accelearation
+	blck_timeAccelerationDay = 2;  // Daytime time accelearation
 	blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
 	blck_timeAccelerationNight = 12;  // Nighttim time acceleration	
 	
@@ -72,9 +72,17 @@
 	
 	***********************************************************/
 	////////
-	//  Headless Client Configurations
-	blck_useHC = true; // Experimental (death messages and rewards not yet working).
+	//  Client Offloading and Headless Client Configurations
+	blck_useHC = true; // Experimental (should be working).
 	
+										//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+										// *******************************************************
+										//  Experimental; may cause issues with waypoints 
+										// *******************************************************
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
+
 	///////////////////////////////
 	//  Kill message configurations
 	// These determine whether and when messages are sent to players regarding AI Kills or illegal kills that might damage a vehicle.
@@ -107,6 +115,10 @@
 	blck_SmokeAtMissions = [false,"random"];  // set to [false,"anything here"] to disable this function altogether. 
 	blck_useSignalEnd = true; // When true a smoke grenade/chemlight will appear at the loot crate for 2 min after mission completion.
 	blck_missionEndCondition = "allKilledOrPlayerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
+
+	///////////////////////////////
+	// General Mission Completion and Loot Settings
+	///////////////////////////////	
 	blck_killPercentage = 0.999999;  // The mission will complete if this fraction of the total AI spawned has been killed.
 								// This facilitates mission completion when one or two AI are spawned into objects.	
 	blck_spawnCratesTiming = "atMissionSpawnGround"; // Choices: "atMissionSpawnGround","atMissionEndGround","atMissionEndAir". 
@@ -121,22 +133,22 @@
 							// To spawn crates at mission start but load gear only after the mission is completed set blck_spawnCratesTiming = "atMissionSpawnGround" && blck_loadCratesTiming = "atMissionCompletion"
 							// To spawn crates on the ground at mission completion set blck_spawnCratesTiming = "atMissionEndGround" // Note that a loaded crate will be spawned.
 							// To spawn crates in the air and drop them by chutes set blck_spawnCratesTiming = "atMissionEndAir" // Note that a loaded crate will be spawned.
+	blck_allowClaimVehicle = true; // Set this to true if you wish to allow players to claim vehicles using one of the claim vehicle scripts floating around.
+
 	///////////////////////////////
 	// PLAYER PENALTIES
 	///////////////////////////////	
-	
+
 	blck_RunGear = true;	// When set to true, AI that have been run over will ve stripped of gear, and the vehicle will be given blck_RunGearDamage of damage.
 	blck_RunGearDamage = 0.2; // Damage applied to player vehicle for each AI run over
-	blck_VK_Gear = false; // When set to true, AI that have been killed by a player in a vehicle in the list of forbidden vehicles or using a forbiden gun will be stripped of gear and the vehicle will be given blck_RunGearDamage of damage
+	blck_VK_Gear = true; // When set to true, AI that have been killed by a player in a vehicle in the list of forbidden vehicles or using a forbiden gun will be stripped of gear and the vehicle will be given blck_RunGearDamage of damage
 	blck_VK_RunoverDamage = true; // when the AI was run over blck_RunGearDamage of damage will be applied to the killer's vehicle.
 	blck_VK_GunnerDamage = false; // when the AI was killed by a gunner on a vehicle that is is in the list of forbidden vehicles, blck_RunGearDamage of damage will be applied to the killer's vehicle each time an AI is killed with a vehicle's gun.
-	//blck_forbidenVehicles = ["B_MRAP_01_hmg_F","O_MRAP_02_hmg_F","I_MRAP_03_hmg_F","B_MRAP_01_hmg_F","O_MRAP_02_hmg_F"]; // Add any vehicles for which you wish to forbid vehicle kills	
-	blck_forbidenVehicles = [];
-	
+	blck_forbidenVehicles = ["B_MRAP_01_hmg_F","O_MRAP_02_hmg_F","I_MRAP_03_hmg_F","B_MRAP_01_hmg_F","O_MRAP_02_hmg_F"]; // Add any vehicles for which you wish to forbid vehicle kills	
 	// For a listing of the guns mounted on various land vehicles see the following link: https://community.bistudio.com/wiki/Arma_3_CfgWeapons_Vehicle_Weapons
 	// HMG_M2 is mounted on the armed offroad that is spawned by Epoch	
-	//blck_forbidenVehicleGuns = ["LMG_RCWS","LMG_M200","HMG_127","HMG_127_APC","HMG_M2","HMG_NSVT","GMG_40mm","GMG_UGV_40mm","autocannon_40mm_CTWS","autocannon_30mm_CTWS","autocannon_35mm","LMG_coax","autocannon_30mm","HMG_127_LSV_01"]; // Add any vehicles for which you wish to forbid vehicle kills, o
-	blck_forbidenVehicleGuns = [];
+	blck_forbidenVehicleGuns = ["LMG_RCWS","LMG_M200","HMG_127","HMG_127_APC","HMG_M2","HMG_NSVT","GMG_40mm","GMG_UGV_40mm","autocannon_40mm_CTWS","autocannon_30mm_CTWS","autocannon_35mm","LMG_coax","autocannon_30mm","HMG_127_LSV_01"]; // Add any vehicles for which you wish to forbid vehicle kills, o
+	
 
 	///////////////////////////////
 	// MISC MISSION PARAMETERS
@@ -250,7 +262,7 @@
 
 	blck_useVehiclePatrols = true; // When true vehicles will be spawned at missions and will patrol the mission area.
 	blck_killEmptyAIVehicles = false; // when true, the AI vehicle will be extensively damaged once all AI have gotten outor been killed.
-    blck_vehicleDeleteTimer = 120*60;
+    	blck_vehicleDeleteTimer = 120*60;
 	////////////////////
 	// Mission Vehicle Settings
 	////////////////////	
@@ -296,18 +308,20 @@
 	//blck_maximumitempriceinai_loadouts = 1000;
 	// lists of black-listed items to be excluded from dynamic loadouts
 		blck_blacklistedVests = [
-			"V_Press_F"
+			//"V_Press_F"
 		];
 
 		blck_blacklistedUniforms = [
 			"U_I_Protagonist_VR",
 			"U_C_Protagonist_VR",			
 			"U_O_Protagonist_VR",
-			"U_B_Protagonist_VR"
+			"U_B_Protagonist_VR",
+			"Exile_Uniform_BambiOverall",
+			"Exile_Uniform_ExileCustoms"
 		];
 
 		blck_blacklistedBackpacks = [
-			"B_ViperLightHarness_blk_F"
+			//"B_ViperLightHarness_blk_F"
 		];
 
 		blck_blacklistedHeadgear = [
@@ -316,7 +330,7 @@
 		];
 
 		blck_blacklistedPrimaryWeapons = [
-			"srifle_LRR_tna_F"
+			//"srifle_LRR_tna_F"
 		];
 
 		blck_blacklistedSecondaryWeapons = [
@@ -328,7 +342,7 @@
 		];
 
 		blck_blacklistedOptics = [
-			"optic_tws"
+			//"optic_tws"
 		];
 
 		blck_blacklistedAttachments = [
@@ -339,10 +353,12 @@
 
 		];	
 	/////////////////////////////////////////////
-
-	blck_groupBehavior = "SENTRY";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
+	
+	blck_groupBehavior = "SAFE";  // https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
+
+	blck_useSmokeWhenHealing = true;  // when true, injured AI will toss a smoke when they attempt to heal.
 	blck_addAIMoney = true;
 	blck_chanceBackpack = 0.3;  // Chance AI will be spawned with a backpack
 	blck_useNVG = true; // When true, AI will be spawned with NVG if is dark
@@ -353,10 +369,10 @@
 	blck_launchersPerGroup = 1;  // Defines the number of AI per group spawned with a launcher
 	blck_launcherCleanup = true;// When true, launchers and launcher ammo are removed from dead AI.
 	blck_minimumPatrolRadius = 22;  // AI will patrol within a circle with radius of approximately min-max meters. note that because of the way waypoints are completed they may more more or less than this distance.
-	blck_maximumPatrolRadius = 35;
+	blck_maximumPatrolRadius = 45;
 	
 	//This defines how long after an AI dies that it's body disappears.
-	blck_bodyCleanUpTimer = 60*40; // time in seconds after which dead AI bodies are deleted
+	blck_bodyCleanUpTimer = 60*30; // time in seconds after which dead AI bodies are deleted
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
 	// values are ordered as follows [blue, red, green, orange];
 	blck_AliveAICleanUpTimer = 60*20;  // Time after mission completion at which any remaining live AI are deleted.
@@ -409,7 +425,7 @@
 		["aimingAccuracy",0.1],["aimingShake",0.5],["aimingSpeed",0.5],["endurance",0.50],["spotDistance",0.6],["spotTime",0.6],["courage",0.60],["reloadSpeed",0.60],["commanding",0.7],["general",0.60]
 	];
 		
-	// Add some money to AI; only works with Exile for now.
+	// Add some money to AI;  
 	blck_maxMoneyOrange = 25;
 	blck_maxMoneyGreen = 20;
 	blck_maxMoneyRed = 15;

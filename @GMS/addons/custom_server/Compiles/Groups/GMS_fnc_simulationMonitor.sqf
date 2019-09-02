@@ -12,6 +12,8 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 private["_playerType","_players"];
 _playerType = ["LandVehicle","SHIP","AIR","TANK"];
+//diag_log format["_fnc_simulationMonitor Called at %1",diag_tickTime];
+//  TODO: establish if vehicles are sometimes frozen because they are not properly activated.
 switch (toLower(blck_modType)) do
 {
 	case "exile": {_playerType = _playerType + ["Exile_Unit_Player"]};
@@ -39,3 +41,25 @@ switch (toLower(blck_modType)) do
 		}forEach (units _x);
 	};
 } forEach blck_monitoredMissionAIGroups;
+{
+	if (simulationEnabled _x) then 
+	{
+		if !([_x,25,true] call blck_fnc_playerInRange) then 
+		{
+			#ifdef blck_debugMode
+			diag_log format['_fnc_simulationManager: disabling simulation for dead AI %1',_x];
+			#endif
+			_x enableSimulationGlobal false;
+		};
+	} else {
+		if ([_x,25,true] call blck_fnc_playerInRange) then 
+		{
+			#ifdef blck_debugMode
+			diag_log format['_fnc_simulationManager: enabling simulation for dead AI %1',_x];
+			#endif
+			_x enableSimulationGlobal true;
+		};
+	};
+} forEach blck_deadAI;
+//  TODO: Add check for dead AI.
+// TODO: Can this be run less often, say every 5 sec?

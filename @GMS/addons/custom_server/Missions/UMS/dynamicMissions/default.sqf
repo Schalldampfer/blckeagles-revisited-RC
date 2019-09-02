@@ -8,7 +8,7 @@ private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_marke
 	"_chanceReinforcements","_helipatrol","_endCondition","_markerColor","_markerType","_useMines","_difficulty","_missionCenter",
 	"_missionGroups","_scubaGroupParameters","_vehiclePatrolParameters","_submarinePatrolParameters","_aircraftTypes","_noAirPatrols","_airPatrols",
 	"_vests","_backpacks","_weaponList","_sideArms","_uniforms","_headGear","_chanceHeliPatrol","_noChoppers","_chancePara","_missionHelis","_noPara",
-	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts"];
+	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts","_vehiclecrewcount"];
 params["_missionCenter","_mission"];
 //_mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 //_missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.
@@ -169,5 +169,5 @@ _chanceLoot = 0.999999990;
 _paraLoot = blck_BoxLoot_Blue;
 _paraLootCounts = blck_lootCountsRed;  // Throw in something more exotic than found at a normal blue mission.
 
-#include "\q\addons\custom_server\Missions\UMS\code\GMS_fnc_spawnDynamicUMSMission.sqf"; 
+#include "\q\addons\custom_server\Missions\UMS\GMS_fnc_spawnDynamicUMSMission.sqf"; 
 

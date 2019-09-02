@@ -14,11 +14,11 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private["_group","_wp","_index","_pattern","_mode","_arc","_dis","_wpPos"];
-
+// TODO: Make sure waypoint positions are far enough away that vehicles/armor moves every minute or so and patrols a wide area
 _group = group _this;
 _group setVariable["timeStamp",diag_tickTime];
-_group setcombatmode "YELLOW";
-_group setBehaviour "COMBAT"
+_group setcombatmode "RED";
+_group setBehaviour "COMBAT";
 _wp = [_group, 0];
 _pattern = _group getVariable["wpPattern",[]];
 _index = _group getVariable["wpIndex",0];

@@ -24,7 +24,7 @@ if !(_soldierType isEqualTo "emplaced") then
 	_group setVariable["minDis",_minDis];
 	_group setVariable["maxDis",_maxDis];
 	_group setVariable["timeStamp",diag_tickTime];
-	_group setVariable["wpRadius",30];
+	_group setVariable["wpRadius",0];
 	_group setVariable["wpMode",_mode];
 	_group setVariable["wpPatrolMode",_wpPatrolMode];
 	_group setVariable["wpDir",0];
@@ -36,7 +36,7 @@ if !(_soldierType isEqualTo "emplaced") then
 	_dis = (_minDis) + random( (_maxDis) - (_minDis) );
 	_newPos = _pos getPos[_dis,_dir];
 	_wp setWPPos [_newPos select 0, _newPos select 1];
-	_wp setWaypointCompletionRadius (_group getVariable["wpRadius",30]); 
+	_wp setWaypointCompletionRadius 0;  //(_group getVariable["wpRadius",30]); 
 	_wp setWaypointType "MOVE";
 	_wp setWaypointName "move";
 	_wp setWaypointBehaviour "COMBAT";

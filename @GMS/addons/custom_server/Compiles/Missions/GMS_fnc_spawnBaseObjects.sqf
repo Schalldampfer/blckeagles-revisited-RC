@@ -33,6 +33,17 @@ _newObjs pushBack _obj;
 		_sim = _x select 3;
 		_dam = _x select 4;
 	};
+
+	#ifdef blck_debugMode
+	if (blck_debugLevel > 0) then 
+	{
+		if !(count (_x select 1) isEqualTo 3) then 
+		{
+			diag_log format["_fnc_spawnBaseObjects [ERROR, invalid object offset provided]: offset = %1 | 3 parameters exected | object definition = %2",_x select 1,1];
+		};
+	};
+	#endif
+
 	_obj = createVehicle[(_x select 0),_center vectorAdd (_x select 1),[],0,"CAN_COLLIDE"];
 	//diag_log format["_fnc_spawnBaseObjects::-->> _x = %1 | _obj = %2",_x,_obj];	
 	_newObjs pushback _obj;

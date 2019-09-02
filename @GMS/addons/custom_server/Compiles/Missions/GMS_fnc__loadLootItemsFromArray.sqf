@@ -25,7 +25,6 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
-// TODO: Check file name which seems to have an extra _ in it.
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 

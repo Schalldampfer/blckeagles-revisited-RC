@@ -8,10 +8,10 @@ A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve cod
 
 Significant Changes:
 =====================
-<<<<<<< Updated upstream
-=======
 
 6.92 Build 180
+=======
+
 1. Support for claim-vehicle scripts is now built-in 
 	blck_allowClaimVehicle = true; // To allow players to claim vehicles (Exile only).
 	Thanks to PRJX for the lead on the code.
@@ -33,7 +33,6 @@ Significant Changes:
 7. Code for spawning vehicles redone to reduced redundancy.
 8. two code tweaks from the Tall Man (MGTDB) were added. 
 
->>>>>>> Stashed changes
 V 6.90  Build 175
 1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
   

@@ -1,4 +1,5 @@
 /*
+	[] call blck_fnc_createGroup
 	By Ghostrider [GRG]
 	Copyright 2016
 	--------------------------
@@ -9,17 +10,20 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
+params[["_side",blck_AI_Side],["_deleteWhenEmpty",true]];
+// for information about the _deleteWhenEmpty parameter see: https://community.bistudio.com/wiki/createGroup
 
-private["_groupSpawned"];
+#ifdef blck_debugMode
+if (blck_debugLevel > 1) then 
+{diag_log format["_fnc_createGroup: _this = %1",_this]};
+#endif 
 
-_groupSpawned = createGroup [blck_AI_Side, true]; 
+private _groupSpawned = createGroup [_side, true]; 
 if (isNull _groupSpawned) exitWith{"ERROR:-> Null Group created by blck_fnc_spawnGroup";};
-
 if (blck_simulationManager == blck_useDynamicSimulationManagement) then 
 {
 	_groupSpawned enableDynamicSimulation true;
 };
-
 _groupSpawned setcombatmode "RED";
 _groupSpawned setBehaviour "COMBAT";
 _groupSpawned allowfleeing 0;

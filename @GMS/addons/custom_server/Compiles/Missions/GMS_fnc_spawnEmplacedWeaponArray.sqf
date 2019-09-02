@@ -88,30 +88,33 @@ if (blck_debugLevel > 1) then
 	#define maxDist 2
 	
 	/// // params["_pos",  "_center", _numai1,  _numai2,  _skillLevel, _minDist, _maxDist, _configureWaypoints, _uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms, _scuba ];
-	_empGroup = [(_x select 1),_pos,minAI,maxAI,_aiDifficultyLevel,minDist,maxDist,configureWaypoints,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnGroup;
-	
-	_empGroup setcombatmode "RED";
-	_empGroup setBehaviour "COMBAT";
-	[(_x select 1),0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
-	if (isNull _empGroup) exitWith {_abort = true};
-
-	// params["_vehType","_pos",["_clearInventory",true]];
-	private _wep = [(_x select 0),[0,0,0],false,true] call blck_fnc_spawnVehicle;
-	_wep addMPEventHandler ["MPHit",{[_this] call blck_EH_AIVehicle_HandleDamage}];
-	_wep addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
-	//_wep setVariable["vehicleGroup",_empGroup];
-	_wep setVariable["GRG_vehType","emplaced"];	
-	_wep setPos _pos;
-	_wep setdir (random 359);
-	[_wep,false] call blck_fnc_configureMissionVehicle;	
-	_emplacedWeps pushback _wep;
-	_units = units _empGroup;
-	_gunner = _units select 0;
-	_gunner moveingunner _wep;
-	_gunner setVariable["GRG_vehType","emplaced"];
-	_gunner setVariable["GRG_vehicle",_wep];
-	//_gunner addEventHandler["GetOutMan",{_this remoteExec["blck_EH_vehcleManGetOut",2]}]; 	
-	_emplacedAI append _units;		
+	private _empGroup = [] call blck_fnc_createGroup;
+	if !(isNull _empGroup) then 
+	{
+		[_empGroup,(_x select 1),_pos,minAI,maxAI,_aiDifficultyLevel,minDist,maxDist,configureWaypoints,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnGroup;
+		_empGroup setcombatmode "RED";
+		_empGroup setBehaviour "COMBAT";
+		_empGroup setVariable ["soldierType","emplaced"];
+		[(_x select 1),0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
+		//if (isNull _empGroup) exitWith {_abort = true};
+		// params["_vehType","_pos",["_clearInventory",true]];
+		private _wep = [(_x select 0),[0,0,0]] call blck_fnc_spawnVehicle;
+		//_wep addMPEventHandler ["MPHit",{[_this] call blck_EH_AIVehicle_HandleDamage}];
+		//_wep addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
+		//_wep setVariable["vehicleGroup",_empGroup];
+		_wep setVariable["GRG_vehType","emplaced"];	
+		_wep setPos _pos;
+		_wep setdir (random 359);
+		[_wep,2] call blck_fnc_configureMissionVehicle;	
+		_emplacedWeps pushback _wep;
+		_units = units _empGroup;
+		_gunner = _units select 0;
+		_gunner moveingunner _wep;
+		_gunner setVariable["GRG_vehType","emplaced"];
+		//_gunner setVariable["GRG_vehicle",_wep];
+		//_gunner addEventHandler["GetOutMan",{_this remoteExec["blck_EH_vehcleManGetOut",2]}]; 	
+		_emplacedAI append _units;		
+	};
 } forEach _missionEmplacedWeapons;
 blck_monitoredVehicles append _emplacedWeps;
 _return = [_emplacedWeps,_emplacedAI,_abort];

@@ -1,4 +1,4 @@
 
-#define blck_buildNumber 177
-#define blck_versionNumber 6.90
-#define blck_buildDate "6-14-19"
+#define blck_buildNumber 180
+#define blck_versionNumber 6.92
+#define blck_buildDate "9-1-19"

@@ -12,6 +12,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 //diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 ",diag_tickTime,blck_monitoredVehicles];
+// TODO: Test that vehicles that are either scheduled for deletion are for deletion pending change in owner are proparly handled (kept in the list, deleted when the time arrives).
 private _serverIDs =  ([2] + (entities "HeadlessClient_F"));
 for "_i" from 1 to (count blck_monitoredVehicles) do
 {
@@ -23,7 +24,6 @@ for "_i" from 1 to (count blck_monitoredVehicles) do
 		if ((owner _veh) in (_serverIDs)) then 
 		{
 			//diag_log format["_fnc_vehicleMonitor: vehicle %1 to be deleted at %2",_veh,(_veh getVariable ["blck_deleteAtTime",0])];
-			
 			if ((_veh getVariable ["blck_deleteAtTime",0]) > 0) then
 			{
 				if (diag_tickTime > ( _veh getVariable ["blck_deleteAtTime",0])) then
@@ -34,11 +34,16 @@ for "_i" from 1 to (count blck_monitoredVehicles) do
 					blck_monitoredVehicles pushBack _veh;
 				};
 			} else {
+				[_veh] call blck_fnc_checkForEmptyVehicle;				
 				blck_monitoredVehicles pushBack _veh;
 			};
-		//} else {
-			//diag_log format["_fnc_vehicleMonitor:  owner of vehicle %1 is a player, discontinuing further monitoring",_veh];
-			// TODO: Add script(s) to add vehicle to database when blck_persistantMissionVehicles == true;
+		} else {
+			#ifdef blck_debugMode
+			if (blck_debugOn) then 
+			{
+				diag_log format["_fnc_vehicleMonitor:  owner of vehicle %1 is a player, discontinuing further monitoring",_veh];
+			};
+			#endif
 		};
 	};
 };

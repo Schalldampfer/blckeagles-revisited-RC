@@ -19,6 +19,7 @@ Included is an updated version of blckeagls mission system. This began as an eff
 	Bill (DBD Clan) for example compositions.
 	cyncrwler, Grahamme and many others for help with troubleshooting and testing
 	Brian Soanes for performance fixes and general guidance.
+
 	
 * Additional Credits include authors of other missions systems who's work influenced this update. 
 	I have indicated as best as possible where work was directly derived from their contributions.:
@@ -29,6 +30,8 @@ Included is an updated version of blckeagls mission system. This began as an eff
 	lazylink (the original mission system)
 	Matt11 (Wicked AI) Updates:
 	Face (A3EAI/A3XAI)
+	HeMan (code to update player crypto)
+	Defent and eraser (code to distribute groups to clients)
 	
 * Compatability
 	Works well with VEMF, SEM, and A3AI all running on the same server.

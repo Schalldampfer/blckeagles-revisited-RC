@@ -23,7 +23,7 @@ private["_staticsSpawned","_return","_obj","_unit","_u"];
 _staticsSpawned = [];
 {
 	_x params["_staticClassName","_staticRelPos","_staticDir"];
-	_obj = [_staticClassName, [0,0,0], true] call blck_fnc_spawnVehicle;  
+	_obj = [_staticClassName, [0,0,0]] call blck_fnc_spawnVehicle;  
 	_obj setVariable["GRG_vehType","emplaced"];
 	_staticsSpawned pushBack _obj;
 	//diag_log format["_fnc_spawnGarrisonInsideBuilding_ATL: _obj = %1 | _staticsSpawned = %2",_obj,_staticsSpawned];

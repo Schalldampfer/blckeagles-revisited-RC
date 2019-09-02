@@ -10,7 +10,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-// TODO: Make sure all groups are captured in the list o factive groups
+
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 #define delayTime 1
 private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_blck_localMissionMarker","_assetKilledMsg","_enemyLeaderConfig",
@@ -199,6 +199,7 @@ if !(_abort) then
 };
 
 #ifdef blck_debugMode
+uiSleep 10;
 if (blck_debugLevel > 0) then
 {
 	diag_log format["[blckeagls] missionSpawner:: (288) AI Patrols Spawned: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
@@ -250,6 +251,11 @@ if (_noChoppers > 0) then
 	};
 };
 
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (256) helipatrols spawned"};
+#endif 
+
 uisleep 3;
 if (count _garrisonedBuilding_ATLsystem > 0) then
 {
@@ -259,6 +265,12 @@ if (count _garrisonedBuilding_ATLsystem > 0) then
 	_blck_AllMissionAI append (units (_temp select 0));
 };
 
+
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (271) garrisons (ATL) spawned"};
+#endif 
+
 uiSleep 3;
 if (count _garrisonedBuildings_BuildingPosnSystem > 0) then
 {
@@ -267,6 +279,11 @@ if (count _garrisonedBuildings_BuildingPosnSystem > 0) then
 	blck_monitoredVehicles append (_temp select 2);
 	_blck_AllMissionAI append (units (_temp select 0));
 };
+
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (285) garrisons (building position system) spawned"};
+#endif 
 
 uiSleep 15;
 private["_noEmplacedToSpawn"];
@@ -287,6 +304,11 @@ if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 	};
 };
 
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (309) emplaced weapons spawned"};
+#endif 
+
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
 if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
 {
@@ -302,6 +324,12 @@ if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles
 		_blck_AllMissionAI append (_temp select 1);
 	};
 };
+
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (330) vehicle patrols spawned"};
+#endif 
+
 uiSleep  delayTime;
 if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 {
@@ -321,6 +349,11 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 	};
 };
 uiSleep  delayTime;;
+
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (355) loot crate(s) spawned"};
+#endif 
 
 if (count _missionLootVehicles > 0) then
 {
@@ -346,9 +379,19 @@ if (_noPara > 0 && (random(1) < _chancePara) && _paraTriggerDistance == 0) then
 	};
 };
 
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (384) mission loot vehicles spawned"};
+#endif 
+
 private["_missionComplete","_endIfPlayerNear","_endIfAIKilled","_secureAsset","_crateStolen","_locations"];
 _missionComplete = -1;
 _startTime = diag_tickTime;
+
+#ifdef blck_debugMode
+uiSleep 10;
+if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (393) waiting for mission end contitions to be met"};
+#endif 
 
 switch (_endCondition) do
 {

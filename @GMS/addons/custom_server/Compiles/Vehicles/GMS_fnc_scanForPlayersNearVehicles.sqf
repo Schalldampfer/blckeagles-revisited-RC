@@ -9,7 +9,6 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 // GMS_fnc_vehiclePlayerSensingLogic.sqf
-
 // No params
 private["_searchRadius","_detectionOdds"];
 {

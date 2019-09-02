@@ -45,17 +45,22 @@ _wp setWaypointCombatMode "RED";
 
 //diag_log format["_fnc_processAIHit: determining if prior heal has occured"];
 if (_unit getVariable ["hasHealed",false]) exitWith {
-	diag_log format["_fnc_processAIHit: _unit %1 has already healed one",_unit];
+	//diag_log format["_fnc_processAIHit: _unit %1 has already healed one",_unit];
 };
 //diag_log format["_fnc_processAIHit: no prior heal so evaluate whether one is needed"];
 if ((damage _unit) > 0.2 ) then
 {
 	//diag_log format["_EH_AIHit::-->> Healing unit %1",_unit];
 	_unit setVariable["hasHealed",true,true];
-	"SmokeShellRed" createVehicle (position _unit);
+	if (blck_useSmokeWhenHealing) then 
+	{
+		"SmokeShellRed" createVehicle (position _unit getPos[1,random(359)]);
+	};
 	_unit addItem "FAK";
 	_unit action ["HealSoldierSelf",  _unit];
 	_unit setDamage 0;
-	_unit removeItem "FAK";
+	uiSleep 1;
+	if ("FAK" in (items _unit)) then {_unit removeItem "FAK"};
+	//_unit removeItem "FAK";
 };
 
