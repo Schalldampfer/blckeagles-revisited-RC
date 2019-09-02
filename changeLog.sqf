@@ -8,6 +8,32 @@ A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve cod
 
 Significant Changes:
 =====================
+<<<<<<< Updated upstream
+=======
+
+6.92 Build 180
+1. Support for claim-vehicle scripts is now built-in 
+	blck_allowClaimVehicle = true; // To allow players to claim vehicles (Exile only).
+	Thanks to PRJX for the lead on the code.
+2. Added a setting to disable having AI toss smoke before healing. Set:
+	blck_useSmokeWhenHealing=false; // to disable this
+3. Added an option to display kill notices using Toasts
+	blck_aiKillUseToast=true; // in blckClient.sqf in the debug folder of your mission.pbo to enable these.
+4. Added offloading of AI to clients (Experimental, waypoints may break when using this)
+	////////
+	//  Client Offloading and Headless Client Configurations
+	blck_useHC = true; // Experimental (death messages and rewards not yet working).
+	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+										// TODO: set to false before release
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
+5.Changed - Monitoring of groups refined to route mission groups that have left the mission area back to it.
+6. Fixed - Vehicle unlock when empty of crew through adding a getOut event handler.
+7. Code for spawning vehicles redone to reduced redundancy.
+8. two code tweaks from the Tall Man (MGTDB) were added. 
+
+>>>>>>> Stashed changes
 V 6.90  Build 175
 1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
   
