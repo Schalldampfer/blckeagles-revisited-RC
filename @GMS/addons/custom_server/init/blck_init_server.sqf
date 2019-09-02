@@ -8,6 +8,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
+
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 if ( !(isServer) || hasInterface) exitWith{};
 if !(isNil "blck_Initialized") exitWith{};

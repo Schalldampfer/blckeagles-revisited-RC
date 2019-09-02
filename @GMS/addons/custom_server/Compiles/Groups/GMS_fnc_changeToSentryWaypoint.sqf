@@ -1,5 +1,5 @@
 // Sets the WP type for WP for the specified group and updates other atributes accordingly.
-// TODO: Not used? 
+// TODO: Not used? How to use this?
 // Keep in for now. 
 /*
 	for ghostridergaming

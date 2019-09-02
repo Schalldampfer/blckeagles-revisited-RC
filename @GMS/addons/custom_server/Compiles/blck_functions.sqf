@@ -125,11 +125,12 @@ private _functions = [
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]
 	["blck_fnc_setupWaypoints","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setupWaypoints.sqf"],			// Set default waypoints for a group
+	// 7/29/19 script mission; presume another function handles this now.
 	//["blck_fnc_missionGroupMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_missionGroupMonitor.sqf"], // Monitors active groups for those that are stuck in an SAD waypoint but not in combat
 	["blck_fnc_changeToSADWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSADWaypoint.sqf"],
 	["blck_fnc_changeToMoveWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToMoveWaypoint.sqf"],
 	["blck_fnc_changeToSentryWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSentryWaypoint.sqf"],
-//	["blck_fnc_setNextWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setNextWaypoint.sqf"],
+	["blck_fnc_setNextWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setNextWaypoint.sqf"],
 	["blck_fnc_cleanEmptyGroups","\q\addons\custom_server\Compiles\Groups\GMS_fnc_cleanEmptyGroups.sqf"],		 // GMS_fnc_cleanEmptyGroups
 	["blck_fnc_findNearestInfantryGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_findNearestInfantryGroup.sqf"],
 	["blck_fnc_createGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_create_AI_Group.sqf"],			// create a group for which other functions spawn AI.
@@ -208,6 +209,12 @@ private _functions = [
 	missionnamespace setvariable [_name,compileFinal  preprocessFileLineNumbers _path];
 } foreach  _functions;
 
+if (blck_ai_offload_to_client) then 
+{
+	publicVariable "blck_fnc_setNextWaypoint";
+	publicVariable "blck_fnc_changeToMoveWaypoint";
+	publicVariable "blck_fnc_changeToSADWaypoint";
+};
 #ifdef GRGserver	
 blck_fnc_broadcastServerFPS = compileFinal  preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_broadcastServerFPS.sqf"; 
 diag_log "blck_functions loaded using GRGserver settings ---- >>>> ";

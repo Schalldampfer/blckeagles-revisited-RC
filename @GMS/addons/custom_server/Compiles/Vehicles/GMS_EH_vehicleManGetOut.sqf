@@ -11,7 +11,7 @@ this addEventHandler ["GetOutMan", {
     turret: Array - turret path
 */
 
-diag_log format["EH_vehicleManGetOut: _this = %1",_this];
+//diag_log format["EH_vehicleManGetOut: _this = %1",_this];
 params["_unit","_role","_veh"];
 [_veh,_unit] remoteExec["blck_fnc_handleAIgetOut",2];
 

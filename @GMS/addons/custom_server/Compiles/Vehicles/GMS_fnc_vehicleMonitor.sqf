@@ -12,6 +12,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 //diag_log format["_fnc_vehicleMonitor:: function called at %1 with _vehList %2 ",diag_tickTime,blck_monitoredVehicles];
+// TODO: Test that vehicles that are either scheduled for deletion are for deletion pending change in owner are proparly handled (kept in the list, deleted when the time arrives).
 private _serverIDs =  ([2] + (entities "HeadlessClient_F"));
 for "_i" from 1 to (count blck_monitoredVehicles) do
 {

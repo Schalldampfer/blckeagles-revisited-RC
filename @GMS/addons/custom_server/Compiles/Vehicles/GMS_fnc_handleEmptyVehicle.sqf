@@ -15,6 +15,7 @@ params["_veh"];
 if ({alive _x} count (crew _veh) == 0 || crew(_veh) isEqualTo []) then
 {	
 	//diag_log format["_fnc_handleEmptyVehicle: no units alive in vehicle %1",_veh, typeOf _veh,gettext (configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
+	// TODO: Make sure this variable is properly set on all vehicles.
 	if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 	{
 		//diag_log format["_fnc_handleEmptyVehicle: emplaced weapon %1 being handled",_veh];
@@ -26,7 +27,7 @@ if ({alive _x} count (crew _veh) == 0 || crew(_veh) isEqualTo []) then
 		}else {
 			//diag_log format["_fnc_handleEmptyVehicle: releasing static %1 to players and setting a default delete timer",_veh];
 			[_veh] call blck_fnc_releaseVehicleToPlayers;  //Call this from _processAIKill
-			_veh setVariable["blck_DeleteAt",diag_tickTime + blck_vehicleDeleteTimer,true];
+			_veh setVariable["blck_deleteAtTime",diag_tickTime + blck_vehicleDeleteTimer,true];
 		};			
 	} else {
 		if (blck_killEmptyAIVehicles) then

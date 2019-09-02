@@ -17,7 +17,7 @@
 		changing any of these variables may break the mission systemChat
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
-	blck_debugON = true;  //  Do not touch ... 
+	blck_debugON = false;  //  Do not touch ... 
 	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
@@ -73,9 +73,13 @@
 	***********************************************************/
 	////////
 	//  Client Offloading and Headless Client Configurations
-	blck_useHC = true; // Experimental (death messages and rewards not yet working).
-	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
-	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_useHC = true; // Experimental (should be working).
+	
+										//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+										// *******************************************************
+										//  Experimental; may cause issues with waypoints 
+										// *******************************************************
 	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
 	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
 
@@ -350,7 +354,7 @@
 		];	
 	/////////////////////////////////////////////
 	
-	blck_groupBehavior = "SAD";  // Suggested choices are "SAD", "SENTRY", "AWARE"   https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
+	blck_groupBehavior = "SAFE";  // https://community.bistudio.com/wiki/ArmA:_AI_Combat_Modes
 	blck_combatMode = "RED"; // Change this to "YELLOW" if the AI wander too far from missions for your tastes.
 	blck_groupFormation = "WEDGE"; // Possibilities include "WEDGE","VEE","FILE","DIAMOND"
 

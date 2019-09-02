@@ -9,7 +9,7 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-
+//  TODO: check that emplaced weapons that should be deleted are added to the scheduler.
 // assumptions: this is always run on the server rgardless if th event is triggered on an HC or other client.
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 if !(isServer) exitWith {};

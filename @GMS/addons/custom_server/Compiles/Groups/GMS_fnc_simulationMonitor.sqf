@@ -13,6 +13,7 @@
 private["_playerType","_players"];
 _playerType = ["LandVehicle","SHIP","AIR","TANK"];
 //diag_log format["_fnc_simulationMonitor Called at %1",diag_tickTime];
+//  TODO: establish if vehicles are sometimes frozen because they are not properly activated.
 switch (toLower(blck_modType)) do
 {
 	case "exile": {_playerType = _playerType + ["Exile_Unit_Player"]};
