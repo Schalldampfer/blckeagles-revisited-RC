@@ -7,7 +7,7 @@
 	Offloads AI groups to a nearby client in order to improve server performance.
 */
 private ["_groups"];
-
+if (isNil "blck_ai_offload_to_client") exitWith {blck_ai_offload_to_client = false};
 if (!blck_ai_offload_to_client) exitWith {};
 if (blck_limit_ai_offload_to_blckeagls) then {_groups = blck_monitoredMissionAIGroups} else {_groups = allGroups};
 

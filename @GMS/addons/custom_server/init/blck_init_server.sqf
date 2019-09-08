@@ -106,6 +106,13 @@ if (blck_blacklistTraderCities) then
 	call compile preprocessfilelinenumbers "\q\addons\custom_server\init\GMS_fnc_getTraderCites.sqf";
 };
 
+if (blck_ai_offload_to_client) then 
+{
+	publicVariable "blck_fnc_setNextWaypoint";
+	publicVariable "blck_fnc_changeToMoveWaypoint";
+	publicVariable "blck_fnc_changeToSADWaypoint";
+};
+
 //Start the mission timers
 if (blck_enableOrangeMissions > 0) then
 {

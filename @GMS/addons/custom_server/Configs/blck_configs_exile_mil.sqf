@@ -99,7 +99,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_MBT_03_cannon_F"
 	];
 	#ifdef useCUP
-	_blck_APC_CUP = [
+	blck_APC_CUP = [
 		"CUP_B_Mastiff_GMG_GB_D",  
 		"CUP_B_Mastiff_HMG_GB_D",  
 		"CUP_B_Ridgback_HMG_GB_D",  
@@ -125,7 +125,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"CUP_O_GAZ_Vodnik_PK_RU"
 	];
 
-	_blck_Tanks_CUP = [
+	blck_Tanks_CUP = [
 		"CUP_B_M2A3Bradley_USA_D",  
 		//"CUP_B_M113_desert_USA",  
 		//"CUP_B_M163_USA",  

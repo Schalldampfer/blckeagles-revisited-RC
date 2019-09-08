@@ -59,7 +59,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	
 	blck_maximumItemPriceInAI_Loadouts = 1000;
 	
-	_blck_armed_vehicles_Exile = [
+	blck_armed_vehicles_Exile = [
 		"Exile_Car_BTR40_MG_Green",
 		"Exile_Car_HMMWV_M134_Green",
 		"Exile_Car_HMMWV_M2_Green",
@@ -80,26 +80,36 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"I_APC_Wheeled_03_cannon_F"	
 	];
 
-	_blck_tracked_APC_ARMA3 = [
+	blck_light_AT_ARMA3 = [
+		"O_G_Offroad_01_AT_F", 
+		"B_G_Offroad_01_AT_F", 
+		"O_T_LSV_02_AT_F", 
+		"O_LSV_02_AT_F", 
+		"B_T_LSV_01_AT_F", 
+		"B_LSV_01_AT_F"
+	];
+	blck_tracked_AA_ARMA3 = [
+		"O_APC_Tracked_02_AA_F",
+		"B_APC_Tracked_01_AA_F"	
+	];
+	blck_tracked_APC_ARMA3 = [
 		"B_APC_Tracked_01_rcws_F",
 		"B_APC_Tracked_01_CRV_F",
-		"B_APC_Tracked_01_AA_F",
 		"O_APC_Tracked_02_cannon_F", 
-		"O_APC_Tracked_02_AA_F",
 		"O_APC_Wheeled_02_rcws_F", 
 		"I_APC_tracked_03_cannon_F"
 	];
 
-	_blck_Tanks_ARMA3 = [
+	blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
-		"B_MBT_01_mlrs_F",
+		//"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
 		"O_MBT_02_cannon_F",
 		//"O_MBT_02_arty_F",
 		"I_MBT_03_cannon_F"
 	];
-	
-	_blck_APC_CUP = [
+	#ifdef useCUP
+	blck_APC_CUP = [
 		"CUP_B_Mastiff_GMG_GB_D",  
 		"CUP_B_Mastiff_HMG_GB_D",  
 		"CUP_B_Ridgback_HMG_GB_D",  
@@ -125,37 +135,38 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		"CUP_O_GAZ_Vodnik_PK_RU"
 	];
 
-	_blck_Tanks_CUP = [
+	blck_Tanks_CUP = [
 		"CUP_B_M2A3Bradley_USA_D",  
-		"CUP_B_M113_desert_USA",  
-		"CUP_B_M163_USA",  
+		//"CUP_B_M113_desert_USA",  
+		//"CUP_B_M163_USA",  
 		"CUP_B_M6LineBacker_USA_D",  
 		"CUP_B_M1A1_DES_US_Army",  
 		"CUP_B_M1A2_TUSK_MG_DES_US_Army",  
-		"CUP_B_AAV_USMC",  
-		"CUP_B_M270_DPICM_USA",  
+		//"CUP_B_AAV_USMC",  
+		//"CUP_B_M270_DPICM_USA",  
 		"CUP_B_ZSU23_CDF",  
-		"CUP_B_BMP2_CDF",  
+		//"CUP_B_BMP2_CDF",  
 		"CUP_B_T72_CDF",  
-		"CUP_I_T34_NAPA",  
+		//"CUP_I_T34_NAPA",  
 		"CUP_B_Challenger2_NATO",  
-		"CUP_B_FV432_Bulldog_GB_D_RWS",  
-		"CUP_B_FV432_Bulldog_GB_D",  
+		//"CUP_B_FV432_Bulldog_GB_D_RWS",  
+		//"CUP_B_FV432_Bulldog_GB_D",  
 		"CUP_B_FV510_GB_D_SLAT",  
-		"CUP_B_MCV80_GB_D_SLAT",  
-		"CUP_O_2S6_RU",  
+		//"CUP_B_MCV80_GB_D_SLAT",  
+		//"CUP_O_2S6_RU",  
 		"CUP_O_BMP3_RU",  
 		"CUP_O_T90_RU",  
-		"CUP_O_T55_SLA",  
-		"CUP_O_BMP1P_TKA",  
-		"CUP_B_M270_DPICM_USA",
-		"CUP_B_M2Bradley_USA_W",  
-		"CUP_B_FV510_GB_D",  
-		"CUP_B_MCV80_GB_D",  
-		"CUP_B_M7Bradley_USA_D",  
-		"CUP_O_2S6_RU",  
-		"CUP_O_BMP1_TKA"
+		"CUP_O_T55_SLA"  //,  
+		//"CUP_O_BMP1P_TKA",  
+		//"CUP_B_M270_DPICM_USA",
+		//"CUP_B_M2Bradley_USA_W",  
+		//"CUP_B_FV510_GB_D",  
+		//"CUP_B_MCV80_GB_D",  
+		//"CUP_B_M7Bradley_USA_D",  
+		//"CUP_O_2S6_RU",  
+		//"CUP_O_BMP1_TKA""
 	];
+	#endif
 	
 	blck_AIPatrolVehicles = 
 	[
