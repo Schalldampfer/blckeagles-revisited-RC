@@ -58,6 +58,7 @@ diag_log format[
 				// Reset locality to the server
 				//diag_log format["_fnc_ai_offloadToClients: setting locality of group %1 to server",_group];
 				_group setGroupOwner 2;
+
 				#ifdef blck_debugMode
 				if (blck_debugOn) then
 				{

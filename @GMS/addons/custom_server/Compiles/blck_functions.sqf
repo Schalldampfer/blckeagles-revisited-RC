@@ -121,7 +121,8 @@ private _functions = [
 	//["blck_fnc_sm_AddScubaGroup","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddScubaGroup.sqf"],
 	//["blck_fnc_sm_AddSurfaceVehicle","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddSurfaceVehicle.sqf"],
 	["blck_fnc_sm_AddSDVVehicle","\q\addons\custom_server\Compiles\Missions\GMS_sm_AddSDVVehicle.sqf"],
-
+	["blck_fnc_sm_AddGroupToArray", "\q\addons\custom_server\Missions\Static\Code\GMS_fnc_sm_AddGroupToArray.sqf"],	
+	
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]
 	["blck_fnc_setupWaypoints","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setupWaypoints.sqf"],			// Set default waypoints for a group
@@ -209,12 +210,6 @@ private _functions = [
 	missionnamespace setvariable [_name,compileFinal  preprocessFileLineNumbers _path];
 } foreach  _functions;
 
-if (blck_ai_offload_to_client) then 
-{
-	publicVariable "blck_fnc_setNextWaypoint";
-	publicVariable "blck_fnc_changeToMoveWaypoint";
-	publicVariable "blck_fnc_changeToSADWaypoint";
-};
 #ifdef GRGserver	
 blck_fnc_broadcastServerFPS = compileFinal  preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_broadcastServerFPS.sqf"; 
 diag_log "blck_functions loaded using GRGserver settings ---- >>>> ";
