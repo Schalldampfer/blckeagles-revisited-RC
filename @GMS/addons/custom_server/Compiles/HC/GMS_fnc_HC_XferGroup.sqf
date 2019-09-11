@@ -14,6 +14,6 @@ private["_group","_unit","_tempEH"];
 _group = _this select 0;
 {
 	_unit = _x;
-	_tempEH = _unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];
+	_tempEH = _unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];  //Fires locally so add this again.
 }forEach (units _group);
-//diag_log format["blckHC:: group %1 transferred to HC %1",_group,clientOwner];
+diag_log format["blckHC:: group %1 transferred to HC %2",_group,clientOwner];

@@ -13,7 +13,7 @@
 params["_SDV","_pos","_difficulty","_numAI","_patrolRadius","_respawnTime"];
 //diag_log format["_fnc_spawnSDVPatrol:  _this = %1",_this];
 private["_vehicle","_group","_diveDepth"];
-_group = [] call blck_fnc_createGroup;
+_group = [blck_AI_Side,true]  call blck_fnc_createGroup;
 if !(isNull _group) then 
 {
 	[_group,_pos,_numAI,_numAI,_difficulty,_pos,_patrolRadius - 2,_patrolRadius,blck_UMS_uniforms,blck_UMS_headgear,true,blck_UMS_weapons,blck_UMS_vests,true] call blck_fnc_spawnGroup;

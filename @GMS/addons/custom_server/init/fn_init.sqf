@@ -25,4 +25,9 @@ if (isServer) then
 {
 	execVM "\q\addons\custom_server\init\blck_init_server.sqf";
 };
+if (!isServer && !hasInterface) then 
+{
+	diag_log format["Loading blackeagls for headless clients"];
+	[] execVM "blck_init_HC.sqf";
+};
 

@@ -88,7 +88,7 @@ if (blck_debugLevel > 1) then
 	#define maxDist 2
 	
 	/// // params["_pos",  "_center", _numai1,  _numai2,  _skillLevel, _minDist, _maxDist, _configureWaypoints, _uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms, _scuba ];
-	private _empGroup = [] call blck_fnc_createGroup;
+	private _empGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 	if !(isNull _empGroup) then 
 	{
 		[_empGroup,(_x select 1),_pos,minAI,maxAI,_aiDifficultyLevel,minDist,maxDist,configureWaypoints,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnGroup;

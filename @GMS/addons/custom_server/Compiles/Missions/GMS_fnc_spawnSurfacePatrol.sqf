@@ -13,7 +13,7 @@
 //  	["B_SDV_01_F",[22584.9,15304.8,-6.14801],"red",4, 75,0],
 params["_SDV","_pos","_difficulty","_numAI","_patrolRadius","_respawnTime"];
 //diag_log format["_fnc_spawnSurfacePatrol:  _this = %1",_this];
-private _group = [] call blck_fnc_createGroup; 
+private _group = [blck_AI_Side,true]  call blck_fnc_createGroup; 
 private _vehicle = objNull;
 if !(isNull _group) then 
 {

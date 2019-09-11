@@ -59,7 +59,7 @@ if ((damage _unit) > 0.2 ) then
 	_unit addItem "FAK";
 	_unit action ["HealSoldierSelf",  _unit];
 	_unit setDamage 0;
-	uiSleep 1;
+	//uiSleep 1;
 	if ("FAK" in (items _unit)) then {_unit removeItem "FAK"};
 	//_unit removeItem "FAK";
 };

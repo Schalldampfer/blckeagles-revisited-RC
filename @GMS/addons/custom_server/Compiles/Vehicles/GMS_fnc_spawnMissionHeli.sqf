@@ -31,7 +31,7 @@ switch (toLower(_skillAI)) do
 	case "orange" : {_minDist = 150;_maxDist = blck_maxPatrolRadiusHelisOrange};
 	default {_minDist = 150; _maxDist = 500};
 };
-private _grpPilot = [] call blck_fnc_createGroup;
+private _grpPilot = [blck_AI_Side,true]  call blck_fnc_createGroup;
 [_grpPilot,_coords,_coords,_crewCount,_crewCount,_skillAI,_minDist,_maxDist,true,_uniforms,_headgear,_vests,_backpacks,_weaponList,_sideArms,false] call blck_fnc_spawnGroup;
 #ifdef blck_debugMode 
 if (blck_debugLevel > 2) then 

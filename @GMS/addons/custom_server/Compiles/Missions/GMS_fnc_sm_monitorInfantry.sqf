@@ -54,7 +54,7 @@ for "_i" from 0 to (count blck_sm_Infantry) do
 							{
 								private _numAI = [_units] call blck_fnc_getNumberFromRange;
 								//params["_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",20], ["_maxDist",35],["_configureWaypoints",true], ["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_weaponList",[]],["_sideArms",blck_Pistols], ["_scuba",false] ];
-								_group = [] call blck_fnc_createGroup;
+								_group = [blck_AI_Side,true] call blck_fnc_createGroup;
 								if !(isNull _group) then 
 								{
 									[

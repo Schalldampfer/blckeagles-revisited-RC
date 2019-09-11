@@ -53,7 +53,7 @@ if ( (count _missionGroups > 0) && _noAIGroups > 0) then
 	{
 		_x params["_position","_minAI","_maxAI","_skillLevel","_minPatrolRadius","_maxPatrolRadius"];
 		_groupSpawnPos = _coords vectorAdd _position;
-		_newGroup = [] call blck_fnc_createGroup;
+		_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 		_newGroup setVariable ["soldierType","infantry"];	
 		#ifdef blck_debugMode
 		if (blck_debugLevel >= 2) then

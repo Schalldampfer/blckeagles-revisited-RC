@@ -15,7 +15,7 @@
 params["_pos",["_skillLevel","red"],["_numUnits",6],["_patrolRadius",15]];
 //diag_log format["_fnc_spawnScubaGroup:  _this = %1",_this];
 private["_group","_diveDepth"];
-_group = [] call blck_fnc_createGroup;
+_group = [blck_AI_Side,true]  call blck_fnc_createGroup;
 if !(isNull _group) then 
 {
 	//params["_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",20], ["_maxDist",35],["_configureWaypoints",true], ["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_weaponList",[]],["_sideArms",blck_Pistols], ["_scuba",false] ];

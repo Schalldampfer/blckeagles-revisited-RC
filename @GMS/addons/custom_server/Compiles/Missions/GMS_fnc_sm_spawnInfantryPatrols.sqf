@@ -30,7 +30,7 @@ if (_patrols isEqualTo []) then
 		_difficulty = _x select 1; // AI difficulty setting (blue, green etc)
 		_noAI = _x select 2; // Number of AI to spawn with the group
 		_patrolRadius = _x select 3;  // Radius within which AI should patrol
-		private _group = [] call blck_fnc_createGroup;
+		private _group = [blck_AI_Side,true]  call blck_fnc_createGroup;
 		//  params["_pos", ["_numai1",5], ["_numai2",10], ["_skillLevel","red"], "_center", ["_minDist",20], ["_maxDist",35], ["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_configureWaypoints",true] ];
 		if !(isNull _group) then 
 		{

@@ -52,7 +52,7 @@ if (_missionPatrolVehicles isEqualTo []) then
 	};
 	_vehicle = _x select 0;
 
-	_vehGroup = [] call blck_fnc_createGroup;
+	_vehGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 	_vehGroup setVariable["soldierType","vehicle"];
 	if !(isNull _vehGroup) then 
 	{

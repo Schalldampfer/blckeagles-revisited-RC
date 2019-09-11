@@ -2,7 +2,7 @@
 
 params["_building","_skillLevel","_noStatics","_typesStatics","_noUnits"];
 diag_log format["_fnc_sm_spawnBuildingGarrison_relPos: handling _building = %1 | at location = %2",_building,position _building];
-private _group = [] call blck_fnc_createGroup;
+private _group = [blck_AI_Side,true] call blck_fnc_createGroup;
 if !(isNull _group) then 
 {
 	// ["_building","_group","_noStatics","_typesStatics","_noUnits",["_aiDifficultyLevel","Red"],

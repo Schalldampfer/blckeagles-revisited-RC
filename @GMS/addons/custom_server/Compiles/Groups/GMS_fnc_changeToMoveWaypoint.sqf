@@ -37,7 +37,7 @@ _maxDis = _group getVariable["maxDis",30];
 _dis = (_minDis) + random( (_maxDis) - (_minDis) );
 _newPos = (_center) getPos[_dis,_dir];
 _wp setWPPos [_newPos select 0, _newPos select 1];
-_wp setWaypointCompletionRadius (_group getVariable["wpRadius",30]);
+_wp setWaypointCompletionRadius (_group getVariable["wpRadius",0]);
 _wp setWaypointType "MOVE";
 _wp setWaypointName "move";
 _wp setWaypointBehaviour "COMBAT";

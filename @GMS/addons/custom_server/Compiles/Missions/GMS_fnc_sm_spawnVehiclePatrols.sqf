@@ -33,7 +33,7 @@ if (_vehiclePatrolSpawns isEqualTo []) then
 	_difficulty = _x select 2;
 	_patrolRadius = _x select 3;
 	//_newGroup = [_x,_unitsPerGroup,_unitsPerGroup,_aiDifficultyLevel,_coords,_minDist,_maxDist,_uniforms,_headGear,true,_weapons,_vests,_isScubaGroup] call blck_fnc_spawnGroup;
-	private _vehGroup = [] call blck_fnc_createGroup;
+	private _vehGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 	_vehGroup setVariable["soldierType","vehicle"];
 	if !(isNull _vehGroup) then 
 	{

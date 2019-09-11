@@ -37,7 +37,7 @@ if (_backpacks  isEqualTo []) then {_backpacks = [_aiDifficultyLevel] call blck_
 private["_group","_buildingsSpawned","_staticsSpawned","_g","_building","_return"];
 _buildingsSpawned = [];
 _staticsSpawned = [];   
-_group = [] call blck_fnc_createGroup; 
+_group = [blck_AI_Side,true] call blck_fnc_createGroup; 
 if !(isNull _group) then 
 {
     {
