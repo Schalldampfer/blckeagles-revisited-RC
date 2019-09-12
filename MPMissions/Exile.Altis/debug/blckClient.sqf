@@ -342,6 +342,6 @@ if !(isServer) then
 		};
 
 	};
-	diag_log "blck client loaded ver 4/2/18 for Version 6.81 8 PM";	
+	diag_log "blck client loaded ver 9/11/19 for blckeagls Version 6.94";	
 	
 };

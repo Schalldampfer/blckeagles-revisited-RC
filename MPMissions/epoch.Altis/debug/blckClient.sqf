@@ -6,16 +6,16 @@
 		_hostage switchMove "";
 		//uisleep 0.1;
 		_animations = _hostage getVariable["GMSAnimations",[""]];
-		//diag_log format["_fnc_nextAnimation: _hostage = %1 and _animations = %2",_hostage,_animations];
+		diag_log format["_fnc_nextAnimation: _hostage = %1 and _animations = %2",_hostage,_animations];
 		_hostage switchMove (selectRandom _animations);
 	};
 	
 	GMS_EH_onAnimationDone = {
-		//diag_log format["GMS_EH_onAnimationDone: _this = %1",_this];
+		diag_log format["GMS_EH_onAnimationDone: _this = %1",_this];
 		private _hostage = _this select 0;
 		if (alive _hostage) then 
 		{
-			//diag_log format["GMS_EH_onAnimationDone: _animations = %1",_hostage getVariable["GMSAnimations",[""]]];
+			diag_log format["GMS_EH_onAnimationDone: _animations = %1",_hostage getVariable["GMSAnimations",[""]]];
 			_hostage call GMS_fnc_nextAnimation;
 		} else {
 			_hostage removeAllEventHandlers "AnimDone";
@@ -23,7 +23,7 @@
 	};
 	
 	GMS_fnc_freeHostage = {
-		//diag_log format["fn_freeHostage: _this = %1",_this];
+		diag_log format["fn_freeHostage: _this = %1",_this];
 		private _hostage = _this select 0;
 		if (_hostage getVariable["blck_unguarded",0] isEqualTo 1) then
 		{
@@ -63,18 +63,21 @@
 		private _asset = _this;
 		_asset addEventHandler ["AnimDone", {_this call GMS_EH_onAnimationDone}];
 		_asset call GMS_fnc_nextAnimation;
-		//diag_log format["_fnc_addAssetAnimations: Animation and event handler added for asset %1",_asset];
+		diag_log format["_fnc_addAssetAnimations: Animation and event handler added for asset %1",_asset];
 	};
 	
 	GMS_fnc_initHostage = {
-		private _hostage = _this;
-		_hostage call GMS_fnc_addHostageActions;
-		_hostage call GMS_fnc_addAssetAnimations;
-		//diag_log format["_fnc_initHostage: hostage %1 initialized",_hostage];
+		if (hasInterface) then 
+		{
+			private _hostage = _this;
+			_hostage call GMS_fnc_addHostageActions;
+			_hostage call GMS_fnc_addAssetAnimations;
+			diag_log format["_fnc_initHostage: hostage %1 initialized",_hostage];
+		};
 	};
 	
 	GMS_fnc_arrestLeader = {
-		//diag_log format["GMS_fnc_arrestLeader: _this = %1",_this];
+		diag_log format["GMS_fnc_arrestLeader: _this = %1",_this];
 		private _leader = _this select 0;
 		if (_leader getVariable["blck_unguarded",0] isEqualTo 1) then
 		{
@@ -114,10 +117,13 @@
 	};
 	
 	GMS_fnc_initLeader = {
-		private _leader = _this;
-		_leader call GMS_fnc_addLeaderActions;
-		_leader call GMS_fnc_addAssetAnimations;
-		//diag_log format["_fnc_initLeader: Leader %1 initialized",_leader];		
+		if (hasInterface) then 
+		{
+			private _leader = _this;
+			_leader call GMS_fnc_addLeaderActions;
+			_leader call GMS_fnc_addAssetAnimations;
+			diag_log format["_fnc_initLeader: Leader %1 initialized",_leader];
+		};
 	};
 	
 if !(isServer) then
@@ -280,8 +286,9 @@ if !(isServer) then
 	};
 	
 	fn_handleMessage = {
+		if !(hasInterface) exitWith {};
 		//private["_event","_msg","_mission"];
-		//diag_log format["fn_handleMessage ====]  Paremeters = _this = %1",_this];
+		diag_log format["fn_handleMessage ====]  Paremeters = _this = %1",_this];
 		params["_event","_message",["_mission",""]];
 
 		//diag_log format["blck_Message ====]  Paremeters _event %1  _message %2 paramter #3 %3",_event,_message,_mission];
@@ -335,6 +342,6 @@ if !(isServer) then
 		};
 
 	};
-	diag_log "blck client loaded";	
+	diag_log "blck client loaded ver 9/11/19 for blckeagls Version 6.94";	
 	
 };
