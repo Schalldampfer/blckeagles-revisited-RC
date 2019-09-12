@@ -95,7 +95,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					diag_log format["missionSpawner: Spawning Groups: case 1: _noAIGroups=1"];
 				};
 				#endif
-				_newGroup = [] call blck_fnc_createGroup;
+				_newGroup = [blck_AI_Side,true] call blck_fnc_createGroup;
 				_newGroup setVariable ["soldierType","infantry"];				
 				#ifdef blck_debugMode
 				if (blck_debugLevel >= 2) then
@@ -137,7 +137,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					} else {
 						_adjusttedGroupSize = _unitsPerGroup;
 					};
-					_newGroup = [] call blck_fnc_createGroup;
+					_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 					_newGroup setVariable ["soldierType","infantry"];					
 					if !(isNull _newGroup) then 
 					{
@@ -164,7 +164,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					diag_log format["_fnc_spawnMissionAI (68): Spawning Groups: case 3: _noAIGroups=3"];
 				};
 				#endif
-				_newGroup = [] call blck_fnc_createGroup;
+				_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 				_newGroup setVariable ["soldierType","infantry"];
 				if !(isNull _newGroup) then 
 				{
@@ -180,7 +180,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 					_blck_AllMissionAI append _newAI;
 					_groupLocations = [_coords,2,20,35] call blck_fnc_findPositionsAlongARadius;
 					{
-						_newGroup = [] call blck_fnc_createGroup;	
+						_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;	
 						_newGroup setVariable ["soldierType","infantry"];		
 						if !(isNull _newGroup) then 
 						{
@@ -207,7 +207,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 				};
 				#endif
 
-				_newGroup = [] call blck_fnc_createGroup;	
+				_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;	
 				_newGroup setVariable ["soldierType","infantry"];			
 				if (isNull _newGroup) then 
 				{
@@ -224,7 +224,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 				};
 				_groupLocations = [_coords,(_noAIGroups - 1),20,40] call blck_fnc_findPositionsAlongARadius;
 				{
-					_newGroup = [] call blck_fnc_createGroup;
+					_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 					_newGroup setVariable ["soldierType","infantry"];
 					if !(isNull _newGroup) then 
 					{

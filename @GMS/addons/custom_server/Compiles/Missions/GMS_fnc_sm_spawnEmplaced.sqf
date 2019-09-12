@@ -44,7 +44,9 @@ if (_missionEmplacedWeapons isEqualTo []) then
 		[_empGroup,_pos,1,1,_difficulty,_pos,1,2,_uniforms,_headGear,false] call blck_fnc_spawnGroup;
 		_empGroup setcombatmode "RED";
 		_empGroup setBehaviour "COMBAT";
-		[_pos,0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
+		//  // params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAFE"],["_soldierType","null"],["_patrolRadius",30],["_wpTimeout",[5.0,7.5,10]]];	
+		// Not sure of the value of giving waypoints here	
+		//[_pos,0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
 		//if (isNull _empGroup) exitWith {_abort = _true};
 		_wep = [_wepnClassName,[0,0,0],false] call blck_fnc_spawnVehicle;
 		//_empGroup setVariable["groupVehicle",_wep];

@@ -210,11 +210,7 @@ private _functions = [
 	missionnamespace setvariable [_name,compileFinal  preprocessFileLineNumbers _path];
 } foreach  _functions;
 
-#ifdef GRGserver	
-blck_fnc_broadcastServerFPS = compileFinal  preprocessFileLineNumbers "\q\addons\custom_server\Compiles\Functions\GMS_fnc_broadcastServerFPS.sqf"; 
-diag_log "blck_functions loaded using GRGserver settings ---- >>>> ";
-#endif
 
-//onPlayerDisconnected {[_name,_owner] call blck_fnc_onPlayerDisconnected;};
+
 
 

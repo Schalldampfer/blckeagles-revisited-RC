@@ -61,10 +61,12 @@ if !(isNull _grpPilot)  then
 		diag_log format["_fnc_spawnMissionHeli(59):  _skillAI = %1 | _minDist = %2 | _maxDist = %3",_skillAI,_minDist,_maxDist];
 	};
 	#endif
-	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","aircraft"] call blck_fnc_setupWaypoints;
 
-
+	#define aircraftPatrolRadius 800
+	#define aircraftWaypointTimeout [1,1.5,2]
+	[_coords,_minDist,_maxDist,_grpPilot,"random","SAD","aircraft",aircraftPatrolRadius,aircraftWaypointTimeout] call blck_fnc_setupWaypoints;
 	blck_monitoredMissionAIGroups pushBack _grpPilot;
+
 	//create helicopter and spawn it
 	if (( typeName _helis) isEqualTo "ARRAY") then 
 	{

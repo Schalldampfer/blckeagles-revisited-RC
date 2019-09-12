@@ -109,8 +109,9 @@ if (blck_blacklistTraderCities) then
 if (blck_ai_offload_to_client) then 
 {
 	publicVariable "blck_fnc_setNextWaypoint";
-	publicVariable "blck_fnc_changeToMoveWaypoint";
-	publicVariable "blck_fnc_changeToSADWaypoint";
+	//publicVariable "blck_fnc_changeToMoveWaypoint";
+	//publicVariable "blck_fnc_changeToSADWaypoint";
+	publicVariable "blck_EH_unitWeaponReloaded";
 };
 
 //Start the mission timers

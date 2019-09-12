@@ -15,5 +15,6 @@ _group = _this select 0;
 {
 	_unit = _x;
 	_tempEH = _unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];  //Fires locally so add this again.
+	diag_log format["blckHC:: reloaded EH added to unit %1 after transfer to HC %2",_x,clientOwner];	
 }forEach (units _group);
 diag_log format["blckHC:: group %1 transferred to HC %2",_group,clientOwner];

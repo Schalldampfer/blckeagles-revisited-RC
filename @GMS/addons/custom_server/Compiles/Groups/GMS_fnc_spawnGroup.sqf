@@ -65,7 +65,10 @@ if !(isNull _group) then
 	if (_configureWaypoints) then
 	{
 		if (_scuba) then {_infantryType = "scuba"} else {_infantryType = "infantry"};
-		[_pos,_minDist,_maxDist,_group,"random","SAD",_infantryType] spawn blck_fnc_setupWaypoints;
+		// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAFE"],["_soldierType","null"],["_patrolRadius",30],["_wpTimeout",[5.0,7.5,10]]];
+		#define infantryPatrolRadius 30
+		#define infantryWaypointTimeout [5,7.5,10]
+		[_pos,_minDist,_maxDist,_group,"random","SAD",_infantryType,infantryPatrolRadius,infantryWaypointTimeout] spawn blck_fnc_setupWaypoints;
 	};
 } else 
 {

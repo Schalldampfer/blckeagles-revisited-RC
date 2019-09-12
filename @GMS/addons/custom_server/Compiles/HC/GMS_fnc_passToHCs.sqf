@@ -29,20 +29,21 @@ if !(blck_connectedHCs isEqualTo []) then
 {
 	_idHC = [blck_connectedHCs] call blck_fnc_HC_leastBurdened;
 	{
-		diag_log format["_fnc_passToHCs: group = %1 | owner = %2 | blck_group = %3",_x, groupOwner _x, _x getVariable ["blck_group","undefined"]];
+		//diag_log format["_fnc_passToHCs: group = %1 | owner = %2 | blck_group = %3",_x, groupOwner _x, _x getVariable ["blck_group","undefined"]];
 		//if (_x getVariable["blck_group",false]) then 
 		//{
 			if ((groupOwner _x) == 2) then 
 			{
 				private _sgor = _x setGroupOwner (owner _idHC);
+				//diag_log format["_fnc_passToHCs: group = %1 | _sgor = %2 | _idHC = %3",_x,_sgor,_idHC];
 				if (_sgor) then
 				{
 					[_x] remoteExec["blck_fnc_HC_XferGroup",_idHC];
 					_numTransfered = _numTransfered + 1;
-					diag_log format["_fnc_passToHCs: group %1 Passed to HC %2",_x,_idHC];
+					//diag_log format["_fnc_passToHCs: group %1 Passed to HC %2",_x,_idHC];
 				};
 			};
 		//};
 	} forEach (_groups);
-	diag_log format["[blckeagls] _passToHCs:: %1 groups transferred to HC %2",_numTransfered,_idHC];
+	//diag_log format["[blckeagls] _passToHCs:: %1 groups transferred to HC %2",_numTransfered,_idHC];
 };

@@ -14,79 +14,76 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private["_group","_wp","_index","_pattern","_mode","_arc","_dis","_wpPos"];
-// TODO: Make sure waypoint positions are far enough away that vehicles/armor moves every minute or so and patrols a wide area
-_group = group _this;
-_group setVariable["timeStamp",diag_tickTime];
-_group setcombatmode "RED";
-_group setBehaviour "COMBAT";
-_wp = [_group, 0];
-_pattern = _group getVariable["wpPattern",[]];
-_index = _group getVariable["wpIndex",0];
-_index = _index + 1;
-_minDis = _group getVariable["minDis",0];
-_maxDis = _group getVariable["maxDis",0];
-dir = (_group getVariable["wpDir",0]) + _group getVariable["wpArc",360/5];
-_group setVariable["wpDir",_dir];
 
-diag_log format["_fnc_setNextWaypoint: ->  _minDis = %1 | _maxDis = %2 | _arc = %3",_minDis,_maxDis,_arc];
-if (_index >= (count _pattern)) then
+private _group = group _this;
+private _leader = _this;
+private _pos = _group getVariable "patrolCenter";  			//  Center of the area to be patroleld.
+private _minDis = _group getVariable "minDis";			//  minimum distance between waypoints
+private _maxDis = _group getVariable "maxDis";  				// maximum distance between waypoints
+// _group getVariable "timeStamp";		// used to check that waypoints are being completed
+//private _wpRadisu _group getVariable "wpRadius";					// Always set to 0 to force groups to move a bit
+private _patrolRadius = _group getVariable "patrolRadius";	// radius of the area to be patrolled
+private _wpMode = _group getVariable "wpMode";					//  The default mode used when the waypoint becomes active  https://community.bistudio.com/wiki/AI_Behaviour
+//_group getVariable "wpPatrolMode";   //  Not used; the idea is to allow two algorythms: randomly select waypoints so groups move back and forth along the perimiter of the patrool area or sequenctioal, hoping along the perimeter
+private _wpTimeout = _group getVariable "wpTimeout";			//  Here to alow you to have the game engine pause before advancing to the next waypoing. a timout of 10-20 sec is recommended for infantry and land vehicles, and 1 sec for aircraft
+private _wpDir = _group getVariable "wpDir";						//  Used to note the degrees along the circumference of the patrol area at which the last waypoint was positioned.
+private _arc = _group getVariable "wpArc";					// Increment in degrees to be used when advancing the position of the patrol to the next position along the patrol perimeter
+//_group getVariable "soldierType";		// infantry, vehicle, air or emplaced. Note that there is no need to have more than one waypoint for emplaced units.
+private _wp = [_group,0];
+private _nearestEnemy = _leader findNearestEnemy (getPosATL _leader);
+
+if (isNull _nearestEnemy) then 
 {
-	_index = 0;
+	// Use standard waypoint algorythms
+	private _vector = _wpDir + _arc + 180;  // this should force  units to cross back and forth across the zone being patrolled
+	_group setVariable["wpDir",_vector,true];
+	private _newWPPos = _pos getPos[_patrolRadius,_vector];
+	_wp setWaypointPosition [_newWPPos,0];
+	_group setBehaviour "SAFE";  //  no enemies detected so lets put the group in a relaxed mode
+	_wp setWaypointBehaviour "SAFE";
+	_wp setWaypointCompletionRadius 0;
+	_wp setWaypointTimeout _wpTimeout;
+	_group setCurrentWaypoint _wp;
+	diag_log format["_fnc_setNextWaypoin[no enemies]t: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
 } else {
-	diag_log format["_fnc_setNextWaypoint: -> waypoint index for group %1 is currently %2 with _pattern = %4 and count _pattern = %3",_group,_index, count _pattern,_pattern];	
-};
+	// move toward that enemy using hunting logic
+	// possibly along patrol perimeter
+	// set mode to SAD / COMBAT
+	/*
+		_vector set to relative direction from leader to enemy +/- random adjustment of up to 33 degrees
+		_distance can be up to one patrol radius outside of the normal perimeter closer to enemy 
+		_timout set to longer period 
+		when coupled with SAD behavior should cause interesting behaviors
+	*/
+	//  [point1, point2] call BIS_fnc_relativeDirTo
+	private _vector = ([(leader _group),_nearestEnemy] call BIS_fnc_relativeDirTo) + (random(33)*selectRandom[-1,1]);
+	_group setVariable["wpDir",_vector];
+	private ["_huntDistance"];
 
-_group setVariable["wpIndex",_index];
-_type = _pattern select _index;
-
-#ifdef blck_debugMode
-diag_log format["_fnc_setNextWaypoint: -> waypoint for group %1 to be updated to mode %2 at position %3 with index %4",_group,_type,waypointPosition  _wp, _index];
-#endif
-
-// revisit this to account for dead units. use waypointPosition if possible.
-_wpPos = waypointPosition  _wp;
-
-_wp setWaypointType _type;
-_wp setWaypointName toLower _type;
-if (_type isEqualTo (toLower "move"))  then
-{ 
-	_dis = (_minDis) + random( (_maxDis) - (_minDis) );
-	if (_group getVariable["wpMode",""] isEqualTo "random") then 
+	if ((leader _group) distance _nearestEnemy > (_patrolRadius * 2)) then 
 	{
-		_dir = random(360)
+		if (((leader _group) distance _pos) > (2 * _patrolRadius)) then 
+		{
+			_huntdistance = 0;
+		} else {
+			_huntDistance = _patrolRadius;
+		};
 	} else {
-		_dir = _group getVariable["wpDir",0] + _group getVariable["wpArc",360/5];
+		_huntDistance = ((leader _group) distance _nearestEnemy) / 2;
 	};
-	_group setVariable["wpDir",_dir];
-	_oldPos = waypointPosition _wp;
-
-	_newPos = (_group getVariable ["patrolCenter",_wpPos]) getPos[_dis,_arc];
-	_wp setWPPos [_newPos select 0, _newPos select 1];
-
-	#ifdef blck_debugMode
-	diag_log format["_fnc_setNextWaypoint: -- > for group %5 | _dis = %1 | _arc = %2 _oldPos = %3 | _newPos = %4",_dis,_arc,_oldPos,_newPos,_group];
-	#endif
 	
-	_wp setWaypointTimeout [1.0,1.1,1.2];
-	//_wp setWaypointTimeout [20,25,30];
-} else {
-	_wp setWaypointTimeout [20,25,30];
-	_newPos = _wpPos;
-	_wp setWPPos _newPos;
-
-	#ifdef blck_debugMode
-	diag_log format["_fnc_setNextWaypoint: - waypoint position for group %1 not changed",_group];
-	#endif
+	private _newWPPos = _pos getPos[_huntDistance,_vector];
+	diag_log format["_fnc_setextWaypoint:  _pos = %1 | _patrolRadius = %5 |  _newWPPos = %2 | _huntDistance = %3 | _vector = %4",_pos,_newWPPos,_huntDistance,_vector,_patrolRadius];
+	_wp setWaypointPosition [_newWPPos,0];
+	_wp setWaypointBehaviour "SAD";
+	_group setBehaviour "AWARE";
+	_wp setWaypointCombatMode "RED";
+	_wp setWaypointTimeout[30,45,60];
+	_wp setWaypointCompletionRadius 0;
+	_group setCurrentWaypoint _wp;	
+	//  Assume the same waypoint statement will be available
+	diag_log format["_fnc_setNextWaypoin[enemies]t: _group = %1 | _newPos = %2 | _nearestEnemy = 54 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp,_nearestEnemy];
 };
-
-#ifdef blck_debugMode
-diag_log format["_fnc_setNextWaypoint: -> waypoint for group %1 set to mode %2 at position %3 with index %4",_group,_type,waypointPosition  _wp, _index];
-diag_log format["_fnc_setNextWaypoint:-> waypoint statements for group %1 = %2",_group, waypointStatements [_group,_index]];
-#endif
-
-_wp setWaypointBehaviour blck_groupBehavior;
-_wp setWaypointCombatMode blck_combatMode;
-_group setCurrentWaypoint _wp;
 
 
 

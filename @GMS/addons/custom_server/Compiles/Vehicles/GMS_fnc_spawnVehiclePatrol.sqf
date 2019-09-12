@@ -39,7 +39,9 @@ if !(isNull _group) then {
 	if (_setWaypoints) then
 	{
 		// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAD"],["_soldierType","null"] ];
-		[_center,_minDis,_maxDis,_group,"perimeter","SAD","vehicle"] spawn blck_fnc_setupWaypoints;
+		#define vehiclePatrolRadius 400
+		#defin vehicleWaypointTimout [6, 9, 12]
+		[_center,_minDis,_maxDis,_group,"perimeter","SAD","vehicle",vehiclePatrolRadius,vehicleWaypointTimout] spawn blck_fnc_setupWaypoints;
 	};
 };
 
