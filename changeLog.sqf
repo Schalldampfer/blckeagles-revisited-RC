@@ -9,6 +9,12 @@ A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve cod
 Significant Changes:
 =====================
 
+6.94 Build 181 
+1. code and logic for generating waypoints updated.
+2. this code, and that for reload events, is broadcast to clients
+3. blckClient has been tweaked to inactivate some code on any connected HC.
+4. Script errors that prevented the HC from starting and being passed AI were fixed.
+
 6.92 Build 180
 =======
 
