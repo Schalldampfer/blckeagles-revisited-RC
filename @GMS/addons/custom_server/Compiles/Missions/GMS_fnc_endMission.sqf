@@ -69,7 +69,7 @@ _fn_missionCleanup = {
 
 		[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
 		{
-			deleteVehicle _x;
+			//if (local _x) then {deleteVehicle _x};
 		}forEach _crates;
 		{
 			deleteVehicle _x;

@@ -185,6 +185,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	"B_APC_Tracked_01_rcws_F"																						
 	]; // Type of vehicle spawned to defend AI bases	
 
+	///  Defined again below in this instance to show options available and also my personal preferences for mil servers
 	blck_AIPatrolVehiclesBlue = [	
 		"Exile_Car_Offroad_Armed_Guerilla01",
 		"Exile_Car_Offroad_Armed_Guerilla02",

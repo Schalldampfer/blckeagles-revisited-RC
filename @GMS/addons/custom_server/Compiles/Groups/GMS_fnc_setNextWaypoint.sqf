@@ -10,6 +10,11 @@
 	All the code and information provided here is provided under an Attribution Non-Commercial ShareAlike 4.0 Commons License.
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+	TODO: Replaces changeToMoveWaypoint 
+	and
+	Replaces changeToSADWaypoint 
+
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
@@ -44,7 +49,7 @@ if (isNull _nearestEnemy) then
 	_wp setWaypointCompletionRadius 0;
 	_wp setWaypointTimeout _wpTimeout;
 	_group setCurrentWaypoint _wp;
-	diag_log format["_fnc_setNextWaypoin[no enemies]t: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
+	//diag_log format["_fnc_setNextWaypoin[no enemies]t: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
 } else {
 	// move toward that enemy using hunting logic
 	// possibly along patrol perimeter
@@ -73,7 +78,7 @@ if (isNull _nearestEnemy) then
 	};
 	
 	private _newWPPos = _pos getPos[_huntDistance,_vector];
-	diag_log format["_fnc_setextWaypoint:  _pos = %1 | _patrolRadius = %5 |  _newWPPos = %2 | _huntDistance = %3 | _vector = %4",_pos,_newWPPos,_huntDistance,_vector,_patrolRadius];
+	//diag_log format["_fnc_setextWaypoint:  _pos = %1 | _patrolRadius = %5 |  _newWPPos = %2 | _huntDistance = %3 | _vector = %4",_pos,_newWPPos,_huntDistance,_vector,_patrolRadius];
 	_wp setWaypointPosition [_newWPPos,0];
 	_wp setWaypointBehaviour "SAD";
 	_group setBehaviour "AWARE";

@@ -53,17 +53,20 @@ if (_missionPatrolVehicles isEqualTo []) then
 	_vehicle = _x select 0;
 
 	_vehGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
-	_vehGroup setVariable["soldierType","vehicle"];
+	_patrolVehicle = objNull;
+	diag_log format["fnc_spawnMissionVehiclePatrols(50):  _vehicle = %1 | _spawnPos = %2 | _vehGroup = %3",_vehicle,_spawnPos,_vehGroup];
 	if !(isNull _vehGroup) then 
 	{
+		_vehGroup setVariable["soldierType","vehicle"];
 		[_vehGroup,_spawnPos,_coords,_crewCount,_crewCount,_skillAI,1,2,false,_uniforms, _headGear,_vests,_backpacks,_weaponList,_sideArms,_isScubaGroup] call blck_fnc_spawnGroup;
+		_missionAI append (units _vehGroup);
 		blck_monitoredMissionAIGroups pushBack _vehGroup;
 		//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",40],["_maxDis",60],["_group",grpNull],["_setWaypoints",true],["_crewCount",4]];
 		_patrolVehicle = [_coords,_spawnPos,_vehicle,40,60,_vehGroup,true,_crewCount] call blck_fnc_spawnVehiclePatrol; 
 
 		if !(isNull _patrolVehicle) then
 		{
-			_patrolVehicle setVariable["vehicleGroup",_vehGroup];
+			//_patrolVehicle setVariable["vehicleGroup",_vehGroup];
 			_vehicles pushback _patrolVehicle;
 			//blck_monitoredVehicles pushBack _patrolVehicle;
 			_missionAI append (units _vehGroup);

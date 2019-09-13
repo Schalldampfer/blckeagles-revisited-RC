@@ -83,7 +83,7 @@ switch (blck_simulationManager) do
 };
 
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
-diag_log format["blckeagls] waiting for players to join ----    >>>>"];
+diag_log format["[blckeagls] waiting for players to join ----    >>>>"];
 
 if ( !(blck_debugON) && (blck_debugLevel isEqualTo 0)) then
 {

@@ -29,7 +29,7 @@ if (count(units (group _unit)) isEqualTo 0) then
 [_unit] joinSilent grpNull;
 if !(_unit isKindOf "Man") then 
 {
-	diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
+	//diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
 	[_unit, ["Eject", vehicle _unit]] remoteExec ["action",(owner _unit)];
 };
 

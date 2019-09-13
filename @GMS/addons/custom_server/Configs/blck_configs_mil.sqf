@@ -155,14 +155,14 @@
 	//  Heli Patrol Heli Types	
 	// Armed Helis
 	//////////////////////////////
-	_blck_littleBirds = ["B_Heli_Light_01_armed_F"];  //  AH-9 Pawnee  (WEST)
-	_blck_armed_hellcats = ["I_Heli_light_03_F"];
-	_blck_armed_orcas = ["O_Heli_Light_02_F","O_Heli_Light_02_v2_F"];
-	_blck_armed_ghosthawks = ["B_Heli_Transport_01_F","B_Heli_Transport_01_camo_F"];
-	_blck_armed_hurons = ["B_Heli_Transport_03_F","B_Heli_Transport_03_black_F"];
-	_blck_armed_attackHelis = ["B_Heli_Attack_01_F"];
-	_blck_armed_heavyAttackHelis = ["O_Heli_Attack_02_F","O_Heli_Attack_02_black_F"];
-	_blck_fighters = [
+	blck_littleBirds = ["B_Heli_Light_01_armed_F"];  //  AH-9 Pawnee  (WEST)
+	blck_armed_hellcats = ["I_Heli_light_03_F"];
+	blck_armed_orcas = ["O_Heli_Light_02_F","O_Heli_Light_02_v2_F"];
+	blck_armed_ghosthawks = ["B_Heli_Transport_01_F","B_Heli_Transport_01_camo_F"];
+	blck_armed_hurons = ["B_Heli_Transport_03_F","B_Heli_Transport_03_black_F"];
+	blck_armed_attackHelis = ["B_Heli_Attack_01_F"];
+	blck_armed_heavyAttackHelis = ["O_Heli_Attack_02_F","O_Heli_Attack_02_black_F"];
+	blck_fighters = [
 		//"O_Plane_CAS_02_F",  // /ti-199 Neophron (CAS)
 		"I_Plane_Fighter_03_AA_F",  //  A-143 Buzzard (AA)
 		//"I_Plane_Fighter_04_F",  //   	A-149 Gryphon
@@ -188,27 +188,27 @@
 	///////////////////////////////
 
 	blck_chanceHeliPatrolBlue = 0.8;  //[0 - 1]  Set to 0 to deactivate and 1 to always have a heli spawn over the mission center and patrol the mission area. The chance of paratroops dropping from the heli is defined by blck_chancePara(Blue|Red|Green|Orange) above.
-	blck_patrolHelisBlue = _blck_littleBirds;
+	blck_patrolHelisBlue = blck_littleBirds;
 	blck_noPatrolHelisBlue = 0;
 	
 	blck_chanceHeliPatrolRed = 0.8; // 0.4;
-	blck_patrolHelisRed = _blck_armed_hellcats;
+	blck_patrolHelisRed = blck_armed_hellcats;
 	blck_noPatrolHelisRed = 1;
 	
 	blck_chanceHeliPatrolGreen = 0.9999;
-	blck_patrolHelisGreen = _blck_armed_ghosthawks;
+	blck_patrolHelisGreen = blck_armed_ghosthawks;
 	blck_noPatrolHelisGreen = [1,3];
 	
 	blck_chanceHeliPatrolOrange = 0.9999;
-	blck_patrolHelisOrange = _blck_armed_attackHelis + _blck_armed_heavyAttackHelis; // + _blck_fighters;
+	blck_patrolHelisOrange = blck_armed_attackHelis + blck_armed_heavyAttackHelis; // + _blck_fighters;
 	blck_noPatrolHelisOrange = [2,4];
 
 	if (toLower(worldName) isEqualTo "namalsk") then
 	{
-		blck_patrolHelisRed = _blck_littleBirds + _blck_armed_hellcats;
-		blck_patrolHelisGreen = _blck_armed_hellcats + _blck_armed_ghosthawks;
+		blck_patrolHelisRed = blck_littleBirds + blck_armed_hellcats;
+		blck_patrolHelisGreen = blck_armed_hellcats + blck_armed_ghosthawks;
 		blck_noPatrolHelisGreen = 1;
-		blck_patrolHelisOrange = _blck_armed_ghosthawks;
+		blck_patrolHelisOrange = blck_armed_ghosthawks;
 		blck_noPatrolHelisOrange = 1;
 	};
 	////////////////////

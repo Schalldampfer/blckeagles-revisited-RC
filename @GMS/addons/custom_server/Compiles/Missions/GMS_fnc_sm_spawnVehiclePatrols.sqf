@@ -27,11 +27,9 @@ if (_vehiclePatrolSpawns isEqualTo []) then
 };
 
 {
-	private ["_vehicle","_spawnPos","_difficulty","_patrolRadius"];
-	_vehicle = _x select 0;
-	_spawnPos = _x select 1;
-	_difficulty = _x select 2;
-	_patrolRadius = _x select 3;
+	private _patrolVehicle = objNull;
+	_x params["_vehicle","_spawnPos","_difficulty","_patrolRadius"];
+	diag_log format["_fnc_sm_spawnVehiclePatrols:"];
 	//_newGroup = [_x,_unitsPerGroup,_unitsPerGroup,_aiDifficultyLevel,_coords,_minDist,_maxDist,_uniforms,_headGear,true,_weapons,_vests,_isScubaGroup] call blck_fnc_spawnGroup;
 	private _vehGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
 	_vehGroup setVariable["soldierType","vehicle"];
@@ -41,13 +39,10 @@ if (_vehiclePatrolSpawns isEqualTo []) then
 
 		//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",30],["_maxDis",45],["_group",grpNull]];
 		_patrolVehicle = [_spawnPos,_spawnPos,_vehicle,_patrolRadius,_patrolRadius,_vehGroup] call blck_fnc_spawnVehiclePatrol;  // Check whether we should pass the group; looks like we should.
-																								// Nope, not necessary
-		//_vehGroup setVariable["groupVehicle",_vehicle];
-
-		if !(isNull _patrolVehicle) then
-		{
-			_patrolVehicle setVariable["vehicleGroup",_vehGroup];
-		};
+		//if !(isNull _patrolVehicle) then
+		//{
+			//_patrolVehicle setVariable["vehicleGroup",_vehGroup];
+		//};
 	};
 } forEach _vehiclePatrolSpawns;
 

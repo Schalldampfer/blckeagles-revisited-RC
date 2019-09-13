@@ -14,8 +14,7 @@ params[["_side",blck_AI_Side],["_deleteWhenEmpty",true]];
 // for information about the _deleteWhenEmpty parameter see: https://community.bistudio.com/wiki/createGroup
 
 #ifdef blck_debugMode
-if (blck_debugLevel > 1) then 
-{diag_log format["_fnc_createGroup: _this = %1",_this]};
+if (blck_debugLevel > 1) then {diag_log format["_fnc_createGroup: _this = %1",_this]};
 #endif 
 
 private _groupSpawned = createGroup [_side, true]; 

@@ -13,12 +13,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_vehType","_pos",["_special","NONE"]];
-//diag_log format["spawnVehicle.sqf: _this = %3 | _vehType = %1 | _pos = %2",_vehType,_pos,_this];
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["spawnVehicle.sqf:  _vehType = %1 | _pos = %2",_vehType,_pos];};
-#endif
-
+diag_log format["spawnVehicle.sqf: _this = %3 | _vehType = %1 | _pos = %2",_vehType,_pos,_this];
 private _veh = createVehicle[_vehType, _pos, [], 0, _special];
 _veh setVectorUp surfaceNormal position _veh;
 _veh allowDamage true;
@@ -26,15 +21,6 @@ _veh enableRopeAttach true;
 _veh setVariable["blck_vehicle",true];
 [_veh] call blck_fnc_protectVehicle;
 [_veh] call blck_fnc_emptyObject;
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["spawnVehicle.sqf:: vehicle spawned is %1",_veh];};
-#endif
-//  params["_veh",["_clearInventory",true]];
-//[_veh,_clearInventory] call blck_fnc_configureMissionVehicle;
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["spawnVehicle:: returning parameter _veh = %1",_veh];};
-#endif
-
+diag_log format["spawnVehicle:: returning parameter _veh = %1",_veh];
 _veh
 	

@@ -169,6 +169,7 @@ private _functions = [
 	["blck_fnc_checkForEmptyVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_checkForEmptyVehicle.sqf"],		
 	["blck_fnc_handleEmptyVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleEmptyVehicle.sqf"],		
 	["blck_fnc_loadVehicleCrew","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_loadVehicleCrew.sqf"],
+	["blck_fnc_selectVehicleCrewCount","\q\addons\custom_server\Compiles\Missions\GMS_fnc_selectVehicleCrewCount.sqf"],
 
 	// functions to support Units
 	["blck_fnc_removeGear","\q\addons\custom_server\Compiles\Units\GMS_fnc_removeGear.sqf"],			// Strip an AI unit of all gear.
