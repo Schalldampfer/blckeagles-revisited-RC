@@ -19,7 +19,7 @@ if (_uniforms isEqualTo []) 		then {_uniforms = [_skillAI] call blck_fnc_selectA
 if (_headGear  isEqualTo [])		then {_headGear = [_skillAI] call blck_fnc_selectAIHeadgear};
 if (_vests isEqualTo []) 			then {_vests = [_skillAI] call blck_fnc_selectAIVests};
 if (_backpacks  isEqualTo []) 		then {_backpacks = [_skillAI] call blck_fnc_selectAIBackpacks};
-if (_weaponList  isEqualTo []) 	then {_weaponList = [_skillAI] call blck_fnc_selectAILoadout};
+if (_weaponList  isEqualTo []) 		then {_weaponList = [_skillAI] call blck_fnc_selectAILoadout};
 if (_sideArms isEqualTo []) 		then {[_skillAI] call blck_fnc_selectAISidearms};
 
 private["_vehGroup","_patrolVehicle","_vehiclePatrolSpawns","_missionAI","_missiongroups","_vehicles","_return","_vehiclePatrolSpawns","_vehicle","_return","_abort","_spawnPos","_v"];

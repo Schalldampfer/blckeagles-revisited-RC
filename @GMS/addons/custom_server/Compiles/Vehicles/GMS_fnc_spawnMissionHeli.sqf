@@ -33,17 +33,11 @@ switch (toLower(_skillAI)) do
 };
 private _grpPilot = [blck_AI_Side,true]  call blck_fnc_createGroup;
 [_grpPilot,_coords,_coords,_crewCount,_crewCount,_skillAI,_minDist,_maxDist,true,_uniforms,_headgear,_vests,_backpacks,_weaponList,_sideArms,false] call blck_fnc_spawnGroup;
-#ifdef blck_debugMode 
-if (blck_debugLevel > 2) then 
-{
-	diag_log format["_fnc_spawnMissionHeli: _group = %1 | units _grpPilot = %2 | _crewCount = %3",_grpPilot, units _grpPilot,_crewCount];
-};
-#endif
 _abort = if (isNull _grpPilot) then{true} else {false};
 if !(isNull _grpPilot)  then
 {
 
-	_grpPilot setBehaviour "COMBAT";
+	_grpPilot setBehaviour "SAFE";
 	_grpPilot setCombatMode "RED";
 	_grpPilot setSpeedMode "NORMAL";
 	_grpPilot allowFleeing 0;
@@ -52,7 +46,7 @@ if !(isNull _grpPilot)  then
 	_grpPilot setVariable["maxDis",_maxDist];
 	_grpPilot setVariable["timeStamp",diag_tickTime];
 	_grpPilot setVariable["arc",0];
-	_grpPilot setVariable["wpRadius",30];
+	_grpPilot setVariable["wpRadius",0];
 	_grpPilot setVariable["wpMode","SAD"];
 	#ifdef blck_debugMode 
 	if (blck_debugLevel > 2) then 
