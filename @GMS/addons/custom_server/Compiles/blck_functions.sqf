@@ -101,17 +101,17 @@ private _functions = [
 	["blck_fnc_sm_monitorGarrisonsASL","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorGarrisonsASL.sqf"],
 	["blck_fnc_sm_monitorGarrisons_relPos","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_monitorGarrisons_relPos.sqf"],	
 	//["blck_fnc_sm_spawnVehiclePatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnVehiclePatrol.sqf"],
-	["blck_fnc_sm_spawnAirPatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrol.sqf"],
-	["blck_fnc_sm_spawnEmplaced","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnEmplaced.sqf"],
-//	["blck_fnc_sm_spawnInfantryPatrol","\q\addons\custom_server\Compiles\Missions\GMS_sm_spawnInfantryPatrol.sqf"],
+	//["blck_fnc_sm_spawnAirPatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrol.sqf"],
+	//["blck_fnc_sm_spawnEmplaced","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnEmplaced.sqf"],
+	//["blck_fnc_sm_spawnInfantryPatrol","\q\addons\custom_server\Compiles\Missions\GMS_sm_spawnInfantryPatrol.sqf"],
 	["blck_fnc_sm_staticPatrolMonitor","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_staticPatrolMonitor.sqf"],
-//	["blck_fnc_sm_checkForPlayerNearMission","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_checkForPlayerNearMission.sqf"],
-	["blck_fnc_sm_spawnAirPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrols.sqf"],
+	//["blck_fnc_sm_checkForPlayerNearMission","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_checkForPlayerNearMission.sqf"],
+	//["blck_fnc_sm_spawnAirPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnAirPatrols.sqf"],
 	//["blck_fnc_sm_spawnEmplaceds","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnEmplaced.sqf"],
-	["blck_fnc_sm_spawnInfantryPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnInfantryPatrols.sqf"],
+	//["blck_fnc_sm_spawnInfantryPatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnInfantryPatrols.sqf"],
 	["blck_fnc_sm_spawnLootContainers","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnLootContainers.sqf"],
 	["blck_fnc_sm_spawnObjects","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnObjects.sqf"],
-	["blck_fnc_sm_spawnVehiclePatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnVehiclePatrols.sqf"],
+	//["blck_fnc_sm_spawnVehiclePatrols","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnVehiclePatrols.sqf"],
 	["blck_fnc_sm_spawnBuildingGarrison_ASL","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnBuildingGarrisonASL.sqf"],
 	["blck_fnc_sm_spawnBuildingGarrison_relPos","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnBuildingGarrison_relPos.sqf"],
 	["blck_fnc_sm_spawnObjectASLVectorDirUp","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_spawnObjectASLVectorDirUp.sqf"],
@@ -120,17 +120,17 @@ private _functions = [
 	["blck_fnc_spawnSurfacePatrol","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnSurfacePatrol.sqf"],
 	//["blck_fnc_sm_AddScubaGroup","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddScubaGroup.sqf"],
 	//["blck_fnc_sm_AddSurfaceVehicle","\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddSurfaceVehicle.sqf"],
-	["blck_fnc_sm_AddSDVVehicle","\q\addons\custom_server\Compiles\Missions\GMS_sm_AddSDVVehicle.sqf"],
-	["blck_fnc_sm_AddGroupToArray", "\q\addons\custom_server\Missions\Static\Code\GMS_fnc_sm_AddGroupToArray.sqf"],	
+	//["blck_fnc_sm_AddSDVVehicle","\q\addons\custom_server\Compiles\Missions\GMS_sm_AddSDVVehicle.sqf"],
+	["blck_fnc_sm_AddGroupToArray", "\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddGroupToArray.sqf"],	
 	
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]
 	["blck_fnc_setupWaypoints","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setupWaypoints.sqf"],			// Set default waypoints for a group
 	// 7/29/19 script mission; presume another function handles this now.
 	//["blck_fnc_missionGroupMonitor","\q\addons\custom_server\Compiles\Groups\GMS_fnc_missionGroupMonitor.sqf"], // Monitors active groups for those that are stuck in an SAD waypoint but not in combat
-	["blck_fnc_changeToSADWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSADWaypoint.sqf"],
-	["blck_fnc_changeToMoveWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToMoveWaypoint.sqf"],
-	["blck_fnc_changeToSentryWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSentryWaypoint.sqf"],
+	//["blck_fnc_changeToSADWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSADWaypoint.sqf"],
+	//["blck_fnc_changeToMoveWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToMoveWaypoint.sqf"],
+	//["blck_fnc_changeToSentryWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_changeToSentryWaypoint.sqf"],
 	["blck_fnc_setNextWaypoint","\q\addons\custom_server\Compiles\Groups\GMS_fnc_setNextWaypoint.sqf"],
 	["blck_fnc_cleanEmptyGroups","\q\addons\custom_server\Compiles\Groups\GMS_fnc_cleanEmptyGroups.sqf"],		 // GMS_fnc_cleanEmptyGroups
 	["blck_fnc_findNearestInfantryGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_findNearestInfantryGroup.sqf"],
