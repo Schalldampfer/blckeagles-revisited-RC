@@ -112,6 +112,8 @@ if (blck_ai_offload_to_client) then
 	//publicVariable "blck_fnc_changeToMoveWaypoint";
 	//publicVariable "blck_fnc_changeToSADWaypoint";
 	publicVariable "blck_EH_unitWeaponReloaded";
+	publicVariable "blck_EH_AIfiredNear";
+	publicVariable "blck_fnc_processAIfiredNear";
 };
 
 //Start the mission timers

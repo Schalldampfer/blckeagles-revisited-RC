@@ -35,15 +35,18 @@ if (_airPatrols isEqualTo []) then
 		_headGear = _this select 4;
 		_helis = _this select 5;
 		*/
+		// params["_coords","_skillAI","_helis",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]],["_Launcher","none"],["_crewCount",4]];
 		[_center,_difficulty,_weapons,_uniforms,_headGear,_heliTypes,0] call blck_fnc_spawnMissionHeli;
 	};
 } else {
 	{
 	/*
 		/*[aircraft classname, position, difficulty(blue, red etc)]*/
-		_aircraft = _x select 0;
-		_pos = _x select 1;
-		_difficulty = _x select 2;
+		_x params["_aircraft","_pos","_difficulty"];
+		//_aircraft = _x select 0;
+		//_pos = _x select 1;
+		//_difficulty = _x select 2;
+		//params["_coords","_skillAI","_helis",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]],["_Launcher","none"],["_crewCount",4]];
 		[_pos,_difficulty,_weapons,_uniforms,_headGear,_aircraft] call blck_fnc_spawnMissionHeli;
 	}forEach _airPatrols;
 };

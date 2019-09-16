@@ -288,7 +288,7 @@ if !(isServer) then
 	fn_handleMessage = {
 		if !(hasInterface) exitWith {};
 		//private["_event","_msg","_mission"];
-		diag_log format["fn_handleMessage ====]  Paremeters = _this = %1",_this];
+		//diag_log format["fn_handleMessage ====]  Paremeters = _this = %1",_this];
 		params["_event","_message",["_mission",""]];
 
 		//diag_log format["blck_Message ====]  Paremeters _event %1  _message %2 paramter #3 %3",_event,_message,_mission];

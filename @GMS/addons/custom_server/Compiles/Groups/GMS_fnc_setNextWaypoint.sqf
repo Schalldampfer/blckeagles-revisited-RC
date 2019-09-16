@@ -36,23 +36,47 @@ private _arc = _group getVariable "wpArc";					// Increment in degrees to be use
 //_group getVariable "soldierType";		// infantry, vehicle, air or emplaced. Note that there is no need to have more than one waypoint for emplaced units.
 private _wp = [_group,0];
 private _nearestEnemy = _leader findNearestEnemy (getPosATL _leader);
+private _maxTime = _group getVariable["maxTime",300];
 
-if (isNull _nearestEnemy) then 
-{
-	// Use standard waypoint algorythms
+//  Extricate stuck group.
+if (diag_tickTime > (_group getVariable "timeStamp") + _maxTime) exitWith 
+{  // try to get unit to move and do antiStuck actions
+	_group setBehaviour "CARELESS";  //  We need them to forget about enemies and move
+	_group setCombatMode "BLUE";  //  We need them to disengage and move
 	private _vector = _wpDir + _arc + 180;  // this should force  units to cross back and forth across the zone being patrolled
 	_group setVariable["wpDir",_vector,true];
 	private _newWPPos = _pos getPos[_patrolRadius,_vector];
 	_wp setWaypointPosition [_newWPPos,0];
-	_group setBehaviour "SAFE";  //  no enemies detected so lets put the group in a relaxed mode
 	_wp setWaypointBehaviour "SAFE";
 	_wp setWaypointCompletionRadius 0;
 	_wp setWaypointTimeout _wpTimeout;
+	_wp setWaypointType "MOVE";
+	_group setCurrentWaypoint _wp;	
+	diag_log format["_fnc_setNextWaypoint[antiSticking]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
+};
+
+//  Move when no enemies are nearby
+if (isNull _nearestEnemy) then 
+{
+	// Use standard waypoint algorythms
+	/*
+		Have groups zig-zag back and forth their patrol area
+		Setting more relaxed criteria for movement and rules of engagement
+	*/
+	private _vector = _wpDir + _arc + 180;  // this should force  units to cross back and forth across the zone being patrolled
+	_group setVariable["wpDir",_vector,true];
+	_group setCombatMode "YELLOW";
+	private _newWPPos = _pos getPos[_patrolRadius,_vector];
+	_wp setWaypointPosition [_newWPPos,0];
+	_group setBehaviour "SAFE";  //  no enemies detected so lets put the group in a relaxed mode
+	_wp setWaypointBehaviour "SAFE";
+	_wp setWaypointCombatMode "YELLOW";
+	_wp setWaypointCompletionRadius 0;
+	_wp setWaypointTimeout _wpTimeout;
 	_group setCurrentWaypoint _wp;
-	//diag_log format["_fnc_setNextWaypoin[no enemies]t: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
+	diag_log format["_fnc_setNextWaypoint[no enemies]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
 } else {
-	// move toward that enemy using hunting logic
-	// possibly along patrol perimeter
+	// move toward nearest enemy using hunting logic
 	// set mode to SAD / COMBAT
 	/*
 		_vector set to relative direction from leader to enemy +/- random adjustment of up to 33 degrees
@@ -61,7 +85,7 @@ if (isNull _nearestEnemy) then
 		when coupled with SAD behavior should cause interesting behaviors
 	*/
 	//  [point1, point2] call BIS_fnc_relativeDirTo
-	private _vector = ([(leader _group),_nearestEnemy] call BIS_fnc_relativeDirTo) + (random(33)*selectRandom[-1,1]);
+	private _vector = ([_leader,_nearestEnemy] call BIS_fnc_relativeDirTo) + (random(33)*selectRandom[-1,1]);
 	_group setVariable["wpDir",_vector];
 	private ["_huntDistance"];
 
@@ -87,7 +111,7 @@ if (isNull _nearestEnemy) then
 	_wp setWaypointCompletionRadius 0;
 	_group setCurrentWaypoint _wp;	
 	//  Assume the same waypoint statement will be available
-	diag_log format["_fnc_setNextWaypoin[enemies]t: _group = %1 | _newPos = %2 | _nearestEnemy = 54 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp,_nearestEnemy];
+	diag_log format["_fnc_setNextWaypoint[enemies]t: _group = %1 | _newPos = %2 | _nearestEnemy = 54 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp,_nearestEnemy];
 };
 
 
