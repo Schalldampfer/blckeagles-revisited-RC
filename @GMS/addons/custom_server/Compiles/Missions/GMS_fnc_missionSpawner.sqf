@@ -312,8 +312,9 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (309) emplaced weap
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
 if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
 {
+	//diag_log format["_missionSpawner(315):  _vehToSpawn = %1 | _missionPatrolVehicles = %2",_vehToSpawn,_missionPatrolVehicles];
 	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false,_vehicleCrewCount] call blck_fnc_spawnMissionVehiclePatrols;
-
+	//diag_log format["_missionSpawner(317):  _temp = %1",_temp];
 	if (typeName _temp isEqualTo "ARRAY") then
 	{
 		_abort = _temp select 2;

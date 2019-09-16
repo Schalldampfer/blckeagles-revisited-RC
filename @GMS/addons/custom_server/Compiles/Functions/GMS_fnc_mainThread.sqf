@@ -75,7 +75,7 @@ while {true} do
 		{
 			if (_x select 2 /* isRunning */) then 
 			{
-				diag_log format["script name %1",_x select 0];
+				//diag_log format["script name %1",_x select 0];
 			};
 		} forEach diag_activeSQFScripts;
 		#endif		

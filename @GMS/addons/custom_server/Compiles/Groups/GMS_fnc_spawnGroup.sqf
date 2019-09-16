@@ -13,7 +13,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 private["_numbertospawn","_safepos","_launcherType","_infantryType"];	
-params[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false]];
+params[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
 
 #ifdef blck_debugMode 
 if (blck_debugLevel > 3) then 
@@ -57,8 +57,11 @@ if !(isNull _group) then
 		} else {
 			_launcherType = "none";
 		};
+		private _unitPos = [_pos,3,6] call blck_fnc_findRandomLocationWithinCircle;
 		 //params["_pos","_aiGroup",_skillLevel,_uniforms, _headGear,_vests,_backpacks,_Launcher,_weaponList,_sideArms,_scuba];
-		[_pos,_group,_skillLevel,_uniforms,_headGear,_vests,_backpacks,_launcherType, _weaponList, _sideArms, _scuba] call blck_fnc_spawnUnit;
+	 	[_unitPos,_group,_skillLevel,_uniforms,_headGear,_vests,_backpacks,_launcherType, _weaponList, _sideArms, _scuba] call blck_fnc_spawnUnit;
+		//private _unit = [_unitPos,_group,_skillLevel,_uniforms,_headGear,_vests,_backpacks,_launcherType, _weaponList, _sideArms, _scuba] call blck_fnc_spawnUnit;
+		//diag_log format["_fnc_spawnGroup: _unit %1 spawned at %2 at a distance from the group center of %3 and _vector of %4",_unit,_unitPos,_unitPos distance _pos,_pos getRelDir _unitPos];
 	};
 	_group selectLeader ((units _group) select 0);
 	// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_pattern",["MOVE","SAD"]]];
@@ -68,7 +71,7 @@ if !(isNull _group) then
 		// params["_pos","_minDis","_maxDis","_group",["_mode","random"],["_wpPatrolMode","SAFE"],["_soldierType","null"],["_patrolRadius",30],["_wpTimeout",[5.0,7.5,10]]];
 		#define infantryPatrolRadius 30
 		#define infantryWaypointTimeout [5,7.5,10]
-		[_pos,_minDist,_maxDist,_group,"random","SAD",_infantryType,infantryPatrolRadius,infantryWaypointTimeout] spawn blck_fnc_setupWaypoints;
+		[_pos,_minDist,_maxDist,_group,"random","SAD",_infantryType,_patrolRadius,infantryWaypointTimeout] spawn blck_fnc_setupWaypoints;
 	};
 } else 
 {

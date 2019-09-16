@@ -12,8 +12,9 @@ this addEventHandler ["GetOutMan", {
 */
 
 //diag_log format["EH_vehicleManGetOut: _this = %1",_this];
-params["_unit","_role","_veh"];
-[_veh,_unit] remoteExec["blck_fnc_handleAIgetOut",2];
+//params["_unit","_role","_veh"];
+#define veh _this select 3
+[veh] call blck_fnc_handleAIgetOut;
 
 
 

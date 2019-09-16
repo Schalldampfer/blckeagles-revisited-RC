@@ -21,7 +21,6 @@ this addEventHandler ["GetOut", {
     turret: Array - turret path
 */
 
-//diag_log format["_fnc_handleAIgetOut: _this = %1",_this];
-private _veh = _this select 0;
-//private _unit = _this select 2;
-[_veh] call blck_fnc_checkForEmptyVehicle;
+diag_log format["_fnc_handleAIgetOut: _this = %1",_this];
+#define veh _this select 0
+if ((isServer) || local (veh)) then {[veh] call blck_fnc_checkForEmptyVehicle};

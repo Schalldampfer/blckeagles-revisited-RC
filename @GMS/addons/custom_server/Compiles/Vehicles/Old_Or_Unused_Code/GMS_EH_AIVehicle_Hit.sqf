@@ -11,6 +11,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 //#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+// TODO: No longer needed; move this to old code folder
 if (isServer) then {_this call blck_fnc_HandleAIVehicleHit};
 
 

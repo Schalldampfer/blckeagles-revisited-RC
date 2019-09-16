@@ -11,38 +11,45 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params["_coords","_noVehiclePatrols","_vehiclePatrolSpawns","_aiDifficultyLevel","_uniforms","_headGear",["_missionType","unspecified"]];
+params["_coords","_noVehiclePatrols","_vehiclePatrolSpawns","_aiDifficultyLevel"];
 //diag_log format["_sm_spawnVehiclePatrols:: _vehiclePatrolSpawns = %1",_vehiclePatrolSpawns];
 private["_vehGroup","_patrolVehicle","_missionAI","_missiongroups","_vehicles","_return","_vehiclePatrolSpawns","_randomVehicle","_return","_abort"];
-//if (count _weapons isEqualTo 0) then {_weaponList = [_aiDifficultyLevel] call blck_fnc_selectAILoadout};
+private ["_weaponList","_sideArms","_uniforms","_headgear","_vests","_backpacks"];
+
 if (_vehiclePatrolSpawns isEqualTo []) then
 {
 	private["_spawnPoints","_vehType"];
 	_spawnPoints = [_coords,_noVehiclePatrols,75,100] call blck_fnc_findPositionsAlongARadius;
 	{
-	  //  ["B_G_Offroad_01_armed_F",[22819.4,16929.5,3.17413],"red", 600],
-	  _vehType = selectRandom blck_AIPatrolVehicles;
-	  _vehiclePatrolSpawns pushBack [_vehType, _x, _aiDifficultyLevel, 150];
+	  //  ["Vehicle Class Name", position[x,y,z], AI Skill [blue, red, green, orange],patrol radius [0 for static units], respawn time [seconds]]
+		#define vehiclePatrolRadius 150
+		#define vehicleRespawnTime 900
+		_vehType = selectRandom blck_AIPatrolVehicles;
+		_vehiclePatrolSpawns pushBack [_vehType, _x, _aiDifficultyLevel, vehiclePatrolRadius,vehicleRespawnTime];
 	} forEach _spawnPoints;
 };
 
 {
 	private _patrolVehicle = objNull;
-	_x params["_vehicle","_spawnPos","_difficulty","_patrolRadius"];
-	diag_log format["_fnc_sm_spawnVehiclePatrols:"];
-	//_newGroup = [_x,_unitsPerGroup,_unitsPerGroup,_aiDifficultyLevel,_coords,_minDist,_maxDist,_uniforms,_headGear,true,_weapons,_vests,_isScubaGroup] call blck_fnc_spawnGroup;
+	_x params["_vehicle","_spawnPos","_aiDifficultyLevel","_patrolRadius","_respawnTime"];
 	private _vehGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
-	_vehGroup setVariable["soldierType","vehicle"];
 	if !(isNull _vehGroup) then 
 	{
-		[_vehGroup,_spawnPos,_spawnPos,3,3,_difficulty,1,2,_uniforms,_headGear,false] call blck_fnc_spawnGroup;
+		_vehGroup setVariable["soldierType","vehicle"];		
+		_weaponList = [_aiDifficultyLevel] call blck_fnc_selectAILoadout;
+		_sideArms 	= [_aiDifficultyLevel] call blck_fnc_selectAISidearms;
+		_uniforms 	= [_aiDifficultyLevel] call blck_fnc_selectAIUniforms;
+		_headGear 	= [_aiDifficultyLevel] call blck_fnc_selectAIHeadgear;
+		_vests 		= [_aiDifficultyLevel] call blck_fnc_selectAIVests;
+		_backpacks 	= [_aiDifficultyLevel] call blck_fnc_selectAIBackpacks;		
 
-		//params["_center","_pos",["_vehType","I_G_Offroad_01_armed_F"],["_minDis",30],["_maxDis",45],["_group",grpNull]];
-		_patrolVehicle = [_spawnPos,_spawnPos,_vehicle,_patrolRadius,_patrolRadius,_vehGroup] call blck_fnc_spawnVehiclePatrol;  // Check whether we should pass the group; looks like we should.
-		//if !(isNull _patrolVehicle) then
-		//{
-			//_patrolVehicle setVariable["vehicleGroup",_vehGroup];
-		//};
+		[_vehGroup,_spawnPos,_spawnPos,3,3,_difficulty,1,2,_uniforms,_headGear,false] call blck_fnc_spawnGroup;
+		blck_monitoredMissionAIGroups pushback _vehGroup;
+		#define useWaypoints true
+		//  params[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], 
+		//  ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
+		_patrolVehicle = [_spawnPos,_spawnPos,_vehicle,_patrolRadius,_patrolRadius,_vehGroup,useWaypoints,[difficulty] call blck_fnc_selectVehicleCrewCount,_patrolRadius] call blck_fnc_spawnVehiclePatrol;  // Check whether we should pass the group; looks like we should.
+
 	};
 } forEach _vehiclePatrolSpawns;
 

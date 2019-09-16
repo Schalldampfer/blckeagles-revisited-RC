@@ -11,4 +11,6 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 //#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-if (isServer) then {_this remoteExec ["blck_fnc_processAIKill",2]};
+#define unit _this select 0
+if (isServer) then {_this call blck_fnc_processAIKill};
+if (local (unit)) then  {_this call blck_fnc_processAIKill};
