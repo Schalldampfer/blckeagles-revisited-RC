@@ -1,7 +1,7 @@
-
 /*
-	Killed handler for _units
-	By Ghostrider-GRG-
+	_EH_AHVehicle_Hit
+	By Ghostrider [GRG]
+	Handles the case where a vehicle is hit.
 
 	--------------------------
 	License
@@ -11,6 +11,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 //#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-#define unit _this select 0
-if (isServer) then {_this call blck_fnc_processAIKill};
-if (local (unit)) then  {_this call blck_fnc_processAIKill};
+// TODO: No longer needed; move this to old code folder
+if (isServer) then {_this call blck_fnc_HandleAIVehicleHit};
+
+

@@ -15,6 +15,27 @@ Significant Changes:
 3. blckClient has been tweaked to inactivate some code on any connected HC.
 4. Script errors that prevented the HC from starting and being passed AI were fixed.
 
+In addition
+worked on killed and hit EH so that these can run on the client owning the unit and server with each having a specific role 
+  - note that this requires that the code be streamed to clients and compiled on the HC.
+Updates to client to reduce logging 
+Added a firedNear EH 
+Redid system for setting up combatmode and behavior to be context dependent
+Redid setNextWaypont to include an antiStuck check and implement the above checks on behavior and combat mode. 
+Support for claim-vehicle scripts is now built-in 
+	blck_allowClaimVehicle = true; // To allow players to claim vehicles (Exile only).
+Added a setting to disable having AI toss smoke before healing. Set:
+	blck_useSmokeWhenHealing=false; // to disable this
+Added an option to display kill notices using Toasts
+	blck_aiKillUseToast=true; // in blckClient.sqf in the debug folder of your mission.pbo to enable these.
+Added offloading of AI to clients
+	////////
+	//  Client Offloading and Headless Client Configurations
+	blck_useHC = true; // Experimental (death messages and rewards not yet working).
+	//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
+	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+										// TODO: set to false before release
 6.92 Build 180
 =======
 

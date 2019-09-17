@@ -24,9 +24,7 @@ while {true} do
 	uiSleep 1;
 	if (diag_tickTime > _timer1sec) then 
 	{		
-		#ifdef GRGserver
-		[] call blck_fnc_broadcastServerFPS;
-		#endif
+
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then
@@ -35,12 +33,12 @@ while {true} do
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
 		[] call blck_fnc_sm_staticPatrolMonitor;
 		[] call blck_fnc_vehicleMonitor;		
+		#ifdef GRGserver
+		[] call blck_fnc_broadcastServerFPS;
+		#endif		
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
-		[] call blck_fnc_cleanupAliveAI;
-		[] call blck_fnc_cleanupObjects;
-		[] call blck_fnc_cleanupDeadAI;
 		[] call blck_fnc_scanForPlayersNearVehicles;
 		[] call GMS_fnc_cleanupTemporaryMarkers;
 		[] call GMS_fnc_updateCrateSignals;				
@@ -51,8 +49,7 @@ while {true} do
 	{
 		_timer1min = diag_tickTime + 60;
 		[] call blck_fnc_spawnPendingMissions;
-		[] call blck_fnc_cleanEmptyGroups;
-		[] call blck_fnc_groupWaypointMonitor;  //  TODO: Test implementation of this function.
+		[] call blck_fnc_groupWaypointMonitor; 
 		if (blck_dynamicUMS_MissionsRuning < blck_numberUnderwaterDynamicMissions) then {[] spawn blck_fnc_addDyanamicUMS_Mission};
 		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
 		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
@@ -75,10 +72,14 @@ while {true} do
 		{
 			if (_x select 2 /* isRunning */) then 
 			{
-				diag_log format["script name %1",_x select 0];
+				//diag_log format["script name %1",_x select 0];
 			};
 		} forEach diag_activeSQFScripts;
 		#endif		
+		[] call blck_fnc_cleanupAliveAI;
+		[] call blck_fnc_cleanupObjects;
+		[] call blck_fnc_cleanupDeadAI;	
+		[] call blck_fnc_cleanEmptyGroups;			
 		_timer5min = diag_tickTime + 300;
 	};
 };

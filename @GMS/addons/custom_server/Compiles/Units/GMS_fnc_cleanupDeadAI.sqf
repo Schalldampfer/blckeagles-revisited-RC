@@ -16,19 +16,23 @@ if (blck_debugLevel > 2) then {diag_log format["fnc_cleanupDeadAI called at time
 #endif
 
 private["_aiList","_ai"];
-_aiList = +blck_deadAI;
+//_aiList = +blck_deadAI;
+for "_i" from 1 to count blck_deadAI do
 {
-	if (diag_tickTime > _x getVariable ["blck_cleanupAt",0]) then 
+	if (_i > count blck_deadAI) exitWith {};
+	_unit = blck_deadAI deleteAt 0;
+	if (diag_tickTime > _unit getVariable ["blck_cleanupAt",0]) then 
 	{
-		_ai = _x;
-		_nearplayer = (_ai nearEntities 1500) select {isplayer _x};
+		_nearplayer = (_unit nearEntities 1500) select {isplayer _x};
 		if (_nearplayer isequalto []) then {
 			{
-				deleteVehicle _x;
-			}forEach nearestObjects [getPos _ai,["WeaponHolderSimulated","GroundWeapoonHolder"],3];	
-			blck_deadAI = blck_deadAI - [_ai];
-			deleteVehicle _ai;
+				deleteVehicle _unit;
+			}forEach nearestObjects [getPos _unit,["WeaponHolderSimulated","GroundWeapoonHolder"],3];	
+			blck_deadAI = blck_deadAI - [_unit];
+			deleteVehicle _unit;
 		};
+	} else{
+		blck_deadAI pushBack _unit;
 	};
-} forEach _aiList;
+};
 

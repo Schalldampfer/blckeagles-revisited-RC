@@ -15,15 +15,21 @@ for "_i" from 1 to (count blck_liveMissionAI) do {
 	if ((_i) <= count blck_liveMissionAI) then {
 		_units = blck_liveMissionAI deleteat 0;
 		_units params ["_unitsarr","_timer"];
-		if (diag_tickTime > _timer) then {
+		if (diag_tickTime > _timer) then 
+		{
+			_nearplayer = ((_unitsarr select 0) nearEntities 1500) select {isplayer _x};
+			if (_nearplayer isequalto []) then 
 			{
-				if ((alive _x) && !(isNull objectParent _x)) then {
-					[objectParent _x] call blck_fnc_deleteAIvehicle;
-				};
-				[_x] call blck_fnc_deleteAI;
-			} forEach _unitsarr;
-		}
-		else {
+				{
+					if ((alive _x) && !(isNull objectParent _x)) then {
+						[objectParent _x] call blck_fnc_deleteAIvehicle;
+					};
+					[_x] call blck_fnc_deleteAI;
+				} forEach _unitsarr;
+			}else {
+				blck_liveMissionAI pushback _units;
+			};
+		} else {
 			blck_liveMissionAI pushback _units;
 		};
 	};

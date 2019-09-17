@@ -19,15 +19,18 @@
 private["_oldObjs"];
 for "_i" from 1 to (count blck_oldMissionObjects) do {
 	if (_i <= count blck_oldMissionObjects) then {
-		_oldObjs = blck_oldMissionObjects deleteat 0;
+		_oldObjs = blck_oldMissionObjects deleteAt 0;
 		_oldObjs params ["_objarr","_timer"];
-		if (diag_tickTime > _timer) then {
+		if (diag_tickTime > _timer) then 
+		{
+			_nearplayer = ((_oldObjs select 0) nearEntities 1500) select {isplayer _x};
+			if (_nearplayer isequalto []) then 
 			{
-				deleteVehicle _x;
-			} forEach _objarr;
-			//uiSleep 0.1;
-		}
-		else {
+				{deleteVehicle _x}forEach _objarr;
+			} else {
+				blck_oldMissionObjects pushback _oldObjs;
+			};
+		} else {
 			blck_oldMissionObjects pushback _oldObjs;
 		};
 	};

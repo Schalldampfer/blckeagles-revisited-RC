@@ -52,7 +52,7 @@ if (diag_tickTime > (_group getVariable "timeStamp") + _maxTime) exitWith
 	_wp setWaypointTimeout _wpTimeout;
 	_wp setWaypointType "MOVE";
 	_group setCurrentWaypoint _wp;	
-	diag_log format["_fnc_setNextWaypoint[antiSticking]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
+	//diag_log format["_fnc_setNextWaypoint[antiSticking]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
 };
 
 //  Move when no enemies are nearby
@@ -74,7 +74,7 @@ if (isNull _nearestEnemy) then
 	_wp setWaypointCompletionRadius 0;
 	_wp setWaypointTimeout _wpTimeout;
 	_group setCurrentWaypoint _wp;
-	diag_log format["_fnc_setNextWaypoint[no enemies]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
+	//diag_log format["_fnc_setNextWaypoint[no enemies]: _group = %1 | _newPos = %2 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp];
 } else {
 	// move toward nearest enemy using hunting logic
 	// set mode to SAD / COMBAT
@@ -105,13 +105,13 @@ if (isNull _nearestEnemy) then
 	//diag_log format["_fnc_setextWaypoint:  _pos = %1 | _patrolRadius = %5 |  _newWPPos = %2 | _huntDistance = %3 | _vector = %4",_pos,_newWPPos,_huntDistance,_vector,_patrolRadius];
 	_wp setWaypointPosition [_newWPPos,0];
 	_wp setWaypointBehaviour "SAD";
-	_group setBehaviour "AWARE";
+	_group setBehaviour "COMBAT";
 	_wp setWaypointCombatMode "RED";
 	_wp setWaypointTimeout[30,45,60];
 	_wp setWaypointCompletionRadius 0;
 	_group setCurrentWaypoint _wp;	
 	//  Assume the same waypoint statement will be available
-	diag_log format["_fnc_setNextWaypoint[enemies]t: _group = %1 | _newPos = %2 | _nearestEnemy = 54 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp,_nearestEnemy];
+	//diag_log format["_fnc_setNextWaypoint[enemies]t: _group = %1 | _newPos = %2 | _nearestEnemy = 54 | waypointStatements = %3",_group,_newWPPos,waypointStatements _wp,_nearestEnemy];
 };
 
 

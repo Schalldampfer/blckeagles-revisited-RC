@@ -200,6 +200,7 @@ if (blck_debugLevel > 2) then
 };
 #endif
 
+_unit addEventHandler ["FiredNear",{_this call blck_EH_AIfiredNear;}];
 _unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];
 _unit addMPEventHandler ["MPKilled", {[(_this select 0), (_this select 1)] call blck_EH_AIKilled;}];
 _unit addMPEventHandler ["MPHit",{[_this] call blck_EH_AIHit;}];

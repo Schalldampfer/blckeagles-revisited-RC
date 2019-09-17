@@ -12,8 +12,22 @@
 //  TODO: check that emplaced weapons that should be deleted are added to the scheduler.
 // assumptions: this is always and only run on the server regardless if th event is triggered on an HC or other client.
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-if !(isServer) exitWith {};
+
 params["_unit","_killer","_instigator"];
+if (hasInterface || !(hasInterface || isDedicated)) exitWith // Only run this on HC or clients 
+{
+	if (local _unit) then 
+	{
+
+		// soldierOne action ["Eject", vehicle soldierOne];
+		if !((vehicle _unit) isKindOf "Man") then 
+		{
+			_unit action["Eject", vehicle _unit];
+			[vehicle _unit] call blck_fnc_checkForEmptyVehicle;
+		};
+	};
+};
+
 //diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
@@ -21,15 +35,20 @@ _unit disableAI "ALL";
 {
 	_unit removeAllMPEventHandlers _x;
 }forEach["MPHit","MPKilled"];
+{
+	_unit removeAllEventHandlers _x;
+}forEach["FiredNear","Reloaded"];
+
 blck_deadAI pushback _unit;
 if (count(units (group _unit)) isEqualTo 0) then 
 {
 	deleteGroup _group;
 };
 [_unit] joinSilent grpNull;
-if !(_unit isKindOf "Man") then 
+
+//diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
+if !((vehicle _unit) isKindOf "Man") then 
 {
-	//diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
 	[_unit, ["Eject", vehicle _unit]] remoteExec ["action",(owner _unit)];
 };
 
