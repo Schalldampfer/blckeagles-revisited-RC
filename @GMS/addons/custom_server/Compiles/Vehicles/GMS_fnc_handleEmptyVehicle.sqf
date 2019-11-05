@@ -16,7 +16,7 @@ if (isServer) then
 {
 	if ({alive _x} count (crew _veh) == 0 || crew(_veh) isEqualTo []) then
 	{	
-		diag_log format["_fnc_handleEmptyVehicle: no units alive in vehicle %1",_veh, typeOf _veh,gettext (configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
+		//diag_log format["_fnc_handleEmptyVehicle: no units alive in vehicle %1",_veh, typeOf _veh,gettext (configFile >> 'cfgWeapons' >> typeOf _veh >> 'displayName')];
 		// TODO: Make sure this variable is properly set on all vehicles.
 		if (_veh getVariable["GRG_vehType","none"] isEqualTo "emplaced") then
 		{

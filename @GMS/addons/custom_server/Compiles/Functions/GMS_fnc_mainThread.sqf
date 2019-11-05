@@ -33,16 +33,12 @@ while {true} do
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
 		[] call blck_fnc_sm_staticPatrolMonitor;
 		[] call blck_fnc_vehicleMonitor;		
-		#ifdef GRGserver
-		[] call blck_fnc_broadcastServerFPS;
-		#endif		
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
 		[] call blck_fnc_scanForPlayersNearVehicles;
 		[] call GMS_fnc_cleanupTemporaryMarkers;
 		[] call GMS_fnc_updateCrateSignals;				
-		[] call blck_fnc_cleanEmptyGroups;
 		_timer20sec = diag_tickTime + 20;
 	};
 	if ((diag_tickTime > _timer1min)) then

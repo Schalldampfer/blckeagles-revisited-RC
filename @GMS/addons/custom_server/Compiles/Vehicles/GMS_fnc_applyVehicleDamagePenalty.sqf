@@ -10,7 +10,5 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 
-	private["_vd"];
 	params["_vk"];
-	_vd = damage _vk;
-	_vk setDamage (_vd + blck_RunGearDamage);
+	_vk setDamage ((damage _vk) + blck_RunGearDamage);

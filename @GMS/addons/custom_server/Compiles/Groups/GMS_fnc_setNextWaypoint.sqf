@@ -104,9 +104,11 @@ if (isNull _nearestEnemy) then
 	private _newWPPos = _pos getPos[_huntDistance,_vector];
 	//diag_log format["_fnc_setextWaypoint:  _pos = %1 | _patrolRadius = %5 |  _newWPPos = %2 | _huntDistance = %3 | _vector = %4",_pos,_newWPPos,_huntDistance,_vector,_patrolRadius];
 	_wp setWaypointPosition [_newWPPos,0];
-	_wp setWaypointBehaviour "SAD";
+	_wp setWaypointBehaviour"COMBAT";
 	_group setBehaviour "COMBAT";
+	_group setCombatMode "RED";
 	_wp setWaypointCombatMode "RED";
+	_wp setWaypointType "SAD";
 	_wp setWaypointTimeout[30,45,60];
 	_wp setWaypointCompletionRadius 0;
 	_group setCurrentWaypoint _wp;	

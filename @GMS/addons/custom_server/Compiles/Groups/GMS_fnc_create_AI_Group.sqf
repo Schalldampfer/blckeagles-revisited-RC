@@ -13,10 +13,6 @@
 params[["_side",blck_AI_Side],["_deleteWhenEmpty",true]];
 // for information about the _deleteWhenEmpty parameter see: https://community.bistudio.com/wiki/createGroup
 
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then {diag_log format["_fnc_createGroup: _this = %1",_this]};
-#endif 
-
 private _groupSpawned = createGroup [_side, true]; 
 if (isNull _groupSpawned) exitWith{"ERROR:-> Null Group created by blck_fnc_spawnGroup";};
 if (blck_simulationManager == blck_useDynamicSimulationManagement) then 
@@ -28,5 +24,5 @@ _groupSpawned setBehaviour "COMBAT";
 _groupSpawned allowfleeing 0;
 _groupSpawned setspeedmode "FULL";
 _groupSpawned setFormation blck_groupFormation; 
-_groupSpawned setVariable ["blck_group",true];
+_groupSpawned setVariable ["blck_group",1];
 _groupSpawned

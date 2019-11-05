@@ -31,20 +31,20 @@ if (hasInterface || !(hasInterface || isDedicated)) exitWith // Only run this on
 //diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
 _unit setVariable ["blck_cleanupAt", (diag_tickTime) + blck_bodyCleanUpTimer];
-_unit disableAI "ALL";
+//_unit disableAI "ALL";
 {
 	_unit removeAllMPEventHandlers _x;
 }forEach["MPHit","MPKilled"];
 {
 	_unit removeAllEventHandlers _x;
 }forEach["FiredNear","Reloaded"];
-
+[_unit] joinSilent blck_graveyardGroup;
+//diag_log format["_processAIKill: units in graveyardGroup = %1",units blck_graveyardGroup];
 blck_deadAI pushback _unit;
 if (count(units (group _unit)) isEqualTo 0) then 
 {
 	deleteGroup _group;
 };
-[_unit] joinSilent grpNull;
 
 //diag_log format["_fnc_processAIKill: unit linked to crew of vehicle %1 | typeOf (vehicle _unit = %2)",vehicle _unit,typeOf (vehicle _unit)];
 if !((vehicle _unit) isKindOf "Man") then 

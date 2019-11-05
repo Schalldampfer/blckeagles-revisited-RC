@@ -21,18 +21,12 @@ private _vehs = [];
 	_pos = _coords vectorAdd _vehOffset;
 	_veh = [_vehType, _pos] call blck_fnc_spawnVehicle;
 	_veh setDir _dir;
-	//[_veh] call blck_fnc_emptyObject;
-	//_veh setVehicleLock "UNLOCKED";
 	_veh lock _lock;
 	if (_loadCrateTiming isEqualTo "atMissionSpawn") then
 	{
 		//diag_log format["blck_fnc_spawnMissionLootVehicles::-> loading loot at mission spawn for veh %1",_x];
 		[_veh,_lootArray,_lootCounts] call blck_fnc_fillBoxes;
 		_veh setVariable["lootLoaded",true];
-	}
-	else
-	{
-		//diag_log format["blck_fnc_spawnMissionLootVehicles::-> not loading veh loot at this time for veh %1",_x];
 	};
 	_vehs pushback _veh;
 }forEach _missionLootVehicles;

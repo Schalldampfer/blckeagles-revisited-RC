@@ -19,11 +19,13 @@ publicVariable "blck_modType";
 if ((tolower blck_modType) isEqualto "epoch") then {
 	diag_log "[blckeagls] Waiting until EpochMod is ready...";
 	waituntil {!isnil "EPOCH_SERVER_READY"};
+	diag_log "[blckeagls] EpochMod is ready...loading blckeagls";
 };
 if ((toLower blck_modType) isEqualTo "exile") then
 {
 	diag_log "[blckeagls] Waiting until ExileMod is ready ...";
-	waitUntil {!isNil "PublicServerIsLoaded"};
+	waitUntil {!PublicServerIsLoaded};
+	diag_log "[blckeagls] Exilemod is ready...loading blckeagls";	
 };
 
 private _blck_loadingStartTime = diag_tickTime;
@@ -108,12 +110,24 @@ if (blck_blacklistTraderCities) then
 
 if (blck_ai_offload_to_client) then 
 {
+	if (blck_useHC) then 
+	{
+		blck_useHC = false;
+		diag_log "[blckeagls] <WARNING> blck_useHC has been diabled to allow offloading to clients";
+	};
+	// Broadcast some code to clients
 	publicVariable "blck_fnc_setNextWaypoint";
-	//publicVariable "blck_fnc_changeToMoveWaypoint";
-	//publicVariable "blck_fnc_changeToSADWaypoint";
 	publicVariable "blck_EH_unitWeaponReloaded";
 	publicVariable "blck_EH_AIfiredNear";
 	publicVariable "blck_fnc_processAIfiredNear";
+	publicVariable "blck_EH_vehicleGetOut";
+	publicVariable "blck_fnc_handleVehicleGetOut";
+	publicVariable "blck_EH_vehicleManGetOut";
+	publicVariable "blck_fnc_checkForEmptyVehicle";
+	publicVariable "blck_fnc_handleEmptyVehicle";
+	publicVariable "blck_fnc_unlockVehicle";
+	publicVariable "blck_EH_AIKilled";
+	publicVariable "blck_fnc_processAIKill";
 };
 
 //Start the mission timers
