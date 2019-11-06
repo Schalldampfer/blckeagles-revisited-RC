@@ -23,7 +23,8 @@ for "_i" from 1 to (count blck_oldMissionObjects) do {
 		_oldObjs params ["_objarr","_timer"];
 		if (diag_tickTime > _timer) then 
 		{
-			_nearplayer = ((_oldObjs select 0) nearEntities 1500) select {isplayer _x};
+			//_nearplayer = ((_oldObjs select 0) nearEntities 1500) select {isplayer _x};
+			private _nearplayer = [position (_objarr select 0),800] call blck_fnc_nearestPlayers;
 			if (_nearplayer isequalto []) then 
 			{
 				{deleteVehicle _x}forEach _objarr;
