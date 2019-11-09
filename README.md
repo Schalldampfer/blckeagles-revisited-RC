@@ -18,7 +18,8 @@ Included is an updated version of blckeagls mission system. This began as an eff
 	Narines - bug fixes and improvements.
 	Bill (DBD Clan) for example compositions.
 	cyncrwler, Grahamme and many others for help with troubleshooting and testing
-	Brian Soanes for performance fixes and general guidance.
+	Brian Soanes for helpful bug fixes, testing, performance fixes and general guidance.
+	
 
 	
 * Additional Credits include authors of other missions systems who's work influenced this update. 
