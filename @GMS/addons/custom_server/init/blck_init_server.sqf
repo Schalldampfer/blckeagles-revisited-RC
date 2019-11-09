@@ -151,6 +151,11 @@ if (blck_enableBlueMissions > 0) then
 	//[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue] spawn blck_fnc_missionTimer;//Starts minor mission system (Blue Map Markers)
 	[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue,blck_enableBlueMissions] call blck_fnc_addMissionToQue;
 };
+// Setup a group for AI corpses
+// params[["_side",blck_AI_Side],["_deleteWhenEmpty",true]];
+blck_graveyardGroup = createGroup [blck_AI_Side,false];
+blck_graveyardGroup setGroupId ["blck_graveyard"];
+blck_graveyardGroup setVariable ["blck_group",1];
 
 //  start the main thread for the mission system which monitors missions running and stuff to be cleaned up
 [] spawn blck_fnc_mainThread;

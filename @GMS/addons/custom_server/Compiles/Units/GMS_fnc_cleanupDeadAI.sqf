@@ -11,9 +11,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then {diag_log format["fnc_cleanupDeadAI called at time %1",diag_tickTime];};
-#endif
+diag_log format["fnc_cleanupDeadAI: time %1 | count blck_deadAI %2",diag_tickTime,count blck_deadAI];
 
 for "_i" from 1 to count blck_deadAI do
 {
@@ -21,7 +19,7 @@ for "_i" from 1 to count blck_deadAI do
 	private _unit = blck_deadAI deleteAt 0;
 	if (diag_tickTime > _unit getVariable ["blck_cleanupAt",0]) then 
 	{
-		private _nearplayer = (_unit nearEntities 1500) select {isplayer _x};
+		private _nearplayer = [position _unit,800] call blck_fnc_nearestPlayers;
 		if (_nearplayer isequalto []) then {
 			{
 				deleteVehicle _unit;

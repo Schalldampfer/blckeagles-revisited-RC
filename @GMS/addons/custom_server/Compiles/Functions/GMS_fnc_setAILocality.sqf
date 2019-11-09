@@ -16,7 +16,7 @@
 */
 
 private _AI = param [0,objNull,[objNull,grpNull]];
-//diag_log format["_fnc_setAILocality: _this = %1",_this];
+
 if (isNull _AI) exitWith
 {
 	diag_log format ["blckeagls ERROR :: Calling blck_fnc_SetAILocality with null parameter; _this: %1",_this];
@@ -45,10 +45,12 @@ private _client = objNull;
 if (!isNull _client) then
 {
 	private _swapped = if (_AIType isEqualTo "OBJECT") then {_AI setOwner (owner _client)} else {_AI setGroupOwner (owner _client)};
-
-	if (!_swapped) then
+	if (toLower(blck_modType) isEqualTo "exile") then
 	{
-		ExileServerOwnershipSwapQueue pushBack [_AI,_client];
+		if (!_swapped) then
+		{
+			ExileServerOwnershipSwapQueue pushBack [_AI,_client];
+		};
 	};
 
 	if (blck_ai_offload_notifyClient) then
@@ -57,21 +59,9 @@ if (!isNull _client) then
 		_msg remoteExecCall ["systemChat", _client];
 		_msg remoteExecCall ["diag_log", _client];
 	};
-	#ifdef blck_debugMode
-	if (blck_debugOn) then
-	{
-		diag_log format ["SetAILocality :: Ownership swap of %1 (%4) to %2 (%3) is initialized. Initial swap attempt successful: %5",_AI, name _client, getPlayerUID _client, _AIType, _swapped];
-	};
-	#endif
 	true
 }
 else
 {
-	#ifdef blck_debugMode
-	if (blck_debugOn) then
-	{
-		diag_log format ["SetAILocality :: No viable client found for the ownership of %1! _pos: %2.",_AI,_pos];
-	};
-	#endif
 	false
 };

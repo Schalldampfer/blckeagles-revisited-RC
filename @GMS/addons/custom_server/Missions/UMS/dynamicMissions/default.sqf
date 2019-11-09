@@ -8,7 +8,7 @@ private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_marke
 	"_chanceReinforcements","_helipatrol","_endCondition","_markerColor","_markerType","_useMines","_difficulty","_missionCenter",
 	"_missionGroups","_scubaGroupParameters","_vehiclePatrolParameters","_submarinePatrolParameters","_aircraftTypes","_noAirPatrols","_airPatrols",
 	"_vests","_backpacks","_weaponList","_sideArms","_uniforms","_headGear","_chanceHeliPatrol","_noChoppers","_chancePara","_missionHelis","_noPara",
-	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts","_vehiclecrewcount"];
+	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts"];
 params["_missionCenter","_mission"];
 //_mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 //_missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.

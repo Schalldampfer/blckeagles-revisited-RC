@@ -10,23 +10,25 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+diag_log format["_fnc_cleanupaliveAI: called at %1 | count %2",diag_ticktime,count blck_liveMissionAI];
 for "_i" from 1 to (count blck_liveMissionAI) do {
 	if ((_i) <= count blck_liveMissionAI) then {
 		_units = blck_liveMissionAI deleteat 0;
-		_units params ["_unitsarr","_timer"];
+		_units params ["_missionCenter","_unitsarr","_timer"];
+		diag_log format["_fnc_cleanupAliveAI: _missionCenter %1 | typeName _unitsArr = %2 | _unitsarr = %3",_missionCenter,typeName _unitsArr, _unitsarr];
 		if (diag_tickTime > _timer) then 
 		{
-			_nearplayer = ((_unitsarr select 0) nearEntities 1500) select {isplayer _x};
-			if (_nearplayer isequalto []) then 
+			private _nearplayer = [_missionCenter,800] call blck_fnc_nearestPlayers;
+			if (_nearPlayer isEqualTo []) then 
 			{
 				{
-					if ((alive _x) && !(isNull objectParent _x)) then {
-						[objectParent _x] call blck_fnc_deleteAIvehicle;
+					private _unit = _x;
+					if ((alive _unit) && !(isNull objectParent _unit)) then {
+						[objectParent _unit] call blck_fnc_deleteAIvehicle;
 					};
-					[_x] call blck_fnc_deleteAI;
+					[_unit] call blck_fnc_deleteAI;
 				} forEach _unitsarr;
-			}else {
+			} else { 
 				blck_liveMissionAI pushback _units;
 			};
 		} else {
