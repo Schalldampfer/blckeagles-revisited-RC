@@ -68,6 +68,14 @@ _blck_localMissionMarker = [_markerClass,_coords,"","",_markerColor,_markerType]
 #define delayTime 1
 #define useRelativePos true
 
+_markerMissionName = format["[%1] %2", switch (_markerColor) do {
+	case "ColorOrange":{"Extreme"};
+	case "ColorGreen":{"Hard"};
+	case "ColorBlue":{"Medium"};
+	case "ColorRed":{"Easy"};
+	default {"Unknown"};
+}, _markerMissionName];
+
 #ifdef blck_debugMode
 diag_log "_missionSpawner:  All variables initialized";
 #endif
