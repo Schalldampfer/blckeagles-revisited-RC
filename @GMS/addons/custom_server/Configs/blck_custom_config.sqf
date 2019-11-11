@@ -97,25 +97,15 @@ switch (toLower (worldName)) do
 	};
 	case "malden":
 	{
-		_arr = date call BIS_fnc_sunriseSunsetTime;
-		_sunrise = _arr select 0;
-		_sunset = _arr select 1;
-		_time = dayTime;
-		_daylight = _sunset - _sunrise;
-		systemChat format["%1",_daylight];
-		systemChat format["TimeAcelDay = %1", _daylight / 2.5];
 		blck_timeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
-		blck_timeAccelerationDay = (_daylight / 2.5);  // Daytime time accelearation
-		blck_timeAccelerationDusk = 8; // Dawn/dusk time accelearation
-		blck_timeAccelerationNight = ((24 - _daylight) / 1.5);  // Nighttim time acceleration
+		blck_timeAccelerationDay = 1.4;  // Daytime time accelearation
+		blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
+		blck_timeAccelerationNight = 8;  // Nighttim time acceleration
 		blck_enableOrangeMissions = 1;  
 		blck_enableGreenMissions = 1;
-		blck_enableRedMissions = 1;
+		blck_enableRedMissions = 2;
 		blck_enableBlueMissions = 1;
-		blck_numberUnderwaterDynamicMissions = 3;	
-		blck_enableHunterMissions = 1;
-		blck_enableScoutsMissions = 1;
-		blck_maxCrashSites = 3; 		
+		blck_numberUnderwaterDynamicMissions = -1;
 	};	
 	case "lythium": 
 	{

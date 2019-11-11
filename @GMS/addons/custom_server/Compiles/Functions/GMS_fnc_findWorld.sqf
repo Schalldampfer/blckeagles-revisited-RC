@@ -56,6 +56,7 @@ switch (_blck_WorldName) do
 			blck_mapCenter = [6049.26,6239.63,0]; //centerPosition = {7100, 7750, 300};
 			blck_mapRange = 6000;
 		};
+		case "tanoa":{blck_mapCenter = [9285, 10111, 0];blck_mapRange = 5600;};
 		case "taviana":{blck_mapCenter = [10370, 11510, 0];blck_mapRange = 14400;};
 		case "namalsk":{blck_mapCenter = [4352, 7348, 0];blck_mapRange = 10000;};
 		case "napf": {blck_mapCenter = [10240,10240,0]; blck_mapRange = 14000};  // {_centerPos = [10240, 10240, 0];_isMountainous = true;_maxHeight = 50;};

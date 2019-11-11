@@ -54,6 +54,13 @@ _fn_doUpdates = {
 			[["showScore",[_respectGained,_distanceBonus,_kills]], [_player]] call blck_fnc_messageplayers;
 		};
 	};
+
+	if (!isNil "A3EAI_sendKillMessage") then {
+		if (A3EAI_enableDeathMessages && {isPlayer _player}) exitWith {
+			[_player,_unit] call A3EAI_sendKillMessage;
+		};
+	};
+
 	if (blck_useKillMessages) then
 	{
 		private _weapon = currentWeapon _player;
