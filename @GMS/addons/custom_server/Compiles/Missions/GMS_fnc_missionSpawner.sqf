@@ -358,7 +358,7 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (355) loot crate(s)
 
 if (count _missionLootVehicles > 0) then
 {
-	_temp = [_coords,_missionLootVehicles,_loadCratesTiming] call blck_fnc_spawnMissionLootVehicles;
+	_temp = [_coords,_missionLootVehicles,_loadCratesTiming,0] call blck_fnc_spawnMissionLootVehicles;
 	_crates append _temp;
 };
 if (_noPara > 0 && (random(1) < _chancePara) && _paraTriggerDistance == 0) then
