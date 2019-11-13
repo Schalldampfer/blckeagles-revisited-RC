@@ -15,9 +15,8 @@ params["_coords","_missionLootVehicles",["_loadCrateTiming","atMissionSpawn"],["
 if (count _coords == 2) then {_coords pushBack 0};
 private _vehs = [];
 {
-	//diag_log format["spawnMissionCVehicles.sqf _x = %1",_x];
-	_x params["_vehType","_vehOffset","_lootArray","_lootCounts",["_dir",0]];
-	//diag_log format["spawnMissionCVehicles: _vehType = %1 | _vehOffset = %2 | _lootArray = %3 | _lootCounts = %4",_vehType,_vehOffset,_lootArray,_lootCounts];
+	_x params["_vehType","_vehOffset",["_dir",0],"_lootArray","_lootCounts"];
+	//diag_log format["spawnMissionCVehicles: _vehType = %1 | _vehOffset = %2 | _lootCounts = %4 | _dir %5 | _lock %6 | _lootArray = %3 ",_vehType,_vehOffset,_lootArray,_lootCounts,_dir,_lock];
 	_pos = _coords vectorAdd _vehOffset;
 	_veh = [_vehType, _pos] call blck_fnc_spawnVehicle;
 	_veh setDir _dir;

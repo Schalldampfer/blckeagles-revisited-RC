@@ -39,7 +39,7 @@ diag_log format["[blckeagls] functions compiled"];
 call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
 waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};
 diag_log format["[blckeagls] blck_useHC = %1 | 	blck_simulationManager = %2 ",blck_useHC,blck_simulationManager];
-diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
+diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_ai_offload_to_client = %2 | blck_debugLevel = %3",blck_debugON,blck_ai_offload_to_client,blck_debugLevel];
 
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";

@@ -14,19 +14,19 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_unit","_killer","_instigator"];
-if (hasInterface || !(hasInterface || isDedicated)) exitWith // Only run this on HC or clients 
-{
-	if (local _unit) then 
-	{
 
-		// soldierOne action ["Eject", vehicle soldierOne];
-		if !((vehicle _unit) isKindOf "Man") then 
-		{
-			_unit action["Eject", vehicle _unit];
-			[vehicle _unit] call blck_fnc_checkForEmptyVehicle;
-		};
+if (local _unit) then 
+{
+
+	// soldierOne action ["Eject", vehicle soldierOne];
+	if !((vehicle _unit) isKindOf "Man") then 
+	{
+		_unit action["Eject", vehicle _unit];
+		[vehicle _unit] call blck_fnc_checkForEmptyVehicle;
 	};
 };
+
+if !(isServer) exitWith {};
 
 //diag_log format["_fnc_processAIKill: _unit = %1 | _killer = %2",_unit,_killer];
 if (_unit getVariable["blck_cleanupAt",-1] > 0) exitWith {};  // this is here so that the script is not accidently run more than once for each MPKilled occurrence.
