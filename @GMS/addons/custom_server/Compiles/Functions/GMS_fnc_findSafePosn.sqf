@@ -130,6 +130,7 @@ if ((count _coords) > 2) then
 	_temp = [_coords select 0, _coords select 1];
 	_coords = _temp;
 };
+diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
 _coords;
 
 

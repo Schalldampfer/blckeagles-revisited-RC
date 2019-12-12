@@ -9,9 +9,9 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-//  	["B_SDV_01_F",[22584.9,15304.8,-6.14801],"red",4, 75,0],
+
 params["_SDV","_pos","_difficulty","_numAI","_patrolRadius","_respawnTime"];
-//diag_log format["_fnc_spawnSDVPatrol:  _this = %1",_this];
+
 private["_vehicle","_group","_diveDepth"];
 _group = [blck_AI_Side,true]  call blck_fnc_createGroup;
 if !(isNull _group) then 

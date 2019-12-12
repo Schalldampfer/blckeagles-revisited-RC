@@ -62,7 +62,8 @@ _wp setWaypointBehaviour "COMBAT";
 (group _unit) setCombatMode "RED";
 _wp setWaypointCombatMode "RED";
 
-if (blck_showCountAliveAI) then
+if (blck_showCountAliveAI && (isNil "blck_spawnerMode")) then
+// TODO: remove backwards compatible code when appropriate.
 {
 	{
 		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;

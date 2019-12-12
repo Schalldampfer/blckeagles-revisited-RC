@@ -15,21 +15,15 @@
 #define configureWaypoints true
 // TODO: consolidate code where possible, for example the recurring code to create the group and add units to the list of units spawned.
 // TODO: find reason that this sometimes throws errors because it passes an array rather than group.
-params["_coords",["_minNoAI",3],["_maxNoAI",6],"_missionGroups",["_aiDifficultyLevel","red"],["_uniforms",[]],["_headGear",blck_BanditHeadgear],["_vests",[]],["_backpacks",[]],["_weapons",[]],["_sideArms",[]],["_isScubaGroup",false]];
-#ifdef blck_debugMode
-if (blck_debugLevel >=2) then
-{
-	private _params = ["_coords","_minNoAI","_maxNoAI","_missionGroups","_aiDifficultyLevel","_uniforms","_headGear","_vests","_backpacks","_weapons","_sideArms","_isScubaGroup"];
-	{
-		diag_log format["_fnc_spawnMissionAI:: param %1 | isEqualTo %2 | _forEachIndex %3",_params select _forEachIndex,_this select _forEachIndex, _forEachIndex];
-	}forEach _this;
-};
-#endif
+
+params["_coords",["_minNoAI",3],["_maxNoAI",6],["_noAIGroups",0],["_missionGroups",[]],["_aiDifficultyLevel","red"],["_uniforms",[]],["_headGear",blck_BanditHeadgear],["_vests",[]],["_backpacks",[]],["_weapons",[]],["_sideArms",[]],["_isScubaGroup",false]];
 
 private["_unitsToSpawn","_unitsPerGroup","_ResidualUnits","_newGroup","_blck_AllMissionAI","_abort","_return","_adjusttedGroupSize","_minDist","_maxDist"];
 _unitsToSpawn = 0;
 _unitsPerGroup = 0;
 _ResidualUnits = 0;
+
+// TODO: Does not really look right
 if (_noAIGroups > 0) then
 {
  // Can add optional debug code here if needed.
@@ -43,7 +37,7 @@ _abort = false;
 #ifdef blck_debugMode
 if (blck_debugLevel >= 2) then
 {
-	diag_log format["_fnc_spawnMissionAI (30):: _unitsToSpawn %1 ; _unitsPerGroup %2  _ResidualUnits %3",_unitsToSpawn,_unitsPerGroup,_ResidualUnits];
+	diag_log format["_fnc_spawnMissionAI (30):: _noAIGroups = %1 | _unitsToSpawn %2 | _unitsPerGroup %3 | _ResidualUnits %4",_noAIGroups,_unitsToSpawn,_unitsPerGroup,_ResidualUnits];
 };
 #endif
 private _newGroup = grpNull;

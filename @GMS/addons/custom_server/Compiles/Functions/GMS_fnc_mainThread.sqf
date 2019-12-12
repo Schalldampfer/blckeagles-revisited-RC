@@ -24,14 +24,14 @@ while {true} do
 	uiSleep 1;
 	if (diag_tickTime > _timer1sec) then 
 	{		
-
+		[] call blck_fnc_monitorInitializedMissions;
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then
 	{
 		_timer5sec = diag_tickTime + 5;
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
-		[] call blck_fnc_sm_staticPatrolMonitor;
+		//[] call blck_fnc_sm_staticPatrolMonitor;  // TODO: sort out static missions
 		[] call blck_fnc_vehicleMonitor;		
 		//[] call blck_fnc_cleanupAliveAI;
 		//[] call blck_fnc_cleanupObjects;
@@ -50,9 +50,11 @@ while {true} do
 	if ((diag_tickTime > _timer1min)) then
 	{
 		_timer1min = diag_tickTime + 60;
-		[] call blck_fnc_spawnPendingMissions;
+
+			[] call blck_fnc_spawnPendingMissions;
+
 		[] call blck_fnc_groupWaypointMonitor; 
-		if (blck_dynamicUMS_MissionsRuning < blck_numberUnderwaterDynamicMissions) then {[] spawn blck_fnc_addDyanamicUMS_Mission};
+		//if (blck_dynamicUMS_MissionsRuning < blck_numberUnderwaterDynamicMissions) then {[] spawn blck_fnc_addDyanamicUMS_Mission};
 		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
 		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
 		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};

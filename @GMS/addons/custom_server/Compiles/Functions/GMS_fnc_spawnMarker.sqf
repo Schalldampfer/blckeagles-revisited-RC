@@ -9,6 +9,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 //#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+// To Be replaced by blck_fnc_createMarker which uses simplified parameter passing 
 
 private["_blck_fn_configureRoundMarker"];
 _blck_fn_configureRoundMarker = {

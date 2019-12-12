@@ -28,7 +28,8 @@ if (_patrols isEqualTo []) then
 {
 	// Use the random spawn logic from the regular dyanmic mission system.
 	//params[_coords,"_maxNoAI,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weapons,sideArms,_isScubaGroup];
-	[_coords,_minNoAI,_maxNoAI,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sidearms,false] call blck_fnc_spawnMissionAI;
+	//[_coords,_minNoAI,_maxNoAI,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sidearms,false] call blck_fnc_spawnMissionAI;
+	// TODO: check if this is needed
 } else {
 	{
 		//diag_log format["_sm_spawnInfantryPatrols.sqf:: _x = %1",_x];

@@ -12,7 +12,7 @@
 */
 #include"\q\addons\custom_server\Configs\blck_defines.hpp";
 
-diag_log "[blckeagls] loading variables";
+if (blck_debugOn) then {diag_log "[blckeagls] loading variables"};
 
 blck_minFPS = 8; 
 
@@ -45,5 +45,14 @@ blck_temporaryMarkers = [];
 blck_illuminatedCrates = []; // [crate,duration,freq of replacement]
 blck_mainThreadUpdateInterval = 60;
 blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,detailed /*unit by unit reveals*/";
-diag_log "[blckeagls] Variables Loaded";
+
+blck_spawnerMode = 1;
+blck_missionData = [];
+blck_activeMissionsList = [];
+
+blck_dynamicUMS_MissionsRuning = 0;
+blck_priorDynamicUMS_Missions = [];
+blck_UMS_ActiveDynamicMissions = [];
+
+if (blck_debugOn) then {diag_log "[blckeagls] Variables Loaded"};
 

@@ -23,7 +23,11 @@ blck_missionSystemRunning = true;
 
 if (isServer) then 
 {
-	[] execVM "\q\addons\custom_server\init\blck_init_server.sqf";
+	diag_log format["blck_fnc_init <SERVER> called at %1",diag_tickTime];
+	private _initFunc = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\init\blck_init_server.sqf";
+	private _script = [] execVM "\q\addons\custom_server\init\blck_init_server.sqf";
+	waitUntil {scriptDone _script};
+	diag_log format["blck_fnc_init: initialization scripts done at %1",diag_tickTime];
 };
 if (!isServer && !hasInterface) then 
 {
@@ -31,3 +35,8 @@ if (!isServer && !hasInterface) then
 	[] execVM "\q\addons\custom_server\init\blck_init_HC.sqf";
 };
 
+/*
+	TODO 
+	Check patrol radius for Air units, Ship units, land vehicle units, and infantry, both static and dynamically spawned.
+
+*/

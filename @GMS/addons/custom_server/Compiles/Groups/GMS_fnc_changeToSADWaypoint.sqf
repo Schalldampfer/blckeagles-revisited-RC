@@ -10,6 +10,8 @@
 	All the code and information provided here is provided under an Attribution Non-Commercial ShareAlike 4.0 Commons License.
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+	// TODO: Still needed?
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
@@ -30,7 +32,7 @@ _wp setWaypointName "sad";
 _wp setWaypointBehaviour "COMBAT";
 _wp setWaypointCombatMode "RED";
 _wp setWaypointTimeout [10,15,20];
-
+diag_log format['====Updating timestamp for group %1 and changing its WP to a Move Waypoint',group this];
 #ifdef blck_debugMode
 if (blck_debugLevel > 2) then {_wp setWaypointStatements ["true","this call blck_fnc_changeToMoveWaypoint; diag_log format['====Updating timestamp for group %1 and changing its WP to a Move Waypoint',group this];"]};	
 #else

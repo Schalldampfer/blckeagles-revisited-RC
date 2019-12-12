@@ -192,7 +192,7 @@ _temp = [[],[],false];
 if (count _missionGroups > 0) then
 {
 	// params["_coords",["_minNoAI",3],["_maxNoAI",6],"_missionGroups",["_aiDifficultyLevel","red"],["_uniforms",blck_SkinList],["_headGear",blck_BanditHeadgear],["_vests",blck_vests],["_backpacks",[]],["_weapons",[]],["_sideArms",blck_Pistols],["_isScubaGroup",false]];
-	_temp = [_coords, _minNoAI,_maxNoAI,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false] call blck_fnc_spawnMissionAI;
+	_temp = [_coords, _minNoAI,_maxNoAI,count _missionGroups,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false] call blck_fnc_spawnMissionAI;
 };
 
 #ifdef blck_debugMode
@@ -212,7 +212,7 @@ if (count _scubaGroupParameters > 0) then
 {
 	//diag_log format["_fnc_dynamicUMSspawner: spawning scuba groups with _scubaGroupParameters = %1",_scubaGroupParameters];
 	// params["_coords",["_minNoAI",3],["_maxNoAI",6],"_missionGroups",["_aiDifficultyLevel","red"],["_uniforms",blck_SkinList],["_headGear",blck_BanditHeadgear],["_vests",blck_vests],["_backpacks",[]],["_weapons",[]],["_sideArms",blck_Pistols],["_isScubaGroup",false]];
-	_temp = [_coords, _minNoAI,_maxNoAI,_scubaGroupParameters,_aiDifficultyLevel,blck_UMS_uniforms,blck_UMS_headgear,blck_UMS_vests,[],blck_UMS_weapons,[],isScubaMission] call blck_fnc_spawnMissionAI;
+	_temp = [_coords, _minNoAI,_maxNoAI,count _scubaGroupParameters,_scubaGroupParameters,_aiDifficultyLevel,blck_UMS_uniforms,blck_UMS_headgear,blck_UMS_vests,[],blck_UMS_weapons,[],isScubaMission] call blck_fnc_spawnMissionAI;
 };
 
 #ifdef blck_debugMode
@@ -632,5 +632,5 @@ _result = [_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_blck_localMission
 #ifdef blck_debugMode
 diag_log format["[blckeagls] dynamicUMSspawner:: (559) end of mission: blck_fnc_endMission has returned control to _fnc_dynamicUMSspawner"];
 #endif
-blck_missionsRun = blck_missionsRun + 1;
-diag_log format["[blckeagls] dynamicUMSspawner:: Total Dyanamic Land and UMS Run = %1", blck_missionsRun];
+//blck_missionsRun = blck_missionsRun + 1;
+//diag_log format["[blckeagls] dynamicUMSspawner:: Total Dyanamic Land and UMS Run = %1", blck_missionsRun];

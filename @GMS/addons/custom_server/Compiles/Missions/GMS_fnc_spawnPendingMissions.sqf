@@ -11,63 +11,64 @@
 	All the code and information provided here is provided under an Attribution Non-Commercial ShareAlike 4.0 Commons License.
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
+
+			_marker,
+		_difficulty,
+		_noMissions,
+		0,  // Number active 
+		0, // times spawned, useful for keeping unique markers 
+		_tMin,
+		_tMax,
+		_waitTime,
+		_missionsData  // 
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-#ifdef blck_debugMode
-if (blck_debugLevel >= 2) then {
-	//diag_log format["_fnc_spawnPendingMissions:: count blck_pendingMissions = %1", count blck_pendingMissions];
-};
-#endif
-
-if (blck_missionsRunning >= blck_maxSpawnedMissions) exitWith {
-
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 2) then {
-		//diag_log "_fnc_spawnPendingMissions:: --- >> Maximum number of missions is running; function exited without attempting to find a new mission to spawn";
-	};
-	#endif
-};
-
-private["_coords","_compiledMission","_search","_readyToSpawnQue","_missionToSpawn","_allowReinforcements"];
-_readyToSpawnQue = [];
-{                      //          0                 1                2          3     3      5         6     
-	// _mission = [_compiledMissionsList,format["%1%2",_marker,_i],_difficulty,_tMin,_tMax,_waitTime,[0,0,0]];
-	//diag_log format["_fnc_spawnPendingMissions: diag_tickTime %6 _marker %1 _difficulty %2 _tMin %3 _tMax %4 _waitTime %5",_x select 1, _x select 2, _x select 3, _x select 4, _x select 5, diag_tickTime];
-	if ( (diag_tickTime > (_x select 5)) && ((_x select 5) > 0) ) then 
-	{
-		_readyToSpawnQue pushback _x;
-		//diag_log format["_fnc_spawnPendingMissions: adding mission with _marker %1 _difficulty %2",_x select 1, _x select 2];
-		//diag_log format["_fnc_spawnPendingMissions: count _readyToSpawnQue = %1",count _readyToSpawnQue];
-	};
-} forEach blck_pendingMissions;
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then 
+if !(isNil "blck_spawnerMode") exitWith 
 {
-	//diag_log format["_fnc_spawnPendingMissions:: --- >> _readyToSpawnQue diag_tickTime %6 _marker %1 _difficulty %2 _tMin %3 _tMax %4 _waitTime %5",_readyToSpawnQue select 1, _readyToSpawnQue select 2, _readyToSpawnQue select 3, _readyToSpawnQue select 4, _readyToSpawnQue select 5, diag_tickTime];
-};
-#endif
-//diag_log format["_fnc_spawnPendingMissions: count _readyToSpawnQue = %1", count _readyToSpawnQue];
-if (count _readyToSpawnQue > 0) then
-{
-	_missionToSpawn = selectRandom _readyToSpawnQue;
-
-	#ifdef blck_debugMode
-	{
-		if (blck_debugLevel > 2) then
+	diag_log format["_fnc_spawnPendingMissions: count blck_missionData = %1",count blck_missionData];
+	{	
+		/*
+		_missionCategoryDescriptors params [
+				"_marker",
+				"_difficulty",
+				"_noMissions",  // Max no missions of this category
+				"_noActive",  // Number active 
+				"_timesSpawned", // times spawned, useful for keeping unique markers 
+				"_tMin", // Used to calculate waittime in the future
+				"_tMax", // as above
+				"_waitTime",  // time at which a mission should be spawned
+				"_missionsData"  // 
+			];
+		*/	
+		private _md = _x;	
+									// 0		1					2				   						3		4		  5	       6	   
+		_md params[/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
+		
+		
 		{
-			//if (_foreachindex > 0) then {diag_log format["_fnc_spawnPendingMissions: _missionToSpawn %1 = %2",_foreachindex, _missionToSpawn select _foreachindex]};
-		};
-	}forEach _missionToSpawn;
-	#endif
+			diag_log format["_fnc_spawnPendingMissions: _x param %1 = %2",_x,_md select _forEachIndex];
+		} forEach [/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
+		
+		if (_noActiveMissions < _maxNoMissions && diag_tickTime > _waitTime && blck_missionsRunning < blck_maxSpawnedMissions) then 
+		{
+			// time to reset timers and spawn something.
+			private _wt = diag_tickTime + _tmin + (random(_tMax - _tMin));
 
-	_coords = [] call blck_fnc_FindSafePosn;
-	_coords pushback 0;	
-	_compiledMission = selectRandom (_missionToSpawn select 0);
-	// 	_mission = [_compiledMissionsList,format["%1%2",_marker,_i],_difficulty,_tMin,_tMax,_waitTime,[0,0,0]];
-	_missionMarker = _missionToSpawn select 1;
-	_missionDifficulty = _missionToSpawn select 2;
-	[_coords,_missionMarker,_missionDifficulty] spawn _compiledMission;
+			#define waitTime 5
+			#define noActive 2
+			
+			_x set[waitTime, _wt];
+			//_x set[timesSpawned, _timesSpawned + 1];
+			_x set[noActive, _noActiveMissions + 1];
+			private _m = selectRandom _missionsData;
+			//private _mrkr = format["%1:%2",_marker,_timesSpawned];
+			//diag_log format["_fnc_spawnPendingMissions: using marker %1 | spawning mission %1",_mrkr,_m];
+			//uisleep 1;  // only for debugging purposes.  
+			//  TODO: comment out uiSleep at a later time.
+			[_x,_m] call blck_fnc_initializeMission;
+		};
+	} forEach blck_missionData;
 };
 
 true

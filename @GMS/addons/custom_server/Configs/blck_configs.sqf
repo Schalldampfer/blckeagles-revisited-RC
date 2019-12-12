@@ -17,13 +17,14 @@
 		changing any of these variables may break the mission systemChat
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
-	blck_debugON = false;  //  Do not touch ... 
-	blck_debugLevel = 0;  //  Do not touch ... 
+	blck_debugON = true;  //  Do not touch ... 
+	blck_debugLevel = 3;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
 	{
-		diag_log format["[blckeagls] Running configs for militarized servers build %1",blck_buildNumber];
-		execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
+		private _script = [] execVM "\q\addons\custom_server\Configs\blck_configs_mil.sqf";
+		waitUntil {scriptDone _script};
+		diag_log "[blckeagls] Configurations for militarized servers loaded";
 	};
 	#endif
 	diag_log format["[blckeagls] Loading configurations for Non-militarized servers build %1",blck_buildNumber];
@@ -95,7 +96,7 @@
 	// blck_labelMapMarkers: Determines if when the mission composition provides text labels, map markers with have a text label indicating the mission type
 	//When set to true,"arrow", text will be to the right of an arrow below the mission marker. 
 	// When set to true,"dot", ext will be to the right of a black dot at the center the mission marker. 
-	blck_labelMapMarkers = [true,"center"];  
+	blck_labelMapMarkers = true;  //  TODO: change this through all code to reflect that it is now a boolean rather than array
 	blck_preciseMapMarkers = true;  // Map markers are/are not centered at the loot crate
 	blck_showCountAliveAI = true;
 
