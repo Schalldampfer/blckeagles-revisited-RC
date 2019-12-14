@@ -45,6 +45,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 	];
 	#define noActive 2
 	#define waitTime 5
+	#define missionData 6	
 	{
 		diag_log format["fnc_initializeMission: _missionCategoryDescriptors:%1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
 	} forEach [
@@ -357,7 +358,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 				private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
 				_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_mainMarker,_labelMarker];
 	
-				#define missionData 6
+
 				_el set[missionData, _missionData];
 
 				// Everything spawned withouth serous errors so lets keep the mission active for future monitoring

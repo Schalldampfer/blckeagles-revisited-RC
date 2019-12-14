@@ -72,7 +72,7 @@ if (typeName _markerType isEqualTo "ARRAY" && !(typeName _markerType isEqualTo "
 	_markerSize = _markerType select 1;
 	_markerType = _markerType select 0;	
 };
-i
+
 	/*
 	private _maxNooMissions = 0;
 	private _noActiveMissions = 0;
