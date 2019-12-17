@@ -2,7 +2,7 @@
 	GMS_fnc_monitorInitializedMissions
 
 */
-//diag_log format["fnc_monitorInitializedMissions: time = %1 | count  blck_activeMissionsList %2 | blck_activeMissionsList %3",diag_tickTime,count blck_activeMissionsList,blck_activeMissionsList];
+diag_log format["fnc_monitorInitializedMissions: time = %1 | count  blck_activeMissionsList %2 | blck_activeMissionsList %3",diag_tickTime,count blck_activeMissionsList,blck_activeMissionsList];
 for "_i" from 1 to (count blck_activeMissionsList) do 
 {
 
@@ -45,9 +45,9 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 	];
 	#define noActive 2
 	#define waitTime 5
-	#define missionData 6	
+	#define missionData 4	
 	{
-		diag_log format["fnc_initializeMission: _missionCategoryDescriptors:%1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
+		diag_log format["fnc_monitorInitializeMission: _missionCategoryDescriptors:%1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
 	} forEach [
 		//"_marker",
 		"_difficulty",
@@ -128,9 +128,9 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 	diag_log format["_fnc_monitorInitializedMissions:time = %1 | _missionTimout = %2",diag_tickTime,_missionTimeoutAt];
 
 	diag_log format["_fnc_monitorInitializedMissions: _coords = %1",_coords];
-	private _playesrNear = [_coords, blck_TriggerDistance] call blck_fnc_nearestPlayers;
+	//private _playesrNear = [_coords, blck_TriggerDistance] call blck_fnc_nearestPlayers;
 	private _playerInRange = [_coords, blck_TriggerDistance, false] call blck_fnc_playerInRange;
-	diag_log format["_fnc_moniorInitializedMissions: _coords = %1 | _playersNear %2 | _playerInRange %3 | _triggered = %4 | _missionTimeoutAt = %5",_coords,_playesrNear,_playerInRange,_triggered,_missionTimeoutAt];
+	diag_log format["_fnc_moniorInitializedMissions: _coords = %1 | _playerInRange %3 | _triggered = %4 | _missionTimeoutAt = %5",_coords,_playerInRange,_triggered,_missionTimeoutAt];
 	#define delayTime 1
 
 	private _monitorAction = -2;
@@ -327,16 +327,23 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 				};		
 				uiSleep  delayTime;
 
-				diag_log format["_fnc_monitorInitializedMissions (329): spawning loot crates as needed: _loadCratesTiming = %1 | _spawnCratesTiming = %2 | _missionLootBoxes = %3",_loadCratesTiming,_spawnCratesTiming,_missionLootBoxes];
+				diag_log format["_fnc_monitorInitializedMissions (329): spawning loot crates as needed: _crates = %1 | _loadCratesTiming = %2 | _spawnCratesTiming = %3| _missionLootBoxes = %4",
+				_crates,
+				_loadCratesTiming,
+				_spawnCratesTiming,
+				_missionLootBoxes
+				];
+				_missionData set[2,_objects];
+				_missionData set[3,_crates];
 				if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 				{
-					if (count _missionLootBoxes > 0) then
+					if (_missionLootBoxes isEqualTo []) then
 					{
-						_crates = [_coords,_missionLootBoxes,_loadCratesTiming, _spawnCratesTiming, "start", _difficulty] call blck_fnc_spawnMissionCrates;
+						_crates = [_coords,[[selectRandom blck_crateTypes,[1,1,0],_crateLoot,_lootCounts]], _loadCratesTiming, _spawnCratesTiming, "start", _difficulty] call blck_fnc_spawnMissionCrates;
 					}
 					else
 					{
-						_crates = [_coords,[[selectRandom blck_crateTypes,[0,0,0],_crateLoot,_lootCounts]], _loadCratesTiming, _spawnCratesTiming, "start", _difficulty] call blck_fnc_spawnMissionCrates;
+						_crates = [_coords,_missionLootBoxes,_loadCratesTiming, _spawnCratesTiming, "start", _difficulty] call blck_fnc_spawnMissionCrates;						
 					};
 
 					if (blck_cleanUpLootChests) then
@@ -344,6 +351,13 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 						_objects append _crates;
 					};
 				};
+				diag_log format["_fnc_monitorInitializedMissions (352): spawning loot crates as needed: _crates = %1 | _loadCratesTiming = %2 | _spawnCratesTiming = %3| _missionLootBoxes = %4",
+				_crates,
+				_loadCratesTiming,
+				_spawnCratesTiming,
+				_missionLootBoxes
+				];	
+
 				uiSleep  delayTime;
 
 				diag_log format["_fnc_monitorInitializedMissions (348): Indicating live AI as needed: blck_showCountAliveAI = %1",blck_showCountAliveAI];
@@ -357,7 +371,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 				} forEach _crates;			
 				private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
 				_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_mainMarker,_labelMarker];
-	
+				{diag_log format["_monotirInitializedMissions:(371) _missiondata %1 = %2",_forEachIndex,_x]} forEach _missionData;
 
 				_el set[missionData, _missionData];
 
@@ -381,7 +395,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 
 		case 1:
 		{
-			diag_log format["_fnc_moniorInitializedMissions(395): evaluating status of mission %1 | _missionTimeoutAt = %2 | time = %3,",_el,_missionTimeoutAt,diag_tickTime];
+			diag_log format["_fnc_moniorInitializedMissions(398): evaluating status of mission %1 | _missionTimeoutAt = %2 | time = %3 | _crates = %4",_el,_missionTimeoutAt,diag_tickTime,_crates];
 			private _missionComplete = -1;
 			private _crateStolen = -1;
 			private ["_secureAsset","_endIfPlayerNear","_endIfAIKilled"];
@@ -398,18 +412,20 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 				[_mainMarker,_labelMarker,_markerMissionName,_blck_AllMissionAI] call blck_fnc_updateMarkerAliveCount;
 			};
 			try {
-
+				private _playerIsNear = [_crates,20,true] call blck_fnc_playerInRangeArray;
+				private _minNoAliveForCompletion = (count _blck_AllMissionAI) - (round(blck_killPercentage * (count _blck_AllMissionAI)));			
+				private _aiKilled = if (({alive _x} count _blck_AllMissionAI) <= _minNoAliveForCompletion)  then {true} else {false}; // mission complete
+				diag_log format["_fnc_monitorInitializedMissions (404): _playerIsNear = %1 | _aiKilled = %2 | _crates = %3",_playerIsNear,_aiKilled,_crates];
 				if (_endIfPlayerNear) then
 				{
 					diag_log format["_fnc_monitorInitializedMissions: mission ended, condition player near, mission %1",_el];
-					if ([_crates,20,true] call blck_fnc_playerInRangeArray) then {throw 1}; // mission complete
+					if (_playerIsNear) throw 1; // mission complete
 				};
 
 				if (_endIfAIKilled) then
 				{
 					diag_log format["_fnc_monitorInitializedMissions: mission ended, condition AI Killed, mission %1",_el];	
-					private _minNoAliveForCompletion = (count _blck_AllMissionAI) - (round(blck_killPercentage * (count _blck_AllMissionAI)));			
-					if (({alive _x} count _blck_AllMissionAI) <= _minNoAliveForCompletion)  then {throw 1}; // mission complete
+					if (_aiKilled) throw 1;
 				};
 
 				if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
@@ -552,6 +568,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 								_el set [0,_missionCategoryDescriptors];
 					
 								{
+									if (_forEachIndex + 1 > count _el) exitWith {};
 									diag_log format["_fnc_spawnPendingMissions: _x param %1 = %2",_x,_el select _forEachIndex];
 								} forEach ["_marker","_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
 								/*

@@ -15,7 +15,7 @@
 
 //	[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue,blck_enableBlueMissions] call blck_fnc_addMissionToQue;
 params["_missionList","_path","_marker","_difficulty","_tMin","_tMax",["_noMissions",1]];
-{diag_log format["_fnc_addMissionToCue: _this %1 = %2",_forEachIndex,_x]} forEach _this;
+//{diag_log format["_fnc_addMissionToCue: _this %1 = %2",_forEachIndex,_x]} forEach _this;
 private["_compiledMission","_compiledMissionsList"];
 
 
@@ -23,7 +23,7 @@ private["_compiledMission","_compiledMissionsList"];
 	private _missionsData = []; // Parameters definine each of the missions for this difficulty are stored as arrays here.
 	{
 		private _missionFile = format["\q\addons\custom_server\Missions\%1\%2.sqf",_path,_x];
-		diag_log format["_fnc_addMissionToCue = %1",_missionfile];
+		//diag_log format["_fnc_addMissionToCue = %1",_missionfile];
 		private _missionCode = compileFinal preprocessFileLinenumbers _missionFile;//return all of the values that define how the mission is spawned as an array of values.
 		private _data = [] call _missionCode;
 		//diag_log format["_fnc_addMissionToQue: count _data = %1 | _data = %2",count _data,_data];

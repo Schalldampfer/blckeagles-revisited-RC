@@ -67,11 +67,11 @@ params["_mArray"];
 private["_marker"];
 _mArray params["_missionMarkerName","_markerPos","_markerLabel","_markerLabelType","_markerColor","_markerTypeInfo"];
 _markerTypeInfo params["_mShape",["_mSize",[0,0]],["_mBrush","GRID"]];
-if (toUpper(_mShape) in ["ELIPSE","ELLIPSE","RECTANGLE"]) then // not an Icon .... 
+if (toUpper(_mShape) in ["ELLIPSE","ELLIPSE","RECTANGLE"]) then // not an Icon .... 
 {		
 	_marker = [_missionMarkerName,_markerPos,_markerColor,_markerLabel, _mSize,_markerLabelType,_mShape,_mBrush] call _blck_fn_configureRoundMarker;
 };
-if !(toUpper(_mShape) in ["ELIPSE","ELLIPSE","RECTANGLE"]) then 
+if !(toUpper(_mShape) in ["ELLIPSE","ELLIPSE","RECTANGLE"]) then 
 {  
 	_marker = [_missionMarkerName,_markerPos, _markerColor,_markerLabel,_mShape] call _blck_fn_configureIconMarker;
 };

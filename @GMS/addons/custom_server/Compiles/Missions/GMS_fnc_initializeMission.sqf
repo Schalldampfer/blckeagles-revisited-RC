@@ -1,11 +1,11 @@
 /*
 
 	Perform all functions necessary to initialize a mission.
-	[_mrkr,_difficulty,_m] call blck_fnc_spawnMission;
+	[_mrkr,_difficulty,_m] call blck_fnc_initializeMission;
 */
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-//  [_x,_m] call blck_fnc_initializeMission;
+
 params["_missionCategoryDescriptors","_missionParameters"];
 
  _missionCategoryDescriptors params [
@@ -35,6 +35,7 @@ params["_missionCategoryDescriptors","_missionParameters"];
 	"_missionsData"  // 
 	];
 
+if (_noActive > _noMissions) exitWith {if (blck_debugOn) then {}};
 
 _missionParameters params[
 	//"_markerClass",				// 0  ?? "Scouts"; ignored from build 186 on.
@@ -46,8 +47,8 @@ _missionParameters params[
 	"_markerMissionName", //   "Scouts";
 	"_markerType", // "mil_triangle"
 	"_markerColor", // ColorBlue
-	"_markerSize",  //[200,200] for elipse and rectangle markers only
-	"_markerBrush",  // "GRID", for elipse and rectangle markers only
+	"_markerSize",  //[200,200] for ELLIPSE and rectangle markers only
+	"_markerBrush",  // "GRID", for ELLIPSE and rectangle markers only
 	//"_markerLabel",		// ignored from build 186 on
 	"_missionLandscapeMode", 	
 	"_garrisonedBuildings_BuildingPosnSystem", 
@@ -93,7 +94,7 @@ _missionParameters params[
 	"_isScubaMission"
 ];
 
-
+/*
  {
 	 diag_log format["fnc_initializeMission: _missionParameters:%1 = %2",_x,_missionParameters select _forEachIndex];
  } forEach [
@@ -152,8 +153,8 @@ _missionParameters params[
 	"_endCondition",
 	"_isScubaMission"
 ];
-
-diag_log format["_fnc_initializeMission: _isScubaMission = %1",_isScubaMission];
+*/
+//diag_log format["_fnc_initializeMission: _isScubaMission = %1",_isScubaMission];
 private "_coords";
 if !(_defaultMissionLocations isEqualTo []) then 
 {

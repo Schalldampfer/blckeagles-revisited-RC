@@ -53,6 +53,7 @@ params ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_mainMarke
 if (_endCondition > 0) exitWith  // Mision aborted for some reason
 {
 	[_mainMarker] call blck_fnc_deleteMarker;
+	[_labelMarker] call blck_fnc_deleteMarker;
 	_cleanupCompositionTimer = 0;
 	_cleanupAliveAITimer = 0;
 	//  	params["_mines","_objects","_blck_AllMissionAI","_mission","_cleanupAliveAITimer","_cleanupCompositionTimer"];

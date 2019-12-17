@@ -14,16 +14,19 @@
 
 private ["_result","_players"];
 params["_pos","_dist",["_onFootOnly",false]];
-_players = call blck_fnc_allPlayers;
-_result = false;
-if !(_onFootOnly) then
 {
-	{
-		if ((_x distance2D _pos) < _dist) exitWith {_result = true;};
-	} forEach _players;
+ diag_log format["_fnc_playerInRange: param %1 = %2",_x,_this select _forEachIndex];
+}forEach ["_pos","_dist","_onFootOnly"];
+private "_players";
+
+if (_onFootOnly) then 
+{
+	_players = allPlayers select {(vehicle _x) isEqualTo _x && _x distance _pos < _dist};	
 } else {
-	{
-		if ( ((_x distance2D _pos) < _dist) && (vehicle _x isEqualTo _x)) exitWith {_result = true;};
-	} forEach _players;
+	_players = allPlayers select {_x distance _pos < _dist};
 };
+
+//_players = allPlayers select {_x distance _pos < _dist};
+private _result = if (_players isEqualTo []) then {false} else {true};
+diag_log format["_fnc_playerInRange: _players = %1 | _result = %2 | _pos = %3 | _dist = %4 | _onFootOnly = %5",_players,_result,_pos,_dist,_onFootOnly];
 _result

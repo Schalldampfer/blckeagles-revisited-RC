@@ -66,6 +66,7 @@ if (isNil "_lootCratePositions") then {_lootCratePositions = []};
 if (isNil "_markerSize") then {_markerSize = [200,200]};
 if (isNil "_markerBrush") then {_markerBrush = "GRID"};
 if (isNil "_isScubaMission") then {_isScubaMission = false};
+if (isNil "_missionLootBoxes") then {_missionLootBoxes = []};
 private "_temp";
 if (typeName _markerType isEqualTo "ARRAY" && !(typeName _markerType isEqualTo "STRING")) then 
 { 
@@ -147,6 +148,5 @@ if (typeName _markerType isEqualTo "ARRAY" && !(typeName _markerType isEqualTo "
 		_endCondition,
 		_isScubaMission 										
 	];
-	// params["_missionCategoryDescriptors","_missionParameters","_marker"];
-	//[_missionCategoryDescriptors,_table,_markerClass] call blck_fnc_initializeMission;
+
 	_table
