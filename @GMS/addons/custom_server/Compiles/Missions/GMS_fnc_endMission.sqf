@@ -42,7 +42,7 @@ _fn_missionCleanup = {
 //  MAIN FUNCTION STARTS HERE
 //////////////////////////////////////////////////////////////////////
 
-private ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_coords","_mission","_endCondition","_vehicles","_mainMarker","_labelMarker","_markerClass"];
+private ["_coords","_mission","_endCondition","_vehicles","_markerClass"];
 
 params ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_mainMarker","_labelMarker","_markerClass","_coords",["_endCondition",0]];
 

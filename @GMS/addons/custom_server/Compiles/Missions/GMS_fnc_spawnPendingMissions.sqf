@@ -47,7 +47,7 @@ if !(isNil "blck_spawnerMode") exitWith
 		
 		
 		{
-			diag_log format["_fnc_spawnPendingMissions: _x param %1 = %2",_x,_md select _forEachIndex];
+			diag_log format["_fnc_spawnPendingMissions: _md param %1 = %2",_x,_md select _forEachIndex];
 		} forEach [/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
 		
 		if (_noActiveMissions < _maxNoMissions && diag_tickTime > _waitTime && blck_missionsRunning < blck_maxSpawnedMissions) then 

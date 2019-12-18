@@ -44,21 +44,19 @@ if (toUpper(_markerType) in ["ELLIPSE","RECTANGLE"]) then // not an Icon ....
 	_m setMarkerColor _markerColor;
 	_m setMarkerBrush _markerBrush;
 	_m setMarkerSize _markerSize;
-	private _name = "label" + _markerName;
 	private _m2 = createMarker ["label" + _markerName, _markerPos];
-	//_m2 setMarkerShape "Icon";
 	_m2 setMarkerType "mil_dot";
 	_m2 setMarkerColor "ColorBlack";
 	_m2 setMarkerText _markerLabel;	
 	_markers = [_m,_m2];	
-	//diag_log format["_fnc_createMarkers: case of ELLIPSE/RECTANGLE: _markers = %1",_markers];
+	diag_log format["_fnc_createMarkers: case of ELLIPSE/RECTANGLE: _markers = %1",_markers];
 } else {
 	private _m = createmarker[_markerName,_markerPos];
 	_m setMarkerType _markerType;
 	_m setMarkerColor _markerColor;
 	_m setMarkerText _markerLabel;
 	_markers = [_m];
-	//diag_log format["_fnc_createMarkers: case of ICON: _markers = %1",_markers];		
+	diag_log format["_fnc_createMarkers: case of ICON: _markers = %1",_markers];		
 };
 
 _markers
