@@ -41,13 +41,13 @@ if !(isNil "blck_spawnerMode") exitWith
 				"_missionsData"  // 
 			];
 		*/	
-		private _md = _x;	
+		private _missionCategoryDescriptors = _x;	
 									// 0		1					2				   						3		4		  5	       6	   
-		_md params[/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
+		_missionCategoryDescriptors params[/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
 		
 		
 		{
-			diag_log format["_fnc_spawnPendingMissions: _md param %1 = %2",_x,_md select _forEachIndex];
+			diag_log format["_fnc_spawnPendingMissions: _missionCategoryDescriptors param %1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
 		} forEach [/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
 		
 		if (_noActiveMissions < _maxNoMissions && diag_tickTime > _waitTime && blck_missionsRunning < blck_maxSpawnedMissions) then 
@@ -58,15 +58,15 @@ if !(isNil "blck_spawnerMode") exitWith
 			#define waitTime 5
 			#define noActive 2
 			
-			_x set[waitTime, _wt];
+			_x set[waitTime, _wt];  // _x here is the _missionCategoryDescriptors being evaluated
 			//_x set[timesSpawned, _timesSpawned + 1];
 			_x set[noActive, _noActiveMissions + 1];
-			private _m = selectRandom _missionsData;
+			//private _m = ;
 			//private _mrkr = format["%1:%2",_marker,_timesSpawned];
 			//diag_log format["_fnc_spawnPendingMissions: using marker %1 | spawning mission %1",_mrkr,_m];
 			//uisleep 1;  // only for debugging purposes.  
 			//  TODO: comment out uiSleep at a later time.
-			[_x,_m] call blck_fnc_initializeMission;
+			[_x,selectRandom _missionsData] call blck_fnc_initializeMission;
 		};
 	} forEach blck_missionData;
 };

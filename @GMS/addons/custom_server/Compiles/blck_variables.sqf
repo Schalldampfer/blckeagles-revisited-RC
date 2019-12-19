@@ -50,9 +50,7 @@ blck_spawnerMode = 1;
 blck_missionData = [];
 blck_activeMissionsList = [];
 
-blck_dynamicUMS_MissionsRuning = 0;
-blck_priorDynamicUMS_Missions = [];
-blck_UMS_ActiveDynamicMissions = [];
+blck_blackListedLocations = []; // [ [marker, time]]
 
 if (blck_debugOn) then {diag_log "[blckeagls] Variables Loaded"};
 

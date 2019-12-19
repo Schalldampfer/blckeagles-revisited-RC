@@ -13,7 +13,7 @@
 diag_log format["_fnc_cleanupaliveAI: called at %1 | count %2",diag_ticktime,count blck_liveMissionAI];
 for "_i" from 1 to (count blck_liveMissionAI) do {
 	if ((_i) <= count blck_liveMissionAI) then {
-		_units = blck_liveMissionAI deleteat 0;
+		_units = blck_liveMissionAI deleteAt 0;
 		_units params ["_missionCenter","_unitsarr","_timer"];
 		diag_log format["_fnc_cleanupAliveAI: _missionCenter %1 | typeName _unitsArr = %2 | _unitsarr = %3",_missionCenter,typeName _unitsArr, _unitsarr];
 		if (diag_tickTime > _timer) then 

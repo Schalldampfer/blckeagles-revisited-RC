@@ -155,7 +155,8 @@ _missionParameters params[
 ];
 */
 //diag_log format["_fnc_initializeMission: _isScubaMission = %1",_isScubaMission];
-private "_coords";
+private ["_coords","_coordArray"];
+_coordsArray = [];
 if !(_defaultMissionLocations isEqualTo []) then 
 {
 	_coords = selectRandom _defaultMissionLocations;
@@ -164,10 +165,11 @@ if !(_defaultMissionLocations isEqualTo []) then
 	{
 		_coords = [] call blck_fnc_findShoreLocation;
 	} else {
-		_coords =  [] call blck_fnc_FindSafePosn;
+		_coords =  [] call blck_fnc_findSafePosn;
+		diag_log format["_fnc_initialeMission: final coords selected = %1",_coords];
 	};
 };
-_defaultMissionLocations pushBack _coords;
+//_defaultMissionLocations pushBack _coords;
 
 diag_log format["_fnc_initializeMission(160): _defaultMissionLocations = %3 | _markerMissionName = %1 | _coords = %2",_markerMissionName,_coords,_defaultMissionLocations];
 blck_ActiveMissionCoords pushback _coords; 
@@ -181,7 +183,7 @@ private _markers = [];
 /*
 	Handle map markers 
 */
-private _markerName = format["%1-%2",_markerMissionName,blck_missionsRun];
+private _markerName = format["%1:%2",_markerMissionName,blck_missionsRun];
 diag_log format["_initializeMission: _markerName = %1",_markerName];
 private "_missionMarkerPosition";
 if (blck_labelMapMarkers select 0) then
@@ -214,19 +216,14 @@ _markers params["_mainMarker",["_labelMarker",""]];
 private _missionTimeoutAt = diag_tickTime + blck_MissionTimeout;
 private _triggered = 0;
 private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
-private _assetSpawned = objNull;
-private _playerInRange = false;
-private _missionTimedOut = false;
-private _wait = true;
 private _objects = [];
 private _mines = [];
 private _crates = [];
-private _aiGroup = [];
 private _missionAIVehicles = [];
 private _blck_AllMissionAI = [];
 private _AI_Vehicles = [];
-private _asset = objNull;
+private _assetSpawned = objNull;
 
-private _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_asset,_mainMarker,_labelMarker];
+private _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_missionAIVehicles,_mainMarker,_labelMarker];
 diag_log format["_fnc_initializeMission(201): _coords = %1 | _markerName = %2 | _marker = %3 | _markers = %4",_coords,_markerName,_mainMarker,_labelMarker];									//  0						1					2			3		4			5				6		7
 blck_activeMissionsList pushBack [_missionCategoryDescriptors,_missionTimeoutAt,_triggered,_spawnPara,_missionData,_missionParameters];

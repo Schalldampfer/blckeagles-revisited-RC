@@ -32,10 +32,23 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 		"_missionParameters"			// 7
 	];
 
-#define noActive 2
-#define waitTime 5
-#define missionData 6
- _missionCategoryDescriptors params [
+/*
+	private _missionCategoryDescriptors = [
+		//_marker,
+		_difficulty,
+		_noMissions,  // Max no missions of this category
+		0,  // Number active 
+		//0, // times spawned, useful for keeping unique markers 
+		_tMin, // Used to calculate waittime in the future
+		_tMax, // as above
+		_waitTime,  // time at which a mission should be spawned
+		_missionsData  // 
+	];
+*/
+	#define noActive 2
+	#define waitTime 5
+	#define missionData 6
+ 	_missionCategoryDescriptors params [
 		//"_marker",
 		"_difficulty",
 		"_noMissions",  // Max no missions of this category
@@ -60,14 +73,15 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 		"_waitTime",  // time at which a mission should be spawned
 		"_missionsData"  // 
 		];
-	//_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_asset,_mainMarker,_labelMarker];
+	#define setMissionData _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_missionAIVehicles,_mainMarker,_labelMarker];
+	//_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_missionAIVehicles,_mainMarker,_labelMarker];
 						//   0       1       2          3         4                   5            6 
-	_missionData params ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","_assetSpawned","_mainMarker","_labelMarker"];
+	_missionData params ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","_assetSpawned","_missionAIVehicles","_mainMarker","_labelMarker"];
 	
 	
 	{
 		diag_log format["_fnc_monitorInitializedMissions: _missionData:%1 = %2",_x, _missionData select _forEachIndex];
-	} forEach ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","_assetSpawned","_mainMarker","_labelMarker"];
+	} forEach ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","_assetSpawned","_missionAIVehicles","_mainMarker","_labelMarker"];
 	
 	_missionParameters params[
 		//"_markerClass",
@@ -166,7 +180,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 				[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerType,  1] call blck_fnc_endMission;			
 		}; 			
 		
-		//  Handle mission waiting to be triggers and player is within the range to trigger		
+		//  Handle mission waiting to be triggerd and player is within the range to trigger		
 		case 0: 
 		{
 			if (blck_debugLevel >= 3) then 
@@ -376,9 +390,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 					_x setVariable["crateSpawnPos", (getPos _x)];
 				} forEach _crates;			
 				private _spawnPara = if (random(1) < _chancePara) then {true} else {false};
-				//									0    1        2           3         4                    5              6             7
-				//_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_asset,_mainMarker,_labelMarker];				
-				_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_mainMarker,_labelMarker];
+				setMissionData  //  code defined above
 				{diag_log format["_monotirInitializedMissions:(371) _missiondata %1 = %2",_forEachIndex,_x]} forEach _missionData;
 
 				_el set[missionData, _missionData];
@@ -498,8 +510,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 					throw 1;
 
 				};
-				///  private _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_asset,_mainMarker,_labelMarker];				
-				_missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_mainMarker,_labelMarker];	
+				setMissionData  // Code defined above
 				#define missionData 6
 				_el set[missionData, _missionData];
 
@@ -598,25 +609,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 									"_tMax", // as above
 									"_waitTime",  // time at which a mission should be spawned
 									"_missionsData"  //
-								];
-
-								_el set [0,_missionCategoryDescriptors];
-								{
-									if (_forEachIndex + 1 > count _el) exitWith {};
-									diag_log format["_fnc_spawnPendingMissions: _x param %1 = %2",_x,_el select _forEachIndex];
-								} forEach ["_marker","_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];					
-								/*
-								_el params [
-									"_missionCategoryDescriptors",  // 0
-									"_missionTimeoutAt",			// 1
-									"_triggered",					// 2
-									"_spawnPara",					// 3
-									"_missionData",					// 6
-									"_missionParameters"			// 7
-								];
-								*/
-
-												
+								];							
 
 					};
 					case 2: { // Abort, crate moved.

@@ -13,9 +13,26 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
+//
+  //  [center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos] call BIS_fnc_findSafePos 
+private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0] call BIS_fnc_findSafePos;
 
+_coords
+
+/*// Check for old coords that have 'expired'
+for "_i" from 1 to (count blck_recentMissionCoords) do 
+{
+	if (_i > count blck_recentMissionCoords) exitWith {};
+	private _oldcoords = blck_recentMissionCoords deleteAt 0;
+	if (diag_tickTime < ((_x select 1))) then {blck_recentMissionCoords pushBack _oldcoords};
+};
+
+// figure out the current black lists
+
+/*
 private["_findNew","_tries","_coords","_dist","_xpos","_ypos","_newPos","_townPos","_pole"];
 private["_minDistFromBases","_minDistFromMission","_minDistanceFromTowns","_minSistanceFromPlayers","_weightBlckList","_weightBases","_weightMissions","_weightTowns","_weightPlayers"];
+
 _findNew = true;
 _tries = 0;
 
@@ -31,8 +48,9 @@ _weightPlayers = 0.6;
 if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
 if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
 _recentMissionCoords = +blck_recentMissionCoords;
+
 {
-	if (diag_tickTime > ((_x select 1) + 1200)) then // if the prior mission was completed more than 20 min ago then delete it from the list and ignore the check for this location.
+	 // if the prior mission was completed more than 20 min ago then delete it from the list and ignore the check for this location.
 	{
 		blck_recentMissionCoords deleteAt (blck_recentMissionCoords find _x);
 	};
@@ -42,19 +60,18 @@ while {_findNew} do
 {
 	_findNew = false;
 	_coords = [blck_mapCenter,0,blck_mapRange,30,0,5,0] call BIS_fnc_findSafePos;
-	//diag_log format["_fnc_findSafePosn: _coords = %1 | _tries = %2",_coords,_tries];
+	diag_log format["_fnc_findSafePosn: _coords = %1 | _tries = %2",_coords,_tries];
 	{
 		if ( ((_x select 0) distance2D _coords) < (_x select 1)) exitWith
 		{
 			_findNew = true;
 		};
 	} forEach blck_locationBlackList;
+
 	if !(_findNew) then
 	{
-	{
-		if ((_x distance2D _coords) < _minDistFromMission) then {
-			_findNew = true;
-		};
+		{
+			if ((_x distance2D _coords) < _minDistFromMission) then {_findNew = true;};
 		}forEach blck_heliCrashSites;	
 	};	
 	if !(_findNew) then

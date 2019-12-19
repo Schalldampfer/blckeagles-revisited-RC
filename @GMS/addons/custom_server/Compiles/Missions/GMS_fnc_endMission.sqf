@@ -23,19 +23,7 @@ _fn_missionCleanup = {
 	blck_liveMissionAI pushback [_coords,_blck_AllMissionAI, (diag_tickTime + _cleanupAliveAITimer)];
 	blck_missionsRunning = blck_missionsRunning - 1;
 	blck_ActiveMissionCoords = blck_ActiveMissionCoords - [ _coords];	
-	//if !(_isScubaMission) then
-	//{
-		blck_recentMissionCoords pushback [_coords,diag_tickTime]; 
-		//[_mission,"inactive",[0,0,0]] call blck_fnc_updateMissionQue;	
-	//};
-	/*
-	if (_isScubaMission) then
-	{
-		blck_priorDynamicUMS_Missions pushback [_coords,diag_tickTime]; 
-		blck_UMS_ActiveDynamicMissions = blck_UMS_ActiveDynamicMissions - [_coords];
-		blck_dynamicUMS_MissionsRuning = blck_dynamicUMS_MissionsRuning - 1;		
-	};
-	*/
+	blck_recentMissionCoords pushback [_coords,diag_tickTime + 1200]; 
 };
 
 ///////////////////////////////////////////////////////////////////////
