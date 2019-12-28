@@ -20,7 +20,7 @@ params["_missionCategoryDescriptors","_missionParameters"];
 		"_missionsData"  // 
 	];
 
-
+/*
 {
 	 diag_log format["fnc_initializeMission: _missionCategoryDescriptors:%1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
 } forEach [
@@ -34,6 +34,7 @@ params["_missionCategoryDescriptors","_missionParameters"];
 	"_waitTime",  // time at which a mission should be spawned
 	"_missionsData"  // 
 	];
+*/
 
 if (_noActive > _noMissions) exitWith {if (blck_debugOn) then {}};
 
@@ -166,17 +167,17 @@ if !(_defaultMissionLocations isEqualTo []) then
 		_coords = [] call blck_fnc_findShoreLocation;
 	} else {
 		_coords =  [] call blck_fnc_findSafePosn;
-		diag_log format["_fnc_initialeMission: final coords selected = %1",_coords];
+		//diag_log format["_fnc_initialeMission: final coords selected = %1",_coords];
 	};
 };
 //_defaultMissionLocations pushBack _coords;
 
-diag_log format["_fnc_initializeMission(160): _defaultMissionLocations = %3 | _markerMissionName = %1 | _coords = %2",_markerMissionName,_coords,_defaultMissionLocations];
+//diag_log format["_fnc_initializeMission(160): _defaultMissionLocations = %3 | _markerMissionName = %1 | _coords = %2",_markerMissionName,_coords,_defaultMissionLocations];
 blck_ActiveMissionCoords pushback _coords; 
 blck_missionsRunning = blck_missionsRunning + 1;
 
 blck_missionsRun = blck_missionsRun + 1;
-diag_log format["_initializeMission (164): Total Dyanamic Land and UMS Run = %1 | total Dynamic and UMS Missions Running = %2", blck_missionsRun,blck_missionsRunning];
+//diag_log format["_initializeMission (164): Total Dyanamic Land and UMS Run = %1 | total Dynamic and UMS Missions Running = %2", blck_missionsRun,blck_missionsRunning];
 
 private _markers = [];
 
@@ -184,7 +185,7 @@ private _markers = [];
 	Handle map markers 
 */
 private _markerName = format["%1:%2",_markerMissionName,blck_missionsRun];
-diag_log format["_initializeMission: _markerName = %1",_markerName];
+//diag_log format["_initializeMission: _markerName = %1",_markerName];
 private "_missionMarkerPosition";
 if (blck_labelMapMarkers select 0) then
 {
@@ -206,7 +207,7 @@ if !(blck_preciseMapMarkers) then
  ];
 */
 private _markers = [_markerName,_coords,_markerMissionName,_markerColor,_markerType,_markerSize,_markerBrush] call blck_fnc_createMarker;
-diag_log format["_fnc_createmarker: _markers = %1",_markers];
+//diag_log format["_fnc_createmarker: _markers = %1",_markers];
 _markers params["_mainMarker",["_labelMarker",""]];
 /*
 	Send a message to players.

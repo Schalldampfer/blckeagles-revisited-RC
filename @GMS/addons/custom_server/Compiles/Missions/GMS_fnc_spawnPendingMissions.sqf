@@ -45,10 +45,11 @@ if !(isNil "blck_spawnerMode") exitWith
 									// 0		1					2				   						3		4		  5	       6	   
 		_missionCategoryDescriptors params[/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
 		
-		
+		/*
 		{
 			diag_log format["_fnc_spawnPendingMissions: _missionCategoryDescriptors param %1 = %2",_x,_missionCategoryDescriptors select _forEachIndex];
-		} forEach [/*"_marker",*/"_difficulty","_maxNoMissions","_noActiveMissions",/*"_timesSpawned",*/"_tMin","_tMax","_waitTime","_missionsData"];
+		} forEach ["_difficulty","_maxNoMissions","_noActiveMissions","_tMin","_tMax","_waitTime","_missionsData"];
+		*/
 		
 		if (_noActiveMissions < _maxNoMissions && diag_tickTime > _waitTime && blck_missionsRunning < blck_maxSpawnedMissions) then 
 		{

@@ -21,6 +21,7 @@ _fn_missionCleanup = {
 	//[_coords,_objects, _cleanupCompositionTimer] call blck_fnc_addObjToQue;
 	blck_oldMissionObjects pushback [_coords,_objects, (diag_tickTime + _cleanupCompositionTimer)];	
 	blck_liveMissionAI pushback [_coords,_blck_AllMissionAI, (diag_tickTime + _cleanupAliveAITimer)];
+	//diag_log format["_fnc_endMission: blck_liveMissionAI = %1",blck_liveMissionAI];
 	blck_missionsRunning = blck_missionsRunning - 1;
 	blck_ActiveMissionCoords = blck_ActiveMissionCoords - [ _coords];	
 	blck_recentMissionCoords pushback [_coords,diag_tickTime + 1200]; 
@@ -34,9 +35,11 @@ private ["_coords","_mission","_endCondition","_vehicles","_markerClass"];
 
 params ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_mainMarker","_labelMarker","_markerClass","_coords",["_endCondition",0]];
 
+/*
 {
 	diag_log format["_fnc_endMission: %1 = %2",_x, _this select _forEachIndex];
 } forEach  ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_mainMarker","_labelMarker","_markerClass","_coords","_endCondition"];
+*/
 
 if (_endCondition > 0) exitWith  // Mision aborted for some reason
 {

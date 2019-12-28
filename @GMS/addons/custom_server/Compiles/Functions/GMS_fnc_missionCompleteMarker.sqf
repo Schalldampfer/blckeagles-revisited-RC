@@ -11,7 +11,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-diag_log format["blck_fnc_missionCompleteMarker:: _this = %1",_this];
+//diag_log format["blck_fnc_missionCompleteMarker:: _this = %1",_this];
 private _location = _this select 0;
 private _name = str(random(1000000)) + "MarkerCleared";
 _m = createMarker [_name, _location];

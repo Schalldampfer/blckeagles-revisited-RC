@@ -14,7 +14,7 @@
 
 params["_locations","_dist",["_onFootOnly",false]];
 private _nearLocations = _locations select {[_x,_dist,_onFootOnly] call blck_fnc_playerInRange};
-diag_log format["_fnc_playerInRangeArray: _locations = %1 | _dist = %2 | _nearLocations = %3",_locations,_dist,_nearLocations];
+//diag_log format["_fnc_playerInRangeArray: _locations = %1 | _dist = %2 | _nearLocations = %3",_locations,_dist,_nearLocations];
 private _return = if (_nearLocations isEqualTo []) then {false} else {true};
 _return
 /*
