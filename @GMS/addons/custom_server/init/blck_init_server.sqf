@@ -46,7 +46,7 @@ call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blc
 diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugLevel = %3",blck_debugON,blck_debugLevel];
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
-diag_log format["[blckeagls]  variables loaded at %1",diag_tickTime];
+diag_log format["[blckeagls] Variables loaded at %1",diag_tickTime];
 
 // spawn map addons to give the server time to position them before spawning in crates etc.
 if (blck_spawnMapAddons) then

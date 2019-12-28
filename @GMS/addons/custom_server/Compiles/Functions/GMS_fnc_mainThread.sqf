@@ -31,7 +31,7 @@ while {true} do
 	{
 		_timer5sec = diag_tickTime + 5;
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
-		//[] call blck_fnc_sm_staticPatrolMonitor;  // TODO: sort out static missions
+		[] call blck_fnc_sm_staticPatrolMonitor;  // TODO: sort out static missions
 		[] call blck_fnc_vehicleMonitor;		
 		//[] call blck_fnc_cleanupAliveAI;
 		//[] call blck_fnc_cleanupObjects;
@@ -64,7 +64,7 @@ while {true} do
 	};
 	if (diag_tickTime > _timer5min) then 
 	{
-		diag_log format["[blckeagls] Timstamp %8 |Dynamic Missions Running %1 | UMS Running %2 | Vehicles %3 | Groups %4 | Server FPS %5 | Server Uptime %6 Min | Missions Run %7",blck_missionsRunning,blck_dynamicUMS_MissionsRuning,count blck_monitoredVehicles,count blck_monitoredMissionAIGroups,diag_FPS,floor(diag_tickTime/60),blck_missionsRun, diag_tickTime];
+		diag_log format["[blckeagls] Timstamp %8 |Dynamic Missions Running %1 | Vehicles %2 | Groups %3 | Server FPS %4 | Server Uptime %5 Min | Missions Run %6",blck_missionsRunning,count blck_monitoredVehicles,count blck_monitoredMissionAIGroups,diag_FPS,floor(diag_tickTime/60),blck_missionsRun, diag_tickTime];
 		#ifdef blck_debugMode
 		/*
 			Syntax:

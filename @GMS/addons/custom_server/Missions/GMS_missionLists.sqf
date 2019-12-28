@@ -13,6 +13,13 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+private["_pathScouts","_missionListScouts","_pathHunters","_missionListHunters","_pathBlue","_missionListBlue","_pathRed","_missionListRed","_pathGreen","_missionListGreen","_pathOrange","_missionListOrange"];
+
+
+
+_pathUMS = "UMS\dynamicMissions";
+_missionListUMS = ["default"];
+
 _pathBlue = "Blue";
 //_missionListBlue = ["hostage1"];
 _missionListBlue = ["default","captive1","hostage1"/*,"default2"/*,"medicalCamp","redCamp","resupplyCamp"*/];

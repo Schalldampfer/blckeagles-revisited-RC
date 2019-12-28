@@ -2,7 +2,7 @@
 	GMS_fnc_monitorInitializedMissions
 
 */
-diag_log format["fnc_monitorInitializedMissions: time = %1 | count  blck_activeMissionsList %2 | blck_activeMissionsList %3",diag_tickTime,count blck_activeMissionsList,blck_activeMissionsList];
+//diag_log format["fnc_monitorInitializedMissions: time = %1 | count  blck_activeMissionsList %2 | blck_activeMissionsList %3",diag_tickTime,count blck_activeMissionsList,blck_activeMissionsList];
 for "_i" from 1 to (count blck_activeMissionsList) do 
 {
 

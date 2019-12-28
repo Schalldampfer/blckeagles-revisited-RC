@@ -81,7 +81,7 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
 	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
-	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],[[0,1,0],[0,0,1]],[true,false],_crateLoot, _lootCounts]
+	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],0,,_crateLoot, _lootCounts]
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.

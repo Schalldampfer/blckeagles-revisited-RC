@@ -11,22 +11,24 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+params[["_coords",[]],["_range",0],["_onFootOnly",false]];
 private ["_result","_players"];
+/*
 params["_pos","_dist",["_onFootOnly",false]];
 {
  diag_log format["_fnc_playerInRange: param %1 = %2",_x,_this select _forEachIndex];
 }forEach ["_pos","_dist","_onFootOnly"];
+*/
 private "_players";
 
 if (_onFootOnly) then 
 {
-	_players = allPlayers select {(vehicle _x) isEqualTo _x && _x distance _pos < _dist};	
+	_players = allPlayers select {(vehicle _x) isEqualTo _x && _x distance _coords < _range};	
 } else {
-	_players = allPlayers select {_x distance _pos < _dist};
+	_players = allPlayers select {_x distance _coords < _range};
 };
 
 //_players = allPlayers select {_x distance _pos < _dist};
 private _result = if (_players isEqualTo []) then {false} else {true};
-diag_log format["_fnc_playerInRange: _players = %1 | _result = %2 | _pos = %3 | _dist = %4 | _onFootOnly = %5",_players,_result,_pos,_dist,_onFootOnly];
+//diag_log format["_fnc_playerInRange: _players = %1 | _result = %2 | _pos = %3 | _dist = %4 | _onFootOnly = %5",_players,_result,_coords,_range,_onFootOnly];
 _result

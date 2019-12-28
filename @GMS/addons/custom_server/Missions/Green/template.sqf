@@ -20,7 +20,7 @@ _lootCounts = blck_lootCountsGreen;
 _startMsg = "An enemy research center was sighted in a nearby sector! Check the Green marker on your map for the location!";
 _endMsg = "The Sector at the Green Marker is under survivor control!";
 _markerLabel = "";
-_markerType = ["ELIPSE",[225,225],"GRID"];
+_markerType = ["ellipse",[225,225],"GRID"];
 _markerColor = "ColorGreen";
 _markerMissionName = "Research Center";
 _missionLandscapeMode = "precise"; // acceptable values are "none","random","precise"
@@ -93,7 +93,12 @@ _noVehiclePatrols = blck_SpawnVeh_Green;
 _noEmplacedWeapons = blck_SpawnEmplaced_Green;
 _uniforms = blck_SkinList;
 _headgear = blck_headgear;
-
+_chanceLoot = 0.6; 
+private _lootIndex = selectRandom[1,2,3,4];
+private _paralootChoices = [blck_contructionLoot,blck_contructionLoot,blck_highPoweredLoot,blck_supportLoot];
+private _paralootCountsChoices = [[0,0,0,8,8,0],[0,0,0,8,8,0],[8,8,0,0,0,0],[0,0,0,0,12,0]];
+_paraLoot = _paralootChoices select _lootIndex;
+_paraLootCounts = _paralootCountsChoices select _lootIndex;  // Throw in something more exotic than found at a normal blue mission.
 //_endCondition = "allKilledOrPlayerNear";  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
 //_timeOut = -1;
 #include "\q\addons\custom_server\Compiles\Missions\GMS_fnc_missionSpawner.sqf";

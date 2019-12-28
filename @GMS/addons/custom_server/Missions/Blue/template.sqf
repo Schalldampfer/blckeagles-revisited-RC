@@ -19,85 +19,95 @@ _crateLoot = blck_BoxLoot_Green;
 _lootCounts = blck_lootCountsGreen;
 _startMsg = "An enemy research center was sighted in a nearby sector! Check the Green marker on your map for the location!";
 _endMsg = "The Sector at the Green Marker is under survivor control!";
-_markerLabel = "";
-_markerType = ["ELIPSE",[225,225],"GRID"];
-_markerColor = "ColorGreen";
-_markerMissionName = "Research Center";
-_missionLandscapeMode = "precise"; // acceptable values are "none","random","precise"
-_missionLandscape = [
-	["Flag_AltisColonial_F",[12.9492,-14.2676,0],0,[true,false]],
-	["Land_Research_HQ_F",[-40.4258,-57.4492,-7.15256e-007],0,[true,false]],
-	["Land_Research_HQ_F",[79.9063,68.1406,2.38419e-007],0,[true,false]],
-	["Land_Research_house_V1_F",[-27.6895,70.9883,0],0,[true,false]],
-	["Land_Research_house_V1_F",[-110.166,14.3926,0],0,[true,false]],
-	["Land_Research_house_V1_F",[54.5078,-70.8457,0],0,[true,false]],
-	["Land_Cargo_Patrol_V1_F",[111.865,11.9375,9.53674e-007],0,[true,false]],
-	["Land_Cargo_HQ_V2_F",[-115.473,-44.5977,-4.76837e-007],0,[true,false]],
-	["Land_SharpRock_apart",[-59.6836,-59.5996,-4.76837e-007],0,[true,false]],
-	["Land_W_sharpRock_apart",[-81.6973,-42.4082,-4.76837e-007],0,[true,false]],
-	["Land_SharpRock_apart",[-96.2168,-5.32031,4.76837e-007],0,[true,false]],
-	["Land_Limestone_01_apart_F",[-79.2305,43.4219,0],0,[true,false]],
-	["Land_Limestone_01_apart_F",[-50.2344,82.4746,0],0,[true,false]],
-	["Land_BluntRock_apart",[3.88281,-71.5488,-2.38419e-007],0,[true,false]],
-	["Land_Limestone_01_apart_F",[35.8926,-77.5918,0],0,[true,false]],
-	["Land_Limestone_01_apart_F",[78.541,-52.3926,-4.76837e-007],0,[true,false]],
-	["Land_Limestone_01_apart_F",[103.91,-6.88867,0],0,[true,false]],
-	["Land_BluntRock_apart",[-11.5586,93.9688,-2.38419e-007],0,[true,false]],
-	["Land_W_sharpStone_02",[54.7344,96.7012,0],0,[true,false]],
-	["Land_BluntRock_apart",[77.4453,88.8301,-2.38419e-007],0,[true,false]],
-	["Land_SharpRock_apart",[104.758,45.668,0],0,[true,false]],
-	["Land_Limestone_01_02_F",[99.5117,23.752,-4.76837e-007],0,[true,false]],
-	["Land_Limestone_01_02_F",[49.8477,50.0039,0],0,[true,false]],
-	["Land_Limestone_01_02_F",[-8.14844,32.2227,4.76837e-007],0,[true,false]],
-	["Land_Limestone_01_02_F",[-35.334,35.1465,-2.38419e-007],0,[true,false]],
-	["Land_SharpStone_02",[-28.6523,1.33398,4.76837e-007],0,[true,false]],
-	["Land_SharpStone_02",[-58.707,-7.46094,-4.76837e-007],0,[true,false]],
-	["Land_Limestone_01_02_F",[64.5078,31.9707,0],0,[true,false]],
-	["Land_Limestone_01_02_F",[33.7246,11.5469,0],0,[true,false]],
-	["Land_SharpStone_02",[69.4277,-3.20313,0],0,[true,false]],
-	["Land_SharpStone_02",[53.7227,-40.1777,-2.38419e-007],0,[true,false]],
-	["Land_Limestone_01_02_F",[-6.26563,-46.0996,-4.76837e-007],0,[true,false]]
-]; // list of objects to spawn as landscape
-_missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
-_missionLootVehicles = []; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
-_missionEmplacedWeapons = 
-	[	
-	["B_HMG_01_high_F",[27.8945,100.275,0],0,[true,false]],
-	["B_HMG_01_high_F",[-84.7793,72.2617,9.53674e-007],0,[true,false]],
-	["B_G_Mortar_01_F",[76.0586,66.9414,-3.1265],0,[true,false]]
-	]; // can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
+_markerMissionName = "Development";
 
-_missionGroups = 
-	[
-	//_x params["_position","_minAI","_maxAI","_skillLevel","_minPatrolRadius","_maxPatrolRadius"];
-	//[[-52.6523,15.8281,-0.00143838],4,6,"Green",4,8],
-	//[[-48.6113,-38.877,-0.00143886],4,6,"Green",4,8],
-	//[[18.4492,-39.5684,-0.00143838],4,6,"Green",4,8],
-	//[[42.6504,31.6621,-0.00143886],4,6,"Green",4,8],
-	//[[7.51563,46.4531,-0.001438864],4,6,"Green",4,8],
-	[[-8.99219,-11.623,-0.00143838],4,6,"Green",4,8]
-	]; // Can be used to define spawn positions of AI patrols
+
+_missionLandscapeMode = "precise"; // acceptable values are "none","random","precise"
+
+//////////
+//   Paste the output of the script here
+_markerType = ["mil_box",[0,0]];
+_markerColor = "Default";
+_markerLabel = "";
+
+_garrisonedBuildings_BuildingPosnSystem = [
+     ["Land_i_House_Big_02_V2_F",[-76.2197,64.5181,0],0,true,false,0.67,3,[],4],
+     ["Land_Unfinished_Building_01_F",[-65.1536,-71.8145,0],0,true,false,0.67,3,[],4]
+];
+
+_garrisonedBuilding_ATLsystem = [
+	
+     ["Land_i_Shop_01_V2_F",[87.1704,-65.3169,0],0,true,false,[["B_HMG_01_high_F",[-2.15186,2.76953,0.303085],0]],[]],
+     ["Land_i_House_Big_01_V3_F",[101.868,63.7637,0],0,true,false,[["B_HMG_01_high_F",[-3.44702,-2.7793,0.41],0],["B_HMG_01_high_F",[2.81006,-5.2124,3.92],0]],[]]
+	 
+];
+
+_missionLandscape = [
+     ["Sign_Sphere100cm_F",[-77.7651,66.4019,0.259255],0,true,true],
+     ["Sign_Sphere100cm_F",[-62.7002,-68.5952,0.185],0,true,true],
+     ["Land_Chapel_V2_F",[-19.5349,-23.1558,0],0,true,true],
+     ["Land_CarService_F",[-19.4431,7.30078,0],0,true,true],
+     ["Land_Church_01_V1_F",[13.1187,-24.9375,0],0,true,true],
+     ["Land_GH_House_2_F",[17.7576,14.8853,0],0,true,true]
+];
+
+_missionLootBoxes = [
+     ["Box_NATO_Wps_F",[-12.8772,-14.7461,0],_crateLoot,_lootCounts,0],
+     ["Box_FIA_Ammo_F",[-11.5447,4.01025,0],_crateLoot,_lootCounts,0],
+     ["IG_supplyCrate_F",[7.43652,-15.4175,0],_crateLoot,_lootCounts,0],
+     ["Box_FIA_Support_F",[9.36304,4.36914,0],_crateLoot,_lootCounts,0]
+];
 
 _missionPatrolVehicles = [
-	//[selectRandom blck_AIPatrolVehicles,[27.8945,100.275,0],0,[true,false]],
-	//[selectRandom blck_AIPatrolVehicles,[-84.7793,72.2617,9.53674e-007],0,[true,false]],
-	[selectRandom blck_AIPatrolVehiclesGreen,[-87.8457,-109.947,7.15256e-007],0,[true,false]]
-];  // can be used to define the spawn positions of vehicle patrols
+     ["B_LSV_01_armed_F",[-50.4993,-5.56201,0],0],
+     ["B_MRAP_01_hmg_F",[-4.58496,-51.4932,-4.76837e-007],0],
+     ["B_MRAP_01_hmg_F",[-1.01758,31.3022,-4.76837e-007],0],
+     ["B_LSV_01_armed_F",[38.8872,-7.23975,0],0]
+];
 
-//  Change _useMines to true/false below to enable mission-specific settings.
-_useMines = blck_useMines;
-_minNoAI = blck_MinAI_Green;
-_maxNoAI = blck_MaxAI_Green;
-_noAIGroups = blck_AIGrps_Green;
-_noVehiclePatrols = blck_SpawnVeh_Green;
-_noEmplacedWeapons = blck_SpawnEmplaced_Green;
-_minNoAI = blck_MinAI_Blue;  // Setting this in the mission file overrides the defaults such as blck_MinAI_Blue
-_maxNoAI = blck_MaxAI_Blue;  // Setting this in the mission file overrides the defaults 
-_noAIGroups = blck_AIGrps_Blue;  // Setting this in the mission file overrides the defaults 
-_noVehiclePatrols = blck_SpawnVeh_Blue;  // Setting this in the mission file overrides the defaults 
-_noEmplacedWeapons = blck_SpawnEmplaced_Blue;  // Setting this in the mission file overrides the defaults 
-_vehicleCrewCount = [3,5]; // min / max number of crew including driver and gunners to be loaded into a vehicle
+_submarinePatrolParameters = [
+];
 
+_airPatrols = [
+];
+
+_missionEmplacedWeapons = [
+     ["B_T_HMG_01_F",[-24.9949,-6.60889,0],0],
+     ["B_T_HMG_01_F",[-2.10034,17.6167,0],0],
+     ["B_T_HMG_01_F",[-1.02319,-24.769,0],0],
+     ["B_T_HMG_01_F",[19.394,-7.26514,0],0]
+];
+
+_missionGroups = [
+     [[-6.98657,-17.4019,0.00143862],3,6,"Red",30,45],
+     [[-12.3303,1.17432,0.00143909],3,6,"Red",30,45],
+     [[16.0247,0.0390625,0.00143909],3,6,"Red",30,45],
+     [[8.53687,13.0479,0.00143909],3,6,"Red",30,45],
+     [[79.074,6.02344,0.00143909],3,6,"Red",30,45]
+];
+
+_scubaGroupParameters = [
+];
+
+
+
+
+//////////
+//  Edit these variables as needed
+_crateLoot = blck_BoxLoot_Red;  				// can be individualized for a particular mission by defining a loot array.
+_lootCounts = blck_lootCountsRed;  				//  can be individualized for a particular mission by defining an array with the counts of each loot type.
+_minNoAI = blck_MinAI_Red;  					// can be any value
+_maxNoAI = blck_MaxAI_Red;						// can be any value
+_noAIGroups = blck_AIGrps_Red;					// can be any value
+_noVehiclePatrols = blck_SpawnVeh_Red;			// can be any value
+_noEmplacedWeapons = blck_SpawnEmplaced_Red;	// can be any value
+
+//////////
+//   The lines below define additional variables you may wish to configure.
+
+
+//  Available variables you may wish to change are listed below.
+/*
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = blck_useMines;  // Setting this in the mission file overrides the defaults 
 _uniforms = blck_SkinList;  // Setting this in the mission file overrides the defaults 
@@ -109,7 +119,6 @@ _sideArms = blck_Pistols;
 _chanceHeliPatrol = blck_chanceHeliPatrolBlue;  // Setting this in the mission file overrides the defaults 
 _noChoppers = blck_noPatrolHelisBlue;
 _missionHelis = blck_patrolHelisBlue;
-
 _chancePara = blck_chanceParaBlue; // Setting this in the mission file overrides the defaults 
 _noPara = blck_noParaBlue;  // Setting this in the mission file overrides the defaults 
 _paraTriggerDistance = 400; // Distance from mission at which a player triggers these reinforcements and any supplemental loot. 						// To have paras spawn at the time the mission spawns with/without accompanying loot set this to 0.
@@ -132,5 +141,9 @@ _loadCratesTiming = blck_loadCratesTiming; // valid choices are "atMissionComple
 						// To spawn crates in the air and drop them by chutes set blck_spawnCratesTiming = "atMissionEndAir" // Note that a loaded crate will be spawned.
 _endCondition = blck_missionEndCondition;  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"
 									// Setting this in the mission file overrides the defaults 
-//_timeOut = -1;
+*/
+
+//////////
+//  DO NOT TOUCH ANYTHING BELOW THIS LINE
+
 #include "\q\addons\custom_server\Compiles\Missions\GMS_fnc_missionSpawner.sqf";

@@ -26,7 +26,7 @@
 
 if !(isNil "blck_spawnerMode") exitWith 
 {
-	diag_log format["_fnc_spawnPendingMissions: count blck_missionData = %1",count blck_missionData];
+	//diag_log format["_fnc_spawnPendingMissions: count blck_missionData = %1",count blck_missionData];
 	{	
 		/*
 		_missionCategoryDescriptors params [
