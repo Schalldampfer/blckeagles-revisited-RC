@@ -16,7 +16,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-diag_log format["_fnc_cleanUpObjects: time %1 | count blck_oldMissionObjects %2",diag_tickTime,count blck_oldMissionObjects];
+//diag_log format["_fnc_cleanUpObjects: time %1 | count blck_oldMissionObjects %2",diag_tickTime,count blck_oldMissionObjects];
 
 for "_i" from 1 to (count blck_oldMissionObjects) do {
 	if (_i <= count blck_oldMissionObjects) then {

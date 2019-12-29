@@ -226,5 +226,5 @@ private _AI_Vehicles = [];
 private _assetSpawned = objNull;
 
 private _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_missionAIVehicles,_mainMarker,_labelMarker];
-diag_log format["_fnc_initializeMission(201): _coords = %1 | _markerName = %2 | _marker = %3 | _markers = %4",_coords,_markerName,_mainMarker,_labelMarker];									//  0						1					2			3		4			5				6		7
+//diag_log format["_fnc_initializeMission(201): _coords = %1 | _markerName = %2 | _marker = %3 | _markers = %4",_coords,_markerName,_mainMarker,_labelMarker];									//  0						1					2			3		4			5				6		7
 blck_activeMissionsList pushBack [_missionCategoryDescriptors,_missionTimeoutAt,_triggered,_spawnPara,_missionData,_missionParameters];

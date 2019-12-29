@@ -19,32 +19,63 @@ _timer20sec = diag_tickTime;
 _timer1min = diag_tickTime;
 _timer5min = diag_tickTime;
 
+/*
+	tracking body deletion issue 
+
+	blck_fnc_cleanupAliveAI seems OK
+	blck_fnc_cleanupObjects seems OK
+	blck_fnc_cleanupDeadAI seems OK
+	blck_fnc_cleanEmptyGroups seems OK
+	blck_fnc_simulationManager seems OK
+	GMS_fnc_updateCrateSignals seems OK
+	blck_fnc_sm_staticPatrolMonitor seems OK
+	GMS_fnc_cleanupTemporaryMarkers	seems OK
+	blck_fnc_groupWaypointMonitor seems OK
+	blck_fnc_ai_offloadToClients seems OK 
+	blck_fnc_timeAcceleration seems OK 
+	blck_fnc_HC_passToHCs seems OK 
+	blck_fnc_vehicleMonitor seems OK - confirmed no issues 
+	blck_fnc_scanForPlayersNearVehicles seems OK 
+	
+*/
 while {true} do
 {
 	uiSleep 1;
 	if (diag_tickTime > _timer1sec) then 
 	{		
 		[] call blck_fnc_monitorInitializedMissions;
+		[] call blck_fnc_cleanupAliveAI;
+		[] call blck_fnc_cleanupObjects;
+		[] call blck_fnc_cleanupDeadAI;	
+		[] call blck_fnc_cleanEmptyGroups;	
+		[] call GMS_fnc_cleanupTemporaryMarkers;
+		[] call GMS_fnc_updateCrateSignals;						
+		//[] call blck_fnc_simulationManager;
+		[] call blck_fnc_vehicleMonitor;
+		[] call blck_fnc_scanForPlayersNearVehicles;
+			
+		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
+		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
+		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};	
+		[] call blck_fnc_groupWaypointMonitor; 
+		[] call blck_fnc_sm_staticPatrolMonitor;  // 									
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then
 	{
 		_timer5sec = diag_tickTime + 5;
-		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
-		[] call blck_fnc_sm_staticPatrolMonitor;  // TODO: sort out static missions
-		[] call blck_fnc_vehicleMonitor;		
-		//[] call blck_fnc_cleanupAliveAI;
-		//[] call blck_fnc_cleanupObjects;
-		//[] call blck_fnc_cleanupDeadAI;			
+		//if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
+		//[] call blck_fnc_sm_staticPatrolMonitor;  // 
+		//[] call blck_fnc_vehicleMonitor;					
 		#ifdef GRGserver
 		[] call blck_fnc_broadcastServerFPS;
 		#endif		
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
-		[] call blck_fnc_scanForPlayersNearVehicles;
-		[] call GMS_fnc_cleanupTemporaryMarkers;
-		[] call GMS_fnc_updateCrateSignals;				
+		//[] call blck_fnc_scanForPlayersNearVehicles;
+		//[] call GMS_fnc_cleanupTemporaryMarkers;
+		//[] call GMS_fnc_updateCrateSignals;				
 		_timer20sec = diag_tickTime + 20;
 	};
 	if ((diag_tickTime > _timer1min)) then
@@ -53,13 +84,12 @@ while {true} do
 
 			[] call blck_fnc_spawnPendingMissions;
 
-		[] call blck_fnc_groupWaypointMonitor; 
-		//if (blck_dynamicUMS_MissionsRuning < blck_numberUnderwaterDynamicMissions) then {[] spawn blck_fnc_addDyanamicUMS_Mission};
-		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
-		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
-		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};
+		//[] call blck_fnc_groupWaypointMonitor; 
+		//if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
+		//if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
+		//if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};
 		#ifdef blck_debugMode
-		diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];
+		//diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];
 		#endif
 	};
 	if (diag_tickTime > _timer5min) then 
@@ -80,10 +110,10 @@ while {true} do
 			};
 		} forEach diag_activeSQFScripts;
 		#endif		
-		[] call blck_fnc_cleanupAliveAI;
-		[] call blck_fnc_cleanupObjects;
-		[] call blck_fnc_cleanupDeadAI;	
-		[] call blck_fnc_cleanEmptyGroups;			
+		//[] call blck_fnc_cleanupAliveAI;
+		//[] call blck_fnc_cleanupObjects;
+		//[] call blck_fnc_cleanupDeadAI;	
+		//[] call blck_fnc_cleanEmptyGroups;			
 		_timer5min = diag_tickTime + 300;
 	};
 };
