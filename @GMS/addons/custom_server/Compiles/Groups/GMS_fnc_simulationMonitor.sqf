@@ -10,56 +10,72 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private["_playerType","_players"];
-_playerType = ["LandVehicle","SHIP","AIR","TANK"];
-//diag_log format["_fnc_simulationMonitor Called at %1",diag_tickTime];
-//  TODO: establish if vehicles are sometimes frozen because they are not properly activated.
-switch (toLower(blck_modType)) do
+diag_log format["_fnc_simulationMonitor Called at %1 | blck_simulationManager = %2 | blck_simulationManagementOff = %3",diag_tickTime,blck_simulationManager,blck_simulationManagementOff];
+if (blck_simulationManager isEqualTo blck_simulationManagementOff) exitWith 
 {
-	case "exile": {_playerType = _playerType + ["Exile_Unit_Player"]};
-	case "epoch": {_playerType = _playerType + ["Epoch_Male_F","Epoch_Female_F"]};
+	diag_log format["_fnc_simulationMonitor: monitoring disabled at %1",diag_tickTime];
 };
+
+if (blck_simulationManager isEqualTo blck_useDynamicSimulationManagement) exitWith 
 {
-	private _group = _x;
-	_players = ((leader _group) nearEntities [_playerType, blck_simulationEnabledDistance]) select {isplayer _x};
-	
-	if !(_players isEqualTo []) then
+	diag_log format["_fnc_simulationMonitor: evaluating simulation using dynamic simulation - poking groups that need to be activated"];
 	{
-		{	
-			if !(simulationEnabled _x) then
-			{	
-				_x enableSimulationGlobal  true;
-				(_players select 0) reveal _x;  //  Force simulation on
-			};
-		}forEach (units _group);
-	}else{
+		private _group = _x;
+		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
+		diag_log format["_fnc_simulationMonitor (24): _nearPlayer = %1",_nearPlayer];
+		if !(_nearPlayer isEqualTo []) then 
 		{
-			if (simulationEnabled _x) then
-			{	
-				_x enableSimulationGlobal false;
-			};
-		}forEach (units _x);
-	};
-} forEach blck_monitoredMissionAIGroups;
+			// toWhom reveal [target, accuracy]
+			diag_log format["_fnc_simulationMonitor: (28) revealing group %1",_group];
+			_group reveal [(_nearplayer select 0),(_group knowsAbout (_nearPlayer select 0)) + 0.001];  //  Force simulation on
+		};
+	} forEach blck_monitoredMissionAIGroups;
+};
+
+if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 {
-	if (simulationEnabled _x) then 
+	diag_log format["_fnc_simulationMonitor: evaluating simulation using blckeagls code"];
 	{
-		if !([_x,25,true] call blck_fnc_playerInRange) then 
+		private _group = _x;
+		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
+		if !(_nearplayer isEqualTo []) then
 		{
-			#ifdef blck_debugMode
-			diag_log format['_fnc_simulationManager: disabling simulation for dead AI %1',_x];
-			#endif
-			_x enableSimulationGlobal false;
+			if !(simulationEnabled (leader _group)) then
+			{	
+				{
+					_x enableSimulationGlobal  true;
+					_x reveal [(_nearplayer select 0),(_group knowsAbout (_nearPlayer select 0)) + 0.001];   //  Force simulation on
+				}forEach units _group;
+				diag_log format["_fnc_simulationMonitor: (44) enabling simulation for group %1",_group];
+			};
+		}else{
+			if (simulationEnabled (leader _group)) then
+			{	
+				{_x enableSimulationGlobal false} forEach units _group;
+				diag_log format["_fnc_simulationMonitor: (50) disabling simulation for group %1",_group];					
+			};
 		};
-	} else {
-		if ([_x,25,true] call blck_fnc_playerInRange) then 
+	} forEach blck_monitoredMissionAIGroups;
+
+	{
+		// disable simulation once players have left the area.
+		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
+		if (simulationEnabled _x) then 
 		{
-			#ifdef blck_debugMode
-			diag_log format['_fnc_simulationManager: enabling simulation for dead AI %1',_x];
-			#endif
-			_x enableSimulationGlobal true;
+			private _unit = _x; //blck_deadAI deleteAt 0;
+			if (_nearPlayer isEqualTo []) then 
+			{
+				_unit enableSimulationGlobal false;
+				diag_log format["_fnc_simulationMonior: simulation for unit %1 set to FALSE",_unit];
+			};
+		} else {
+			if !(_nearPlayers isEqualTo []) then 
+			{
+				_unit enableSimulationGlobal true;
+				diag_log format["_fnc_simulationMonior: simulation for unit %1 set to TRUE",_unit];			
+			};
 		};
-	};
-} forEach blck_deadAI;
-//  TODO: Add check for dead AI.
-// TODO: Can this be run less often, say every 5 sec?
+	} forEach units blck_graveyardGroup;		
+};
+
+

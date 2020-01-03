@@ -50,7 +50,7 @@ while {true} do
 		[] call blck_fnc_cleanEmptyGroups;	
 		[] call GMS_fnc_cleanupTemporaryMarkers;
 		[] call GMS_fnc_updateCrateSignals;						
-		//[] call blck_fnc_simulationManager;
+		[] call blck_fnc_simulationManager;
 		[] call blck_fnc_vehicleMonitor;
 		[] call blck_fnc_scanForPlayersNearVehicles;
 			

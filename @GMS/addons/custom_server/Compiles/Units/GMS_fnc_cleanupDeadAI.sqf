@@ -13,10 +13,8 @@
 
 //diag_log format["fnc_cleanupDeadAI: (partially deactivated) time %1 | count blck_deadAI %2",diag_tickTime,count blck_deadAI];
 
-//for "_i" from 1 to count blck_deadAI do
 {
-	//if (_i > count blck_deadAI) exitWith {};
-	private _unit = _x; //blck_deadAI deleteAt 0;
+	private _unit = _x; 
 	if (_unit getVariable["blck_cleanupAt",0] isEqualTo 0) then {_unit setVariable["blck_cleanupAt",diag_tickTime + blck_bodyCleanUpTimer]};
 	private _nearplayer = [position _unit,800] call blck_fnc_nearestPlayers;	
 	diag_log format["fnc_cleanupDeadAI: _unit = %1 | blck_cleanupat = %2 | _nearPlayer = %3",_unit, _unit getVariable["blck_cleanupAt",0],_nearPlayer];	
