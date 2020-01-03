@@ -23,5 +23,5 @@ if ((tolower blck_modType) isEqualto "exile") then
 {
 	call compile preprocessfilelinenumbers "\q\addons\custom_server\SLS\SLS_init_exile.sqf";
 };
-diag_log "[blckeagls] SLS System: Static loot crates ran successfully!";
+//diag_log "[blckeagls] SLS System: Static loot crates ran successfully!";
 blck_SLSComplete = true;

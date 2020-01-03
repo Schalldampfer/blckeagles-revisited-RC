@@ -45,8 +45,8 @@
 
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
-	blck_simulationManager = blck_useBlckeaglsSimulationManager; 
-	//diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
+	blck_simulationManager = blck_useDynamicSimulationManagement; 
+
 	/*
 		blck_simulationManagementOff  - no simulation management occurs
 		blck_useBlckeaglsSimulationManager - simulation is enabled/disabled by periodic checks for nearby players; a 'wake' function is included when a units simulation is turned on
@@ -96,7 +96,7 @@
 	// blck_labelMapMarkers: Determines if when the mission composition provides text labels, map markers with have a text label indicating the mission type
 	//When set to true,"arrow", text will be to the right of an arrow below the mission marker. 
 	// When set to true,"dot", ext will be to the right of a black dot at the center the mission marker. 
-	blck_labelMapMarkers = true;  //  TODO: change this through all code to reflect that it is now a boolean rather than array
+	blck_labelMapMarkers = [true,"center"];  ;  //  TODO: change this through all code to reflect that it is now a boolean rather than array
 	blck_preciseMapMarkers = true;  // Map markers are/are not centered at the loot crate
 	blck_showCountAliveAI = true;
 

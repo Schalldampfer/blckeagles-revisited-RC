@@ -10,23 +10,23 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-diag_log format["_fnc_simulationMonitor Called at %1 | blck_simulationManager = %2 | blck_simulationManagementOff = %3",diag_tickTime,blck_simulationManager,blck_simulationManagementOff];
+//diag_log format["_fnc_simulationMonitor Called at %1 | blck_simulationManager = %2 | blck_simulationManagementOff = %3",diag_tickTime,blck_simulationManager,blck_simulationManagementOff];
 if (blck_simulationManager isEqualTo blck_simulationManagementOff) exitWith 
 {
-	diag_log format["_fnc_simulationMonitor: monitoring disabled at %1",diag_tickTime];
+	//diag_log format["_fnc_simulationMonitor: monitoring disabled at %1",diag_tickTime];
 };
 
 if (blck_simulationManager isEqualTo blck_useDynamicSimulationManagement) exitWith 
 {
-	diag_log format["_fnc_simulationMonitor: evaluating simulation using dynamic simulation - poking groups that need to be activated"];
+	//diag_log format["_fnc_simulationMonitor: evaluating simulation using dynamic simulation - poking groups that need to be activated"];
 	{
 		private _group = _x;
 		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
-		diag_log format["_fnc_simulationMonitor (24): _nearPlayer = %1",_nearPlayer];
+		//diag_log format["_fnc_simulationMonitor (24): _nearPlayer = %1",_nearPlayer];
 		if !(_nearPlayer isEqualTo []) then 
 		{
 			// toWhom reveal [target, accuracy]
-			diag_log format["_fnc_simulationMonitor: (28) revealing group %1",_group];
+			//diag_log format["_fnc_simulationMonitor: (28) revealing group %1",_group];
 			_group reveal [(_nearplayer select 0),(_group knowsAbout (_nearPlayer select 0)) + 0.001];  //  Force simulation on
 		};
 	} forEach blck_monitoredMissionAIGroups;
@@ -34,7 +34,7 @@ if (blck_simulationManager isEqualTo blck_useDynamicSimulationManagement) exitWi
 
 if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 {
-	diag_log format["_fnc_simulationMonitor: evaluating simulation using blckeagls code"];
+	//diag_log format["_fnc_simulationMonitor: evaluating simulation using blckeagls code"];
 	{
 		private _group = _x;
 		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
@@ -46,7 +46,7 @@ if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 					_x enableSimulationGlobal  true;
 					_x reveal [(_nearplayer select 0),(_group knowsAbout (_nearPlayer select 0)) + 0.001];   //  Force simulation on
 				}forEach units _group;
-				diag_log format["_fnc_simulationMonitor: (44) enabling simulation for group %1",_group];
+				//diag_log format["_fnc_simulationMonitor: (44) enabling simulation for group %1",_group];
 			};
 		}else{
 			if (simulationEnabled (leader _group)) then
@@ -66,13 +66,13 @@ if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 			if (_nearPlayer isEqualTo []) then 
 			{
 				_unit enableSimulationGlobal false;
-				diag_log format["_fnc_simulationMonior: simulation for unit %1 set to FALSE",_unit];
+				//diag_log format["_fnc_simulationMonior: simulation for unit %1 set to FALSE",_unit];
 			};
 		} else {
 			if !(_nearPlayers isEqualTo []) then 
 			{
 				_unit enableSimulationGlobal true;
-				diag_log format["_fnc_simulationMonior: simulation for unit %1 set to TRUE",_unit];			
+				//diag_log format["_fnc_simulationMonior: simulation for unit %1 set to TRUE",_unit];			
 			};
 		};
 	} forEach units blck_graveyardGroup;		

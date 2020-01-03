@@ -25,7 +25,7 @@ _markerColor = "ColorOrange";
 _markerMissionName = "Medical Camp";
 _missionLandscapeMode = "precise"; // acceptable values are "none","random","precise"
 _missionLandscape = [
-		["Flag_AAF_F",[5,6,0],0,[false,true]], 
+		["Flag_AAF_F",[4,4,0],0,[false,true]], 
 		["Land_dp_transformer_F",[1.698242,-10.4668,-0.00763702],271.32,[true,true]], 
 		["Land_Wreck_BRDM2_F",[1.37012,13.498,0.00109863],184.487,[true,true]], 
 		["Land_BagBunker_Small_F",[18.4512,-3.66406,0.00780487],305.003,[true,true]], 

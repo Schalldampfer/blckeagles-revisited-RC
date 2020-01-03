@@ -26,9 +26,13 @@
 
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
-	blck_simulationManager = blck_useBlckeaglsSimulationManagement; 
-	//diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
-	// Note that you can define map-specific variants in custom_server\configs\blck_custom_config.sqf
+	blck_simulationManager = blck_useBlckeaglsSimulationManager; 
+	/*
+		blck_simulationManagementOff  - no simulation management occurs
+		blck_useBlckeaglsSimulationManager - simulation is enabled/disabled by periodic checks for nearby players; a 'wake' function is included when a units simulation is turned on
+		blck_useDynamicSimulationManagement 2 - arma dynamic simulation is used
+	*/
+
 	blck_useTimeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
 	blck_timeAccelerationDay = 2;  // Daytime time accelearation
 	blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
@@ -221,7 +225,8 @@
 	#else
 	// Change this value to reduce the number of spawned missions at any one time.
 	blck_maxSpawnedMissions = 4;
-
+	#endif
+	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
 	blck_enableGreenMissions = 1;

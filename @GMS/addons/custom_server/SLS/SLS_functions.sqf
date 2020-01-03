@@ -91,7 +91,7 @@ _fn_setupCrates = {
 	if (blck_debugON) then 
 	{
 		_blck_localMissionMarker = [format["SLS%1%2",_location select 0, _location select 1],(getPos _crate),"","","ColorGreen",["mil_box",[]]];
-		diag_log format["[blckeagls] SLS:: spawning diagnostic marker at %1",getPos _crate];
+		//diag_log format["[blckeagls] SLS:: spawning diagnostic marker at %1",getPos _crate];
 		// params["_missionType","_markerPos","_markerLabel","_markerLabelType","_markerColor","_markerType"];
 		[_blck_localMissionMarker] call blck_fnc_spawnMarker;
 	};
@@ -106,8 +106,8 @@ private["_cratePos","_lootType","_randomPos","_useSmoke"];
 	_index = 1;
 	if (blck_debugON) then
 	{
-		diag_log format["[blckeagls] SLS :: main function: Location name = %3 |count _ar = %1 | _index = %2", count _ar, _index, _name];
-		diag_log format["[blckeagls] SLS :: main function: count _ar = %1", _ar];
+		//diag_log format["[blckeagls] SLS :: main function: Location name = %3 |count _ar = %1 | _index = %2", count _ar, _index, _name];
+		//diag_log format["[blckeagls] SLS :: main function: count _ar = %1", _ar];
 	};
 	if ((tolower _map) isEqualto (toLower(worldName))) then
 	{
@@ -118,7 +118,7 @@ private["_cratePos","_lootType","_randomPos","_useSmoke"];
 			_crateParams = _ar deleteat 0;
 			if (blck_debugON) then
 			{
-				diag_log format["[blckeagls] SLS:: spawning crate spawning crate at location name %1 with parameters of %2 --->>> %1",_name,_crateParams];
+				//diag_log format["[blckeagls] SLS:: spawning crate spawning crate at location name %1 with parameters of %2 --->>> %1",_name,_crateParams];
 			};
 //			_crateParams params["_cratePos","_lootType","_randomPos","_useSmoke"];
 			_crateParams call _fn_setupCrates;

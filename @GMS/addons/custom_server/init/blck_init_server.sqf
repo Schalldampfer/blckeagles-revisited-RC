@@ -20,15 +20,18 @@ blck_Initialized = true;
 blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {""}};
 publicVariable "blck_modType";
 
+// Disabled for now - need to speak to He-Man about the epoch-specific code below.
+// I may need to spawn this rather than execute line by line.
+
 if ((tolower blck_modType) isEqualto "epoch") then {
 	diag_log "[blckeagls] Waiting until EpochMod is ready...";
-	waituntil {!isnil "EPOCH_SERVER_READY"};
+	//waituntil {!isnil "EPOCH_SERVER_READY"};
 	diag_log "[blckeagls] EpochMod is ready...loading blckeagls";
 };
 if ((toLower blck_modType) isEqualTo "exile") then
 {
 	diag_log "[blckeagls] Waiting until ExileMod is ready ...";
-	waitUntil {!PublicServerIsLoaded};
+	//waitUntil {!PublicServerIsLoaded};
 	diag_log "[blckeagls] Exilemod is ready...loading blckeagls";	
 };
 
