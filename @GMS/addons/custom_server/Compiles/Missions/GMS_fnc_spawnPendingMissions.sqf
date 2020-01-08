@@ -64,10 +64,12 @@ if !(isNil "blck_spawnerMode") exitWith
 			_x set[noActive, _noActiveMissions + 1];
 			//private _m = ;
 			//private _mrkr = format["%1:%2",_marker,_timesSpawned];
-			//diag_log format["_fnc_spawnPendingMissions: using marker %1 | spawning mission %1",_mrkr,_m];
+
 			//uisleep 1;  // only for debugging purposes.  
 			//  TODO: comment out uiSleep at a later time.
-			[_x,selectRandom _missionsData] call blck_fnc_initializeMission;
+			//[_x,selectRandom _missionsData] call blck_fnc_initializeMission;
+			//diag_log format["_fnc_spawnPendingMissions: adding mission to cue of missions to be initialized using _x %1 | _noActive %2 | _waitTime %3",_x,_noActiveMissions,_wt];			
+			blck_initializedMissionsList pushBack [_x,selectRandom _missionsData];
 		};
 	} forEach blck_missionData;
 };

@@ -25,8 +25,9 @@ if (isServer) then
 {
 	diag_log format["blck_fnc_init <SERVER> called at %1",diag_tickTime];
 	private _initFunc = compileFinal preprocessFileLineNumbers "\q\addons\custom_server\init\blck_init_server.sqf";
-	private _script = [] execVM "\q\addons\custom_server\init\blck_init_server.sqf";
-	waitUntil {scriptDone _script};
+	//private _script = [] execVM "\q\addons\custom_server\init\blck_init_server.sqf";
+	[] spawn _initFunc;
+	//waitUntil {scriptDone _script};
 	diag_log format["blck_fnc_init: initialization scripts done at %1",diag_tickTime];
 };
 if (!isServer && !hasInterface) then 

@@ -6,6 +6,10 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+
+private ["_coords","_coordArray","_return"];
+
+
 params["_missionCategoryDescriptors","_missionParameters"];
 
  _missionCategoryDescriptors params [
@@ -39,34 +43,33 @@ params["_missionCategoryDescriptors","_missionParameters"];
 if (_noActive > _noMissions) exitWith {if (blck_debugOn) then {}};
 
 _missionParameters params[
-	//"_markerClass",				// 0  ?? "Scouts"; ignored from build 186 on.
-	"_defaultMissionLocations",	// 1	
-	"_crateLoot", 				// 2
-	"_lootCounts", 				// 3
-	"_startMsg", // 2
-	"_endMsg", // 3
-	"_markerMissionName", //   "Scouts";
-	"_markerType", // "mil_triangle"
-	"_markerColor", // ColorBlue
-	"_markerSize",  //[200,200] for ELLIPSE and rectangle markers only
-	"_markerBrush",  // "GRID", for ELLIPSE and rectangle markers only
-	//"_markerLabel",		// ignored from build 186 on
-	"_missionLandscapeMode", 	
+	//"_markerClass",					// 0  ?? "Scouts"; ignored from build 186 on.
+	"_defaultMissionLocations",			// 1	
+	"_crateLoot", 						// 2
+	"_lootCounts", 						// 3
+	"_startMsg", 						// 4
+	"_endMsg", 							// 5
+	"_markerMissionName", 				// 6   "Scouts";
+	"_markerType", 						// 7 "mil_triangle"
+	"_markerColor", 					// 8 ColorBlue
+	"_markerSize",  					// 9 [200,200] for ELLIPSE and rectangle markers only
+	"_markerBrush",  					// 10 "GRID", for ELLIPSE and rectangle markers only
+	"_missionLandscapeMode", 			// 11 
 	"_garrisonedBuildings_BuildingPosnSystem", 
-	"_garrisonedBuilding_ATLsystem",
-	"_missionLandscape",
-	"_missionLootBoxes",
-	"_missionLootVehicles",
-	"_missionPatrolVehicles",
-	"_submarinePatrolParameters",
-	"_airPatrols",
-	"_noVehiclePatrols", 
-	"_vehicleCrewCount",
-	"_missionEmplacedWeapons",
-	"_noEmplacedWeapons", 
-	"_missionLootVehicles",
-	"_useMines", 
-	"_minNoAI", 
+	"_garrisonedBuilding_ATLsystem",	// 13
+	"_missionLandscape",				// 14
+	"_missionLootBoxes",				// 15
+	"_missionLootVehicles",				// 16
+	"_missionPatrolVehicles",			// 17
+	"_submarinePatrolParameters",		// 18
+	"_airPatrols",						// 19
+	"_noVehiclePatrols", 				// 20
+	"_vehicleCrewCount",				// 21
+	"_missionEmplacedWeapons",			// 22
+	"_noEmplacedWeapons", 				// 23
+	"_missionLootVehicles",				// 24
+	"_useMines", 						// 25
+	"_minNoAI", 						// 26
 	"_maxNoAI", 
 	"_noAIGroups", 		
 	"_missionGroups",
@@ -156,7 +159,6 @@ _missionParameters params[
 ];
 */
 //diag_log format["_fnc_initializeMission: _isScubaMission = %1",_isScubaMission];
-private ["_coords","_coordArray"];
 _coordsArray = [];
 if !(_defaultMissionLocations isEqualTo []) then 
 {
@@ -167,10 +169,16 @@ if !(_defaultMissionLocations isEqualTo []) then
 		_coords = [] call blck_fnc_findShoreLocation;
 	} else {
 		_coords =  [] call blck_fnc_findSafePosn;
-		//diag_log format["_fnc_initialeMission: final coords selected = %1",_coords];
+
 	};
 };
-//_defaultMissionLocations pushBack _coords;
+//diag_log format["_fnc_initializeMission: _coords = %1",_coords];
+//uiSleep 1;
+if (_coords isEqualTo []) exitWith 
+{
+	//diag_log format['_fnc_initializeMission: no safe location found, defering initialization'];
+	false;
+};
 
 //diag_log format["_fnc_initializeMission(160): _defaultMissionLocations = %3 | _markerMissionName = %1 | _coords = %2",_markerMissionName,_coords,_defaultMissionLocations];
 blck_ActiveMissionCoords pushback _coords; 
@@ -228,3 +236,5 @@ private _assetSpawned = objNull;
 private _missionData = [_coords,_mines,_objects,_crates, _blck_AllMissionAI,_assetSpawned,_missionAIVehicles,_mainMarker,_labelMarker];
 //diag_log format["_fnc_initializeMission(201): _coords = %1 | _markerName = %2 | _marker = %3 | _markers = %4",_coords,_markerName,_mainMarker,_labelMarker];									//  0						1					2			3		4			5				6		7
 blck_activeMissionsList pushBack [_missionCategoryDescriptors,_missionTimeoutAt,_triggered,_spawnPara,_missionData,_missionParameters];
+
+true

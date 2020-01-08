@@ -49,7 +49,7 @@ blck_revealMode = "detailed"; //""basic" /*group or vehicle level reveals*/,deta
 blck_spawnerMode = 1;
 blck_missionData = [];
 blck_activeMissionsList = [];
-
+blck_initializedMissionsList = [];
 blck_blackListedLocations = []; // [ [marker, time]]
 
 if (blck_debugOn) then {diag_log "[blckeagls] Variables Loaded"};

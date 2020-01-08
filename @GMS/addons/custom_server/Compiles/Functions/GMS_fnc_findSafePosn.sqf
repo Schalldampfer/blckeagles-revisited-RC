@@ -1,6 +1,3 @@
-// self explanatory. Checks to see if the position is in either a black listed location or near a player spawn. 
-// As written this relies on BIS_fnc_findSafePos to ensure that the spawn point is not on water or an excessively steep slope. 
-// 
 /*
 	for ghostridergaming
 	By Ghostrider [GRG]
@@ -14,9 +11,46 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 //
-  //  [center, minDist, maxDist, objDist, waterMode, maxGrad, shoreMode, blacklistPos, defaultPos] call BIS_fnc_findSafePos 
-private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0] call BIS_fnc_findSafePos;
 
+private _blacklistedLocations =  blck_locationBlackList;
+
+private "_pole";
+if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
+if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
+{_blacklistedLocations pushBack [_x,blck_minDistanceToBases]} forEach nearestObjects[blck_mapCenter, [_pole], blck_mapRange];
+{_blacklistedLocations pushBack [_x,blck_minDistanceFromTowns]} forEach blck_townLocations;
+{_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission]} forEach blck_ActiveMissionCoords;
+for '_i' from 1 to count blck_recentMissionCoords do {
+	private _loc = blck_recentMissionCoords deleteAt 0;
+	if (_loc select 1 < diag_tickTime) then 
+	{
+		blck_recentMissionCoords pushBack _loc;
+		_blacklistedLocations pushBack [_loc, 500];
+	};
+};
+{_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission]} forEach blck_recentMissionCoords;
+{_blcklistedLocations pushBack [_x,blck_TriggerDistance + 300]} forEach allPlayers;
+private _coords = []; 
+
+private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+diag_log format["_fnc_findSafePosn: _coords from first attempt = %1",_coords];
+
+if (_coords isEqualTo []) then 
+{
+	for "_index" from 1 to 100 do 
+	{
+		{
+			_x set[1, (_x select 1) * 0.8];
+			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
+		} forEach _blacklistedLocations;
+		_coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
+		if !(_coords isEqualTo []) exitWith {};
+		uisleep 1;
+	};
+};
+
+//diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
 _coords
 
 /*// Check for old coords that have 'expired'

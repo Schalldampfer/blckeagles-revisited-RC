@@ -126,6 +126,7 @@ private _functions = [
 	["blck_fnc_sm_AddGroupToArray", "\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_AddGroupToArray.sqf"],	
 	["blck_fnc_initializeMission", "\q\addons\custom_server\Compiles\Missions\GMS_fnc_initializeMission.sqf"],
 	["blck_fnc_monitorInitializedMissions","\q\addons\custom_server\Compiles\Missions\GMS_fnc_monitorInitializedMissions.sqf"],
+	["blck_fnc_spawnInitializedMissions","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnInitializedMissions.sqf"],
 
 	// Group-related functions
 	["blck_fnc_spawnGroup","\q\addons\custom_server\Compiles\Groups\GMS_fnc_spawnGroup.sqf"],					// Spawn a single group and populate it with AI units]

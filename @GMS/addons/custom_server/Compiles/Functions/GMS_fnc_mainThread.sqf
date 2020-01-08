@@ -58,7 +58,8 @@ while {true} do
 		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
 		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};	
 		[] call blck_fnc_groupWaypointMonitor; 
-		[] call blck_fnc_sm_staticPatrolMonitor;  // 									
+		[] call blck_fnc_sm_staticPatrolMonitor;  
+		[] call blck_fnc_spawnInitializedMissions;									
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then

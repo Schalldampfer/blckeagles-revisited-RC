@@ -51,6 +51,7 @@ diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugL
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
 diag_log format["[blckeagls] Variables loaded at %1",diag_tickTime];
 
+
 // spawn map addons to give the server time to position them before spawning in crates etc.
 if (blck_spawnMapAddons) then
 {
@@ -62,7 +63,7 @@ if (blck_spawnMapAddons) then
 if ( !(blck_debugON) && (blck_debugLevel isEqualTo 0)) then
 {
 	diag_log format["[blckeagls] waiting for players to join ----    >>>>"];
-	waitUntil{{isPlayer _x}count allPlayers > 0};
+	//waitUntil{{isPlayer _x}count allPlayers > 0};
 	diag_log "[blckeagls] Player Connected, spawning missions";
 } else {
 	diag_log "[blckeagls] Debug mode ON, proceding without players";

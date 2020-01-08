@@ -24,7 +24,7 @@ _fn_missionCleanup = {
 	//diag_log format["_fnc_endMission: blck_liveMissionAI = %1",blck_liveMissionAI];
 	blck_missionsRunning = blck_missionsRunning - 1;
 	blck_ActiveMissionCoords = blck_ActiveMissionCoords - [ _coords];	
-	blck_recentMissionCoords pushback [_coords,diag_tickTime + 1200]; 
+	blck_recentMissionCoords pushback [_coords,  diag_tickTime + 900]; 
 };
 
 ///////////////////////////////////////////////////////////////////////
