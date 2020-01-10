@@ -11,177 +11,73 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 //
-
+if (isNil "blck_locationBlackList") then {blck_locationBlackList = []};
 private _blacklistedLocations =  blck_locationBlackList;
-
+/*
+diag_log format["_fnc_findSafePosn: blck_locationBlackList = %1", blck_locationBlackList];
+diag_log format["_fnc_findSafePosn: _blacklistedLocations = %1",_blacklistedLocations];
 private "_pole";
 if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
 if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
-{_blacklistedLocations pushBack [_x,blck_minDistanceToBases]} forEach nearestObjects[blck_mapCenter, [_pole], blck_mapRange];
-{_blacklistedLocations pushBack [_x,blck_minDistanceFromTowns]} forEach blck_townLocations;
-{_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission]} forEach blck_ActiveMissionCoords;
+{
+	if (count _x isEqualTo 2) then {
+		diag_log format["_value %1 has a count of 2",_x];
+		_x pushBack 0;
+	};
+	_blacklistedLocations pushBack [_x,blck_minDistanceToBases];
+} forEach nearestObjects[blck_mapCenter, [_pole], blck_mapRange];
+
+{
+	if (count _x isEqualTo 2) then {_x pushBack 0};
+	_blacklistedLocations pushBack [_x,blck_minDistanceFromTowns];
+} forEach blck_townLocations;
+{
+	if (count _x isEqualTo 2) then {_x pushBack 0};
+	_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission];
+} forEach blck_ActiveMissionCoords;
+*/
+/*
 for '_i' from 1 to count blck_recentMissionCoords do {
 	private _loc = blck_recentMissionCoords deleteAt 0;
+	diag_log format["BIS_fnc_findSafePos:  _loc = %1",_loc];
+	
 	if (_loc select 1 < diag_tickTime) then 
 	{
+		diag_log "location still blacklisted";
+		if (count (_loc select 0) isEqualTo 2) then {(_loc select 0) pushBack 0};
 		blck_recentMissionCoords pushBack _loc;
-		_blacklistedLocations pushBack [_loc, 500];
+		_blacklistedLocations pushBack [_loc select 0, 500];
 	};
+	
 };
-{_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission]} forEach blck_recentMissionCoords;
-{_blcklistedLocations pushBack [_x,blck_TriggerDistance + 300]} forEach allPlayers;
+*/
+/*
+{
+	if (count _x isEqualTo 2) then {_x pushBack 0};
+	_blacklistedLocations pushBack [_x,blck_TriggerDistance + 300];
+} forEach allPlayers;
+
 private _coords = []; 
-
+*/
 private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
-diag_log format["_fnc_findSafePosn: _coords from first attempt = %1",_coords];
-
+diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
 if (_coords isEqualTo []) then 
 {
 	for "_index" from 1 to 100 do 
 	{
 		{
 			_x set[1, (_x select 1) * 0.8];
-			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
+			diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
 		} forEach _blacklistedLocations;
 		_coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
-		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
+		diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
 		if !(_coords isEqualTo []) exitWith {};
 		uisleep 1;
 	};
 };
 
-//diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
+diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
 _coords
 
-/*// Check for old coords that have 'expired'
-for "_i" from 1 to (count blck_recentMissionCoords) do 
-{
-	if (_i > count blck_recentMissionCoords) exitWith {};
-	private _oldcoords = blck_recentMissionCoords deleteAt 0;
-	if (diag_tickTime < ((_x select 1))) then {blck_recentMissionCoords pushBack _oldcoords};
-};
-
-// figure out the current black lists
-
-/*
-private["_findNew","_tries","_coords","_dist","_xpos","_ypos","_newPos","_townPos","_pole"];
-private["_minDistFromBases","_minDistFromMission","_minDistanceFromTowns","_minSistanceFromPlayers","_weightBlckList","_weightBases","_weightMissions","_weightTowns","_weightPlayers"];
-
-_findNew = true;
-_tries = 0;
-
-_minDistFromBases = blck_minDistanceToBases;
-_minDistFromMission = blck_MinDistanceFromMission;
-_minDistanceFromTowns = blck_minDistanceFromTowns;
-_minSistanceFromPlayers = blck_minDistanceToPlayer;
-_weightBlckList = 0.95;
-_weightBases = 0.9;
-_weightMissions = 0.8;
-_weightTowns = 0.7;
-_weightPlayers = 0.6;
-if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
-if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
-_recentMissionCoords = +blck_recentMissionCoords;
-
-{
-	 // if the prior mission was completed more than 20 min ago then delete it from the list and ignore the check for this location.
-	{
-		blck_recentMissionCoords deleteAt (blck_recentMissionCoords find _x);
-	};
-}forEach _recentMissionCoords;
-
-while {_findNew} do
-{
-	_findNew = false;
-	_coords = [blck_mapCenter,0,blck_mapRange,30,0,5,0] call BIS_fnc_findSafePos;
-	diag_log format["_fnc_findSafePosn: _coords = %1 | _tries = %2",_coords,_tries];
-	{
-		if ( ((_x select 0) distance2D _coords) < (_x select 1)) exitWith
-		{
-			_findNew = true;
-		};
-	} forEach blck_locationBlackList;
-
-	if !(_findNew) then
-	{
-		{
-			if ((_x distance2D _coords) < _minDistFromMission) then {_findNew = true;};
-		}forEach blck_heliCrashSites;	
-	};	
-	if !(_findNew) then
-	{
-		{
-			if ( (_x distance2D _coords) < _minDistFromMission) exitWith
-			{
-				_FindNew = true;
-			};
-		} forEach blck_ActiveMissionCoords;	
-	};
-	if !(_findNew) then
-	{
-		{
-			if ((_x distance2D _coords) < blck_minDistanceToBases) then
-			{
-				_findNew = true;
-			};
-		}forEach  nearestObjects[blck_mapCenter, [_pole], blck_minDistanceToBases];		
-	};		
-	if !(_findNew) then
-	{
-		{
-			_townPos = [((locationPosition _x) select 0), ((locationPosition _x) select 1), 0];
-			if (_townPos distance2D _coords < blck_minDistanceFromTowns) exitWith {
-				_findNew = true;
-			};
-		} forEach blck_townLocations;	
-	};		
-	if !(_findNew) then
-	{
-		{
-			if (isPlayer _x && (_x distance2D _coords) < blck_minDistanceToPlayer) then 
-			{
-					_findNew = true;
-			};
-		}forEach playableUnits;	
-	};
-	if !(_findNew) then
-	{
-		// test for water nearby
-		_dist = 50;
-		for [{_i=0}, {_i<360}, {_i=_i+20}] do
-		{
-			_xpos = (_coords select 0) + sin (_i) * _dist;
-			_ypos = (_coords select 1) + cos (_i) * _dist;
-			_newPos = [_xpos,_ypos,0];
-			if (surfaceIsWater _newPos) then
-			{
-				_findNew = true;
-				_i = 361;
-			};
-		};
-	};
-	if (_findNew) then
-	{
-		if (_tries in [3,6,9,12,15,18,21]) then
-		{
-			_minDistFromMission = _minDistFromMission * _weightMissions;
-			_minDistFromBases = _minDistFromBases * _weightBases;
-			_minSistanceFromPlayers = _minSistanceFromPlayers * _minSistanceFromPlayers;
-			_minDistanceFromTowns = _minDistanceFromTowns * _weightTowns;
-		};
-		if (_tries > 25) then 
-		{
-			_findNew = false;
-		};
-	};
-};
-if ((count _coords) > 2) then 
-{
-	private["_temp"];
-	_temp = [_coords select 0, _coords select 1];
-	_coords = _temp;
-};
-diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
-_coords;
 
 

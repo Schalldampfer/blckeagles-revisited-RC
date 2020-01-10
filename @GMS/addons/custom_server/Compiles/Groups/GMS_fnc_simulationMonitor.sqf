@@ -52,17 +52,19 @@ if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 			if (simulationEnabled (leader _group)) then
 			{	
 				{_x enableSimulationGlobal false} forEach units _group;
-				diag_log format["_fnc_simulationMonitor: (50) disabling simulation for group %1",_group];					
+				//diag_log format["_fnc_simulationMonitor: (50) disabling simulation for group %1",_group];					
 			};
 		};
 	} forEach blck_monitoredMissionAIGroups;
 
 	{
+		 //diag_log format["_fnc_simulationManager: _x = %1 | blck_graveyardGroup = %2",_x, units blck_graveyardGroup];
 		// disable simulation once players have left the area.
-		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
+		
 		if (simulationEnabled _x) then 
 		{
 			private _unit = _x; //blck_deadAI deleteAt 0;
+			//private _nearPlayer = [position (_x),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
 			if (_nearPlayer isEqualTo []) then 
 			{
 				_unit enableSimulationGlobal false;
