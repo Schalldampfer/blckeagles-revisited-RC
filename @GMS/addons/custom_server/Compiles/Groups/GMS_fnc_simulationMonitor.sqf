@@ -10,7 +10,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-//diag_log format["_fnc_simulationMonitor Called at %1 | blck_simulationManager = %2 | blck_simulationManagementOff = %3",diag_tickTime,blck_simulationManager,blck_simulationManagementOff];
+
 if (blck_simulationManager isEqualTo blck_simulationManagementOff) exitWith 
 {
 	//diag_log format["_fnc_simulationMonitor: monitoring disabled at %1",diag_tickTime];
@@ -18,15 +18,12 @@ if (blck_simulationManager isEqualTo blck_simulationManagementOff) exitWith
 
 if (blck_simulationManager isEqualTo blck_useDynamicSimulationManagement) exitWith 
 {
-	//diag_log format["_fnc_simulationMonitor: evaluating simulation using dynamic simulation - poking groups that need to be activated"];
+	// wake groups up if needed.
 	{
 		private _group = _x;
 		private _nearplayer = [position (leader _group),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
-		//diag_log format["_fnc_simulationMonitor (24): _nearPlayer = %1",_nearPlayer];
 		if !(_nearPlayer isEqualTo []) then 
 		{
-			// toWhom reveal [target, accuracy]
-			//diag_log format["_fnc_simulationMonitor: (28) revealing group %1",_group];
 			_group reveal [(_nearplayer select 0),(_group knowsAbout (_nearPlayer select 0)) + 0.001];  //  Force simulation on
 		};
 	} forEach blck_monitoredMissionAIGroups;
@@ -58,22 +55,20 @@ if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManager) then
 	} forEach blck_monitoredMissionAIGroups;
 
 	{
-		 //diag_log format["_fnc_simulationManager: _x = %1 | blck_graveyardGroup = %2",_x, units blck_graveyardGroup];
+		// diag_log format["_fnc_simulationManager: _x = %1 | blck_graveyardGroup = %2",_x, units blck_graveyardGroup];
 		// disable simulation once players have left the area.
-		
+		private _nearPlayers = [position (_x),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;		
 		if (simulationEnabled _x) then 
-		{
-			private _unit = _x; //blck_deadAI deleteAt 0;
-			//private _nearPlayer = [position (_x),blck_simulationEnabledDistance] call blck_fnc_nearestPlayers;	
-			if (_nearPlayer isEqualTo []) then 
+		{		
+			if (_nearPlayers isEqualTo []) then 
 			{
-				_unit enableSimulationGlobal false;
+				_x enableSimulationGlobal false;
 				//diag_log format["_fnc_simulationMonior: simulation for unit %1 set to FALSE",_unit];
 			};
 		} else {
 			if !(_nearPlayers isEqualTo []) then 
 			{
-				_unit enableSimulationGlobal true;
+				_x enableSimulationGlobal true;
 				//diag_log format["_fnc_simulationMonior: simulation for unit %1 set to TRUE",_unit];			
 			};
 		};

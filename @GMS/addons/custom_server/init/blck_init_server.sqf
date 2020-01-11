@@ -68,7 +68,7 @@ if ( !(blck_debugON) && (blck_debugLevel isEqualTo 0)) then
 } else {
 	diag_log "[blckeagls] Debug mode ON, proceding without players";
 };
-
+//if (true) exitWith {diag_log "blck_init_server ended at line 95"};
 // find and set Mapcenter and size
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\init\GMS_fnc_findWorld.sqf";
 diag_log "[blckeagls] Map-specific information defined";
@@ -120,7 +120,24 @@ if (blck_ai_offload_to_client) then
 	publicVariable "blck_fnc_processAIKill";
 };
 
+_fn_setupLocationType = {
+	params[	"_locationType"];
+	//diag_log format["[GMSAI] _fn_setupLocationType: _this = %1",_this];
+	private _locations = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), [_locationType], worldSize];	
+	//diag_log format["[GMSAI] _fn_setupLocationType: %1 locations found searcing for %2",count _configuredAreas,_locationType];
+	//diag_log format["_fn_setupLocationType: _configuredAreas = %1",_configuredAreas];
+	_locations	
+};
 
+private _villages = ["NameVillage"] call _fn_setupLocationType;
+private _cites = ["NameCity"] call _fn_setupLocationType;
+private _capitals = ["NameCityCapital"] call _fn_setupLocationType;
+private _marine = ["NameMarine"] call _fn_setupLocationType;
+private _other = ["NameLocal"] call _fn_setupLocationType;
+private _airport = ["Airport"] call _fn_setupLocationType;
+
+blck_townLocations = _villages + _cites + _capitals + _marine + _other + _airport;
+diag_log format["_init_server: count blck_townLocations = %1 || blck_townLocations = %2",count blck_townLocations, blck_townLocations];
 // set up the lists of available missions for each mission category
 #include "\q\addons\custom_server\Missions\GMS_missionLists.sqf";
 diag_log "[blckeagls] Mission Lists Loaded";
