@@ -73,7 +73,7 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 	//  where _customLootArray follows the same format as blck_BoxLoot_Red and the other pre-defined arrays and
 	//  where _customlootcountsarray1 also follows the same format as the predefined arrays like blck_lootCountsRed
 		//  ["Box_NATO_Ammo_F",[22893,16766.8,6.31652],[[0,1,0],[0,0,1]],[true,false], _crateLoot, _lootCounts],
-	[selectRandom blck_UMS_crates,[22584,15304,-1],[[0,1,0],[0,0,1]],[true,false], _crateLoot, _lootCounts]
+	[selectRandom blck_UMS_crates,[22584.9,15282.2,-1],[[0,1,0],[0,0,1]],[true,false], _crateLoot, _lootCounts]
 ];  // If this array is empty a single loot chest will be added at the center. If you add items loot chest(s) will be spawned in specific positions.
 
 
@@ -81,7 +81,7 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
 	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
-	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],0,,_crateLoot, _lootCounts]
+	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],0,_crateLoot, _lootCounts]
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.
@@ -91,6 +91,7 @@ _noEmplacedWeapons = blck_SpawnEmplaced_Red; // Modified as needed; can be a num
 // or _noEmplacedWeapons = 3; // a constant number of emplaced weps per misison
 // Note that this value is ignored if you define static weapon positions and types in the array below.
 _missionEmplacedWeapons = [
+	// ["Weapon class name", position[xy,z], AI Difficulty [blue, red, green, orange], patrol radius [0 for static weapons], seconds to wait before respawning (set to 0 to disable respawns)]
 	//["B_G_Mortar_01_F",[22867.3,16809.1,3.17968],"red",0,0],
 	//["B_HMG_01_high_F",[22944.3,16820.5,3.14243],"green",0,0]
 ];
@@ -107,36 +108,39 @@ _aiGroupParameters = [
 
 ];
 _aiScubaGroupParameters = [
-	// [ [px, py, pz] /* position*/, "difficulty", 4 /*Number to Spawn*/, 150 /*radius of patrol*/]
+	// [ [px, py, pz] /* position*/, "difficulty", 4 /*Number to Spawn*/, 150 /*radius of patrol*/, seconds to wait after all units killed before respawning the group (set to 0 to disable respawns)]
 	//[[22584.9,15304.8,-4.27578],"red",4, 75,0],
-	[[22613.5,15269.1,-4.28332],"red",3, 75,900],
-	[[22549,15288.9,0],"red",1, 75,0]
+	//[[22613.5,15269.1,-4.28332],"red",3, 75,900],
+	[[22549,15288.9,0],"red",3, 75,900]
 ];
 _noVehiclePatrols = blck_SpawnVeh_Red; // Modified as needed; can be a numberic value (e.g. 3) or range presented as [2,4]; 
 										//  Note that this value is ignored if you define vehicle patrols in the array below.
 _vehiclePatrolParameters = [
-	//["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],"red",75,60],
-	["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",75,0]	
+	//["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red",4 (Units to spawn into vehicle), 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+	//["B_T_Boat_Armed_01_minigun_F",[22577.6,15275.3,-0.0354593],"red",3, 75,0],
+	["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",3, 75,0]	
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
 							// Allows you to define the location of the center of the patrol, vehicle type spawned, radius to patrol, and AI difficulty (blue, red, green etc).
 
 _submarinePatrolParameters = [
-	//["B_SDV_01_F",[22584.9,15304.8,-1],"red",75,0],
-	["B_SDV_01_F",[22609.9,15299.8,-1],"red",75,0]
+	////["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red",4 (Units to spawn into vehicle), 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+	["B_SDV_01_F",[22607.9,15299.8,-1],"red",3, 75,0],
+	["B_SDV_01_F",[22609.9,15297.8,-1],"red",3, 75,0]	
 ];
 
 _aircraftTypes = blck_patrolHelisRed;  //  You can use one of the pre-defined lists in blck_configs or your own custom array.
 _noAirPatrols =	blck_noPatrolHelisRed; // You can use one of the pre-defined values or a custom one. acceptable values are integers (1,2,3) or a range such as [2,4]; 
 										//  Note: this value is ignored if you specify air patrols in the array below.
 _airPatrols = [
-	//["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,0],
+	//["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red", 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+	//["Exile_Chopper_Huey_Armed_Green",[22578.4,15273,50],"red",1000,0]  //,
 	//[selectRandom _aircraftTypes,_missionCenter,"green",1000,0]
 ];
 
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = false;  // Set to false if you have vehicles patrolling nearby.
 
-#include "\q\addons\custom_server\Missions\UMS\code\GMS_fnc_sm_initializeUMSStaticMission.sqf"; 
+#include "\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_initializeUMSStaticMission.sqf";
 
 diag_log format["[blckeagls static missions] COMPLETED initializing misions %1 position at %2 difficulty %3",_mission,_missionCenter,_difficulty];

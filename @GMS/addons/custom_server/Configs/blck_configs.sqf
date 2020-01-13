@@ -34,7 +34,7 @@
 		**************************************
 	*/
 	/***************************************************************
-		BLCKEAGLS SUPPLEMENTAL MODULES
+	SUPPLEMENTAL MODULES
 	****************************************************************	
 		Configuration for Addons that support the overall Mission system.
 		These are:
@@ -45,8 +45,8 @@
 
 	blck_spawnMapAddons = true;  // When true map addons will be spawned based on parameters  define in custum_server\MapAddons\MapAddons_init.sqf
 	blck_spawnStaticLootCrates = true; // When true, static loot crates will be spawned and loaded with loot as specified in custom_server\SLS\SLS_init_Epoch.sqf (or its exile equivalent).
-	blck_simulationManager = blck_useDynamicSimulationManagement; 
-
+	blck_simulationManager = blck_useBlckeaglsSimulationManager; 
+	//diag_log format["[blckeagls] blck_configs:  blck_simulationManager = %1",blck_simulationManager];
 	/*
 		blck_simulationManagementOff  - no simulation management occurs
 		blck_useBlckeaglsSimulationManager - simulation is enabled/disabled by periodic checks for nearby players; a 'wake' function is included when a units simulation is turned on
@@ -96,7 +96,7 @@
 	// blck_labelMapMarkers: Determines if when the mission composition provides text labels, map markers with have a text label indicating the mission type
 	//When set to true,"arrow", text will be to the right of an arrow below the mission marker. 
 	// When set to true,"dot", ext will be to the right of a black dot at the center the mission marker. 
-	blck_labelMapMarkers = [true,"center"];  ;  //  TODO: change this through all code to reflect that it is now a boolean rather than array
+	blck_labelMapMarkers = true;  //  TODO: change this through all code to reflect that it is now a boolean rather than array
 	blck_preciseMapMarkers = true;  // Map markers are/are not centered at the loot crate
 	blck_showCountAliveAI = true;
 
@@ -394,6 +394,9 @@
 	
 	**************************************************************/
 	//This defines the skill, minimum/Maximum number of AI and how many AI groups are spawned for each mission type
+	// See the links below for information on how these affect the AI behavior and performance.
+	// https://community.bistudio.com/wiki/Arma_3_AI_Skill 
+	// https://community.bistudio.com/wiki/setSkill
 	// Orange Missions
 	blck_MinAI_Orange = 20;
 	blck_MaxAI_Orange = 25;
@@ -432,7 +435,134 @@
 	blck_maxMoneyRed = 15;
 	blck_maxMoneyBlue = 10;
 
-		if (toLower(blck_modType) isEqualTo "epoch") then
+	blck_UMS_uniforms = 
+	[
+		"U_I_Wetsuit",
+		"U_O_Wetsuit",
+		"U_B_Wetsuit"
+	];
+
+	blck_UMS_headgear = 
+	[
+		"G_Diving",
+		"G_B_Diving",
+		"G_O_Diving",
+		"G_I_Diving"
+	];
+
+	blck_UMS_vests = 
+	[
+		"V_RebreatherB",
+		"V_RebreatherIA",
+		"V_RebreatherIR"
+	];
+
+	blck_UMS_weapons = 
+	[
+		"arifle_SDAR_F"
+	];
+
+	if ((tolower blck_modType) isEqualTo "exile") then
+	{
+		blck_UMS_submarines =
+		[
+			
+			"Exile_Boat_SDV_CSAT",
+			"Exile_Boat_SDV_Digital",
+			"Exile_Boat_SDV_Grey"
+		];
+		
+		blck_UMS_crates =
+		[
+			"Exile_Container_SupplyBox"
+		];
+	};
+	if ((tolower blck_modType) isEqualTo "epoch") then
+	{
+		blck_UMS_submarines =
+		[
+			
+			"B_SDV_01_EPOCH"
+		];
+		//blck_UMS_crates = blck_crateTypes;
+		blck_UMS_crates = ["container_epoch"];	
+	};
+	blck_UMS_unarmedSurfaceVessels = 
+	[
+		"B_Boat_Transport_01_F",
+		"I_Boat_Transport_01_F"
+	];
+	blck_UMS_armedSurfaceVessels =
+	[
+		"B_Boat_Armed_01_minigun_F",
+		"I_Boat_Armed_01_minigun_F"	
+	];
+	blck_UMS_surfaceVessels = blck_UMS_unarmedSurfaceVessels + blck_UMS_armedSurfaceVessels;
+	blck_UMS_shipWrecks =
+	[
+		"Land_Boat_06_wreck_F",
+		"Land_Boat_05_wreck_F",
+		"Land_Boat_04_wreck_F",
+		"Land_Boat_02_abandoned_F",
+		"Land_Boat_01_abandoned_red_F",
+		"Land_Boat_01_abandoned_blue_F"
+	];
+	
+	#ifdef GRGserver
+	blck_AIAlertDistance = [250,450,650,800];  //  Radius within which AI will be notified of enemy activity. Depricated as a group-sed system is used now. The group is informed of the enemy location when a group member is hit or killed.
+	//blck_AIAlertDistance = [150,225,400,500];
+	// How precisely player locations will be revealed to AI after an AI kill
+	// values are ordered as follows [blue, red, green, orange];
+	blck_AIIntelligence = [0.3, 0.5, 0.7, 0.9];  
+	
+	blck_baseSkill = 0.7;  // The overal skill of the AI - range 0.1 to 1.0.
+	
+	/***************************************************************
+	
+	MISSION TYPE SPECIFIC AI SETTINGS
+	
+	**************************************************************/
+	//This defines the skill, minimum/Maximum number of AI and how many AI groups are spawned for each mission type
+	// Orange Missions
+	blck_MinAI_Orange = 20;
+	blck_MaxAI_Orange = 25;
+	blck_AIGrps_Orange = 5;
+	blck_SkillsOrange = [
+		["aimingAccuracy",[0.25,0.36]],["aimingShake",[0.45,0.55]],["aimingSpeed",[0.65,0.75]],["endurance",1.00],["spotDistance",1.0],["spotTime",0.7],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",1.00]
+	];
+	
+	// Green Missions
+	blck_MinAI_Green = 16;
+	blck_MaxAI_Green = 21;
+	blck_AIGrps_Green = 4;
+	blck_SkillsGreen = [
+		["aimingAccuracy",[0.2,0.3]],["aimingShake",[0.4,0.5]],["aimingSpeed",[0.55,0.7]],["endurance",0.9],["spotDistance",0.9],["spotTime",0.65],["courage",0.9],["reloadSpeed",0.9],["commanding",0.9],["general",0.75]
+	];
+	
+	// Red Missions
+	blck_MinAI_Red = 12;
+	blck_MaxAI_Red = 15;
+	blck_AIGrps_Red = 3;
+	blck_SkillsRed = [
+		["aimingAccuracy",[0.2,0.25]],["aimingShake",[0.35,0.4]],["aimingSpeed",0.6],["endurance",0.80],["spotDistance",0.7],["spotTime",0.6],["courage",0.80],["reloadSpeed",0.70],["commanding",0.8],["general",0.70]
+	];
+	
+	// Blue Missions
+	blck_MinAI_Blue = 8;	
+	blck_MaxAI_Blue = 12;
+	blck_AIGrps_Blue = 2;
+	blck_SkillsBlue = [
+		["aimingAccuracy",[0.08,16]],["aimingShake",[0.25,0.35]],["aimingSpeed",0.5],["endurance",0.50],["spotDistance",0.6],["spotTime",0.6],["courage",0.60],["reloadSpeed",0.60],["commanding",0.7],["general",0.60]
+	];
+		
+	// Add some money to AI; 
+	blck_maxMoneyOrange = 25;
+	blck_maxMoneyGreen = 20;
+	blck_maxMoneyRed = 15;
+	blck_maxMoneyBlue = 10;	
+	#endif
+	
+	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch.sqf";

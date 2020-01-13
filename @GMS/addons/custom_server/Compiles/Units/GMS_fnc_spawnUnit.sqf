@@ -73,7 +73,8 @@ if (blck_debugLevel >= 2) then
 [_unit] call blck_fnc_removeGear;
 if (_scuba) then
 {
-	_unit swiminDepth (_pos select 2);
+	_unit swiminDepth (([_pos] call blck_fnc_findWaterDepth) / 2);
+	diag_log format["_fnc_spawnUnit:: -- >> unit depth = %1 and underwater for unit = %2",_pos select 2, underwater _unit];	
 	#ifdef blck_debugMode
 	if (blck_debugLevel >= 2) then
 	{

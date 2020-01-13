@@ -37,21 +37,25 @@ if ((toLower blck_modType) isEqualTo "exile") then
 
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
+diag_log format["[blckeagls] build information loaded at %1",diag_tickTime];
 
 // compile functions
-call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
-diag_log format["[blckeagls] functions compiled"];
+[] call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
+diag_log format["[blckeagls] functions compiled at %1",diag_tickTime];
 
-call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
+
+[] call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
+diag_log format["[blckeagls] blck_configs.sqf run at %1",diag_tickTime];
 waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};
+
 // Load any user-defined specifications or overrides
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
-diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
+diag_log format["[blckeagls] Custom Configurations Loaded at %1",diag_tickTime];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugLevel = %3",blck_debugON,blck_debugLevel];
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
 diag_log format["[blckeagls] Variables loaded at %1",diag_tickTime];
 
-
+//if(true) exitWith {};
 // spawn map addons to give the server time to position them before spawning in crates etc.
 if (blck_spawnMapAddons) then
 {
@@ -122,10 +126,7 @@ if (blck_ai_offload_to_client) then
 
 _fn_setupLocationType = {
 	params[	"_locationType"];
-	//diag_log format["[GMSAI] _fn_setupLocationType: _this = %1",_this];
 	private _locations = nearestLocations [getArray (configFile >> "CfgWorlds" >> worldName >> "centerPosition"), [_locationType], worldSize];	
-	//diag_log format["[GMSAI] _fn_setupLocationType: %1 locations found searcing for %2",count _configuredAreas,_locationType];
-	//diag_log format["_fn_setupLocationType: _configuredAreas = %1",_configuredAreas];
 	_locations	
 };
 
@@ -137,14 +138,20 @@ private _other = ["NameLocal"] call _fn_setupLocationType;
 private _airport = ["Airport"] call _fn_setupLocationType;
 
 blck_townLocations = _villages + _cites + _capitals + _marine + _other + _airport;
-diag_log format["_init_server: count blck_townLocations = %1 || blck_townLocations = %2",count blck_townLocations, blck_townLocations];
+//diag_log format["_init_server: count blck_townLocations = %1 || blck_townLocations = %2",count blck_townLocations, blck_townLocations];
+
 // set up the lists of available missions for each mission category
 #include "\q\addons\custom_server\Missions\GMS_missionLists.sqf";
 diag_log "[blckeagls] Mission Lists Loaded";
 
+// Initialize static land-based and UMS missions (these initializations could be combined)
+[_pathStaticMissions,_staticMissions] call compile preprocessfilelinenumbers "\q\addons\custom_server\Missions\Static\GMS_StaticMissions_init.sqf";
+[_pathStaticUnderwaterMissions,_staticUnderwaterMissions] call compile preprocessfilelinenumbers "\q\addons\custom_server\Missions\UMS\GMS_UMS_staticMissions_init.sqf";
+diag_log "[blckeagls] blck_init_server: ->> Static Missions Initialized.";
+
 if (blck_numberUnderwaterDynamicMissions > 0) then 
 {
-		[_missionListUMS,_pathUMS,"UMSMarker","Red",blck_TMin_UMS,blck_TMax_UMS,blck_numberUnderwaterDynamicMissions] call blck_fnc_addMissionToQue;
+		[_missionListDynamicUMS,_pathUMS,"UMSMarker","Red",blck_TMin_UMS,blck_TMax_UMS,blck_numberUnderwaterDynamicMissions] call blck_fnc_addMissionToQue;
 };
 
 if (blck_enableOrangeMissions > 0) then

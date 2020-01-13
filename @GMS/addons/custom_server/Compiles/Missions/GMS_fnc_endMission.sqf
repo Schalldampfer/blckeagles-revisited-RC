@@ -13,10 +13,10 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp"
-private["_cleanupAliveAITimer","_cleanupCompositionTimer"];
 	
 _fn_missionCleanup = {	
 	params["_mines","_objects","_blck_AllMissionAI","_cleanupAliveAITimer","_cleanupCompositionTimer"];
+	//{diag_log format["_fn_missionCleanup: parameter %1 = %2",_forEachIndex,_x]} forEach _this;
 	[_mines] call blck_fnc_clearMines;
 	//[_coords,_objects, _cleanupCompositionTimer] call blck_fnc_addObjToQue;
 	blck_oldMissionObjects pushback [_coords,_objects, (diag_tickTime + _cleanupCompositionTimer)];	
@@ -43,12 +43,13 @@ params ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_mainMarke
 
 if (_endCondition > 0) exitWith  // Mision aborted for some reason
 {
+	diag_log format["_fnc_endMission: script called with ABORT condition"];
 	[_mainMarker] call blck_fnc_deleteMarker;
 	[_labelMarker] call blck_fnc_deleteMarker;
-	_cleanupCompositionTimer = 0;
-	_cleanupAliveAITimer = 0;
-	//  	params["_mines","_objects","_blck_AllMissionAI","_mission","_cleanupAliveAITimer","_cleanupCompositionTimer"];
-	[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer] call _fn_missionCleanup;
+	#define cleanupCompositionTimer 0
+	#define cleanupAliveAITimer 0
+	//  params["_mines","_objects","_blck_AllMissionAI","_cleanupAliveAITimer","_cleanupCompositionTimer"];
+	[_mines,_objects,_blck_AllMissionAI,cleanupAliveAITimer,cleanupCompositionTimer] call _fn_missionCleanup;
 
 	{
 		if (local _x) then {deleteVehicle _x};

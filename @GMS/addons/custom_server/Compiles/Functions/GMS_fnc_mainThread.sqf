@@ -44,51 +44,38 @@ while {true} do
 	if (diag_tickTime > _timer1sec) then 
 	{		
 		[] call blck_fnc_monitorInitializedMissions;
-		[] call blck_fnc_cleanupAliveAI;
-		[] call blck_fnc_cleanupObjects;
-		[] call blck_fnc_cleanupDeadAI;	
-		[] call blck_fnc_cleanEmptyGroups;	
-		[] call GMS_fnc_cleanupTemporaryMarkers;
-		[] call GMS_fnc_updateCrateSignals;						
-		[] call blck_fnc_simulationManager;
-		[] call blck_fnc_vehicleMonitor;
-		[] call blck_fnc_scanForPlayersNearVehicles;
-			
-		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
-		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
-		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};	
-		[] call blck_fnc_groupWaypointMonitor; 
-		[] call blck_fnc_sm_staticPatrolMonitor;  
 		[] call blck_fnc_spawnInitializedMissions;									
 		_timer1sec = diag_tickTime + 1;
 	};
 	if (diag_tickTime > _timer5sec) then
 	{
 		_timer5sec = diag_tickTime + 5;
-		//if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
-		//[] call blck_fnc_sm_staticPatrolMonitor;  // 
-		//[] call blck_fnc_vehicleMonitor;					
+		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
+		[] call blck_fnc_sm_staticPatrolMonitor;  // 
+		[] call blck_fnc_vehicleMonitor;					
 		#ifdef GRGserver
 		[] call blck_fnc_broadcastServerFPS;
 		#endif		
 	};
 	if (diag_tickTime > _timer20sec) then
 	{
-		//[] call blck_fnc_scanForPlayersNearVehicles;
-		//[] call GMS_fnc_cleanupTemporaryMarkers;
-		//[] call GMS_fnc_updateCrateSignals;				
+		[] call blck_fnc_scanForPlayersNearVehicles;
+		[] call GMS_fnc_updateCrateSignals;	
+		[] call blck_fnc_groupWaypointMonitor; 			
+		[] call blck_fnc_spawnPendingMissions;				
 		_timer20sec = diag_tickTime + 20;
 	};
 	if ((diag_tickTime > _timer1min)) then
 	{
 		_timer1min = diag_tickTime + 60;
-
-			[] call blck_fnc_spawnPendingMissions;
-
-		//[] call blck_fnc_groupWaypointMonitor; 
-		//if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
-		//if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
-		//if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};
+		if (blck_useHC) then {[] call blck_fnc_HC_passToHCs};
+		if (blck_useTimeAcceleration) then {[] call blck_fnc_timeAcceleration};
+		if (blck_ai_offload_to_client) then {[] call blck_fnc_ai_offloadToClients};
+		[] call GMS_fnc_cleanupTemporaryMarkers;		
+		[] call blck_fnc_cleanupAliveAI;
+		[] call blck_fnc_cleanupObjects;
+		[] call blck_fnc_cleanupDeadAI;	
+		[] call blck_fnc_cleanEmptyGroups;			
 		#ifdef blck_debugMode
 		//diag_log format["_fnc_mainThread: active scripts include: %1",diag_activeScripts];
 		#endif
@@ -110,11 +97,7 @@ while {true} do
 				//diag_log format["script name %1",_x select 0];
 			};
 		} forEach diag_activeSQFScripts;
-		#endif		
-		//[] call blck_fnc_cleanupAliveAI;
-		//[] call blck_fnc_cleanupObjects;
-		//[] call blck_fnc_cleanupDeadAI;	
-		//[] call blck_fnc_cleanEmptyGroups;			
+		#endif				
 		_timer5min = diag_tickTime + 300;
 	};
 };

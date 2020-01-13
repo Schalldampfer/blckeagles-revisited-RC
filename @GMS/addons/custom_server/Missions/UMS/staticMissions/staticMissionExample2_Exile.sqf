@@ -118,7 +118,7 @@ _noVehiclePatrols = blck_SpawnVeh_Red; // Modified as needed; can be a numberic 
 _vehiclePatrolParameters = [
 	//["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red",4 (Units to spawn into vehicle), 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
 	//["B_T_Boat_Armed_01_minigun_F",[22577.6,15275.3,-0.0354593],"red",3, 75,0],
-	//["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",3, 75,0]	
+	["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",3, 75,0]	
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
 							// Allows you to define the location of the center of the patrol, vehicle type spawned, radius to patrol, and AI difficulty (blue, red, green etc).
@@ -141,6 +141,6 @@ _airPatrols = [
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = false;  // Set to false if you have vehicles patrolling nearby.
 
-#include "\q\addons\custom_server\Missions\UMS\code\GMS_fnc_sm_initializeUMSStaticMission.sqf"; 
+#include "\q\addons\custom_server\Compiles\Missions\GMS_fnc_sm_initializeUMSStaticMission.sqf"; 
 
 diag_log format["[blckeagls static missions] COMPLETED initializing middions %1 position at %2 difficulty %3",_mission,_missionCenter,_difficulty];

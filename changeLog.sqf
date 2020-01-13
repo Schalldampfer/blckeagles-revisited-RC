@@ -14,6 +14,7 @@ Added: An optional variable was added with which you can pre-define locations fo
 	So just add this in the definition for your missions as needed.
 
 Changed: A new function for spawning markers was added which uses a simpler system for handling parameters that define the markers.
+Changed: variables used to configure underwater (UMS) missions were moved to blck_config / blck_config_mil
 Changed The approach for pre-compiling, spawning and monitoring missions was redone. Variables that define missions, mission timers and mission status are loaded into arrays at server startup.
 Changed: A single script is called repeatedly to monitor each class of mission (blue, red, UMS etc). 
 	That script handles mission timout, missions being triggered, spawning missions, and mission end conditions.

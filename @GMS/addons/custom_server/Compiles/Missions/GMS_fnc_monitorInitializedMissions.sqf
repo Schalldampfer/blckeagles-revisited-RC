@@ -1,6 +1,6 @@
 /*
 	GMS_fnc_monitorInitializedMissions
-
+	by Ghostrider-GRG-
 */
 //diag_log format["fnc_monitorInitializedMissions: time = %1 | count  blck_activeMissionsList %2 | blck_activeMissionsList %3",diag_tickTime,count blck_activeMissionsList,blck_activeMissionsList];
 for "_i" from 1 to (count blck_activeMissionsList) do 
@@ -493,17 +493,23 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 
 				if (_secureAsset) then
 				{		
-					!(alive _assetSpawned) then {throw 3} else 
+					if !(alive _assetSpawned) then 
 					{
+						diag_log format["_line 498 asset %1 killed throwing error with code 3",_assetSpawned];
+						throw 3;
+					} else {
+						diag_log format["line 501: asset alive, count _blck_AllMissionAI = %1",count _blck_AllMissionAI];
 						if (({alive _x} count _blck_AllMissionAI) <= _minNoAliveForCompletion) then
 						{
 							if ((_assetSpawned getVariable["blck_unguarded",0]) isEqualTo 0) then 
 							{
 								_assetSpawned setVariable["blck_unguarded",1,true];
+								diag_log format["_assetSpawned: blck_unguarded updated to 1 for asset %1",_assetSpawned];
 							};
 							
 							if ((_assetSpawned getVariable["blck_AIState",0]) isEqualTo 1) then 
 							{
+								diag_log format["_assetSpawned: blck_AIState updated to 1 for asset %1",_assetSpawned];
 								_assetSpawned allowdamage false;
 								[_assetSpawned] remoteExec["GMS_fnc_clearAllActions",-2, true];
 								throw 1;								
@@ -511,6 +517,7 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 						};
 					};
 				};
+
 				if (blck_debugLevel > 3 && diag_tickTime > _missionTimeoutAt) then 
 				{
 					diag_log format["_monitoInitializeMissions: debugLevel == 3, mission triggered, timout condition reached, ending mission"];
@@ -625,8 +632,11 @@ for "_i" from 1 to (count blck_activeMissionsList) do
 								_endMsg = "Crate Removed from Mission Site Before Mission Completion: Mission Aborted";
 								[_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_mainMarker,_labelMarker,_markerType,_coords, 0] call blck_fnc_endMission;
 							};
-					case 3: {  // Abort, key asset killed				
-								[_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_mainMarker,_labelMarker,_markerType,_coords, 0] call blck_fnc_endMission;
+					case 3: {  // Abort, key asset killed		
+								diag_log format["Asset Killed, aborting mission"];		
+								#define missionAbort 1
+								//[_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_mainMarker,_labelMarker,_markerType,_coords, 0]
+								[_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_mainMarker,_labelMarker,_markerType,_coords, missionAbort] call blck_fnc_endMission;
 							};
 				};
 			};

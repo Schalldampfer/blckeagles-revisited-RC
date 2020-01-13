@@ -11,23 +11,15 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 #define configureWaypoints true
 #define isScubaGroup true
+#define UMS_backpacks [] 
+#define UMS_sidearms [] 
 
-params["_pos",["_skillLevel","red"],["_numUnits",6],["_patrolRadius",15]];
+params["_group","_pos",["_skillLevel","red"],["_numUnits",6],["_patrolRadius",15]];
+//{diag_log format["_fnc_spawnScubaGroup: _this select %1 = %2",_foreachindex,_x]} forEach _this; 
 
-private["_group"];
-try 
-{
-	_group = [blck_AI_Side,true]  call blck_fnc_createGroup;  // allow server to delete the group as soon as it is empty
-	if (isNull _group) throw 1; 
-	[_group,_pos,_pos,_numUnits,_numUnits,_skillLevel, _patrolRadius - 2, _patrolRadius, configureWaypoints, blck_UMS_uniforms, blck_UMS_headgear, blck_UMS_vests, [], blck_UMS_weapons, [], isScubaGroup] call blck_fnc_spawnGroup;
-	private _diveDepth = [_pos] call blck_fnc_findWaterDepth * 0.5;
-	{
-		_x swimInDepth (_diveDepth);
-	} forEach units _group;
-}
+	//params[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true],
+	//["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
+[_group,_pos,_pos,_numUnits,_numUnits,_skillLevel, _patrolRadius - 2, _patrolRadius, configureWaypoints, blck_UMS_uniforms, blck_UMS_headgear, blck_UMS_vests, UMS_backpacks, blck_UMS_weapons, UMS_sidearms, isScubaGroup] call blck_fnc_spawnGroup;
 
-catch
-{
-	diag_log format["[blckeagls] <WARNING> createGroup returned grpNull"];
-};
-_group;
+
+
