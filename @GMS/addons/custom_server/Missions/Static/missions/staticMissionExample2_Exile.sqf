@@ -116,7 +116,7 @@ _aiGroupParameters = [
 	//[[22832.9,16805.6,4.59315],"red",4, 75,900],
 	//[[22909.8,16778.6,3.19144],"red",4, 75,900],
 	//[[22819.4,16929.5,5.33892],"red",4, 75,900],
-	[[22819.4,16929.5,5.33892],"red",4, 75,900]
+	[[22819.4,16929.5,5.33892],"red",8, 75,900]
 ];
 
 _noVehiclePatrols = blck_SpawnVeh_Red; // Modified as needed; can be a numberic value (e.g. 3) or range presented as [2,4]; 
@@ -133,7 +133,7 @@ _noAirPatrols =	blck_noPatrolHelisRed; // You can use one of the pre-defined val
 										//  Note: this value is ignored if you specify air patrols in the array below.
 _airPatrols = [
 	// // ["Aircraft Class Name", position[x,y,z], AI Skill [blue, red, green, orange],patrol radius [0 for static units], respawn time [seconds]]
-	//["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,900]//,
+	["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,900]//,
 	//[selectRandom _aircraftTypes,[22830.2,16618.1,11.4549],"blue",1000,0]
 ];
 //  Change _useMines to true/false below to enable mission-specific settings.

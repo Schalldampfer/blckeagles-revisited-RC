@@ -23,21 +23,24 @@ switch (toLower (worldName)) do
 	{
 		private ["_arr","_sunrise","_sunset","_time"];
 		_arr = date call BIS_fnc_sunriseSunsetTime;
-		_sunrise = _arr select 0;
-		_sunset = _arr select 1;
+		_arr params["_sunrise","_sunset"];
+		
+		//_sunrise = _arr select 0;
+		//_sunset = _arr select 1;
 		_daylight = _sunset - _sunrise;
 		_nightTime = abs(24 - _daylight);
-		_time = dayTime;
+		_restartTime = 6;
+		//_time = dayTime;
 		#ifdef blck_milServer
 		blck_timeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
-		blck_timeAccelerationDay = (_daylight)/3;  // Daytime time accelearation
-		blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
-		blck_timeAccelerationNight = _nightTime / 6;  // Nighttim time acceleration	
+		blck_timeAccelerationDay = (_daylight/_restarttime) - 1;  // Daytime time accelearation
+		blck_timeAccelerationDusk = 5; // Dawn/dusk time accelearation
+		blck_timeAccelerationNight = (_nightTime/(_restartTime - 2)) - 1;  // Nighttim time acceleration	
 		#else
 		blck_timeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
-		blck_timeAccelerationDay = (_daylight)/8;  // Daytime time accelearation
-		blck_timeAccelerationDusk = 4; // Dawn/dusk time accelearation
-		blck_timeAccelerationNight = _nightTime / 8;  // Nighttim time acceleration		
+		blck_timeAccelerationDay = 4;  // Daytime time accelearation
+		blck_timeAccelerationDusk = 6; // Dawn/dusk time accelearation
+		blck_timeAccelerationNight = 10;  // Nighttime time acceleration		
 		#endif
 		//blck_maxCrashSites = 3;
 	};
@@ -63,8 +66,8 @@ switch (toLower (worldName)) do
 		blck_enableGreenMissions = -1;
 		blck_enableRedMissions = 1;
 		blck_enableBlueMissions = -1;
-		blck_enableHunterMissions = 1;
-		blck_enableScoutsMissions = -1;
+		blck_enableHunterMissions = -1;
+		blck_enableScoutsMissions = 1;
 		blck_maxCrashSites = 1;  // recommended settings: 3 for Altis, 2 for Tanoa, 1 for smaller maps. Set to -1 to disable
 		
 		blck_timeAcceleration = true; // When true, time acceleration will be periodically updated based on amount of daylight at that time according to the values below.
@@ -146,28 +149,31 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	
 	blck_useHC = true;
 
-	blck_maxSpawnedMissions = 15;
+	blck_maxSpawnedMissions = 10;
 	blck_mainThreadUpdateInterval = 10;
-	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = 1;
+	blck_enableOrangeMissions = -1;  
+	blck_enableGreenMissions = -1;
 	blck_enableRedMissions = 1;
-	blck_enableBlueMissions = 1;
-	blck_numberUnderwaterDynamicMissions = 1;	
+	blck_enableBlueMissions = -1;
+	blck_numberUnderwaterDynamicMissions = -1;	
 	blck_enableHunterMissions = -1;
 	blck_enableScoutsMissions = -1;
-	blck_maxCrashSites = -3; 
+	blck_maxCrashSites = -1; 
 	
 	//blck_killEmptyStaticWeapons = false;
 	//blck_killEmptyAIVehicles = true;
 	blck_cleanupCompositionTimer = 20;  // Time after mission completion at which items in the composition are deleted.
 	blck_AliveAICleanUpTimer = 20;  // Time after mission completion at which any remaining live AI are deleted.
-	blck_bodyCleanUpTimer = 20;
+	blck_bodyCleanUpTimer = 20000;
 	blck_vehicleDeleteTimer = 20; 
-	//blck_MissionTimeout = 30;
+	//blck_MissionTimeout = 240;
 	
-	//blck_noPatrolHelisOrange = 1;
-	//blck_chanceHeliPatrolOrange = 1;
-	//blck_chanceParaOrange = 1;
+	blck_noPatrolHelisOrange = 1;
+	blck_chanceHeliPatrolOrange = 1;
+	blck_chanceParaOrange = 1;
+	blck_chanceHeliPatrolGreen = 1;
+	blck_chanceParaGreen = 1;	
+	//blck_chanceHeliPatrolRed = -1;
 	//blck_chanceHeliPatrolBlue = -1;
 	//blck_noPatrolHelisBlue = -1;
 	//blck_chanceParaBlue = -1; // [0 - 1] set to 0 to deactivate and 1 to always have paratroops spawn over the center of the mission. This value can be a range as well [0.1,0.3]
@@ -178,12 +184,12 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	//blck_SpawnEmplaced_Orange = 1; // Number of static weapons at Orange Missions
 	//blck_SpawnEmplaced_Green = 1; // Number of static weapons at Green Missions
 	//blck_SpawnEmplaced_Blue = 1;  // Number of static weapons at Blue Missions
-	//blck_SpawnEmplaced_Red = 1; 
+	//blck_SpawnEmplaced_Red = -1; 
 
-	//blck_SpawnVeh_Orange = 1; // Number of vehicles at Orange Missions
-	//blck_SpawnVeh_Green = 1; // Number of vehicles at Green Missions
-	//blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
-	blck_SpawnVeh_Red = 1;
+	blck_SpawnVeh_Orange = 3; // Number of vehicles at Orange Missions
+	blck_SpawnVeh_Green = 3; // Number of vehicles at Green Missions
+	blck_SpawnVeh_Blue = 3;  // Number of vehicles at Blue Missions
+	blck_SpawnVeh_Red = 3;
 	
 	blck_TMin_Blue = 7;
 	blck_TMin_Red = 10;

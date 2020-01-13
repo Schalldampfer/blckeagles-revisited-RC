@@ -10,10 +10,8 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-//diag_log "[blckeagls] GMS_StaticMissions_init.sqf <Initializing Static Mission System>";
-//static mission descriptor for code: [position,level, numAI or [min,maxAI],patrolRadius, respawn, group[groupNull],spawnedAt[0],respawn[0]]
+
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-#include "\q\addons\custom_server\Missions\Static\GMS_StaticMissions_Lists.sqf";
 
 blck_sm_Infantry = [];
 blck_sm_Vehicles = [];
@@ -27,8 +25,8 @@ blck_sm_garrisonBuildings_ASL = [];
 blcl_sm_garrisonBuilding_relPos = [];
 
 blck_sm_monitoring = 0;
-blck_sm_groupDespawnTime = 10; // 120;
-blck_sm_patrolRespawnInterval = 10;  // 600
+blck_sm_groupDespawnTime = 120;
+blck_sm_patrolRespawnInterval = 600;
 {
 	if ((toLower worldName) isEqualTo toLower(_x select 1)) then
 	{

@@ -228,11 +228,17 @@
 	#endif
 	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
-	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = 1;
+	blck_enableOrangeMissions = 2;  
+	blck_enableGreenMissions = 0;
 	blck_enableRedMissions = 2;
 	blck_enableBlueMissions = 2;
-	blck_numberUnderwaterDynamicMissions = 2;  // Values from 0 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
+	blck_numberUnderwaterDynamicMissions = 3;  // Values from 0 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
+
+	#ifdef GRGserver
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 2;
+	blck_maxcrashsites = 3;
+	#endif
 
 	////////////////////
 	// MISSION TIMERS
@@ -244,6 +250,12 @@
 	blck_TMin_Blue = 120;
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
+	#ifdef GRGserver
+	blck_TMin_Hunter = 120;
+	blck_TMin_Scouts = 115;
+	blck_TMin_Crashes = 115;
+
+	#endif
 	
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
@@ -251,6 +263,11 @@
 	blck_TMax_Blue = 200;
 	blck_TMax_Red = 250;
 	blck_TMax_UMS = 200;
+	#ifdef GRGserver
+	blck_TMax_Hunter = 200;
+	blck_TMax_Scouts = 200;
+	blck_TMax_Crashes = 200;
+	#endif
 	
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
@@ -268,10 +285,10 @@
 	blck_SpawnVeh_Blue = 1;  // Number of vehicles at Blue Missions
 	blck_SpawnVeh_Red = 2;  // Number of vehicles at Red Missions
 
-	blck_vehCrew_blue = 3;  //  can be formated as a single value or a range such as [3,5];
-	blck_vehCrew_red = 3;
-	blck_vehCrew_green = 3;
-	blck_vehCrew_orange = 3;
+	blck_vehCrew_blue = 5;
+	blck_vehCrew_red = 5;
+	blck_vehCrew_green = 4;
+	blck_vehCrew_orange = 5;
 
 	///////////////////////////////
 	// AI STATIC WEAPON Settings	
@@ -366,6 +383,11 @@
 	
 	//This defines how long after an AI dies that it's body disappears.
 	blck_bodyCleanUpTimer = 80*60; // time in seconds after which dead AI bodies are deleted
+	#ifdef GRGserver
+	#ifdef blck_milServer
+	blck_bodyCleanUpTimer = 80*60;  //  Trying to reduce lag with player counts > 20
+	#endif
+	#endif
 	
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
 	// values are ordered as follows [blue, red, green, orange];

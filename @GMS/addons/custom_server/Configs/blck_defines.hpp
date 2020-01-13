@@ -11,8 +11,9 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 
+
 #define useAPEX 
-//#define blck_milServer
+#define blck_milServer
 //#define blck_useCUP
 //#define blck_useRHS
 //#define blck_useLAGO 
@@ -22,8 +23,10 @@
 ///////////////////////////
 
 //#define blck_debugMode
+#define GRGserver
 //#define blck_addCarParts
 #define blck_triggerLoopCompleteTime 40*60
+
 #define onFoot 1
 #define inVehicle 2
 

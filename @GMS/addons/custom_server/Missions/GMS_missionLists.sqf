@@ -19,15 +19,10 @@ private["_pathScouts","_missionListScouts","_pathHunters","_missionListHunters",
 private _pathStaticMissions = "\Static\missions";
 private _staticMissions = [
 	// [mod (Epoch, Exile), map (Altis, Tanoa etc), mission center, eg [10445,2014,0], filename.sqf (name of static mission template for that mission)];
-	["Epoch","Altis","template.sqf"],
+	//["Epoch","Altis","template.sqf"],
 	["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
-	//["Epoch","Altis","destroyer.sqf"],
-	["Exile","Altis","template.sqf"],	
+	//["Exile","Altis","template.sqf"],	
 	["Exile","Altis","staticMissionExample2_Exile.sqf"],
-	//["Epoch","Altis","chelnosiStatic.sqf"],
-	//#ifndef blck_milServer
-	//["Exile","Altis","chelnosiStatic.sqf"],
-	//#endif
 	["newmission","newmap","somescript.sqf"]  //  Here just so you dont have to worry about all those commas
 ];
 
@@ -49,31 +44,22 @@ private _pathUMS = "UMS\dynamicMissions";
 private _missionListDynamicUMS = ["default"];
 
 private _pathBlue = "Blue";
-//_missionListBlue = ["hostage1"]; //["default_testing"];
+
 _missionListBlue = ["default"/*,"hostage1","captive1"*/,"sniperBase","survivalSupplies"/*,"default2","medicalCamp","redCamp","resupplyCamp"*/];
 //diag_log format["_missionLists: _missionListBlue = %1",_missionListBlue];
 // Passed 
 
 _pathRed = "Red";
-if (blck_debugOn) then 
-{
-	_missionListRed = ["fuelDepot"];
-} else {
-	_missionListRed = [/*"default","default2","medicalCamp","hostage1","captive1",*/"fuelDepot","junkyardWilly","TraderBoss","carThieves"];
-};
+_missionListRed = [/*"default","default2","medicalCamp","hostage1","captive1",*/"fuelDepot","junkyardWilly","TraderBoss","carThieves"];
+
 // Passed 
 private ["_missionListGreen"];
 _pathGreen = "Green";
-if (blck_debugOn || blck_debugLevel > 0) then
-{
-	_missionListGreen = ["redCamp"/*,"colonelsBase","banditVillage"*/];
-} else {
-	_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"FieldCamp","FieldHQ","weaponsResearch","munitionsResearch","colonelsBase","banditVillage"];
-};
+_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"FieldCamp","FieldHQ","weaponsResearch","munitionsResearch","colonelsBase","banditVillage"];
+
 // Passed 
 
 _pathOrange = "Orange";
-//_missionListOrange = ["redCamp"/*,"operationTakeover"*/];
 _missionListOrange = [/*"default","default2","medicalCamp","redCamp","resupplyCamp",*/"CommandersComplex","generalsCamp","colonel2","stronghold","operationShutdown","operationTakeover"/*,"temple"*/];
 // Passed 
 

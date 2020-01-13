@@ -16,8 +16,8 @@
 	/*
 		changing any of these variables may break the mission systemChat
 	*/
-	blck_locationBlackList = [];  // add coords and radius for each area here.
-	blck_debugON = false;  //  Do not touch ... 
+	blck_locationBlackList = [];  // Do not touch ...
+	blck_debugON = true;  //  Do not touch ... 
 	blck_debugLevel = 0;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
@@ -34,7 +34,7 @@
 		**************************************
 	*/
 	/***************************************************************
-	SUPPLEMENTAL MODULES
+		BLCKEAGLS SUPPLEMENTAL MODULES
 	****************************************************************	
 		Configuration for Addons that support the overall Mission system.
 		These are:
@@ -75,15 +75,15 @@
 	////////
 	//  Client Offloading and Headless Client Configurations
 	blck_useHC = true; // Experimental (should be working).
-	
 										//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
 	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
 										// *******************************************************
 										//  Experimental; may cause issues with waypoints 
 										// *******************************************************
-	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
-	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
-
+	blck_ai_offload_notifyClient = true;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated. (Recommended)
+	blck_allow_hunting_behaviors = true;  // Not used yet
+	
 	///////////////////////////////
 	//  Kill message configurations
 	// These determine whether and when messages are sent to players regarding AI Kills or illegal kills that might damage a vehicle.
@@ -229,15 +229,25 @@
 	////////////////////
 	
 	// Maximum number of missions shown on the map at any one time.
+	#ifdef GRGserver
+	blck_maxSpawnedMissions = 15;
+	#else
 	// Change this value to reduce the number of spawned missions at any one time.
 	blck_maxSpawnedMissions = 4;
+	#endif
 	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = 1;
+	blck_enableGreenMissions = 2;
 	blck_enableRedMissions = 2;
-	blck_enableBlueMissions = 1;
+	blck_enableBlueMissions = 2;
 	blck_numberUnderwaterDynamicMissions = 3;  // Values from -1 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
+
+	#ifdef GRGserver
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 1;
+	blck_maxcrashsites = 3;
+	#endif
 
 	////////////////////
 	// MISSION TIMERS
@@ -250,12 +260,24 @@
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
 	
+	#ifdef GRGserver
+	blck_TMin_Hunter = 120;
+	blck_TMin_Scouts = 115;
+	blck_TMin_Crashes = 115;
+	#endif
+	
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
 	blck_TMax_Green = 300;
 	blck_TMax_Blue = 200;
 	blck_TMax_Red = 250;
 	blck_TMax_UMS = 400;
+
+	#ifdef GRGserver
+	blck_TMax_Hunter = 200;
+	blck_TMax_Scouts = 200;
+	blck_TMax_Crashes = 200;
+	#endif
 	
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
@@ -263,7 +285,7 @@
 
 	blck_useVehiclePatrols = true; // When true vehicles will be spawned at missions and will patrol the mission area.
 	blck_killEmptyAIVehicles = false; // when true, the AI vehicle will be extensively damaged once all AI have gotten outor been killed.
-    	blck_vehicleDeleteTimer = 120*60;
+    blck_vehicleDeleteTimer = 120*60;
 	////////////////////
 	// Mission Vehicle Settings
 	////////////////////	
@@ -373,10 +395,10 @@
 	blck_maximumPatrolRadius = 45;
 	
 	//This defines how long after an AI dies that it's body disappears.
-	blck_bodyCleanUpTimer = 60*30; // time in seconds after which dead AI bodies are deleted
+	blck_bodyCleanUpTimer = 60*45; // time in seconds after which dead AI bodies are deleted
 	// Each time an AI is killed, the location of the killer will be revealed to all AI within this range of the killed AI, set to -1 to disable
 	// values are ordered as follows [blue, red, green, orange];
-	blck_AliveAICleanUpTimer = 60*20;  // Time after mission completion at which any remaining live AI are deleted.
+	blck_AliveAICleanUpTimer = 60*15;  // Time after mission completion at which any remaining live AI are deleted.
 
 	// How precisely player locations will be revealed to AI after an AI kill
 	// values are ordered as follows [blue, red, green, orange];	
