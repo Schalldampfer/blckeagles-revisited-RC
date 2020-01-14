@@ -16,20 +16,28 @@ diag_log format["[blckeagls] Configuring Map-specific settings with worldName = 
 switch (toLower worldName) do 
 {// These may need some adjustment - including a test for shore or water should help as well to avoid missions spawning on water.
 		case "altis":{
-			blck_mapRange = (worldName call BIS_fnc_mapSize) / 2;  // I believe this is the distance across the entire map so divide by 2 to get a radius within which to search from center for 'stuff'
-			blck_mapCenter = getArray(configFile >> "CfgWorlds" >> "worldName" >> "centerPosition");
+			blck_mapRange = 21000;  // I believe this is the distance across the entire map so divide by 2 to get a radius within which to search from center for 'stuff'
+			blck_mapCenter = [14000,14000,0];
 		};
 		case "stratis":{
-			blck_mapRange = worldName call BIS_fnc_mapSize; 
-			blck_mapCenter = getArray(configFile >> "CfgWorlds" >> "worldName" >> "centerPosition");
+			blck_mapRange = 10000;
+			blck_mapCenter = [4190,4000,0];
 		}; // Add Central, East and West respawns/traders 
+		case "tanoa": {
+			blck_mapRange = 12000;
+			blck_mapCenter = [7580,8010,0];
+		};
 		case "malden":{
-			blck_mapCenter = [6000,7000,0];blck_mapRange = 5500;
+			blck_mapCenter = [5750,6590,0];blck_mapRange = 7000;
 		};		
 		case "chernarus":{
 			blck_mapCenter = [7100, 7750, 0]; //centerPosition = {7100, 7750, 300};
 			blck_mapRange = 5300;
 		};	
+		case "livonia":{
+			blck_mapCenter = [6650,6140,0];
+			blck_mapRange = 10000;
+		};
 		case "chernarus_summer":{blck_mapCenter = [7100, 7750, 0]; blck_mapRange = 6000;}; 
 		case "bornholm":{
 			blck_mapCenter = [11240, 11292, 0];

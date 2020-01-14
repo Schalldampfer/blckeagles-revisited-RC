@@ -20,7 +20,7 @@ private _pathStaticMissions = "\Static\missions";
 private _staticMissions = [
 	// [mod (Epoch, Exile), map (Altis, Tanoa etc), mission center, eg [10445,2014,0], filename.sqf (name of static mission template for that mission)];
 	//["Epoch","Altis","template.sqf"],
-	["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
+	//["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
 	//["Exile","Altis","template.sqf"],	
 	["Exile","Altis","staticMissionExample2_Exile.sqf"],
 	["newmission","newmap","somescript.sqf"]  //  Here just so you dont have to worry about all those commas
@@ -30,63 +30,22 @@ private _staticMissions = [
 private _pathStaticUnderwaterMissions = "\UMS\staticMissions";
 private _staticUnderwaterMissions = [
 	// [mod (Epoch, Exile), map (Altis, Tanoa etc), mission center, eg [10445,2014,0], filename.sqf (name of static mission template for that mission)];
-	["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
+	//["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
 	["Exile","Altis","staticMissionExample2_Exile.sqf"]
 ];
-
-private _pathScouts = "Scouts";
-private _missionListScouts = ["Scouts"];
-
-private _pathHunters = "Hunters";
-private _missionListHunters = ["Hunters"];
 
 private _pathUMS = "UMS\dynamicMissions";
 private _missionListDynamicUMS = ["default"];
 
 private _pathBlue = "Blue";
-
-_missionListBlue = ["default"/*,"hostage1","captive1"*/,"sniperBase","survivalSupplies"/*,"default2","medicalCamp","redCamp","resupplyCamp"*/];
-//diag_log format["_missionLists: _missionListBlue = %1",_missionListBlue];
-// Passed 
+_missionListBlue = ["default"/*,"hostage1","captive1","default2","medicalCamp","redCamp","resupplyCamp"*/];
 
 _pathRed = "Red";
-_missionListRed = [/*"default","default2","medicalCamp","hostage1","captive1",*/"fuelDepot","junkyardWilly","TraderBoss","carThieves"];
+_missionListRed = [/*"default","resupplyCamp","medicalCamp","hostage1","captive1",*/"redCamp"];
 
-// Passed 
 private ["_missionListGreen"];
 _pathGreen = "Green";
-_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"FieldCamp","FieldHQ","weaponsResearch","munitionsResearch","colonelsBase","banditVillage"];
-
-// Passed 
+_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"resupplyCamp"];
 
 _pathOrange = "Orange";
-_missionListOrange = [/*"default","default2","medicalCamp","redCamp","resupplyCamp",*/"CommandersComplex","generalsCamp","colonel2","stronghold","operationShutdown","operationTakeover"/*,"temple"*/];
-// Passed 
-
-#ifdef blck_milServer
-if (blck_debugOn) then 
-{
-	_missionListGreen = ["FieldCamp"];
-} else {
-	_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"FieldCamp","FieldHQ","weaponsResearch","munitionsResearch","colonelsBase"/*,"banditVillage"*/];
-};
-// Passed 
-
-if (blck_debugOn) then 
-{
-	_missionListOrange = ["operationTakeover"/*,"pinkPoison","stronghold","operationShutdown","operationTakeover","generalsCamp","colonel2"*/];
-} else { 
-	_missionListOrange = [/*"default","default2","medicalCamp","redCamp","resupplyCamp",*/"CommandersComplex","generalsCamp","colonel2","pinkPoison","stronghold","operationShutdown","operationTakeover"/*,"temple"*/];
-};
-// Passed CommandersComplex  generalsCamp  colonel2  pinkPoison  stronghold  
-// Failed 
-#endif
-
-_pathHeliCrashes = "HeliCrashes";
-
-if (toLower(worldName) isEqualTo "namalsk") then
-{
-	diag_log format["[blckeagls] GMS_missionLists.sqf:: -> running mission list variants for Namalsk"];
-	_missionListGreen = [/*"default","default2",/*"medicalCamp","redCamp","resupplyCamp",*/"FieldCamp","FieldHQ"/*,"weaponsResearch","munitionsResearch"*/];
-	_missionListOrange = [/*"default","default2","medicalCamp","redCamp","resupplyCamp",*/"CommandersComplex","generalsCamp"/*,"colonel2","temple"*/];
-};
+_missionListOrange = [/*"default",*/"medicalCamp"/*,"redCamp","resupplyCamp"*/];
