@@ -417,6 +417,63 @@
 	blck_maxMoneyRed = 30;
 	blck_maxMoneyBlue = 20;
 
+<<<<<<< Updated upstream
+=======
+	#ifdef GRGserver
+	blck_AIAlertDistance = [250,425,650,800];  //  Radius within which AI will be notified of enemy activity. Depricated as a group-sed system is used now. The group is informed of the enemy location when a group member is hit or killed.
+	//blck_AIAlertDistance = [150,225,400,500];
+	// How precisely player locations will be revealed to AI after an AI kill
+	// values are ordered as follows [blue, red, green, orange];
+	blck_AIIntelligence = [0.3, 0.5, 0.7, 0.9];  
+	
+	blck_baseSkill = 1;  // The overal skill of the AI - range 0.1 to 1.0.
+	
+	/***************************************************************
+	
+	MISSION TYPE SPECIFIC AI SETTINGS
+	
+	**************************************************************/
+	//This defines the skill, minimum/Maximum number of AI and how many AI groups are spawned for each mission type
+	// Orange Missions
+	blck_MinAI_Orange = 30;
+	blck_MaxAI_Orange = 35;
+	blck_AIGrps_Orange = 5;
+	blck_SkillsOrange = [
+		["aimingAccuracy",0.6],["aimingShake",0.9],["aimingSpeed",0.9],["endurance",1.00],["spotDistance",1.0],["spotTime",1.0],["courage",1.00],["reloadSpeed",1.00],["commanding",1.00],["general",1.00]
+	];
+	
+	// Green Missions
+	blck_MinAI_Green = 26;
+	blck_MaxAI_Green = 31;
+	blck_AIGrps_Green = 4;
+	blck_SkillsGreen = [
+		["aimingAccuracy",0.55],["aimingShake",0.75],["aimingSpeed",0.85],["endurance",0.9],["spotDistance",0.9],["spotTime",0.9],["courage",0.9],["reloadSpeed",0.9],["commanding",0.9],["general",0.75]
+	];
+	
+	// Red Missions
+	blck_MinAI_Red = 12;
+	blck_MaxAI_Red = 18;
+	blck_AIGrps_Red = 3;
+	blck_SkillsRed = [
+		["aimingAccuracy",0.4],["aimingShake",0.6],["aimingSpeed",0.6],["endurance",0.80],["spotDistance",0.7],["spotTime",0.8],["courage",0.80],["reloadSpeed",0.70],["commanding",0.8],["general",0.70]
+	];
+	
+	// Blue Missions
+	blck_MinAI_Blue = 8;	
+	blck_MaxAI_Blue = 14;
+	blck_AIGrps_Blue = 2;
+	blck_SkillsBlue = [
+		["aimingAccuracy",0.12],["aimingShake",0.3],["aimingSpeed",0.5],["endurance",0.50],["spotDistance",0.6],["spotTime",0.6],["courage",0.60],["reloadSpeed",0.60],["commanding",0.7],["general",0.60]
+	];
+		
+	// Add some money to AI; only works with Exile for now.
+	blck_maxMoneyOrange = 25;
+	blck_maxMoneyGreen = 20;
+	blck_maxMoneyRed = 15;
+	blck_maxMoneyBlue = 10;	
+	#endif
+	
+>>>>>>> Stashed changes
 	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];

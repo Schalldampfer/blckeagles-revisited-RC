@@ -13,6 +13,7 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
+<<<<<<< Updated upstream
 _pathBlue = "Blue";
 //_missionListBlue = ["hostage1"];
 _missionListBlue = ["default","captive1","hostage1"/*,"default2"/*,"medicalCamp","redCamp","resupplyCamp"*/];
@@ -28,3 +29,16 @@ _missionListGreen = [/*"default","default2",/*"redCamp",*//*"resupplyCamp",*/"me
 _pathOrange = "Orange";
 //_missionListOrange = ["resupplyCamp"];
 _missionListOrange = [/*"default","default2","medicalCamp","redCamp",*/"resupplyCamp"];
+=======
+private _pathBlue = "Blue";
+private _missionListBlue = ["default","hostage1","captive1","medicalCamp","redCamp","resupplyCamp"];
+
+private _pathRed = "Red";
+private _missionListRed = ["default","redCamp","medicalCamp","resupplyCamp"];
+ 
+private _pathGreen = "Green";
+private  _missionListGreen = ["default","medicalCamp","redCamp","resupplyCamp"];
+
+private _pathOrange = "Orange";
+private _missionListOrange = ["default","medicalCamp","redCamp","resupplyCamp"];
+>>>>>>> Stashed changes

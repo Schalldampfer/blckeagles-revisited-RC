@@ -1,7 +1,10 @@
 /*
 	Define loot crate configurations for Epoch.
+
+	for ghostridergaming
 	By Ghostrider [GRG]
 	Copyright 2016
+	Last Modified 3-14-17
 	
 	--------------------------
 	License
@@ -13,29 +16,92 @@
 //diag_log "Loading Static Loot Container Spawning System for Epoch";
 _lootBoxes = 
 [
-	/*[	
-		  
-		"altis",  // map name
-		"Camp1", // a name for this region for logging and debuging purpses and to help identify the definition down the road when changing things on the server
-		2,  // number of locations specified from the list below at which to spawn crates 
-		[  // format here is [[position x, y, z], direction, exact / loose placement (true/false), smoke near crate (true/false]
-			[[23555.9,18422.7,0.730287],0,true, false], // loadout (0-4), false=random placement near position, true = show smoke at position
-			[[23542.1,18435.9,0.00143886],0,true, false],
-			[[23514,18452.5,0.00143886],0,true, false],
-			[[23534.2,18418.8,0.00143886],0,false, true]		
-		]
-		
-	],
-	[	"altis",
-		"refuel",
-		2,
-		[ 	// format here is [[position x, y, z], direction, exact / loose placement (true/false), smoke near crate (true/false]
-			[[22963.8,17041.3,0.00143886],0,false, false], 
-			[[22942.8,17038,0.00143886],0,false, false],
-			[[22948.7,17054,0.00143886],0,false, false]
-		] // No comma after this last one
-	] //  No comma after this last one 
-	*/
+				#ifdef GRG_TestServer
+				["altis","APTrader",10,
+					[
+					[[14658.1, 16790.9, 18.3795],0,false,false],
+					[[14660, 16788.5, 18.3795],0,false,false],
+					[[17518.4,13260.7,12.7337],0,false,false],
+					[[17528.1,13270.2,12.725],0,false,false],
+					[[17537.4,13278.2,12.706],0,false,false],
+					[[17547.9,13286,12.6121],0,false,false],
+					[[17599.5,13240.5,13.327],0,false,false],
+					[[17593.1,13231.9,13.4375],0,false,false],
+					[[17586.5,13224.6,13.5832],0,false,false],
+					[[17580.5,13217.8,13.6708],0,false,false]					
+					]
+				],
+				#endif
+
+				// Ferres
+				/*
+				["altis","Ferres", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
+					[
+					[[21693.887,7731.0264,13.955027],0,true, true], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
+					[[21850.063,7504.3203,14.677059],0,true, true],
+					[[21693.674,7431.4141,15.578629],0,true, true],
+					[[21631.227,7773.9927,14.149431],0,true, true],
+					[[21572.559,7462.2661,17.827536],0,true, true],
+					[[21801.348,7631.4448,13.80711],0,true, true],
+					[[21508.932,7585.6309,15.844649],0,true, true],
+					[[21547.027,7695.6738,15.754698],0,true, true]
+					]
+				],*/
+				// Dump
+				["altis","Dump", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
+					[
+					[[5791,20314.5,0],0,false, true,true], // crate position 1, loadout (0-4), false=random placement near position, true = show smoke at position
+					[[5902.33,20272.7,0],0,false, true,true],
+					[[5955.21,20136.2,0],0,false, true,true],
+					[[5908.32,20088.3,0],0,false, true,true],
+					[[55843.54,20171.6,0],0,false, true,true],
+					[[5775.42,20163.3,0],0,false, true,true],
+					[[5979.18,20206.5,0],0,false, true,true],
+					[[5943.89,20076.7,0],0,false, false,true]
+					]
+				],
+				// Beach #1
+				["altis","Beach", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
+					[
+					[[22769.8,7051.28,0],0,false, true,true], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
+					[[22934.3,6990.53,0],0,false, true,true],
+					[[22831.7,7003.24,0],0,false, true,true],
+					[[22666.6,7009.22,0],0,false, true,true],
+					[[22634.6,6985.3,0],0,false, true,true],
+					[[22583.4,6935.63,0],0,false, true,true],
+					[[22651.1,7060.75,0],0,false, true,true]
+					]
+				],
+				["altis","Pack-1", 1,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
+					[
+					[[14269.6,13016.2,0],0,false,false], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
+					[[14359.9,13047.7,0],0,false,false],
+					[[14293.5,12956.9,0],0,false,false] 
+					]
+				]
+				/*,
+				["altis","Pack-2", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
+					[
+					[[26810,24557.2,0.00140762],0,false,false], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
+					[[26746,24652.6,0.520973],0,false,false],
+					[[26798.1,24668.3,0.001297],0,false,false],
+					[[26873,24635.1,17.4495],0,false,false],
+					[[26940.7,24642.2,0.732187],0,false,false],
+					[[26955.5,24658.4,0.739138],0,false,false],
+					[[26943.8,24666.2,0.722866],0,false,false],
+					[[26930.2,24651.9,0.727114],0,false,false],
+					[[26965.5,24684.1,7.63653],0,false,false],
+					[[26928.3,24714.8,7.63206],0,false,false],
+					[[26940.7,24730.5,7.76619],0,false,false],
+					[[26952,24750.5,0.602812],0,false,false],
+					[[26932.7,24730.8,0.635454],0,false,false],
+					[[26931.2,24739,0.724504],0,false,false],
+					[[26968.1,24700.1,0.599913],0,false,false],
+					[[26847.9,24821.4,0.340788],0,false,false],
+					[[26783.4,24788.2,12.5849],0,false,false],
+					[[26729.8,24759.1,0.296225],0,false,false]					
+					]
+				]*/
 ];
 
 private["_loot_uniforms","_loot_pistols","_loot_rifles","_loot_snipers","_loot_LMG","_loot_silencers"];

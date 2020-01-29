@@ -16,6 +16,7 @@ if ((tolower blck_modType) isEqualTo "epoch") then
 	private _config = configFile >> "CfgEpoch";
 	private _configWorld = _config >> worldname;
 	private _telePos = getArray(configFile >> "CfgEpoch" >> worldName >> "telePos" );
+	diag_log format["_fnc_getTraderCities: _telePos = %1",_telePos];
 	{
 		blck_locationBlackList pushback [_x select 3, 1000];
 	} foreach _telePos;
@@ -23,11 +24,8 @@ if ((tolower blck_modType) isEqualTo "epoch") then
 
 if ((tolower blck_modType) isEqualTo "exile") then
 {
-	if (blck_blacklistTraderCities || blck_blacklistSpawns || blck_listConcreteMixerZones) then 
+	private _traderCites = allMapMarkers;
 	{
-		private _traderCites = allMapMarkers;
-		private _tc = [];
-		{
 			if (getMarkerType _x isEqualTo "ExileTraderZone" && blck_blacklistTraderCities) then {
 				blck_locationBlackList pushback [(getMarkerPos _x),1000];
 			};
@@ -39,6 +37,5 @@ if ((tolower blck_modType) isEqualTo "exile") then
 			if (getMarkerType _x isEqualTo "ExileConcreteMixerZone" && blck_listConcreteMixerZones) then {
 				blck_locationBlackList pushback [(getMarkerPos _x),1000];		
 			};	
-		}forEach _traderCites;
-	};
+	}forEach _traderCites;
 };

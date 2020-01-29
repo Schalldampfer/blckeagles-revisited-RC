@@ -632,5 +632,10 @@ _result = [_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_blck_localMission
 #ifdef blck_debugMode
 diag_log format["[blckeagls] dynamicUMSspawner:: (559) end of mission: blck_fnc_endMission has returned control to _fnc_dynamicUMSspawner"];
 #endif
+<<<<<<< Updated upstream
 blck_missionsRun = blck_missionsRun + 1;
 diag_log format["[blckeagls] dynamicUMSspawner:: Total Dyanamic Land and UMS Run = %1", blck_missionsRun];
+=======
+//blck_missionsRun = blck_missionsRun + 1;
+//diag_log format["[blckeagls] dynamicUMSspawner:: Total Dyanamic Land and UMS Run = %1", blck_missionsRun];
+>>>>>>> Stashed changes

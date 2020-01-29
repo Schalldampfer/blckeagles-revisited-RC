@@ -80,8 +80,12 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
+<<<<<<< Updated upstream
 	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
 	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],[[0,1,0],[0,0,1]],[true,false],_crateLoot, _lootCounts]
+=======
+	["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],0,_crateLoot, _lootCounts]
+>>>>>>> Stashed changes
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.
@@ -107,31 +111,54 @@ _aiGroupParameters = [
 
 ];
 _aiScubaGroupParameters = [
+<<<<<<< Updated upstream
 	// [ [px, py, pz] /* position*/, "difficulty", 4 /*Number to Spawn*/, 150 /*radius of patrol*/]
 	//[[22584.9,15304.8,-4.27578],"red",4, 75,0],
 	[[22613.5,15269.1,-4.28332],"red",3, 75,900],
 	[[22549,15288.9,0],"red",1, 75,0]
+=======
+	// [ [px, py, pz] /* position*/, "difficulty", 4 /*Number to Spawn*/, 150 /*radius of patrol*/, seconds to wait after all units killed before respawning the group (set to 0 to disable respawns)]
+
+	[[22549,15288.9,0],"red",3, 75,900]
+>>>>>>> Stashed changes
 ];
 _noVehiclePatrols = blck_SpawnVeh_Red; // Modified as needed; can be a numberic value (e.g. 3) or range presented as [2,4]; 
 										//  Note that this value is ignored if you define vehicle patrols in the array below.
 _vehiclePatrolParameters = [
+<<<<<<< Updated upstream
 	//["B_T_Boat_Transport_01_F",[22570.1,15235.3,-4.49949],"red",75,60],
 	["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",75,0]	
+=======
+	//["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red",4 (Units to spawn into vehicle), 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+
+	["B_T_Boat_Armed_01_minigun_F",[22578.6,15273.3,-0.0354593],"red",3, 75,0]	
+>>>>>>> Stashed changes
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
 							// Allows you to define the location of the center of the patrol, vehicle type spawned, radius to patrol, and AI difficulty (blue, red, green etc).
 
 _submarinePatrolParameters = [
+<<<<<<< Updated upstream
 	//["B_SDV_01_F",[22584.9,15304.8,-1],"red",75,0],
 	["B_SDV_01_F",[22609.9,15299.8,-1],"red",75,0]
+=======
+	////["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red",4 (Units to spawn into vehicle), 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+	["B_SDV_01_F",[22607.9,15299.8,-1],"red",3, 75,0],
+	["B_SDV_01_F",[22609.9,15297.8,-1],"red",3, 75,0]
+>>>>>>> Stashed changes
 ];
 
 _aircraftTypes = blck_patrolHelisRed;  //  You can use one of the pre-defined lists in blck_configs or your own custom array.
 _noAirPatrols =	blck_noPatrolHelisRed; // You can use one of the pre-defined values or a custom one. acceptable values are integers (1,2,3) or a range such as [2,4]; 
 										//  Note: this value is ignored if you specify air patrols in the array below.
 _airPatrols = [
+<<<<<<< Updated upstream
 	//["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,0],
 	//[selectRandom _aircraftTypes,_missionCenter,"green",1000,0]
+=======
+	//["Vehicle Class Name",Position [22570.1,15235.3,-4.49949],AI Difficulty "red", 75 (radius of patrol area),60 (seconds to wait after all units dead before respawning)],
+	["selectRandom _aircraftTypes",[22578.4,15273,50],"red",1000,0]  
+>>>>>>> Stashed changes
 ];
 
 //  Change _useMines to true/false below to enable mission-specific settings.

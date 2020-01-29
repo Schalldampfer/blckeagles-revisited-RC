@@ -32,20 +32,23 @@ _unitsPerGroup = 0;
 _ResidualUnits = 0;
 if (_noAIGroups > 0) then
 {
- // Can add optional debug code here if needed.
-_unitsToSpawn = [[_minNoAI,_maxNoAI]] call blck_fnc_getNumberFromRange;  //round(_minNoAI + round(random(_maxNoAI - _minNoAI)));
-_unitsPerGroup = floor(_unitsToSpawn/_noAIGroups);
-_ResidualUnits = _unitsToSpawn - (_unitsPerGroup * _noAIGroups);
+	// Can add optional debug code here if needed.
+	_unitsToSpawn = [[_minNoAI,_maxNoAI]] call blck_fnc_getNumberFromRange;  //round(_minNoAI + round(random(_maxNoAI - _minNoAI)));
+	_unitsPerGroup = floor(_unitsToSpawn/_noAIGroups);
+	_ResidualUnits = _unitsToSpawn - (_unitsPerGroup * _noAIGroups);
 };
 _blck_AllMissionAI = [];
 _abort = false;
 
+<<<<<<< Updated upstream
 #ifdef blck_debugMode
 if (blck_debugLevel >= 2) then
 {
 	diag_log format["_fnc_spawnMissionAI (30):: _unitsToSpawn %1 ; _unitsPerGroup %2  _ResidualUnits %3",_unitsToSpawn,_unitsPerGroup,_ResidualUnits];
 };
 #endif
+=======
+>>>>>>> Stashed changes
 private _newGroup = grpNull;
 //_newGroup setVariable ["soldierType","infantry"];
 if ( (count _missionGroups > 0) && _noAIGroups > 0) then
@@ -64,6 +67,7 @@ if ( (count _missionGroups > 0) && _noAIGroups > 0) then
 
 		if !(isNull _newGroup) then 
 		{
+			//[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
 			[_newGroup,_groupSpawnPos,_coords,_minAI,_maxAI,_aiDifficultyLevel,_minPatrolRadius,_maxPatrolRadius,configureWaypoints,_uniforms,_headGear,_vests,_backpacks,_weapons,_sideArms,_isScubaGroup] call blck_fnc_spawnGroup;
 			_newGroup setVariable ["soldierType","infantry"];
 			_newAI = units _newGroup;

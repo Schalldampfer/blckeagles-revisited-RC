@@ -17,10 +17,17 @@ private["_cleanupAliveAITimer","_cleanupCompositionTimer","_isScubaMission"];
 	
 _fn_missionCleanup = {	
 	params["_mines","_objects","_blck_AllMissionAI","_mission","_cleanupAliveAITimer","_cleanupCompositionTimer",["_isScubaMission",false]];
+<<<<<<< Updated upstream
 	//diag_log format["_fn_missionCleanup: blck_missionsRunning Started at %1", blck_missionsRunning];
 	[_mines] call blck_fnc_clearMines;
 	[_objects, _cleanupCompositionTimer] call blck_fnc_addObjToQue;
 	[_blck_AllMissionAI, (_cleanupAliveAITimer)] call blck_fnc_addLiveAItoQue;
+=======
+	[_mines] call blck_fnc_clearMines;
+	//[_coords,_objects, _cleanupCompositionTimer] call blck_fnc_addObjToQue;
+	blck_oldMissionObjects pushback [_coords,_objects, (diag_tickTime + _cleanupCompositionTimer)];	
+	blck_liveMissionAI pushback [_coords,_blck_AllMissionAI, (diag_tickTime + _cleanupAliveAITimer)];
+>>>>>>> Stashed changes
 	blck_missionsRunning = blck_missionsRunning - 1;
 	//diag_log format["_fn_missionCleanup: blck_missionsRunning reset to %1", blck_missionsRunning];
 	blck_ActiveMissionCoords = blck_ActiveMissionCoords - [ _coords];	
@@ -40,6 +47,7 @@ _fn_missionCleanup = {
 ///////////////////////////////////////////////////////////////////////
 //  MAIN FUNCTION STARTS HERE
 //////////////////////////////////////////////////////////////////////
+<<<<<<< Updated upstream
 	#ifdef blck_debugMode
 	diag_log format["_fnc_endMission: _this = %1",_this];
 	#endif
@@ -67,6 +75,17 @@ _fn_missionCleanup = {
 		_cleanupCompositionTimer = 0;
 		_cleanupAliveAITimer = 0;
 
+=======
+
+	params["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission",["_endCondition",0],["_vehicles",[]],["_isScubaMission",false]];
+
+	if (_endCondition > 0) exitWith  // Mision aborted for some reason
+	{
+		[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;
+		_cleanupCompositionTimer = 0;
+		_cleanupAliveAITimer = 0;
+
+>>>>>>> Stashed changes
 		[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
 		{
 			//if (local _x) then {deleteVehicle _x};
@@ -77,7 +96,11 @@ _fn_missionCleanup = {
 	};
 	if (_endCondition <= 0) then // Normal Mission End State
 	{
+<<<<<<< Updated upstream
 		//diag_log format["_fnc_endMission: mission end condition == 0 | setting all timers to 0"];
+=======
+
+>>>>>>> Stashed changes
 		private["_cleanupAliveAITimer","_cleanupCompositionTimer"];
 		if (blck_useSignalEnd) then
 		{
@@ -85,6 +108,7 @@ _fn_missionCleanup = {
 			{
 				_x enableRopeAttach true;
 			}forEach _crates;
+<<<<<<< Updated upstream
 			#ifdef blck_debugMode	
 			if (blck_debugLevel > 0) then
 			{
@@ -97,6 +121,9 @@ _fn_missionCleanup = {
 			diag_log format["_fnc_endMission:  Mission Completed without errors, setting all timers to default values"];
 		};
 		#endif
+=======
+		};
+>>>>>>> Stashed changes
 		
 		_cleanupCompositionTimer = blck_cleanupCompositionTimer;
 		_cleanupAliveAITimer = blck_AliveAICleanUpTimer;
@@ -118,9 +145,12 @@ _fn_missionCleanup = {
 			_posnVeh = blck_monitoredVehicles find _x;  // returns -1 if the vehicle is not in the array else returns 0-(count blck_monitoredVehicles -1)
 			if (_posnVeh >= 0) then
 			{
+<<<<<<< Updated upstream
 				#ifdef blck_debugMode
 				diag_log format["_fnc_endMission: setting missionCompleted for vehicle %1 to %2",_x,diag_tickTime];
 				#endif
+=======
+>>>>>>> Stashed changes
 				(blck_monitoredVehicles select _posnVeh) setVariable ["missionCompleted", diag_tickTime];
 			} else {
 				_x setVariable ["missionCompleted", diag_tickTime];
@@ -129,8 +159,12 @@ _fn_missionCleanup = {
 		} forEach _vehicles;
 		[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
 	};
+<<<<<<< Updated upstream
 	#ifdef blck_debugMode
 	diag_log format["_fnc_endMission: after to running mission end functions -> blck_missionsRunning = %1 | blck_dynamicUMS_MissionsRuning = %2",blck_missionsRunning,blck_dynamicUMS_MissionsRuning];
 	#endif
 	//diag_log format["_fnc_endMission (138): after to running mission end functions -> blck_missionsRunning = %1 | blck_dynamicUMS_MissionsRuning = %2",blck_missionsRunning,blck_dynamicUMS_MissionsRuning];	
+=======
+
+>>>>>>> Stashed changes
 	_endCondition

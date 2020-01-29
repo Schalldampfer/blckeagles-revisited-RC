@@ -74,6 +74,28 @@ if (_missionPatrolVehicles isEqualTo []) then
 		};
 	};
 } forEach _missionPatrolVehicles;
+<<<<<<< Updated upstream
 blck_monitoredVehicles append _vehicles;
 _return = [_vehicles, _missionAI, _abort];
+=======
+if !(_abort) then 
+{
+	blck_monitoredVehicles append _vehicles;
+	if !(isNil "blck_spawnerMode") then 
+	 {	
+		_return = [_vehicles, _missionAI];
+	 } else {
+		_return = [_vehicles, _missionAI, _abort];
+	 };
+} else {
+	 if !(isNil "blck_spawnerMode") then 
+	 {	
+		{[_x] call blck_fnc_destroyVehicleAndCrew} forEach _vehicles;
+		_return = grpNull;
+	 } else {
+		blck_monitoredVehicles append _vehicles;
+		_return = [_emplacedWeps,_emplacedAI,_abort];		
+	 };
+};
+>>>>>>> Stashed changes
 _return

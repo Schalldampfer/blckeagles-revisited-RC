@@ -16,7 +16,11 @@
 private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_blck_localMissionMarker","_assetKilledMsg","_enemyLeaderConfig",
 		"_AI_Vehicles","_timeOut","_aiDifficultyLevel","_missionPatrolVehicles","_missionGroups","_loadCratesTiming","_spawnCratesTiming","_assetSpawned","_hostageConfig",
 		"_chanceHeliPatrol","_noPara","_chanceLoot","_heliCrew","_loadCratesTiming","_useMines","_blck_AllMissionAI","_delayTime","_groupPatrolRadius",
+<<<<<<< Updated upstream
 		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_marker","_vehicleCrewCount"];
+=======
+		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount"];
+>>>>>>> Stashed changes
 		
 params["_coords","_markerClass","_aiDifficultyLevel"];
 
@@ -28,7 +32,11 @@ diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords 
 if (isNil "_assetKilledMsg")			 then {_assetKilledMsg = ""};
 if (isNil "_markerColor") 				then {_markerColor = "ColorBlack"};
 if (isNil "_markerType") 				then {_markerType = ["mil_box",[]]};
+<<<<<<< Updated upstream
 //if (isNil "_timeOut") then {_timeOut = -1;};
+=======
+if (isNil "_markerSize") 				then {_markerSize = []};
+>>>>>>> Stashed changes
 if (isNil "_endCondition") 				then {_endCondition = blck_missionEndCondition};  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"};
 if (isNil "_spawnCratesTiming")	 		then {_spawnCratesTiming = blck_spawnCratesTiming}; // Choices: "atMissionSpawnGround","atMissionStartAir","atMissionEndGround","atMissionEndAir". 
 if (isNil "_loadCratesTiming") 			then {_loadCratesTiming = blck_loadCratesTiming}; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
@@ -48,6 +56,7 @@ if (isNil "_noChoppers") 				then {_noChoppers = [_aiDifficultyLevel] call blck_
 if (isNil "_chancePara") 				then {_chancePara = [_aiDifficultyLevel] call blck_fnc_selectChanceParatroops};
 if (isNil "_missionHelis") 				then {_missionHelis = [_aiDifficultyLevel] call blck_fnc_selectMissionHelis};
 if (isNil "_noPara") 					then {_noPara = [_aiDifficultyLevel] call blck_fnc_selectNumberParatroops};
+if (isNil "_paraSkill")					then {_paraSkill = _aiDifficultyLevel};
 if (isNil "_chanceLoot") 				then {_chanceLoot = 1.0}; //0.5}; 
 if (isNil "_paraTriggerDistance") 		then {_paraTriggerDistance = 400;};
 if (isNil "_paraLoot") 					then {_paraLoot = blck_BoxLoot_Green};  //  Add diffiiculty based settings
@@ -56,6 +65,25 @@ if (isNil "_missionLootVehicles") 		then {_missionLootVehicles = []};
 if (isNil "_garrisonedBuilding_ATLsystem") then {_garrisonedBuilding_ATLsystem = []};
 if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {_garrisonedBuildings_BuildingPosnSystem = []};
 if (isNil "_vehicleCrewCount") then {_vehicleCrewCount = [_aiDifficultyLevel] call GMS_fnc_selectVehicleCrewCount};
+<<<<<<< Updated upstream
+=======
+if (isNil "_defaultMissionLocations") then {_defaultMissionLocations = []};
+if (isNil "_submarinePatrolParameters") then {_submarinePatrolParameters = []};
+if (isNil "_airpatrols") then {_airpatrols = []};
+if (isNil "_scubagroupparameters") then {_scubagroupparameters = []};
+if (isNil "_markerMissionName") then {
+	diag_log format["_fnc_missionSpawner: _markerMissionName not defined, using default value"];
+	_markerMissionName = "Default Mission Name";
+};
+if (isNil "_noLootCrates") then {_noLootCrates = 1};
+if (isNil "_lootCrates") then {_lootCrates = blck_crateTypes};
+if (isNil "_lootCratePositions") then {_lootCratePositions = []};
+//if (isNil "_markerSize") then {_markerSize = [200,200]};
+//if (isNil "_markerBrush") then {_markerBrush = "GRID"};
+if (isNil "_isScubaMission") then {_isScubaMission = false};
+if (isNil "_missionLootBoxes") then {_missionLootBoxes = []};
+private "_temp";
+>>>>>>> Stashed changes
 
 _objects = [];
 _mines = [];
@@ -180,6 +208,7 @@ if (blck_debugLevel > 0) then
 uiSleep  delayTime;
 
 _abort = false;
+<<<<<<< Updated upstream
 _temp = [[],[],false];
 
 #ifdef blck_debugMode
@@ -190,6 +219,11 @@ private _params = [_coords,_minNoAI,_maxNoAI,_missionGroups,_aiDifficultyLevel,_
 #endif
 
 _temp = [_coords, _minNoAI,_maxNoAI,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnMissionAI;
+=======
+_temp = [];
+
+_temp = [_coords, _minNoAI,_maxNoAI,_noAIGroups,_missionGroups,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnMissionAI;
+>>>>>>> Stashed changes
 
 _abort = _temp select 1;
 
@@ -291,6 +325,7 @@ _noEmplacedToSpawn = [_noEmplacedWeapons] call blck_fnc_getNumberFromRange;
 if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 {
 	_temp = [_coords,_missionEmplacedWeapons,useRelativePos,_noEmplacedToSpawn,_aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_spawnEmplacedWeaponArray;
+<<<<<<< Updated upstream
 	
 	if (typeName _temp isEqualTo "ARRAY") then
 	{
@@ -302,6 +337,11 @@ if (blck_useStatic && (_noEmplacedToSpawn > 0)) then
 		_objects append (_temp select 0);
 		_blck_AllMissionAI append (_temp select 1);
 	};
+=======
+	_temp params ["_emplacedObjects","_units","_abort"];
+	_objects append _emplacedObjects;
+	_blck_AllMissionAI append _units;
+>>>>>>> Stashed changes
 };
 
 #ifdef blck_debugMode
@@ -314,16 +354,32 @@ if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles
 {
 	//diag_log format["_missionSpawner(315):  _vehToSpawn = %1 | _missionPatrolVehicles = %2",_vehToSpawn,_missionPatrolVehicles];
 	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false,_vehicleCrewCount] call blck_fnc_spawnMissionVehiclePatrols;
+<<<<<<< Updated upstream
 	//diag_log format["_missionSpawner(317):  _temp = %1",_temp];
 	if (typeName _temp isEqualTo "ARRAY") then
 	{
 		_abort = _temp select 2;
+=======
+	diag_log format["_fnc_missionSpawner (327)  _temp = %1",_temp];
+	_temp params ["_patrolVehicles","_units","_abort"];
+	_blck_AllMissionAI append _units; 
+	/*
+	if (typeName _temp isEqualTo "ARRAY") then
+	{
+		_abort = _temp select 2;
+	} else {
+		_abort = true;
+>>>>>>> Stashed changes
 	};
 	if !(_abort) then
 	{
 		_patrolVehicles = _temp select 0;
 		_blck_AllMissionAI append (_temp select 1);
 	};
+<<<<<<< Updated upstream
+=======
+	*/
+>>>>>>> Stashed changes
 };
 
 #ifdef blck_debugMode
@@ -358,7 +414,11 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (355) loot crate(s)
 
 if (count _missionLootVehicles > 0) then
 {
+<<<<<<< Updated upstream
 	_temp = [_coords,_missionLootVehicles,_loadCratesTiming] call blck_fnc_spawnMissionLootVehicles;
+=======
+	_temp = [_coords,_missionLootVehicles,_loadCratesTiming,0] call blck_fnc_spawnMissionLootVehicles;
+>>>>>>> Stashed changes
 	_crates append _temp;
 };
 if (_noPara > 0 && (random(1) < _chancePara) && _paraTriggerDistance == 0) then

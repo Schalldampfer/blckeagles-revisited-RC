@@ -14,23 +14,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 _lootBoxes = 
 [
-				#ifdef GRG_TestServer
-				["altis","APTrader",10,
-					[
-					[[14658.1, 16790.9, 18.3795],0,false,false],
-					[[14660, 16788.5, 18.3795],0,false,false],
-					[[17518.4,13260.7,12.7337],0,false,false],
-					[[17528.1,13270.2,12.725],0,false,false],
-					[[17537.4,13278.2,12.706],0,false,false],
-					[[17547.9,13286,12.6121],0,false,false],
-					[[17599.5,13240.5,13.327],0,false,false],
-					[[17593.1,13231.9,13.4375],0,false,false],
-					[[17586.5,13224.6,13.5832],0,false,false],
-					[[17580.5,13217.8,13.6708],0,false,false]					
-					]
-				],
-				#endif
-
+				// Examples for Altis and bornholm are provided here
 				// Ferres
 				/*
 				["altis","Ferres", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
@@ -44,113 +28,14 @@ _lootBoxes =
 					[[21508.932,7585.6309,15.844649],0,true, true],
 					[[21547.027,7695.6738,15.754698],0,true, true]
 					]
-				],*/		
-				#ifndef blck_milServer
-				// Dump
-				["altis","Dump", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[5791,20314.5,0],0,false,true], // crate position 1, loadout (0-4), false=random placement near position, true = show smoke at position
-					[[5902.33,20272.7,0],0,false,true],
-					[[5955.21,20136.2,0],0,false,true],
-					[[5908.32,20088.3,0],0,false,true],
-					[[55843.54,20171.6,0],0,false,true],
-					[[5775.42,20163.3,0],0,false,true],
-					[[5979.18,20206.5,0],0,false,true],
-					[[5943.89,20076.7,0],0,false,true]
-					]
-				],
-				// Beach #1
-				["altis","Beach", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[22769.8,7051.28,0],0,false,true], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
-					[[22934.3,6990.53,0],0,false,true],
-					[[22831.7,7003.24,0],0,false,true],
-					[[22666.6,7009.22,0],0,false,true],
-					[[22634.6,6985.3,0],0,false,true],
-					[[22583.4,6935.63,0],0,false,true],
-					[[22651.1,7060.75,0],0,false,true]
-					]
-				],
-				["altis","Pack-1", 1,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[14269.6,13016.2,0],0,false,false], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
-					[[14359.9,13047.7,0],0,false,false],
-					[[14293.5,12956.9,0],0,false,false] 
-					]
-				],
-				["altis","Pack-2", 4,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[26810,24557.2,0.00140762],0,false,false], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
-					[[26746,24652.6,0.520973],0,false,false],
-					[[26798.1,24668.3,0.001297],0,false,false],
-					[[26873,24635.1,17.4495],0,false,false],
-					[[26940.7,24642.2,0.732187],0,false,false],
-					[[26955.5,24658.4,0.739138],0,false,false],
-					[[26943.8,24666.2,0.722866],0,false,false],
-					[[26930.2,24651.9,0.727114],0,false,false],
-					[[26965.5,24684.1,7.63653],0,false,false],
-					[[26928.3,24714.8,7.63206],0,false,false],
-					[[26940.7,24730.5,7.76619],0,false,false],
-					[[26952,24750.5,0.602812],0,false,false],
-					[[26932.7,24730.8,0.635454],0,false,false],
-					[[26931.2,24739,0.724504],0,false,false],
-					[[26968.1,24700.1,0.599913],0,false,false],
-					[[26847.9,24821.4,0.340788],0,false,false],
-					[[26783.4,24788.2,12.5849],0,false,false],
-					[[26729.8,24759.1,0.296225],0,false,false]					
-					]
-				],
-				#endif
-				["taviana","Zoo", 3,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[18614.1,3029.22,0],0,false, true], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
-					[[19215.7,2260.17,0],0,false, true],
-					[[19073.2,2775.83,0],0,false, true],
-					[[18632.1,2967.54,0],0,false, true],
-					[[18671.2,2869.73,0],0,false, true]
-					]
-				],
-				// Power Plant
-				["taviana","NPP", 3,							// Number of crates to select from the array of possible possitions below. Note that there can be multiple arrays of this type.
-					[
-					[[9478.98,4481.12,0],0,false, false], // crate position 1, loadout (0-4), true=random placement near position, true = show smoke at position
-					[[9584.39,4474.86,0],0,false, false],
-					[[9485.74,4303.65,0],0,false, false],
-					[[9549.64,4236.95,0],0,false, false],
-					[[9347.52,4656.96,0],0,false, false],
-					[[9427.53,4585.94,0],0,false, false],
-					[[9542.42,4603.89,0],0,false, false]					
-					]
-				],
-				["bornholm","Stronghold1",4,
-				// Stronghold 1
-					[
-					[[16776.3,2841.59,0.115455],2,true, false],
-					[[16885.1,2763.64,0.0635304],4,true, false],
-					[[16953.7,2588.12,0.0866053],2,true, false],
-					[[17028.5,2645.56,0.0632489],4,true, false],		
-					[[16818.7,2627.68,0.0635295],2,true, false],
-					[[16828.1,2794.94,0.086482],4,true, false],
-					[[16776.8,2842.19,0.115454],2,true, false]					
-					]
-				],
-				["bornholm","Stronghold2", 4,
-				// Stronghold 2
-					[
-					[[4342.52,19974.5,1.5059],2,false, false],
-					[[4364.01,19957.2,1.7643],4,false, false],
-					[[4337.55,19886.1,0.923979],2,false, false],
-					[[4317.76,19915.3,0.336912],4,false, false],
-					[[4261.73,19957,0.0783005],2,false, false],				
-					[[4280.66,19961.2,0.180275],4,false, false],
-					[[4318.1,19916.5,0.514435],2,false, false]					
-					]
-				],			
-				["bornholm","Object99",4,// ** Note that there is no comma after the last entry.
+				],*/	
+					
+				/*	
+				["bornholm","Object99",4,// ** Note that there is no comma after the last entry.  // for darth_rogues Object99 addon
 				// Object 99 blah blah
 					[
-						/*
-						// Darthrogues Obj 99
+						
+					// Darthrogues Obj 99
 					[[7231.91,11975.8,0.836342],2,false, false],
 					[[7266.08,11981.6,1.0471],4,false, false],
 					[[7337.64,12011.6,12.7679],2,false, false],
@@ -165,109 +50,8 @@ _lootBoxes =
 					[[7147.93,12056.5,0.848099],4,false, false],					
 					[[7137.67,12110.8,4.0068],2,false, false],	
 					[[7166,12138,3.86438],4,false, false],	
-					[[7130.52,12207.9,0.56971],4,false, false]	
-					*/					
-					// Mr. Squirrel's Obj 69
-					[[7253.48,12101.4,0],2,false, false],
-					[[7276.15,12118.1,0],4,false, false],
-					[[7158.4,12068.5,0],2,false, false],
-					[[7128.27,12206.9,0],4,false, false],
-					[[7167.57,12218.9,0],2,false, false],
-					[[7218.71,12188.5,0],4,false, false],
-					[[7209.02,12166.9,0],2,false, false],
-					[[7233.2,12067.5,0],4,false, false],
-					[[7167.75,12038.4,0],2,false, false],
-					[[7106.96,12119.2,0],4,false, false],
-					[[7161.82,12126.7,0],2,false, false],
-					[[7096.61,12195.9,0],4,false, false],					
-					[[7083.88,12141.1,0],2,false, false],	
-					[[7060.33,12146.2,0],4,false, false],	
-					[[7135.81,12168.1,0],2,false, false],		
-					[[7055.72,12159.2,0.38678],4,false, false],
-					[[7119.19,12100.2,0.801155],2,false, false],
-					[[7124.51,12095.7,1.16968],4,false, false]
-					]
-				],
-				["bornholm","Mafia Island", 4,
-				  [// Mafia Island
-					[[19296.5, 22308.8, 0],2,false, false],
-					[[19279, 22352.2, 0],4,false, false],
-					[[19213.8, 22358.6, 0],2,false, false],
-					[[19190.4, 22367.4, 0],4,false, false],
-					[[19204.3, 22314.9, 0],2,false, false],
-					[[19368.7, 22347.3, 0],4,false, false],
-					[[19462.8, 22306.1, 0],2,false, false],
-					[[19321.4, 22240.1, 3.46751],4,false, false]			
-				  ]
-				],
-				["bornholm","Science Compound", 4,
-				  [// Science Compound
-					[[7922.43,7347, 0],2,false, false],
-					[[7926.59,7427.49, 0],4,false, false],
-					[[7929.08,7421.45, 0],2,false, false],
-					[[7984.89,7474.71, 0],4,false, false],
-					[[7974.01,7472.63, 0],2,false, false],
-					[[7934.56,7572.23, 0],4,false, false],
-					[[7945.09,7587.68, 0],2,false, false],
-					[[7949.19,7567.18,0],4,false, false]			
-				  ]
-				], 
-					//[[21572.559,7462.2661,17.827536],4,true, true]
-					//[[21801.348,7631.4448,13.80711],1,true, true],
-					//[[21508.932,7585.6309,15.844649],2,true, true],
-					//[[21547.027,7695.6738,15.754698],3,true, true]
-
-   [   "lythium", "RaiderBase", 3, 
-        [
-            [[18950.6,13115.8,233.078],1,true, false], // loadout (0-4), false=random placement near position, true = show smoke at position
-            [[18958,13095.9,231.687],2,true, false],
-            [[19048.7,13134,229.004],2,true, false],
-            [[19062.3,13126.6,229.646],1,true, false],
-            [[19032.2,13087.3,227.428],3,true, false],
-            [[18988,13192.7,223.058],1,true, false],
-            [[19076.2,13105.2,231.051],3,true, false]
-        ]
-    ],
-	[   "lythium","chemical", 4, 
-        [
-            [[9081.29,19774.8,704.102],1,true, false], // loadout (0-4), false=random placement near position, true = show smoke at position
-            [[9081.29,19774.8,704.102],2,true, false],
-            [[8926.25,19856.5,728.456],2,true, false],
-            [[8999.95,19917.9,714.447],1,true, false],
-            [[9391.22,19888,713.624],3,true, false],
-            [[9026.12,20360,687.103],1,true, false],
-			[[8972.81,20222.4,714.263],3,true, false],
-            [[9406.59,19506.8,635.903],3,true, false],
-			[[7715.5,20352.6,822.616],3,true, false]
-        ]
-    ],
-	[   "lythium","nwaste", 4, 
-        [
-            [[19123.5,1726.78,77.169],1,true, false], // loadout (0-4), false=random placement near position, true = show smoke at position
-            [[19000.5,1657.84,79.3068],2,true, false],
-            [[19028.6,1525.28,80.0602],2,true, false],
-            [[19076.7,1536.15,78.7828],1,true, false],
-            [[19393.5,1784.66,32.3623],3,true, false],
-            [[19391,1783.63,32.5241],1,true, false],
-			[[19255.1,2204.95,46.3486],3,true, false],
-            [[19398.7,2323,42.8409],3,true, false]
-			
-        ]
-    ],
-	[   "lythium","mine", 4, 
-        [
-            [[4114.84,905.004,357.621],1,true, false], // loadout (0-4), false=random placement near position, true = show smoke at position
-            [[3714.22,760.414,383.659],2,true, false],
-            [[3774.63,684.883,384.924],2,true, false],
-            [[3747.2,777.427,384.203],1,true, false],
-            [[3761.07,611.827,383.125],3,true, false],
-            [[3709.12,780.889,383.27],1,true, false],
-			[[3712.96,805.05,382.848],3,true, false],
-            [[3688.47,713.877,382.692],3,true, false],
-			[[4373.19,607.184,370.77],3,true, false]
-        ]
-    ]					
-
+					[[7130.52,12207.9,0.56971],4,false, false]						
+				]*/		
 ];
 
 

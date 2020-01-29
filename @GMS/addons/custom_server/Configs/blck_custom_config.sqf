@@ -152,10 +152,17 @@ if (blck_debugON || (blck_debugLevel > 0)) then // These variables are found in 
 	blck_enableGreenMissions = 1;
 	blck_enableRedMissions = 1;
 	blck_enableBlueMissions = 1;
+<<<<<<< Updated upstream
 	blck_numberUnderwaterDynamicMissions = 1;	
 	blck_enableHunterMissions = -1;
 	blck_enableScoutsMissions = -1;
 	blck_maxCrashSites = -3; 
+=======
+	blck_numberUnderwaterDynamicMissions = 3;	
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 1;
+	blck_maxCrashSites = 1; 
+>>>>>>> Stashed changes
 	
 	//blck_killEmptyStaticWeapons = false;
 	//blck_killEmptyAIVehicles = true;

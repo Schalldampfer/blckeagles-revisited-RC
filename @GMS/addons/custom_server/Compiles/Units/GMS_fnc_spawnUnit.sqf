@@ -73,6 +73,7 @@ if (blck_debugLevel >= 2) then
 [_unit] call blck_fnc_removeGear;
 if (_scuba) then
 {
+<<<<<<< Updated upstream
 	_unit swiminDepth (_pos select 2);
 	#ifdef blck_debugMode
 	if (blck_debugLevel >= 2) then
@@ -80,6 +81,9 @@ if (_scuba) then
 		diag_log format["_fnc_spawnUnit:: -- >> unit depth = %1 and underwater for unit = %2",_pos select 2, underwater _unit];
 	};
 	#endif
+=======
+	_unit swiminDepth (([_pos] call blck_fnc_findWaterDepth) / 2);
+>>>>>>> Stashed changes
 };
 
 _skin = "";
@@ -192,13 +196,6 @@ else
 };
 
 _unit addWeapon selectRandomWeighted["",4,"Binocular",3,"Rangefinder",1];
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then
-{
-	diag_log format["_fnc_spawnUnit:: --> unit loadout = %1", getUnitLoadout _unit];
-};
-#endif
 
 _unit addEventHandler ["FiredNear",{_this call blck_EH_AIfiredNear;}];
 _unit addEventHandler ["Reloaded", {_this call blck_EH_unitWeaponReloaded;}];

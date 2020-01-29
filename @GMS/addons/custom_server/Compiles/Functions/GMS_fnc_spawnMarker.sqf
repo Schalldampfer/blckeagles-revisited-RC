@@ -14,8 +14,8 @@ private["_blck_fn_configureRoundMarker"];
 _blck_fn_configureRoundMarker = {
 	private["_name","_pos","_color","_size","_MainMarker","_arrowMarker","_labelMarker","_labelType"];
 	params["_name","_pos","_color","_text","_size","_labelType","_mShape","_mBrush"];
+
 	if ((_pos distance [0,0,0]) < 10) exitWith {};
-	
 	_MainMarker = createMarker [_name, _pos];
 	_MainMarker setMarkerColor _color;
 	_MainMarker setMarkerShape "ELLIPSE";
@@ -62,9 +62,11 @@ _blck_fn_configureIconMarker = {
 	_MainMarker
 };
 
-params["_mArray"];
+params["_mArray","_mBrush"];
+
 private["_marker"];
 _mArray params["_missionMarkerName","_markerPos","_markerLabel","_markerLabelType","_markerColor","_markerTypeInfo"];
+<<<<<<< Updated upstream
 _markerTypeInfo params["_mShape",["_mSize",[0,0]],["_mBrush","GRID"]];
 if (toUpper(_mShape) in ["ELIPSE","ELLIPSE","RECTANGLE"]) then // not an Icon .... 
 {		
@@ -72,6 +74,16 @@ if (toUpper(_mShape) in ["ELIPSE","ELLIPSE","RECTANGLE"]) then // not an Icon ..
 };
 if !(toUpper(_mShape) in ["ELIPSE","ELLIPSE","RECTANGLE"]) then 
 {  
+=======
+
+_markerTypeInfo params[["_mShape","mil_dot"],["_mSize",[0,0]],["_mBrush","GRID"]];
+
+if (toUpper(_mShape) in ["ELLIPSE","RECTANGLE"]) then // not an Icon .... 
+{	
+	if (isNil "_mBrush") then {_mBrush = "GRID"};
+	_marker = [_missionMarkerName,_markerPos,_markerColor,_markerLabel, _mSize,_markerLabelType,_mShape,_mBrush] call _blck_fn_configureRoundMarker;
+} else {  
+>>>>>>> Stashed changes
 	_marker = [_missionMarkerName,_markerPos, _markerColor,_markerLabel,_mShape] call _blck_fn_configureIconMarker;
 };
 if (isNil "_marker") then {_marker = ""};

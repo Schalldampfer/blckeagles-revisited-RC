@@ -22,7 +22,11 @@
 ///////////////////////////
 
 //#define blck_debugMode
+<<<<<<< Updated upstream
 //#define GRGserver
+=======
+#define GRGserver
+>>>>>>> Stashed changes
 //#define blck_addCarParts
 #define blck_triggerLoopCompleteTime 40*60
 #define onFoot 1

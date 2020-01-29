@@ -8,7 +8,11 @@ private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_marke
 	"_chanceReinforcements","_helipatrol","_endCondition","_markerColor","_markerType","_useMines","_difficulty","_missionCenter",
 	"_missionGroups","_scubaGroupParameters","_vehiclePatrolParameters","_submarinePatrolParameters","_aircraftTypes","_noAirPatrols","_airPatrols",
 	"_vests","_backpacks","_weaponList","_sideArms","_uniforms","_headGear","_chanceHeliPatrol","_noChoppers","_chancePara","_missionHelis","_noPara",
+<<<<<<< Updated upstream
 	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts","_vehiclecrewcount"];
+=======
+	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts"];
+>>>>>>> Stashed changes
 params["_missionCenter","_mission"];
 //_mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 //_missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.
@@ -48,6 +52,7 @@ _lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts
 								  // values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
 								  //  blck_lootCountsOrange = [[6,8],[24,32],[5,10],[25,35],16,1];   // Orange
 
+
 _startMsg = "Pirates were spotted off the coast - intercept them and collect the loot";
 _endMsg = "The pirates were defeated";
 _markerLabel = "";
@@ -60,7 +65,6 @@ _missionLandscapeMode = "precise"; // acceptable values are "random","precise"
 									// In precise mode objects will be spawned at the relative positions specified.
 									// In the random mode, objects will be randomly spawned within the mission area.
 _missionLandscape = [  //  Paste appropriate lines from M3EDEN output here.
-	//  ["Land_Cargo_HQ_V2_F",[22894.7,16766,3.19],[[0,1,0],[0,0,1]],[true,false]],
 	["Land_Boat_05_wreck_F",[1,1,0],0,[true,false]]
 ]; // list of objects to spawn as landscape using output from M3EDEN editor.
 
@@ -69,7 +73,6 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 	//  where _customLootArray follows the same format as blck_BoxLoot_Red and the other pre-defined arrays and
 	//  where _customlootcountsarray1 also follows the same format as the predefined arrays like blck_lootCountsRed
 		//  ["Box_NATO_Ammo_F",[22893,16766.8,6.31652],[[0,1,0],[0,0,1]],[true,false], _crateLoot, _lootCounts],
-		//["Exile_Container_SupplyBox",[1.91016,-3.85352,-3.54709],0,[true,false], _crateLoot, _lootCounts]
 		//[selectRandom blck_UMS_crates,[0,0,0],_crateLoot, _lootCounts]
 ];  // If this array is empty a single loot chest will be added at the center. If you add items loot chest(s) will be spawned in specific positions.
 
@@ -77,8 +80,12 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
+<<<<<<< Updated upstream
 	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
 	["I_Boat_Transport_01_F",[3,3,0],_crateLoot, _lootCounts]
+=======
+	["I_Boat_Transport_01_F",[3,3,0],0,_crateLoot, _lootCounts]
+>>>>>>> Stashed changes
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.
@@ -102,16 +109,12 @@ _scubaGroupParameters = [
 //_noVehiclePatrols = blck_SpawnVeh_Red; // Not useful for marine missions which we assume need pre-defined positions for vehicles.
 // These are surface patrols. 
 _vehiclePatrolParameters = [
-	//  	["B_MRAP_01_hmg_F",[27.8945,100.275,0],0,[true,false]],
 	["B_Boat_Armed_01_minigun_F",[2,2,0],0]
-	//["B_T_Boat_Transport_01_F",[16.7676,43.083,-0.00134277],"red",4, 75,60]	
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
 							// Allows you to define the location of the center of the patrol, vehicle type spawned, radius to patrol, and AI difficulty (blue, red, green etc).
 
 _submarinePatrolParameters = [
-	//  
-	//["B_SDV_01_F",[22584.9,15304.8,-6.14801],"red",4, 75,0],
 	["B_SDV_01_F",[-2,-2,-1.5],0]
 ];
 

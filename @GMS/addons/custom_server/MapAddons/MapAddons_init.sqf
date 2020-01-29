@@ -20,18 +20,12 @@ _addonsPath = "\q\addons\custom_server\MapAddons\mapcontent\";
 _addonsEpoch = [
 	//["mapName","subfolder","filename.sqf"]
 	// when "subfolder" equals "" then the spawner will look for the file in the mapcontent directory 
-	// See the examples below and in custom_server\MapAddons\mapcontent\Altis for an idea as to how to set these arrays up.
-	/*
-	["Altis","Altis","mobileRefuelSaltFlats.sqf"],
-	["Altis","Altis","smallbaseSaltFlats.sqf"]
-	*/
+
 ];
 
 _addonsExile = [
-	/*
-	["Altis","Altis","mobileRefuelSaltFlats-DBD_final.sqf"],
-	["Altis","Altis","smallbaseSaltFlats.sqf"]
-	*/
+	//["mapName","subfolder","filename.sqf"]
+	// when "subfolder" equals "" then the spawner will look for the file in the mapcontent directory 
 ];
 
 
@@ -50,7 +44,8 @@ _fnc_runIt =
 			} else {
 				_path = format["%1%2%3",_addonsPath,_x select 1,"\"];
 			};
-			if (blck_debugLevel > 1) then {diag_log format["[blckeagls] MapAddons::-->> Running the following script: %1%2",_path,_x select 2];};
+			if (blck_debugLevel >= 1) then {diag_log format["[blckeagls] MapAddons::-->> Running the following script: %1%2",_path,_x select 2];};
+			diag_log format["[blckeagls] MapAddons::-->> Running the following script: %1%2",_path,_x select 2];
 			[] execVM format["%1%2",_path,_x select 2];
 		};
 	}forEach _addons;
