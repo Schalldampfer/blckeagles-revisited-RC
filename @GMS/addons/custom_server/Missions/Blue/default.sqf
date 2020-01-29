@@ -95,7 +95,9 @@ _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the 
 					  // When present and empty the mission spawner evaluates the minAI, maxAI, noAIGroups settings	
 					  // When present with values these override the defaults.
 					  // See default2.sqf for an example of the use of this variable.
-_missionLootVehicles = []; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
+_missionLootVehicles = [
+	[selectRandom["B_MRAP_01_EPOCH","O_MRAP_02_EPOCH","I_MRAP_03_EPOCH"],[-5,5,0],random 360,_crateLoot,_lootCounts]
+]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 					
 					// when the array is empty this parameter is ignored.
 					// You can have vehicles serve as loot containiners by defining them here.

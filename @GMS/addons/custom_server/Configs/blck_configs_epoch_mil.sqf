@@ -79,14 +79,16 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	blck_tracked_APC_ARMA3 = [
 		"B_APC_Tracked_01_rcws_F",
 		"B_APC_Tracked_01_CRV_F",
+		"B_APC_Tracked_01_AA_F",
 		"O_APC_Tracked_02_cannon_F", 
+		"O_APC_Tracked_02_AA_F",
 		"O_APC_Wheeled_02_rcws_F", 
 		"I_APC_tracked_03_cannon_F"
 	];
 
 	blck_Tanks_ARMA3 = [
 		//"B_MBT_01_arty_F",
-		//"B_MBT_01_mlrs_F",
+		"B_MBT_01_mlrs_F",
 		"B_MBT_01_TUSK_F",
 		"O_MBT_02_cannon_F",
 		//"O_MBT_02_arty_F",

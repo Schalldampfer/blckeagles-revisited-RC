@@ -16,7 +16,7 @@
 	
 ////diag_log "[blckeagls] Spawning Orange Mission with template = redCamp";
 _crateLoot = blck_BoxLoot_Orange;
-_lootCounts = blck_lootCountsOrange;
+_lootCounts = blck_lootCountsBlue;
 _startMsg = "A temporary Bandit camp has been spotted. Check the Orange marker on your map for its location";
 _endMsg = "The temporary Bandit Orange camp at the Orange Marker is under player control";
 _markerLabel = "";
@@ -69,7 +69,9 @@ _missionLandscape = [
 		["Land_BagFence_Round_F",[-34.3232,10.1035,0.00181007],60.0012,[false,true]]
 		]; // list of objects to spawn as landscape
 _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
-_missionLootVehicles = []; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
+_missionLootVehicles = [
+	[selectRandom["B_Plane_CAS_01_dynamicLoadout_F","O_Plane_CAS_02_dynamicLoadout_F","I_Plane_Fighter_03_dynamicLoadout_F"],[8,17,0],random 360,_crateLoot,_lootCounts]
+]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionEmplacedWeapons = []; // can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = blck_useMines;

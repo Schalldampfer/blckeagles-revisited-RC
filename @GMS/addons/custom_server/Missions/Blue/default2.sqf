@@ -86,8 +86,8 @@ _missionLootBoxes = [
 
 		// blck_lootCountsBlue= [4,12,3,6,6,1];
 _missionLootVehicles = [
-	["I_G_Offroad_01_armed_F",[-8,8,0],_crateLoot,[0,10,2,5,5,1]],
-	["I_G_Offroad_01_armed_F",[8,17,0],_crateLoot,[0,10,2,5,5,1]]
+	//["I_G_Offroad_01_armed_F",[-8,8,0],_crateLoot,[0,10,2,5,5,1]],
+	[selectRandom["O_Truck_02_transport_EPOCH","O_Truck_02_covered_EPOCH","O_Truck_02_box_EPOCH","O_Truck_03_transport_EPOCH","O_Truck_03_covered_EPOCH"],[8,17,0],random 360,_crateLoot,[0,10,2,5,5,1]]
 	]; //  Parameters are "vehiclel type", offset relative to mission center, loot array, items to load from each category of the loot array.
 	//  ["B_HMG_01_high_F"/*,"B_GMG_01_high_F","O_static_AT_F"*/];
 

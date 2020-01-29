@@ -35,7 +35,13 @@ _missionLandscape = [
 		["CamoNet_INDP_big_F",[18.3711,15.5703,-0.00395203],54.9965,[false,true]]
 		]; // list of objects to spawn as landscape
 _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
-_missionLootVehicles = []; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
+_missionLootVehicles = [
+	[selectRandom[
+		"B_Truck_01_mover_EPOCH","B_Truck_01_transport_EPOCH","B_Truck_01_covered_EPOCH","B_Truck_01_box_EPOCH",
+		"O_Truck_02_transport_EPOCH","O_Truck_02_covered_EPOCH","O_Truck_02_box_EPOCH",
+		"O_Truck_03_transport_EPOCH","O_Truck_03_covered_EPOCH"
+	],[0,5,0],random 360,_crateLoot,_lootCounts]
+]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionEmplacedWeapons = []; // can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = blck_useMines;
