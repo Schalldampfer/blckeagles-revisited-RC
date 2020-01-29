@@ -1,7 +1,6 @@
 // Configures a mission vehicle
 /*
 	By Ghostrider [GRG]
-	Copyright 2016
 	
 	spawns a vehicle of _vehType and mans it with units in _group.
 	returns _veh, the vehicle spawned.
@@ -16,14 +15,12 @@
 
 params["_veh",["_locked",0]];
 private["_unit"];
-//_veh setVehicleLock "LOCKEDPLAYER";
 _veh lock _locked;
 
 _veh addMPEventHandler["MPHit",{if (isServer) then {_this call blck_fnc_AIVehicle_HandleHit}}];
 _veh addMPEventHandler["MPKilled",{if (isServer) then {_this call blck_fnc_processAIVehicleKill}}];
 #define vehicleAffected _this select 0
 _veh addEventHandler["GetOut",{if (isServer || local (vehicleAffected)) then {_this call blck_fnc_handleVehicleGetOut}}];
-//_veh addEventHandler["Local", {if (isServer) then {_this call blck_EH_changeLocality}}];  //  Not used at present
 
 blck_monitoredVehicles pushBackUnique _veh;
 if (blck_modType isEqualTo "Epoch") then

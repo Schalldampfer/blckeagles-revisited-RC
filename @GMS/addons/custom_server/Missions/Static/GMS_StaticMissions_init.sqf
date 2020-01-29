@@ -27,8 +27,8 @@ blck_sm_garrisonBuildings_ASL = [];
 blcl_sm_garrisonBuilding_relPos = [];
 
 blck_sm_monitoring = 0;
-blck_sm_groupDespawnTime = 10; // 120;
-blck_sm_patrolRespawnInterval = 10;  // 600
+blck_sm_groupDespawnTime = 120;
+blck_sm_patrolRespawnInterval = 600;
 {
 	if ((toLower worldName) isEqualTo toLower(_x select 1)) then
 	{

@@ -13,8 +13,10 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private _grp = +allGroups;
+private _grp = allGroups;
+for "_i" from 1 to (count _grp) do
 {
-	if ((count units _x) isEqualTo 0) then {deleteGroup _x};
-}forEach _grp;
+	private _g = _grp deleteAt 0;
+	if ((count units _g) isEqualTo 0) then {deleteGroup _g};
+};
 

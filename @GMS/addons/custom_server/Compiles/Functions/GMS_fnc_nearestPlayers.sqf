@@ -1,5 +1,6 @@
 
 /*
+	blck_fnc_nearestPlayers
 	for ghostridergaming
 	By Ghostrider [GRG]
 	Copyright 2016
@@ -12,10 +13,19 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-//diag_log format["_fnc_nearestPlayers: _this = %1",_this];
-params["_coords","_range"];
-private["_return","_playerClassNames","_epochClasses","_exileClasses"];
-if (blck_modType isEqualTo "Epoch") then {_playerClassNames = ["Epoch_Female_F","Epoch_Male_F"]};
-if (blck_modType isEqualTo "Exile") then {_playerClassNames = ["Exile_Unit_Player"]};
-_return = nearestObjects[_coords,_playerClassNames,_range];
-_return
+
+params[["_coords",[]],"_range"];
+/*
+{
+	diag_log format["_fnc_nearestPlayers: %1 = %2",_x, _this select _forEachIndex];
+}forEach ["_coords", "_range"];
+*/
+if (_coords isEqualTo []) then 
+{
+	_coords = [0,0,0];
+	//diag_log format["[blckeagls] No value passed to blck_fnc_nearestPlayers for _coords - default of [0,0,0] used"];
+};
+
+private _players = allPlayers select {(_x distance _coords) < _range};
+//diag_log format["_fnc_nearestPlayers: _coords %1 | _range %2 | _return = %3",_coords,_range,_players];
+_players

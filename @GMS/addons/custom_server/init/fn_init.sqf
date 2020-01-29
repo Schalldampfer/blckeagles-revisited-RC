@@ -31,3 +31,8 @@ if (!isServer && !hasInterface) then
 	[] execVM "\q\addons\custom_server\init\blck_init_HC.sqf";
 };
 
+/*
+	TODO 
+	Check patrol radius for Air units, Ship units, land vehicle units, and infantry, both static and dynamically spawned.
+
+*/

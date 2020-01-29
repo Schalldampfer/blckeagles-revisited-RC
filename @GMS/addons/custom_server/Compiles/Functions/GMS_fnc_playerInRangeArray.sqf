@@ -12,9 +12,12 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private ["_result"];
 params["_locations","_dist",["_onFootOnly",false]];
-_result = false;
+private _nearLocations = _locations select {[_x,_dist,_onFootOnly] call blck_fnc_playerInRange};
+//diag_log format["_fnc_playerInRangeArray: _locations = %1 | _dist = %2 | _nearLocations = %3",_locations,_dist,_nearLocations];
+private _return = if (_nearLocations isEqualTo []) then {false} else {true};
+_return
+/*
 {
 	_result = [_x,_dist,_onFootOnly] call blck_fnc_playerInRange;
 	if (_result) exitWith {};

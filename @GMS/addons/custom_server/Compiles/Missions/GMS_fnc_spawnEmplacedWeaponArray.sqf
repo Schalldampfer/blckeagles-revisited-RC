@@ -12,7 +12,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params["_coords","_missionEmplacedWeapons","_useRelativePos","_noEmplacedWeapons","_aiDifficultyLevel",["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]]];
+params["_coords",["_missionEmplacedWeapons",[]],["_useRelativePos",true],["_noEmplacedWeapons",0],["_aiDifficultyLevel","red"],["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]]];
 if (_uniforms isEqualTo []) 		then {_uniforms = [_aiDifficultyLevel] call blck_fnc_selectAIUniforms};
 if (_headGear  isEqualTo [])		then {_headGear = [_aiDifficultyLevel] call blck_fnc_selectAIHeadgear};
 if (_vests isEqualTo []) 			then {_vests = [_aiDifficultyLevel] call blck_fnc_selectAIVests};
@@ -20,15 +20,11 @@ if (_backpacks  isEqualTo []) 		then {_backpacks = [_aiDifficultyLevel] call blc
 if (_weaponList  isEqualTo []) 	then {_weaponList = [_aiDifficultyLevel] call blck_fnc_selectAILoadout};
 if (_sideArms isEqualTo []) 		then {[_aiDifficultyLevel] call blck_fnc_selectAISidearms};
 
-#ifdef blck_debugMode
-if (blck_debugLevel >=2) then
+/*
 {
-	private _params = ["_coords","_missionEmplacedWeapons","_useRelativePos","_noEmplacedWeapons","_aiDifficultyLevel","_uniforms","_headGear","_vests","_backpacks","_weaponList","_sideArms"];
-	{
-		diag_log format["blck_fnc_spawnEmplacedWeaponArray:: param %1 | isEqualTo %2 | _forEachIndex %3",_params select _forEachIndex,_this select _forEachIndex, _forEachIndex];
-	}forEach _this;
-};
-#endif
+	diag_log format["_fnc_spawnEmplacedWeaponArray: _this %1 varName %2 = %3",_forEachIndex,_x,_this select _forEachIndex];
+} forEach ["_coords","_missionEmplacedWeapons","_useRelativePos","_noEmplacedWeapons","_aiDifficultyLevel"];
+*/
 
 private["_return","_emplacedWeps","_emplacedAI","_wep","_units","_gunner","_abort","_pos","_mode","_useRelativePos","_useRelativePos"];
 _emplacedWeps = [];
@@ -37,35 +33,17 @@ _units = [];
 _abort = false;
 _pos = [];
 
-#ifdef blck_debugMode
-//diag_log "_fnc_spawnEmplacedWeaponArray start";
-#endif
-
 // Define _missionEmplacedWeapons if not already configured.
 if (_missionEmplacedWeapons isEqualTo []) then
 {
 	_missionEmplacedWeaponPositions = [_coords,_noEmplacedWeapons,35,50] call blck_fnc_findPositionsAlongARadius;
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnEmplacedWeaponArray(38): creating random spawn locations: _missionEmplacedWeaponsPositions = %1", _missionEmplacedWeaponPositions];
-	};
-	#endif
+
 	{
 		_static = selectRandom blck_staticWeapons;
-		//diag_log format["_fnc_spawnEmplacedWeaponArray: creating spawn element [%1,%2]",_static,_x];
 		_missionEmplacedWeapons pushback [_static,_x];
-		//diag_log format["_fnc_spawnEmplacedWeaponArray: _mi updated to %1",_missionEmplacedWeapons];
 	} forEach _missionEmplacedWeaponPositions;
 	_useRelativePos = false;
 };
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 1) then
-{
-	diag_log format["_fnc_spawnEmplacedWeaponArray(52):: starting static weapon spawner with _missionEmplacedWeapons = %1", _missionEmplacedWeapons];
-};
-#endif
 
 {
 	if (_useRelativePos) then 
@@ -75,12 +53,6 @@ if (blck_debugLevel > 1) then
 		_pos = (_x select 1);
 	};
 
-	#ifdef blck_debugMode
-	if (blck_debugLevel > 1) then
-	{
-		diag_log format["_fnc_spawnEmplacedWeaponArray(67)::  _coords = %1 | offset = %2 | final _pos = %3",_coords,_x select 1, _pos];
-	};
-	#endif
 	#define configureWaypoints false
 	#define minAI 1
 	#define maxAI 1
@@ -96,12 +68,7 @@ if (blck_debugLevel > 1) then
 		_empGroup setBehaviour "COMBAT";
 		_empGroup setVariable ["soldierType","emplaced"];
 		[(_x select 1),0.01,0.02,_empGroup,"random","SAD","emplaced"] spawn blck_fnc_setupWaypoints;
-		//if (isNull _empGroup) exitWith {_abort = true};
-		// params["_vehType","_pos",["_clearInventory",true]];
 		private _wep = [(_x select 0),[0,0,0]] call blck_fnc_spawnVehicle;
-		//_wep addMPEventHandler ["MPHit",{[_this] call blck_EH_AIVehicle_HandleDamage}];
-		//_wep addEventHandler["GetOut",{_this remoteExec["blck_EH_vehicleGetOut",2]}];
-		//_wep setVariable["vehicleGroup",_empGroup];
 		_wep setVariable["GRG_vehType","emplaced"];	
 		_wep setPos _pos;
 		_wep setdir (random 359);
@@ -110,12 +77,32 @@ if (blck_debugLevel > 1) then
 		_units = units _empGroup;
 		_gunner = _units select 0;
 		_gunner moveingunner _wep;
-		_gunner setVariable["GRG_vehType","emplaced"];
-		//_gunner setVariable["GRG_vehicle",_wep];
-		//_gunner addEventHandler["GetOutMan",{_this remoteExec["blck_EH_vehcleManGetOut",2]}]; 	
+		_gunner setVariable["GRG_vehType","emplaced"];	
 		_emplacedAI append _units;		
+	} else {
+		_abort = true;
+		_return = grpNull;
+		diag_log format["[blckeagls] <WARNING> createGroup returned grpNull"];
 	};
 } forEach _missionEmplacedWeapons;
-blck_monitoredVehicles append _emplacedWeps;
-_return = [_emplacedWeps,_emplacedAI,_abort];
+if !(_abort) then 
+{
+	blck_monitoredVehicles append _emplacedWeps;
+	 if !(isNil "blck_spawnerMode") then 
+	 {
+		_return = [_emplacedWeps,_emplacedAI];
+	 } else {
+		_return = [_emplacedWeps,_emplacedAI,_abort];
+	 };
+} else {
+	 if !(isNil "blck_spawnerMode") then 
+	 {	
+		{[_x] call blck_fnc_destroyVehicleAndCrew} forEach _emplacedWeps;
+		_return = grpNull;
+	 } else {
+		blck_monitoredVehicles append _emplacedWeps;
+		_return = [_emplacedWeps,_emplacedAI,_abort];		
+	 };
+};
+
 _return

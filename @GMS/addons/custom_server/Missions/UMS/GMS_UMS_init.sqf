@@ -21,6 +21,6 @@ blck_UMS_ActiveDynamicMissions = [];
 #include "GMS_UMS_dynamicMissionList.sqf";
 [] execVM "q\addons\custom_server\Missions\UMS\GMS_UMS_StaticMissions_init.sqf";
 
-diag_log "[blckeagls]  UMS <Initialized>";
+diag_log "[blckeagls] UMS <Initialized>";
  
 

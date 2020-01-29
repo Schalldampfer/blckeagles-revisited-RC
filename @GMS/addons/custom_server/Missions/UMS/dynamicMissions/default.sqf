@@ -8,11 +8,7 @@ private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_marke
 	"_chanceReinforcements","_helipatrol","_endCondition","_markerColor","_markerType","_useMines","_difficulty","_missionCenter",
 	"_missionGroups","_scubaGroupParameters","_vehiclePatrolParameters","_submarinePatrolParameters","_aircraftTypes","_noAirPatrols","_airPatrols",
 	"_vests","_backpacks","_weaponList","_sideArms","_uniforms","_headGear","_chanceHeliPatrol","_noChoppers","_chancePara","_missionHelis","_noPara",
-<<<<<<< Updated upstream
-	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts","_vehiclecrewcount"];
-=======
 	"_chanceLoot","_paraTriggerDistance","_paraLoot","_paraLootCounts"];
->>>>>>> Stashed changes
 params["_missionCenter","_mission"];
 //_mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 //_missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.
@@ -48,6 +44,8 @@ _crateLoot = blck_BoxLoot_Orange;  // You can use a customized _crateLoot config
 	];	
 	*/
 
+_isScubaMission = true;  // This tells the mission spawner to search for a location on the water near a shore rather than on land.
+
 _lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts or one that is predefined but it must follow the following format:
 								  // values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
 								  //  blck_lootCountsOrange = [[6,8],[24,32],[5,10],[25,35],16,1];   // Orange
@@ -76,16 +74,9 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 		//[selectRandom blck_UMS_crates,[0,0,0],_crateLoot, _lootCounts]
 ];  // If this array is empty a single loot chest will be added at the center. If you add items loot chest(s) will be spawned in specific positions.
 
-
-
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
-<<<<<<< Updated upstream
-	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
-	["I_Boat_Transport_01_F",[3,3,0],_crateLoot, _lootCounts]
-=======
 	["I_Boat_Transport_01_F",[3,3,0],0,_crateLoot, _lootCounts]
->>>>>>> Stashed changes
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.
@@ -99,6 +90,7 @@ _missionGroups =
 	// position relative to center, difficulty, no AI, minRadius, maxRadius
 	// [[1,-1,-1],2,3,"red", 5,10]
 ];
+
 _scubaGroupParameters = [
 	// Scuba units.
 	// [[-10.9121,-10.9824,-1.20243],5,7,"Green",5,12],

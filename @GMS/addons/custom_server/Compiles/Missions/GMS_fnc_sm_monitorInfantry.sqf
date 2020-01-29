@@ -77,7 +77,7 @@ for "_i" from 0 to (count blck_sm_Infantry) do
 							blck_sm_Infantry pushBack _element;
 						};
 				case 2: {  // Spawn Group at a Later Time.
-							blck_liveMissionAI pushBack[units _group,diag_tickTime]; // schedule units of group for deletion now.
+							blck_liveMissionAI pushBack[_pos,units _group,diag_tickTime]; // schedule units of group for deletion now.
 							_element set[respawnAt,diag_tickTime + _respawnTime];	
 							_element set[groupSpawned,0];
 							blck_sm_Infantry pushBack _element;

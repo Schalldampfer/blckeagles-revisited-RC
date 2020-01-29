@@ -65,8 +65,8 @@ private _functions = [
 	["blck_fnc_addMissionToQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_addMissionToQue.sqf"],
 	["blck_fnc_updateMissionQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_updateMissionQue.sqf"],
 	["blck_fnc_spawnPendingMissions","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnPendingMissions.sqf"],
-	["blck_fnc_addLiveAItoQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_addLiveAItoQue.sqf"],
-	["blck_fnc_addObjToQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_addObjToQue.sqf"],
+	//["blck_fnc_addLiveAItoQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_addLiveAItoQue.sqf"],
+	//["blck_fnc_addObjToQue","\q\addons\custom_server\Compiles\Missions\GMS_fnc_addObjToQue.sqf"],
 	["blck_fnc_spawnCrate","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnCrate.sqf"],			// Simply spawns a crate of a specified type at a specific position.
 	["blck_fnc_spawnMissionCrates","\q\addons\custom_server\Compiles\Missions\GMS_fnc_spawnMissionCrates.sqf"], 
 	["blck_fnc_cleanupObjects","\q\addons\custom_server\Compiles\Missions\GMS_fnc_cleanUpObjects.sqf"],

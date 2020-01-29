@@ -10,68 +10,52 @@
 */
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-<<<<<<< Updated upstream
-=======
 
 diag_log format["[blckeagls] blck_init_server started"];
 
 // Only run this on a dedicated server
->>>>>>> Stashed changes
 if ( !(isServer) || hasInterface) exitWith{};
 
 // Only run this once 
 if !(isNil "blck_Initialized") exitWith{};
-<<<<<<< Updated upstream
-=======
 
 // This is just a flag so we know if blckeagls has been started or not.
 blck_Initialized = true;
 
->>>>>>> Stashed changes
 // find and set Mod
 blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {""}};
 publicVariable "blck_modType";
 
-<<<<<<< Updated upstream
-=======
 // This block waits for the mod to start but is disabled for now
->>>>>>> Stashed changes
 if ((tolower blck_modType) isEqualto "epoch") then {
 	diag_log "[blckeagls] Waiting until EpochMod is ready...";
-	waituntil {!isnil "EPOCH_SERVER_READY"};
+	//waituntil {!isnil "EPOCH_SERVER_READY"};
+	diag_log "[blckeagls] EpochMod is ready...loading blckeagls";
 };
 if ((toLower blck_modType) isEqualTo "exile") then
 {
 	diag_log "[blckeagls] Waiting until ExileMod is ready ...";
-	waitUntil {!isNil "PublicServerIsLoaded"};
+	//waitUntil {!PublicServerIsLoaded};
+	diag_log "[blckeagls] Exilemod is ready...loading blckeagls";	
 };
 
 // Just some housekeeping for ghost.
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
-diag_log format["[blckeagls] Loading Server Mission System"];
+diag_log format["[blckeagls] build information loaded at %1",diag_tickTime];
 
 
 // compile functions
-call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
-diag_log format["[blckeagls] functions compiled"];
+[] call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_functions.sqf";
+diag_log format["[blckeagls] functions compiled at %1",diag_tickTime];
 
-call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
+
+[] call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
+diag_log format["[blckeagls] blck_configs.sqf run at %1",diag_tickTime];
 waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};
-diag_log format["[blckeagls] blck_useHC = %1 | 	blck_simulationManager = %2 ",blck_useHC,blck_simulationManager];
-diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 blck_debugLevel = %2",blck_debugON,blck_debugLevel];
 
 
 // Load any user-defined specifications or overrides
-<<<<<<< Updated upstream
-call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
-//diag_log format["[blckeagls]  configurations loaded at %1",diag_tickTime];
-
-call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\blck_variables.sqf";
-
-uiSleep 15;
-
-=======
 [] call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 diag_log format["[blckeagls] Custom Configurations Loaded at %1",diag_tickTime];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugLevel = %3",blck_debugON,blck_debugLevel];
@@ -81,7 +65,6 @@ diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugL
 diag_log format["[blckeagls] Variables loaded at %1",diag_tickTime];
 
 // configure dynamic simulation management is this is being used.
->>>>>>> Stashed changes
 if (blck_simulationManager == 2) then 
 {
 	"Group" setDynamicSimulationDistance 1800;
@@ -96,19 +79,11 @@ if (blck_spawnMapAddons) then
 	diag_log "[blckeagls] Map Addons disabled";
 };
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 // find and set Mapcenter and size
-diag_log "[blckeagls] Loading Map-specific information";
 call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\init\GMS_fnc_findWorld.sqf";
+diag_log "[blckeagls] Map-specific information defined";
 
 // set up the lists of available missions for each mission category
-<<<<<<< Updated upstream
-//diag_log "[blckeagls] Loading Mission Lists";
-=======
->>>>>>> Stashed changes
 #include "\q\addons\custom_server\Missions\GMS_missionLists.sqf";
 diag_log "[blckeagls] Mission Lists Loaded Successfully";
 
@@ -149,13 +124,14 @@ if (blck_blacklistTraderCities) then
 
 if (blck_ai_offload_to_client) then 
 {
+	if (blck_useHC) then 
+	{
+		blck_useHC = false;
+		diag_log "[blckeagls] <WARNING> blck_useHC has been diabled to allow offloading to clients";
+	};
+	// Broadcast some code to clients
 	publicVariable "blck_fnc_setNextWaypoint";
-	//publicVariable "blck_fnc_changeToMoveWaypoint";
-	//publicVariable "blck_fnc_changeToSADWaypoint";
 	publicVariable "blck_EH_unitWeaponReloaded";
-<<<<<<< Updated upstream
-};
-=======
 	publicVariable "blck_EH_AIfiredNear";
 	publicVariable "blck_fnc_processAIfiredNear";
 	publicVariable "blck_EH_vehicleGetOut";
@@ -183,7 +159,6 @@ private _airport = ["Airport"] call _fn_setupLocationType;
 
 blck_townLocations = _villages + _cites + _capitals + _marine + _other + _airport;
 diag_log format["_init_server: count blck_townLocations = %1 || blck_townLocations = %2",count blck_townLocations, blck_townLocations];
->>>>>>> Stashed changes
 
 //Start the mission timers
 if (blck_enableOrangeMissions > 0) then
@@ -207,21 +182,14 @@ if (blck_enableBlueMissions > 0) then
 	[_missionListBlue,_pathBlue,"BlueMarker","blue",blck_TMin_Blue,blck_TMax_Blue,blck_enableBlueMissions] call blck_fnc_addMissionToQue;
 };
 
-<<<<<<< Updated upstream
-=======
 
 // Setup a group for AI corpses
 blck_graveyardGroup = createGroup [blck_AI_Side,false];
 blck_graveyardGroup setGroupId ["blck_graveyard"];
 blck_graveyardGroup setVariable ["blck_group",1];
 
->>>>>>> Stashed changes
 //  start the main thread for the mission system which monitors missions running and stuff to be cleaned up
 [] spawn blck_fnc_mainThread;
 blck_pvs_version = blck_versionNumber;
 publicVariable "blck_pvs_version";
-<<<<<<< Updated upstream
-diag_log "[blckeagls] < MISSION SYSTEM FULLY INITIALIZED AND RUNNING >";
-=======
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
->>>>>>> Stashed changes
