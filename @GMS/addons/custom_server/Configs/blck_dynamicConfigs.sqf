@@ -124,13 +124,8 @@ if (toLower(blck_modType) isEqualTo "exile") then
 				case "Backpack": {if !(_x in blck_blacklistedBackpacks) then {_backpacks pushBack _x}else {if (blck_logBlacklistedItems) then {diag_log format["Backpack %1 Excluded: blacklisted Item",_x]}}};
 			};
 		};
-<<<<<<< Updated upstream
-	} else {
-		if (["base",_x] call BIS_fnc_inString) then {diag_log format["_dynamicConfigs: excluding class %1",_x]};
-=======
 	//} else {
 		//if (["base",_x] call BIS_fnc_inString) then {diag_log format["_dynamicConfigs: excluding class %1",_x]};
->>>>>>> Stashed changes
 	};
 } forEach _classnameList;
 

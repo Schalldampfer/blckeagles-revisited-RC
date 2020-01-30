@@ -15,7 +15,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 #ifdef blck_debugMode
-//diag_log "_fnc_changeToMoveWaypoint: blck_debugMode enabled";
+diag_log "_fnc_changeToMoveWaypoint: blck_debugMode enabled";
 #endif
 private["_group","_wp","_wpPos","_dis","_arc","_dir","_newPos","_marker","_center","_minDis","_maxDis"];
 

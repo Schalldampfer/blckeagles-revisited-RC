@@ -73,17 +73,7 @@ if (blck_debugLevel >= 2) then
 [_unit] call blck_fnc_removeGear;
 if (_scuba) then
 {
-<<<<<<< Updated upstream
-	_unit swiminDepth (_pos select 2);
-	#ifdef blck_debugMode
-	if (blck_debugLevel >= 2) then
-	{
-		diag_log format["_fnc_spawnUnit:: -- >> unit depth = %1 and underwater for unit = %2",_pos select 2, underwater _unit];
-	};
-	#endif
-=======
 	_unit swiminDepth (([_pos] call blck_fnc_findWaterDepth) / 2);
->>>>>>> Stashed changes
 };
 
 _skin = "";
@@ -137,7 +127,12 @@ _muzzles = getArray (configFile >> "CfgWeapons" >> _weap >> "WeaponSlotsInfo" >>
 _underbarrel = getArray (configFile >> "CfgWeapons" >> _weap >> "WeaponSlotsInfo" >> "UnderBarrelSlot" >> "compatibleItems");
 _legalOptics = _optics - blck_blacklistedOptics;
 
-_unit addMagazines [selectRandom _ammoChoices, 3];
+if (typeName _ammoChoices isEqualTo "ARRAY" and !(_ammochoices isEqualTo [])) then 
+{
+	_unit addMagazines [selectRandom _ammoChoices, 3];
+} else {
+	diag_log format["<ERROR> _fnc_spawnUnit: _weap = %1 | _ammoChoices = %2 | time = %3",_weap,_ammoChoices,time];
+};
 
 if (random 1 < 0.4) then {_unit addPrimaryWeaponItem (selectRandom _muzzles)};
 if (random 1 < 0.4) then {_unit addPrimaryWeaponItem (selectRandom _legalOptics)};

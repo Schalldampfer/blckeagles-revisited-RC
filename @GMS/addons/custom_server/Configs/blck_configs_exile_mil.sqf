@@ -157,6 +157,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		//"CUP_O_BMP1_TKA""
 	];
 	#endif
+
 	blck_AIPatrolVehicles = 
 	[
 	//"Exile_Car_Offroad_Armed_Guerilla01",

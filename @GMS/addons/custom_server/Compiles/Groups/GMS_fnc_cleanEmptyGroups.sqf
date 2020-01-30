@@ -9,11 +9,16 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-
+//diag_log format["_fnc_cleanEmptyGroups: count blck_monitoredMissionAIGroups = %1",count blck_monitoredMissionAIGroups];
 for "_i" from 0 to ((count blck_monitoredMissionAIGroups) - 1) do
 {
 	if (_i >= (count blck_monitoredMissionAIGroups)) exitWith {};
 	_grp = blck_monitoredMissionAIGroups deleteat 0;
-	if ({alive _x} count units _grp > 0) then {	blck_monitoredMissionAIGroups pushBack _grp};
+	if ({alive _x} count units _grp > 0) then 
+	{
+		blck_monitoredMissionAIGroups pushBack _grp;
+	} else {
+		if !(isNull _grp) then {deleteGroup _grp};
+	};
 };
 

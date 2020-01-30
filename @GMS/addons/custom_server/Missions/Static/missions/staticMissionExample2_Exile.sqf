@@ -86,7 +86,7 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
 						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
 	//["Exile_Car_Van_Box_Guerilla02",[22896.8,16790.1,3.18987],[[0,1,0],[0,0,1]],[true,false], _crateLoot, [[1,2],[4,6],[2,6],[5,8],6,1]],
-	//["Exile_Car_Van_Fuel_Guerilla02",[22919,16782.7,3.18132],[[0,1,0],[0.00129187,0,0.999999]],[true,false],_crateLoot, _lootCounts]
+	["Exile_Car_Van_Fuel_Guerilla02",[22919,16782.7,3.18132],[[0,1,0],[0.00129187,0,0.999999]],[true,false],_crateLoot, _lootCounts]
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
 // You can use the same format used for _missionLootBoxes to add vehicles with/without loot.
@@ -97,8 +97,8 @@ _noEmplacedWeapons = blck_SpawnEmplaced_Red; // Modified as needed; can be a num
 // Note that this value is ignored if you define static weapon positions and types in the array below.
 _missionEmplacedWeapons = [
 	// ["Weapon Class Name", position[x,y,z], AI Skill [blue, red, green, orange],patrol radius [0 for static units], respawn time [seconds]]
-	//["B_G_Mortar_01_F",[22867.3,16809.1,3.17968],"red",0,0],
-	//["B_HMG_01_high_F",[22944.3,16820.5,3.14243],"green",0,0]
+	["B_G_Mortar_01_F",[22867.3,16809.1,3.17968],"red",0,0],
+	["B_HMG_01_high_F",[22944.3,16820.5,3.14243],"green",0,0]
 ]; 								// example [ ["emplacedClassName",[px, py, pz] /* position to spawn weapon */, difficulty /* difficulty of AI manning weapon (blue, red etc)] ];
 								// can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
 								// If the number of possible locations exceeds the number of emplaced weapons specified above then only some of the locations in the array will have emplaced weapons spawned.
@@ -123,7 +123,7 @@ _noVehiclePatrols = blck_SpawnVeh_Red; // Modified as needed; can be a numberic 
 										//  Note that this value is ignored if you define vehicle patrols in the array below.
 _vehiclePatrolParameters = [
 	//// ["Vehicle Class Name", position[x,y,z], AI Skill [blue, red, green, orange],patrol radius [0 for static units], respawn time [seconds]]
-	["Exile_Car_Offroad_Armed_Guerilla02",[22809.5,16699.2,8.78706],"green", 600,90]	
+	["Exile_Car_Offroad_Armed_Guerilla02",[22809.5,16699.2,8.78706],"green", 150,900]	
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
 							// Allows you to define the location of the center of the patrol, vehicle type spawned, radius to patrol, and AI difficulty (blue, red, green etc).
@@ -133,7 +133,7 @@ _noAirPatrols =	blck_noPatrolHelisRed; // You can use one of the pre-defined val
 										//  Note: this value is ignored if you specify air patrols in the array below.
 _airPatrols = [
 	// // ["Aircraft Class Name", position[x,y,z], AI Skill [blue, red, green, orange],patrol radius [0 for static units], respawn time [seconds]]
-	//["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,900]//,
+	["Exile_Chopper_Huey_Armed_Green",[22923.4,16953,3.19],"red",1000,900]//,
 	//[selectRandom _aircraftTypes,[22830.2,16618.1,11.4549],"blue",1000,0]
 ];
 //  Change _useMines to true/false below to enable mission-specific settings.

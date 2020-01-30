@@ -80,9 +80,10 @@
 										// *******************************************************
 										//  Experimental; may cause issues with waypoints 
 										// *******************************************************
-	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
-
 	blck_ai_offload_notifyClient = true;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
+	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated. (Recommended)
+	blck_allow_hunting_behaviors = true;  // Not used yet
+	
 	///////////////////////////////
 	//  Kill message configurations
 	// These determine whether and when messages are sent to players regarding AI Kills or illegal kills that might damage a vehicle.
@@ -228,8 +229,12 @@
 	////////////////////
 	
 	// Maximum number of missions shown on the map at any one time.
+	#ifdef GRGserver
+	blck_maxSpawnedMissions = 15;
+	#else
 	// Change this value to reduce the number of spawned missions at any one time.
 	blck_maxSpawnedMissions = 5;
+	#endif
 	
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
@@ -237,6 +242,12 @@
 	blck_enableRedMissions = 2;
 	blck_enableBlueMissions = 1;
 	blck_numberUnderwaterDynamicMissions = 0;  // Values from -1 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
+
+	#ifdef GRGserver
+	blck_enableHunterMissions = 1;
+	blck_enableScoutsMissions = 1;
+	blck_maxcrashsites = 3;
+	#endif
 
 	////////////////////
 	// MISSION TIMERS
@@ -249,12 +260,24 @@
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
 	
+	#ifdef GRGserver
+	blck_TMin_Hunter = 120;
+	blck_TMin_Scouts = 115;
+	blck_TMin_Crashes = 115;
+	#endif
+	
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
 	blck_TMax_Green = 300;
 	blck_TMax_Blue = 200;
 	blck_TMax_Red = 250;
 	blck_TMax_UMS = 400;
+
+	#ifdef GRGserver
+	blck_TMax_Hunter = 200;
+	blck_TMax_Scouts = 200;
+	blck_TMax_Crashes = 200;
+	#endif
 	
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
@@ -508,7 +531,6 @@
 		"Land_Boat_01_abandoned_blue_F"
 	];
 	
-	#ifdef GRGserver
 	blck_AIAlertDistance = [250,450,650,800];  //  Radius within which AI will be notified of enemy activity. Depricated as a group-sed system is used now. The group is informed of the enemy location when a group member is hit or killed.
 	//blck_AIAlertDistance = [150,225,400,500];
 	// How precisely player locations will be revealed to AI after an AI kill
@@ -560,7 +582,6 @@
 	blck_maxMoneyGreen = 20;
 	blck_maxMoneyRed = 15;
 	blck_maxMoneyBlue = 10;	
-	#endif
 	
 	if (toLower(blck_modType) isEqualTo "epoch") then
 	{

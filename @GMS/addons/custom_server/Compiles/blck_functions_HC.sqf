@@ -166,7 +166,7 @@ private _functions = [
 	["GMS_fnc_revealVehicleToUnits","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_revealVehicleToUnits.sqf"],	
 	//["GMS_fnc_handleEmptyStaticWeapon","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleEmptyStaticWeapon.sqf"],
 	*/
-	["blck_EH_vehicleGetOut","\q\addons\custom_server\Compiles\Vehicles\GMS_EH_vehicleGetOut.sqf"],
+	//["blck_EH_vehicleGetOut","\q\addons\custom_server\Compiles\Vehicles\GMS_EH_vehicleGetOut.sqf"],
 	["blck_fnc_handleVehicleGetOut","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_handleVehicleGetOut.sqf"],
 	/*
 	["blck_fnc_checkForEmptyVehicle","\q\addons\custom_server\Compiles\Vehicles\GMS_fnc_checkForEmptyVehicle.sqf"],		

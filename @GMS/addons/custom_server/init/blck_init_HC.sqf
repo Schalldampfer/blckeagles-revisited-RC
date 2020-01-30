@@ -20,5 +20,14 @@ call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Compiles\bl
 //call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
 //call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 diag_log format["[blckeagls] Loading Headless Client Version %2 |  Build Date %1 | Build %3 | loaded in %4 seconds",blck_buildDate,blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime];
-
+while {true} do 
+{
+	uiSleep 60;
+	private _localGroups = allGroups select {local _x};
+	private _localUnits = 0;
+	{
+		_localUnits = _localUnits + count(units _x);
+	} forEach _localGroups;
+	diag_log format["[blckeagls] HC Logging: Groups offloaded = %1 | Units offloaded = %2 | fps = %3 | time = %4 ",_localGroups,_localUnits,diag_FPS,diag_tickTime];
+};
 

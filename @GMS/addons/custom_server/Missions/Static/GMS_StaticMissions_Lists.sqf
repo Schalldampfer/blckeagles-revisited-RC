@@ -15,12 +15,6 @@ private ["_staticMissions"];
 
 _staticMissions = [
 	// [mod (Epoch, Exile), map (Altis, Tanoa etc), mission center, eg [10445,2014,0], filename.sqf (name of static mission template for that mission)];
-<<<<<<< Updated upstream
-	//["Epoch","Altis","template.sqf"],
-	//["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
-	//["Exile","Altis","staticMissionExample2_Exile.sqf"],
-	["newmission","newmap","somescript.sqf"]
-=======
 	["Epoch","Altis","template.sqf"],
 	["Epoch","Altis","staticMissionExample2_Epoch.sqf"],
 	//["Epoch","Altis","destroyer.sqf"],
@@ -31,7 +25,6 @@ _staticMissions = [
 	["Exile","Altis","chelnosiStatic.sqf"],
 	//#endif
 	["newmission","newmap","somescript.sqf"]  //  Here just so you dont have to worry about all those commas
->>>>>>> Stashed changes
 ];
 
 diag_log "[blckeagls] GMS_StaticMissions_Lists.sqf <Loaded>";

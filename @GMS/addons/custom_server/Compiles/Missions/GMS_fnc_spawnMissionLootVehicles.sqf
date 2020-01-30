@@ -12,27 +12,27 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_coords","_missionLootVehicles",["_loadCrateTiming","atMissionSpawn"],["_lock",0]];
-if (count _coords == 2) then {_coords pushBack 0};
+if (count _coords isEqualTo 2) then {_coords pushBack 0};
 private _vehs = [];
 {
-	//diag_log format["spawnMissionCVehicles.sqf _x = %1",_x];
-	_x params["_vehType","_vehOffset","_lootArray","_lootCounts",["_dir",0]];
-	//diag_log format["spawnMissionCVehicles: _vehType = %1 | _vehOffset = %2 | _lootArray = %3 | _lootCounts = %4",_vehType,_vehOffset,_lootArray,_lootCounts];
+	_x params["_vehType","_vehOffset",["_dir",0],"_lootArray","_lootCounts"];
+	//diag_log format["spawnMissionCVehicles: _vehType = %1 | _vehOffset = %2 | _lootCounts = %4 | _dir %5 | _lock %6 | _lootArray = %3 ",_vehType,_vehOffset,_lootArray,_lootCounts,_dir,_lock];
 	_pos = _coords vectorAdd _vehOffset;
 	_veh = [_vehType, _pos] call blck_fnc_spawnVehicle;
-	_veh setDir _dir;
-	//[_veh] call blck_fnc_emptyObject;
-	//_veh setVehicleLock "UNLOCKED";
+	if (typeName _dir isEqualTo "SCALAR") then 
+	{
+		_veh setDir _dir;
+	};
+	if (typeName _dir isEqualTo "ARRAY") then
+	{
+		_veh setVectorDirAndUp _dir;
+	};
 	_veh lock _lock;
 	if (_loadCrateTiming isEqualTo "atMissionSpawn") then
 	{
 		//diag_log format["blck_fnc_spawnMissionLootVehicles::-> loading loot at mission spawn for veh %1",_x];
 		[_veh,_lootArray,_lootCounts] call blck_fnc_fillBoxes;
 		_veh setVariable["lootLoaded",true];
-	}
-	else
-	{
-		//diag_log format["blck_fnc_spawnMissionLootVehicles::-> not loading veh loot at this time for veh %1",_x];
 	};
 	_vehs pushback _veh;
 }forEach _missionLootVehicles;

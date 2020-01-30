@@ -1,6 +1,3 @@
-// self explanatory. Checks to see if the position is in either a black listed location or near a player spawn. 
-// As written this relies on BIS_fnc_findSafePos to ensure that the spawn point is not on water or an excessively steep slope. 
-// 
 /*
 	for ghostridergaming
 	By Ghostrider [GRG]
@@ -13,123 +10,71 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
+//
+if (isNil "blck_locationBlackList") then {blck_locationBlackList = []};
+private _blacklistedLocations =  blck_locationBlackList;
 
-private["_findNew","_tries","_coords","_dist","_xpos","_ypos","_newPos","_townPos","_pole"];
-private["_minDistFromBases","_minDistFromMission","_minDistanceFromTowns","_minSistanceFromPlayers","_weightBlckList","_weightBases","_weightMissions","_weightTowns","_weightPlayers"];
-_findNew = true;
-_tries = 0;
+//diag_log format["_fnc_findsafeposn: count blck_recentMissionCoords = %1 | blck_recentMissionCoords = %2", count blck_recentMissionCoords, blck_recentMissionCoords];
 
-_minDistFromBases = blck_minDistanceToBases;
-_minDistFromMission = blck_MinDistanceFromMission;
-_minDistanceFromTowns = blck_minDistanceFromTowns;
-_minSistanceFromPlayers = blck_minDistanceToPlayer;
-_weightBlckList = 0.95;
-_weightBases = 0.9;
-_weightMissions = 0.8;
-_weightTowns = 0.7;
-_weightPlayers = 0.6;
+for '_i' from 1 to count blck_recentMissionCoords do {
+	private _loc = blck_recentMissionCoords deleteAt 0;
+	//diag_log format["BIS_fnc_findSafePos:  _loc = %1",_loc];
+	if (_loc select 1 < diag_tickTime) then 
+	{
+		//diag_log "location still blacklisted";
+		blck_recentMissionCoords pushBack _loc;
+		_blacklistedLocations pushBack [_loc select 0, 500];
+	};
+};
+
+//diag_log format["_fnc_findsafeposn: count blck_ActiveMissionCoords = %1 || blck_ActiveMissionCoords = %2 ",count blck_ActiveMissionCoords,blck_ActiveMissionCoords];
+// Check coordinates of active missions so we dont spawn 2 right on top of each other 
+{
+	//diag_log format["_fnc_findSafePosn: search activeMissioncoords, _x = %1",_x];
+	_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission];
+} forEach blck_ActiveMissionCoords;
+
+// Check for bases every time this function is called so that we account for any new bases started during that server uptime period.
+private "_pole";
 if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
 if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
-_recentMissionCoords = +blck_recentMissionCoords;
-{
-	if (diag_tickTime > ((_x select 1) + 1200)) then // if the prior mission was completed more than 20 min ago then delete it from the list and ignore the check for this location.
-	{
-		blck_recentMissionCoords deleteAt (blck_recentMissionCoords find _x);
-	};
-}forEach _recentMissionCoords;
+private _bases = nearestObjects[blck_mapCenter, [_pole], blck_mapRange + 5000];
 
-while {_findNew} do
+//diag_log format["_fnc_findSafePosn: count _bases = %1 | _bases = %2", count _bases, _bases];
 {
-	_findNew = false;
-	_coords = [blck_mapCenter,0,blck_mapRange,30,0,5,0] call BIS_fnc_findSafePos;
-	//diag_log format["_fnc_findSafePosn: _coords = %1 | _tries = %2",_coords,_tries];
-	{
-		if ( ((_x select 0) distance2D _coords) < (_x select 1)) exitWith
-		{
-			_findNew = true;
-		};
-	} forEach blck_locationBlackList;
-	if !(_findNew) then
-	{
-	{
-		if ((_x distance2D _coords) < _minDistFromMission) then {
-			_findNew = true;
-		};
-		}forEach blck_heliCrashSites;	
-	};	
-	if !(_findNew) then
-	{
-		{
-			if ( (_x distance2D _coords) < _minDistFromMission) exitWith
-			{
-				_FindNew = true;
-			};
-		} forEach blck_ActiveMissionCoords;	
-	};
-	if !(_findNew) then
+	_blacklistedLocations pushBack [getPosATL _x,blck_minDistanceToBases];
+} forEach _bases;
+
+//diag_log format["_fnc_findSafePosn: count blck_townLocations = %1",count blck_townLocations];
+{
+	_blacklistedLocations pushBack [locationPosition _x,blck_minDistanceFromTowns];
+} forEach blck_townLocations;
+
+//diag_log format["_fnc_findSafePosn: count allPlayers = %1",count allPlayers];
+{
+	_blacklistedLocations pushBack [getPosATL _x,blck_TriggerDistance + 300];
+} forEach allPlayers;
+
+private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+
+//diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
+if (_coords isEqualTo []) then 
+{
+	for "_index" from 1 to 100 do 
 	{
 		{
-			if ((_x distance2D _coords) < blck_minDistanceToBases) then
-			{
-				_findNew = true;
-			};
-		}forEach  nearestObjects[blck_mapCenter, [_pole], blck_minDistanceToBases];		
-	};		
-	if !(_findNew) then
-	{
-		{
-			_townPos = [((locationPosition _x) select 0), ((locationPosition _x) select 1), 0];
-			if (_townPos distance2D _coords < blck_minDistanceFromTowns) exitWith {
-				_findNew = true;
-			};
-		} forEach blck_townLocations;	
-	};		
-	if !(_findNew) then
-	{
-		{
-			if (isPlayer _x && (_x distance2D _coords) < blck_minDistanceToPlayer) then 
-			{
-					_findNew = true;
-			};
-		}forEach playableUnits;	
-	};
-	if !(_findNew) then
-	{
-		// test for water nearby
-		_dist = 50;
-		for [{_i=0}, {_i<360}, {_i=_i+20}] do
-		{
-			_xpos = (_coords select 0) + sin (_i) * _dist;
-			_ypos = (_coords select 1) + cos (_i) * _dist;
-			_newPos = [_xpos,_ypos,0];
-			if (surfaceIsWater _newPos) then
-			{
-				_findNew = true;
-				_i = 361;
-			};
-		};
-	};
-	if (_findNew) then
-	{
-		if (_tries in [3,6,9,12,15,18,21]) then
-		{
-			_minDistFromMission = _minDistFromMission * _weightMissions;
-			_minDistFromBases = _minDistFromBases * _weightBases;
-			_minSistanceFromPlayers = _minSistanceFromPlayers * _minSistanceFromPlayers;
-			_minDistanceFromTowns = _minDistanceFromTowns * _weightTowns;
-		};
-		if (_tries > 25) then 
-		{
-			_findNew = false;
-		};
+			_x set[1, (_x select 1) * 0.8];
+			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
+		} forEach _blacklistedLocations;
+		_coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
+		if !(_coords isEqualTo []) exitWith {};
+		uisleep 1;
 	};
 };
-if ((count _coords) > 2) then 
-{
-	private["_temp"];
-	_temp = [_coords select 0, _coords select 1];
-	_coords = _temp;
-};
-_coords;
+
+//diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
+_coords
+
 
 

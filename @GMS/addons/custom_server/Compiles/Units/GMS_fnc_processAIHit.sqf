@@ -15,7 +15,7 @@ if !(isServer) exitWith {};
 private ["_unit","_instigator","_group","_wp"];
 _unit = _this select 0 select 0;
 _instigator = _this select 0 select 3;
-diag_log format["_fnc_processAIHit:(19): _units = %1 and _instigator = %2 units damage is %3",_unit,_instigator, damage _unit];
+//diag_log format["_fnc_processAIHit:(19): _units = %1 and _instigator = %2 units damage is %3",_unit,_instigator, damage _unit];
 
 //diag_log format["_fnc_processAIHit: evaluating case of ai not alive"];
 if (!(alive _unit)) exitWith {
