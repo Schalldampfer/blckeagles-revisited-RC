@@ -6,7 +6,7 @@ Installation:
 2) Unpack your mission pbo (epoch.Altis.pbo or Exile.Altis.pbo). 
 3) Open the folder containing the unpacked mission.
 4) Copy the debug folder from your download (MPMissions\epoch.Altis or MPMissions\exile.Altis)
-5) Merge the line in MPMissions\epoch.Altis\init.sqf with your init.sqf, or use the one provided if you do not have one.
+5) Merge the line in MPMissions\epoch.Altis\init.sqf with your init.sqf, or use the one provided if you do not have an init.sqf in your mission.
 6) Adjust settings for messages shown by the client by changing values in \debug\blckclient.sqf to suit your needs.
   (see blckClient.sqf for details)
 7) Repack your mission.pbo.
