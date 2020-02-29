@@ -8,6 +8,27 @@ A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve cod
 
 Significant Changes:
 =====================
+6.96 Build 197
+Sorted some wisses with the dynamic UMS spawner. 
+Removing debugging info
+TODO: come back to grpNull detection 
+
+6092 Build 196
+sorted issues with markers 
+and added new findSafeLocation 
+
+6.92 Build 194
+Added _noAIGroups to parameter list for _spawnMissionAI
+Other minor changes to delete logging.
+
+6.92 Build 193
+Updates to scripts to see if player(s) are near locations.
+Updates to scripts to delete alive and dead AI.
+Updates to simulation managers.
+
+6.92 Guild 192
+All actions on dead AI are handled throug units blck_graveyardGroup 
+All use of blck_deadAI has been deleted.
 
 6.94 Build 181 
 1. code and logic for generating waypoints updated.
