@@ -319,19 +319,6 @@ if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles
 	diag_log format["_fnc_missionSpawner (327)  _temp = %1",_temp];
 	_temp params ["_patrolVehicles","_units","_abort"];
 	_blck_AllMissionAI append _units; 
-	/*
-	if (typeName _temp isEqualTo "ARRAY") then
-	{
-		_abort = _temp select 2;
-	} else {
-		_abort = true;
-	};
-	if !(_abort) then
-	{
-		_patrolVehicles = _temp select 0;
-		_blck_AllMissionAI append (_temp select 1);
-	};
-	*/
 };
 
 #ifdef blck_debugMode
@@ -589,6 +576,7 @@ if (_secureAsset && (alive _assetSpawned)) then
 };
 if (_secureAsset && !(alive _assetSpawned)) then
 {
+		diag_log format["_fnc_missionSpawner: irregular mission end, asset killed"];
 	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_assetKilledMsg,_blck_localMissionMarker,_coords,_markerClass, -1] call blck_fnc_endMission;
 };
 

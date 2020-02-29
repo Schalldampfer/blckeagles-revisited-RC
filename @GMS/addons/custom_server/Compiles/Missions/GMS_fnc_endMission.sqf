@@ -41,7 +41,11 @@ _fn_missionCleanup = {
 //////////////////////////////////////////////////////////////////////
 
 	params["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission",["_endCondition",0],["_vehicles",[]],["_isScubaMission",false]];
-
+	private _param = ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission","_endCondition","_vehicles","_isScubaMission"];
+	{
+		diag_log format["_fnc_endMission: param %1 = %2",_param select _forEachIndex,_x];
+	} forEach _this;
+	
 	if (_endCondition > 0) exitWith  // Mision aborted for some reason
 	{
 		[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;
@@ -77,12 +81,13 @@ _fn_missionCleanup = {
 		// Using a variable attached to the crate rather than the global setting to be sure we do not fill a crate twice.
 		// the "lootLoaded" loaded should be set to true by the crate filler script so we can use that for our check.
 		{
-			if !(_x getVariable["lootLoaded",false]) then
+			if !(_x getVariable["lootLoaded",false] || _endCondition == 1) then // dont load loot if the asset was killed
 			{
 				// _crateLoot,_lootCounts are defined above and carry the loot table to be used and the number of items of each category to load
 				[_x,_crateLoot,_lootCounts] call blck_fnc_fillBoxes;
 			};
 		}forEach _crates;
+
 		{
 			private ["_v","_posnVeh"];
 			_posnVeh = blck_monitoredVehicles find _x;  // returns -1 if the vehicle is not in the array else returns 0-(count blck_monitoredVehicles -1)

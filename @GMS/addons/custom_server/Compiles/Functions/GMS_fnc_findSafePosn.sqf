@@ -23,7 +23,7 @@ for '_i' from 1 to count blck_recentMissionCoords do {
 	{
 		//diag_log "location still blacklisted";
 		blck_recentMissionCoords pushBack _loc;
-		_blacklistedLocations pushBack [_loc select 0, 500];
+		_blacklistedLocations pushBack [_loc select 0, 300];
 	};
 };
 
@@ -38,7 +38,7 @@ for '_i' from 1 to count blck_recentMissionCoords do {
 private "_pole";
 if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
 if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
-private _bases = nearestObjects[blck_mapCenter, [_pole], blck_mapRange + 5000];
+private _bases = nearestObjects[blck_mapCenter, [_pole], blck_mapRange + 25000];
 
 //diag_log format["_fnc_findSafePosn: count _bases = %1 | _bases = %2", count _bases, _bases];
 {
@@ -52,7 +52,7 @@ private _bases = nearestObjects[blck_mapCenter, [_pole], blck_mapRange + 5000];
 
 //diag_log format["_fnc_findSafePosn: count allPlayers = %1",count allPlayers];
 {
-	_blacklistedLocations pushBack [getPosATL _x,blck_TriggerDistance + 300];
+	_blacklistedLocations pushBack [getPosATL _x,blck_minDistanceToPlayer];
 } forEach allPlayers;
 
 private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
