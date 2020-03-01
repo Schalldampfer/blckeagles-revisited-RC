@@ -576,7 +576,7 @@ if (_secureAsset && (alive _assetSpawned)) then
 };
 if (_secureAsset && !(alive _assetSpawned)) then
 {
-		diag_log format["_fnc_missionSpawner: irregular mission end, asset killed"];
+	//diag_log format["_fnc_missionSpawner: irregular mission end, asset killed"];
 	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_assetKilledMsg,_blck_localMissionMarker,_coords,_markerClass, -1] call blck_fnc_endMission;
 };
 

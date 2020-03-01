@@ -42,10 +42,11 @@ _fn_missionCleanup = {
 
 	params["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission",["_endCondition",0],["_vehicles",[]],["_isScubaMission",false]];
 	private _param = ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission","_endCondition","_vehicles","_isScubaMission"];
+	/*
 	{
 		diag_log format["_fnc_endMission: param %1 = %2",_param select _forEachIndex,_x];
 	} forEach _this;
-	
+	*/
 	if (_endCondition > 0) exitWith  // Mision aborted for some reason
 	{
 		[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;
