@@ -9,10 +9,12 @@ This addon includes several modules which will be discussed in the following ord
 1. Core Mission System.
 
 The core mission system is configured to run 5 different classes of mission (Blue, Red, Green and Orange, and underwater/surface) simultaneously.
-Reducing value for 	...\custom_serer\configs\blck_configs.sqf\blck_maxSpawnedMissions will reduce the number of missions running on the server at any one time.
+Reducing value for 	...\custom_serer\configs\blck_configs.sqf\blck_maxSpawnedMissions will reduce the total number of missions running on the server at any one time.
 
 General settings include:
-	the ability set whether and how messages to players regarding missions spawned or completed are displayed,
+
+	the ability set whether and how messages to players regarding missions spawned or completed are displayed (settings are defined on the client/mission.pbo)
+
 	whether and how messages to players regarding killed AI are displayed
 	Number of AI groups;
 	Number of AI per group;
@@ -43,11 +45,11 @@ The missions themselves are spawned from templates which can be used to define m
  the messages sent to players; 
  Text used to label the mark
  Type of marker used to label the map
- Number of AI groups and number of AI and, if desired their spawn locations.
+ Number of AI groups and number of AI or, alternatively desired their spawn locations.
  (optional) loot chest positions and loot to be loaded
  Type and location of any objects, buildings, or other entities that give the mission character
  Number and (optional) locations of static weapons
- Number, type, and spawn location(s) of vehicle patrols
+ Number, type, and spawn location(s) of vehicle patrols which can be spawned randomly or in defined locatoins.
  
  To create and run new missions simply: 
 	layout an AI base in the Arma 3 editor, 
@@ -65,10 +67,9 @@ You can shorten the time after which bodies or scenery are deleted if you believ
 
 2. Static Mission System.
 
-Additional Modules Available:
-
 Suport is provided for groups of AI, vehicles, aircraft, static weapons, subs, surface vessels.
 The positions of these are defined by templates (see custom_server\Missions\Static\Missions folder for examples) or by calls to functions to add these elements.
+The patrol radius, number of respawns and respawn timer can be set in the arrays that define these AI assets.
 The recommended way to place static units of various types is to lay out their positions in the editor then export the data using the tools provided to create a new mission with these definitions.
 Alternatively you can set up calls to the functions that initialize spawns for these units in blck_custom_configs.sqf or an include that is incorporated into it.
 See the directions for creating static missions for more information.
