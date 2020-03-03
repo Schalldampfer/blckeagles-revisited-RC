@@ -9,7 +9,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private["_mapCenter","_waterPos","_priorUMSpositions"];
+private["_mapCenter","_waterPos","_priorUMSpositions","_maxDistance"];
 
 switch (toLower worldName) do 
 {
