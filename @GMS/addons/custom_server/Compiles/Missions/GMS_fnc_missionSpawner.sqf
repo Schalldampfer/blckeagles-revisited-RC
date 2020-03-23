@@ -16,7 +16,8 @@
 private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_blck_localMissionMarker","_assetKilledMsg","_enemyLeaderConfig",
 		"_AI_Vehicles","_timeOut","_aiDifficultyLevel","_missionPatrolVehicles","_missionGroups","_loadCratesTiming","_spawnCratesTiming","_assetSpawned","_hostageConfig",
 		"_chanceHeliPatrol","_noPara","_chanceLoot","_heliCrew","_loadCratesTiming","_useMines","_blck_AllMissionAI","_delayTime","_groupPatrolRadius",
-		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount"];
+		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount",
+		"_defaultMissionLocations"];
 		
 params["_coords","_markerClass","_aiDifficultyLevel"];
 
@@ -73,6 +74,13 @@ if (isNil "_lootCratePositions") then {_lootCratePositions = []};
 if (isNil "_isScubaMission") then {_isScubaMission = false};
 if (isNil "_missionLootBoxes") then {_missionLootBoxes = []};
 private "_temp";
+
+// If the mission is to be spawned at pre-defined coordinates then select one from the array that defines them 
+// otherwise use the _coords that were passed to the script in _this
+if !(_defaultMissionLocations isEqualTo []) then 
+{
+	_coords = selectRandom _defaultMissionLocations;
+};
 
 _objects = [];
 _mines = [];

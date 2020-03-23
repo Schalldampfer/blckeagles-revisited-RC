@@ -48,7 +48,7 @@ if (blck_modType isEqualTo "Epoch") then
 	};
 	//diag_log format["_fnc_spawnUnit: for unit %1 Crypto set to %2",_unit,_unit getVariable "Crypto"];	
 };
-if (blck_modType isEqualTo "Exile") then
+if !(blck_modType isEqualTo "Epoch") then
 {
 	"i_g_soldier_unarmed_f" createUnit [_pos, _aiGroup, "_unit = this", blck_baseSkill, "COLONEL"];
 	switch(_skillLevel) do
@@ -64,12 +64,7 @@ if (blck_modType isEqualTo "Exile") then
 private _tempPos = _pos findEmptyPosition [0.1, 3, typeOf _unit];
 //diag_log format["_fnc_spawnUnit: _pos = %1 | _tempPos = %2",_pos,_tempPos];
 if !(_tempPos isEqualTo []) then {_unit setPos _tempPos};
-#ifdef blck_debugMode
-if (blck_debugLevel >= 2) then
-{
-	diag_log format["_fnc_spawnUnit::-->> unit spawned = %1",_unit];
-};
-#endif
+
 [_unit] call blck_fnc_removeGear;
 if (_scuba) then
 {
@@ -78,12 +73,7 @@ if (_scuba) then
 
 _skin = "";
 _counter = 1;
-#ifdef blck_debugMode
-if (blck_debugLevel >= 2) then
-{
-	diag_log format["_fnc_spawnUnit: _uniforms = %1",_uniforms];
-};
-#endif
+
 while {_skin isEqualTo "" && _counter < 10} do
 {
 	_unit forceAddUniform (selectRandom _uniforms);

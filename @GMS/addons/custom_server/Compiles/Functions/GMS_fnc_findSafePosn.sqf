@@ -35,10 +35,10 @@ for '_i' from 1 to count blck_recentMissionCoords do {
 } forEach blck_ActiveMissionCoords;
 
 // Check for bases every time this function is called so that we account for any new bases started during that server uptime period.
-private "_pole";
-if (blck_modType isEqualTo "Epoch") then {_pole = "PlotPole_EPOCH"};
-if (blck_modType isEqualTo "Exile") then {_pole = "Exile_Construction_Flag_Static"};
-private _bases = nearestObjects[blck_mapCenter, [_pole], blck_mapRange + 25000];
+private _bases = [];
+if (blck_modType isEqualTo "Epoch") then {_bases = nearestObjects[blck_mapCenter, ["PlotPole_EPOCH"], blck_mapRange + 25000]};
+if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter, ["Exile_Construction_Flag_Static"], blck_mapRange + 25000]};
+
 
 //diag_log format["_fnc_findSafePosn: count _bases = %1 | _bases = %2", count _bases, _bases];
 {

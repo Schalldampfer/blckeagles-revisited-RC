@@ -16,22 +16,6 @@
 //diag_log "Loading Static Loot Container Spawning System for Epoch";
 _lootBoxes = 
 [
-				#ifdef GRG_TestServer
-				["altis","APTrader",10,
-					[
-					[[14658.1, 16790.9, 18.3795],0,false,false],
-					[[14660, 16788.5, 18.3795],0,false,false],
-					[[17518.4,13260.7,12.7337],0,false,false],
-					[[17528.1,13270.2,12.725],0,false,false],
-					[[17537.4,13278.2,12.706],0,false,false],
-					[[17547.9,13286,12.6121],0,false,false],
-					[[17599.5,13240.5,13.327],0,false,false],
-					[[17593.1,13231.9,13.4375],0,false,false],
-					[[17586.5,13224.6,13.5832],0,false,false],
-					[[17580.5,13217.8,13.6708],0,false,false]					
-					]
-				],
-				#endif
 
 				// Ferres
 				/*

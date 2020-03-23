@@ -35,10 +35,6 @@ if (count _uniforms > 0) then
 _posn = (_coords vectorAdd _posn);
 _char setPos [_posn select 0, _posn select 1, 0];
 
-#ifdef blck_debugMode
-diag_log format["_fnc_spawnchar  _char = %1 at Position = %2 | _coords = %3",_char, getPos _char,_coords];
-#endif
-
 if (blck_modType isEqualTo "Epoch") then {_char setVariable ["LAST_CHECK",28800,true]};
 _char setPos (_posn);
 _char setDir (_dir);
@@ -52,5 +48,5 @@ _char allowDamage true;
 _char enableSimulationGlobal true;
 _char setVariable["GMSAnimations",_animations,true];
 _char setUnitPos "UP";
-//diag_log format["_fnc_spawncharacter: _char = %1",_char];
+
 _char

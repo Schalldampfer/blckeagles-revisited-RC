@@ -227,26 +227,13 @@
 	// Enable / Disable Missions
 	////////////////////
 	
-	// Maximum number of missions shown on the map at any one time.
-	#ifdef GRGserver
-	blck_maxSpawnedMissions = 15;
-	#else
-	// Change this value to reduce the number of spawned missions at any one time.
-	blck_maxSpawnedMissions = 4;
-	#endif
-	
+
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
 	blck_enableGreenMissions = 2;
 	blck_enableRedMissions = 2;
 	blck_enableBlueMissions = 2;
 	blck_numberUnderwaterDynamicMissions = 3;  // Values from -1 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
-
-	#ifdef GRGserver
-	blck_enableHunterMissions = 1;
-	blck_enableScoutsMissions = 1;
-	blck_maxcrashsites = 3;
-	#endif
 
 	////////////////////
 	// MISSION TIMERS
@@ -259,12 +246,7 @@
 	blck_TMin_Red = 150;
 	blck_TMin_UMS = 180;	
 	
-	#ifdef GRGserver
-	blck_TMin_Hunter = 120;
-	blck_TMin_Scouts = 115;
-	blck_TMin_Crashes = 115;
-	#endif
-	
+
 	//Maximum Spawn time between missions in seconds
 	blck_TMax_Orange = 360;
 	blck_TMax_Green = 300;
@@ -272,12 +254,7 @@
 	blck_TMax_Red = 250;
 	blck_TMax_UMS = 400;
 
-	#ifdef GRGserver
-	blck_TMax_Hunter = 200;
-	blck_TMax_Scouts = 200;
-	blck_TMax_Crashes = 200;
-	#endif
-	
+
 	///////////////////////////////
 	// AI VEHICLE PATROL PARAMETERS
 	///////////////////////////////	
