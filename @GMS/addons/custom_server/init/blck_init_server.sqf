@@ -23,7 +23,11 @@ if !(isNil "blck_Initialized") exitWith{};
 blck_Initialized = true;
 
 // find and set Mod
-blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {"default"}};
+blck_modType = "";
+if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {blck_modType = "Exile"};
+if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {blck_modType = "Epoch"}; 
+if (!(blck_modType in ["Exile","Epoch"] )) then {blck_modType = "default"};
+diag_log format["[blckeagls] blck_modType = %1",blck_modtype];
 publicVariable "blck_modType";
 
 // This block waits for the mod to start but is disabled for now
@@ -38,7 +42,10 @@ if ((toLower blck_modType) isEqualTo "exile") then
 	//waitUntil {!PublicServerIsLoaded};
 	diag_log "[blckeagls] Exilemod is ready...loading blckeagls";	
 };
-
+if ((toLower blck_modType) isEqualTo "default") then 
+{
+	diag_log "[blckeagls] Configuring Mission System for Default Settings...";
+};
 // Just some housekeeping for ghost.
 private _blck_loadingStartTime = diag_tickTime;
 #include "\q\addons\custom_server\init\build.sqf";
@@ -52,11 +59,11 @@ diag_log format["[blckeagls] functions compiled at %1",diag_tickTime];
 
 [] call compile preprocessfilelinenumbers "\q\addons\custom_server\Configs\blck_configs.sqf";
 diag_log format["[blckeagls] blck_configs.sqf run at %1",diag_tickTime];
-waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn")};
+waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil "blck_debugOn") && (!isNil "blck_AI_Side")};
 uiSleep 10;
 
 // Load any user-defined specifications or overrides
-[] call compileFinal preprocessFileLineNumbers "\q\addons\custom_server\Configs\blck_custom_config.sqf";
+[] execVM "\q\addons\custom_server\Configs\blck_custom_config.sqf";
 diag_log format["[blckeagls] Custom Configurations Loaded at %1",diag_tickTime];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugLevel = %3",blck_debugON,blck_debugLevel];
 
@@ -218,15 +225,16 @@ blck_graveyardGroup setVariable ["blck_group",1];
 [] spawn blck_fnc_mainThread;
 blck_pvs_version = blck_versionNumber;
 publicVariable "blck_pvs_version";
-diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
+diag_log format["[blckeagls] version %1 Build %2 Date %4 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime,blck_buildDate]; //,blck_modType];
 
 if (blck_debugOn || (blck_debugLevel >= 1)) then 
 {
 	private _pos = [] call blck_fnc_findSafePosn;
 	private _root = "";
-	private _path = "Orange";
+	private _path = "default";
 	private _mission = "bunkerMission";
 	private _compiledMission = compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\%1\%2.sqf",_path,_mission];
 	diag_log format["[blckeagls] mission test sequence run for mission path %1 name %2",_path,_mission];
-	[_pos,"testMarkerGRG","blue"] call _compiledMission;
+	[_pos,"testMarkerGRG","blue"] spawn _compiledMission;
+	diag_log format["testmarker mission spawned at %1",diag_tickTime];
 };

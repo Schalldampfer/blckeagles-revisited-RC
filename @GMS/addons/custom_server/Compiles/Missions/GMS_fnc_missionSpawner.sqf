@@ -58,7 +58,6 @@ if (isNil "_missionLootVehicles") 		then {_missionLootVehicles = []};
 if (isNil "_garrisonedBuilding_ATLsystem") then {_garrisonedBuilding_ATLsystem = []};
 if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {_garrisonedBuildings_BuildingPosnSystem = []};
 if (isNil "_vehicleCrewCount") then {_vehicleCrewCount = [_aiDifficultyLevel] call GMS_fnc_selectVehicleCrewCount};
-if (isNil "_defaultMissionLocations") then {_defaultMissionLocations = []};
 if (isNil "_submarinePatrolParameters") then {_submarinePatrolParameters = []};
 if (isNil "_airpatrols") then {_airpatrols = []};
 if (isNil "_scubagroupparameters") then {_scubagroupparameters = []};
@@ -77,6 +76,7 @@ private "_temp";
 
 // If the mission is to be spawned at pre-defined coordinates then select one from the array that defines them 
 // otherwise use the _coords that were passed to the script in _this
+if (isNil "_defaultMissionLocations") then {_defaultMissionLocations = []};
 if !(_defaultMissionLocations isEqualTo []) then 
 {
 	_coords = selectRandom _defaultMissionLocations;

@@ -73,7 +73,9 @@ if (_coords isEqualTo []) then
 	};
 };
 
-//diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
+private _distToNearest = 900000;
+
+diag_log format["_fnc_findSafePosn: _coords = %1  |  _distToNearest = %2  |  count blck_recentMissionCoords = %3  |  count blck_ActiveMissionCoords %4",_coords, _distToNearest, count blck_recentMissionCoords, count blck_ActiveMissionCoords];
 _coords
 
 

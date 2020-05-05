@@ -17,6 +17,7 @@
 //#define blck_useCUP
 //#define blck_useRHS
 //#define blck_useLAGO 
+//#define blck_useNIA
 
 ////////////////////////////
 //  Do not touch anything below this line

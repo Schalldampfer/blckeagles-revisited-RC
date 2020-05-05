@@ -49,10 +49,10 @@
 	***********************************************************/
 	////////
 	//  Client Offloading and Headless Client Configurations
-	blck_useHC = true; // Experimental (should be working).
+	blck_useHC = false; // Experimental (should be working).
 	
 										//  Credit to Defent and eraser for their excellent work on scripts to transfer AI to clients for which these settings are required.
-	blck_ai_offload_to_client = false; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
+	blck_ai_offload_to_client = true; // forces AI to be transfered to player's PCs.  Disable if you have players running slow PCs.
 										// *******************************************************
 										//  Experimental; may cause issues with waypoints 
 										// *******************************************************
@@ -76,10 +76,10 @@
 	blck_showCountAliveAI = true;	
 
 	//Minimum distance between missions
-	blck_MinDistanceFromMission = 1500;
-	blck_minDistanceToBases = 900;
-	blck_minDistanceToPlayer = 900;
-	blck_minDistanceFromTowns = 300;
+	blck_MinDistanceFromMission = 1000;
+	blck_minDistanceToBases = 400;
+	blck_minDistanceToPlayer = 500;
+	blck_minDistanceFromTowns = 250;
 	
 	///////////////////////////////
 	// Mission Smoke and Signals
@@ -203,7 +203,7 @@
 	blck_patrolHelisOrange = blck_armed_attackHelis + blck_armed_heavyAttackHelis; // + _blck_fighters;
 	blck_noPatrolHelisOrange = [2,4];
 
-	if (toLower(worldName) isEqualTo "namalsk") then
+	if (toLower(worldName) isEqualTo "namalsk" || toLower(worldName) isEqualTo "enoch") then
 	{
 		blck_patrolHelisRed = blck_littleBirds + blck_armed_hellcats;
 		blck_patrolHelisGreen = blck_armed_hellcats + blck_armed_ghosthawks;
