@@ -22,8 +22,7 @@ private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_mission
 params["_coords","_markerClass","_aiDifficultyLevel"];
 
 [_markerClass,  "active",_coords] call blck_fnc_updateMissionQue;
-blck_ActiveMissionCoords pushback _coords; 
-	blck_missionsRunning = blck_missionsRunning + 1;
+
 diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
 
 if (isNil "_assetKilledMsg")			 then {_assetKilledMsg = ""};
@@ -81,6 +80,10 @@ if !(_defaultMissionLocations isEqualTo []) then
 {
 	_coords = selectRandom _defaultMissionLocations;
 };
+
+blck_ActiveMissionCoords pushback _coords; 
+blck_missionsRunning = blck_missionsRunning + 1;
+diag_log format["_fnc_missionSpawner:  count blck_ActiveMissionCoords = %1 | blck_ActiveMissionCoords = %2",count blck_ActiveMissionCoords,blck_ActiveMissionCoords];
 
 _objects = [];
 _mines = [];

@@ -62,7 +62,7 @@ if (count _readyToSpawnQue > 0) then
 	#endif
 
 	_coords = [] call blck_fnc_FindSafePosn;
-	_coords pushback 0;	
+	
 	_compiledMission = selectRandom (_missionToSpawn select 0);
 	// 	_mission = [_compiledMissionsList,format["%1%2",_marker,_i],_difficulty,_tMin,_tMax,_waitTime,[0,0,0]];
 	_missionMarker = _missionToSpawn select 1;
