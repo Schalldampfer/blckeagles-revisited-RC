@@ -46,8 +46,6 @@ if (_vehiclePatrolSpawns isEqualTo []) then
 		[_vehGroup,_spawnPos,_spawnPos,3,3,_difficulty,1,2,_uniforms,_headGear,false] call blck_fnc_spawnGroup;
 		blck_monitoredMissionAIGroups pushback _vehGroup;
 		#define useWaypoints true
-		//  params[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], 
-		//  ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
 		_patrolVehicle = [_spawnPos,_spawnPos,_vehicle,_patrolRadius,_patrolRadius,_vehGroup,useWaypoints,[difficulty] call blck_fnc_selectVehicleCrewCount,_patrolRadius] call blck_fnc_spawnVehiclePatrol;  // Check whether we should pass the group; looks like we should.
 
 	};
