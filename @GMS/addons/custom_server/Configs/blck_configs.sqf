@@ -239,6 +239,10 @@
 	// MISSION TIMERS
 	////////////////////
 	
+
+	// Change this value to reduce the number of spawned missions at any one time.
+	blck_maxSpawnedMissions = 9;
+		
 	// Reduce to 1 sec for immediate spawns, or longer if you wish to space the missions out	
 	blck_TMin_Orange = 250;
 	blck_TMin_Green = 200;
