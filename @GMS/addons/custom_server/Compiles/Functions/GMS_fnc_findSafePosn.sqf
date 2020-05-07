@@ -14,46 +14,53 @@
 if (isNil "blck_locationBlackList") then {blck_locationBlackList = []};
 private _blacklistedLocations =  blck_locationBlackList;
 
-//diag_log format["_fnc_findsafeposn: count blck_recentMissionCoords = %1 | blck_recentMissionCoords = %2", count blck_recentMissionCoords, blck_recentMissionCoords];
+_fn_buildBlacklistedLocationsList = {
+	params["_minToBases","_minToPlayers","_minToMissions","_minToTowns","_minToRecentMissionLocation"];
+	private _blacklistedLocations = +blck_locationBlackList;
 
-for '_i' from 1 to count blck_recentMissionCoords do {
-	private _loc = blck_recentMissionCoords deleteAt 0;
-	//diag_log format["BIS_fnc_findSafePos:  _loc = %1",_loc];
-	if (_loc select 1 < diag_tickTime) then 
+	for '_i' from 1 to (count blck_recentMissionCoords) do {
+		private _loc = blck_recentMissionCoords deleteAt 0;
+		//diag_log format["_fnc_findSafePosn: Evaluation reccent mission location %1",_x];
+		if (_loc select 1 < diag_tickTime) then 
+		{
+			blck_recentMissionCoords pushBack _loc;
+			_blacklistedLocations pushBack [_loc select 0, _minToRecentMissionLocation];
+		};
+	};	
+
 	{
-		//diag_log "location still blacklisted";
-		blck_recentMissionCoords pushBack _loc;
-		_blacklistedLocations pushBack [_loc select 0, 300];
-	};
+		//diag_log format["_fnc_findSafePosn: adding activeMissioncoords, element %1 2 = %1",_x,_forEachIndex];
+		_blacklistedLocations pushBack [_x,_minToMissions];
+	} forEach blck_ActiveMissionCoords;	
+
+	private "_bases";
+	if (blck_modType isEqualTo "Epoch") then {_bases = nearestObjects[blck_mapCenter, ["PlotPole_EPOCH"], blck_mapRange + 25000]};
+	if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter, ["Exile_Construction_Flag_Static"], blck_mapRange + 25000]};
+
+	{
+		//diag_log format["_fnc_findSafePosn: adding base location at %1",_x];
+		_blacklistedLocations pushBack [getPosATL _x,_minToBases];
+	} forEach _bases;	
+
+	// Town positions are already in the blacklist
+	//{
+		//_blacklistedLocations pushBack [locationPosition _x,_minToTowns];
+	//} forEach blck_townLocations;	
+
+	{
+		//diag_log format["_fnc_findSafePosn: adding player %1 at %2",_x, getPosATL _x];
+		_blacklistedLocations pushBack [getPosATL _x,_minToPlayers];
+	} forEach allPlayers;	
+	_blacklistedLocations
 };
 
-//diag_log format["_fnc_findsafeposn: count blck_ActiveMissionCoords = %1 || blck_ActiveMissionCoords = %2 ",count blck_ActiveMissionCoords,blck_ActiveMissionCoords];
-// Check coordinates of active missions so we dont spawn 2 right on top of each other 
-{
-	//diag_log format["_fnc_findSafePosn: search activeMissioncoords, _x = %1",_x];
-	_blacklistedLocations pushBack [_x,blck_MinDistanceFromMission];
-} forEach blck_ActiveMissionCoords;
+private _minDistToBases = blck_minDistanceToBases;
+private _minDistToPlayers = blck_minDistanceToPlayer;
+private _minDistToTowns = blck_minDistanceFromTowns;
+private _mindistToMissions = blck_MinDistanceFromMission;
+private _minToRecentMissionLocation = 200;
 
-// Check for bases every time this function is called so that we account for any new bases started during that server uptime period.
-private _bases = [];
-if (blck_modType isEqualTo "Epoch") then {_bases = nearestObjects[blck_mapCenter, ["PlotPole_EPOCH"], blck_mapRange + 25000]};
-if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter, ["Exile_Construction_Flag_Static"], blck_mapRange + 25000]};
-
-
-//diag_log format["_fnc_findSafePosn: count _bases = %1 | _bases = %2", count _bases, _bases];
-{
-	_blacklistedLocations pushBack [getPosATL _x,blck_minDistanceToBases];
-} forEach _bases;
-
-//diag_log format["_fnc_findSafePosn: count blck_townLocations = %1",count blck_townLocations];
-{
-	_blacklistedLocations pushBack [locationPosition _x,blck_minDistanceFromTowns];
-} forEach blck_townLocations;
-
-//diag_log format["_fnc_findSafePosn: count allPlayers = %1",count allPlayers];
-{
-	_blacklistedLocations pushBack [getPosATL _x,blck_minDistanceToPlayer];
-} forEach allPlayers;
+private _blacklistedLocations = [_minDistToBases,_minDistToPlayers,_minDistToTowns,_mindistToMissions,_minToRecentMissionLocation] call _fn_buildBlacklistedLocationsList;
 
 private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
 
@@ -67,15 +74,12 @@ if (_coords isEqualTo []) then
 			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
 		} forEach _blacklistedLocations;
 		_coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
-		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
+		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2 on try #%3",_index,_coords,_i];
 		if !(_coords isEqualTo []) exitWith {};
 		uisleep 1;
 	};
 };
 
-private _distToNearest = 900000;
-
-diag_log format["_fnc_findSafePosn: _coords = %1  |  _distToNearest = %2  |  count blck_recentMissionCoords = %3  |  count blck_ActiveMissionCoords %4",_coords, _distToNearest, count blck_recentMissionCoords, count blck_ActiveMissionCoords];
 _coords
 
 

@@ -7,6 +7,19 @@ Many thanks for new Coding and ideas from Grahame.
 
 Significant Changes:
 =====================
+6.96 Build 202 
+FIXED: few minor bug fixes. 
+FIXED: Static Mission Loot vehicles are no longer deleted by Epoch servers when players enter them.
+FIXED: an error in coordinates for some randomly spawned missions tha added an extra 0 to the array with the coordinaates.
+Added: a define for NIA all in one in blck_defines; 
+Added a few preconfigures variables with lists of NIA Armas items.
+Added: an optional parameter to define the location of a mission as one of one or more locations in an array 
+  _defaultMissionLocations = [];
+Removed: some debugging and map sepcific settings from blck_custom_config.sqf 
+  
+6.96 Build 199
+Added support for Arma servers not running Epoch or Exile 
+
 6.96 Build 197
 Sorted some wisses with the dynamic UMS spawner. 
 Removing debugging info
