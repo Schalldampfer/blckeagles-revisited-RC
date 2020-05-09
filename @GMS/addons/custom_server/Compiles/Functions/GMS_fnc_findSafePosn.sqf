@@ -51,6 +51,12 @@ _fn_buildBlacklistedLocationsList = {
 		//diag_log format["_fnc_findSafePosn: adding player %1 at %2",_x, getPosATL _x];
 		_blacklistedLocations pushBack [getPosATL _x,_minToPlayers];
 	} forEach allPlayers;	
+
+	if !(blck_minDistanceFromDMS == -1) then 
+	{
+		_blacklistedLocations append [] call blck_fnc_getAllDMSMarkers;
+	};
+
 	_blacklistedLocations
 };
 

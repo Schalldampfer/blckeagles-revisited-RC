@@ -100,10 +100,11 @@
 	blck_showCountAliveAI = true;
 
 	//Minimum distance between missions
-	blck_MinDistanceFromMission = 1500;
-	blck_minDistanceToBases = 900;
-	blck_minDistanceToPlayer = 900;
-	blck_minDistanceFromTowns = 300;
+	blck_MinDistanceFromMission = 1000;
+	blck_minDistanceToBases = 1000;
+	blck_minDistanceToPlayer = 800;
+	blck_minDistanceFromTowns = 500;
+	blck_minDistanceFromDMS = 500;  // minimum distance for a blackeagls mission from any nearby DMS missions. set to -1 to disable this check.	
 	
 	///////////////////////////////
 	// Mission Smoke and Signals

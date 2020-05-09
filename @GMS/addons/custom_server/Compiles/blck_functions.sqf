@@ -47,6 +47,7 @@ private _functions = [
 	["blck_fnc_findRandomLocationWithinCircle","\q\addons\custom_server\Compiles\Functions\GMS_fnc_findRandomLocationWithinCircle.sqf"],
 	["blck_fnc_getAllBlackeaglsMarkers" ,"\q\addons\custom_server\Compiles\Functions\GMS_fnc_getAllBlckeaglsMarkers.sqf"],
 	["blck_fnc_isBlackeaglsMarker","\q\addons\custom_server\Compiles\Functions\GMS_fnc_isBlackeaglsMarker.sqf"],
+	["blck_fnc_getAllDMSMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_getAllDMSMarkers.sqf"]
 
 	// Player-related functions
 	["GMS_fnc_handlePlayerUpdates","\q\addons\custom_server\Compiles\Units\GMS_fnc_handlePlayerUpdates.sqf"],
