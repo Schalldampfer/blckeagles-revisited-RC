@@ -9,12 +9,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-/*
-	Purpose: returns the nearest marker of a specific type 
-	Parameters: type of marker to search for as a "STRING"
-	Returns: The nearest marker of that type
-*/
 
-params["_mType"];
-private _nearestMarker = [player, (allMapMarkers select {(getMarkerType _x) isEqualTo _mType})] BIS_fnc_nearestPosition;
-_nearestMarker;
+private _m = _this;
+private _r = if ( ([_m,0,(count blck_missionMarkerRootName) - 1] call BIS_fnc_trimString) isEqualTo blck_missionMarkerRootName) then {true} else {false};
+_r

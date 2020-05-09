@@ -556,6 +556,7 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround" && _loadCratesTiming isE
 private["_result"];
 // Force passing the mission name for informational purposes.
 _blck_localMissionMarker set [2, _markerMissionName];
+// delete the prior instance of this mission.
 if (blck_showCountAliveAI) then
 {
 	_marker setMarkerText format["%1: All AI Dead",_markerMissionName];

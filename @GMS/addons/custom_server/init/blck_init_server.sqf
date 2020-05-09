@@ -227,14 +227,4 @@ blck_pvs_version = blck_versionNumber;
 publicVariable "blck_pvs_version";
 diag_log format["[blckeagls] version %1 Build %2 Date %4 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime,blck_buildDate]; //,blck_modType];
 
-if (blck_debugOn || (blck_debugLevel >= 1)) then 
-{
-	private _pos = [] call blck_fnc_findSafePosn;
-	private _root = "";
-	private _path = "default";
-	private _mission = "bunkerMission";
-	private _compiledMission = compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\%1\%2.sqf",_path,_mission];
-	diag_log format["[blckeagls] mission test sequence run for mission path %1 name %2",_path,_mission];
-	[_pos,"testMarkerGRG","blue"] spawn _compiledMission;
-	diag_log format["testmarker mission spawned at %1",diag_tickTime];
-};
+
