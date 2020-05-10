@@ -9,7 +9,7 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-waitUntil{!isNil "blck_cratetypes"};
+
 blck_UMS_uniforms = 
 [
 	"U_I_Wetsuit",
@@ -47,20 +47,28 @@ if ((tolower blck_modType) isEqualTo "exile") then
 		"Exile_Boat_SDV_Grey"
 	];
 	
-	blck_UMS_crates =
-	[
-		"Exile_Container_SupplyBox"
-	];
+	blck_UMS_crates =	["Exile_Container_SupplyBox"];
 };
 if ((tolower blck_modType) isEqualTo "epoch") then
+{
+	blck_UMS_submarines = ["B_SDV_01_EPOCH"];
+	//blck_UMS_crates = blck_crateTypes;
+	blck_UMS_crates = ["container_epoch"];	
+};
+if ((toLower blck_modType) isEqualTo "default") then 
 {
 	blck_UMS_submarines =
 	[
 		
-		"B_SDV_01_EPOCH"
+		"Exile_Boat_SDV_CSAT",
+		"Exile_Boat_SDV_Digital",
+		"Exile_Boat_SDV_Grey"
 	];
-	//blck_UMS_crates = blck_crateTypes;
-	blck_UMS_crates = ["container_epoch"];	
+	
+	blck_UMS_crates =
+	[
+
+	];
 };
 blck_UMS_unarmedSurfaceVessels = 
 [

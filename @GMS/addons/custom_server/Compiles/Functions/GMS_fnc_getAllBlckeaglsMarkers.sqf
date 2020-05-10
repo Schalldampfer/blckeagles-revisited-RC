@@ -9,10 +9,5 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
-private _m = [];
-{
-	if (_x call blck_fnc_isBlackeaglsMarker) then {_m pushBack _x};
-} forEach allMapMarkers;
-diag_log format["_fnc_getAllBlackeaglsMarkers: _bem = %1",_m];
-_m
-
+private _blckMarkers = [blck_missionMarkerRootName] call blck_fnc_getAllMarkersOfSubtype;
+_blckMarkers

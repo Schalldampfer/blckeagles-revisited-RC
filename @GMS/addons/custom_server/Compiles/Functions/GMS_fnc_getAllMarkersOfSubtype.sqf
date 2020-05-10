@@ -8,8 +8,17 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-private _m = _this;
-private _r = if ( ([_m,0,(count blck_missionMarkerRootName) - 1] call BIS_fnc_trimString) isEqualTo blck_missionMarkerRootName) then {true} else {false};
-_r
+/*
+	Useful if you know the rootname for markers for a mission system to add these to black lists or other lists
+*/
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+private _subtype = _this;
+private _end = (count _subtype) - 1;
+private _m = [];
+{
+	if ([_x,0,_end] call BIS_fnc_trimString isEqualTo _subtype) then {_m pushBack _x};
+} forEach allMapMarkers;
+
+_m
+

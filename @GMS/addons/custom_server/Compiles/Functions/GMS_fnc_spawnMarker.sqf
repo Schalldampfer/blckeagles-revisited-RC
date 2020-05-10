@@ -76,4 +76,5 @@ if (toUpper(_mShape) in ["ELLIPSE","RECTANGLE"]) then // not an Icon ....
 	_marker = [_missionMarkerName,_markerPos, _markerColor,_markerLabel,_mShape] call _blck_fn_configureIconMarker;
 };
 if (isNil "_marker") then {_marker = ""};
+
 _marker

@@ -52,9 +52,9 @@ _fn_buildBlacklistedLocationsList = {
 		_blacklistedLocations pushBack [getPosATL _x,_minToPlayers];
 	} forEach allPlayers;	
 
-	if !(blck_minDistanceFromDMS == -1) then 
+	if (blck_minDistanceFromDMS > 0) then 
 	{
-		_blacklistedLocations append [] call blck_fnc_getAllDMSMarkers;
+		_blacklistedLocations append ([] call blck_fnc_getAllDMSMarkers);
 	};
 
 	_blacklistedLocations
@@ -70,7 +70,7 @@ private _blacklistedLocations = [_minDistToBases,_minDistToPlayers,_minDistToTow
 
 private _coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
 
-//diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
+diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
 if (_coords isEqualTo []) then 
 {
 	for "_index" from 1 to 100 do 

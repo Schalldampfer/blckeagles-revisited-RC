@@ -15,8 +15,8 @@
 #include "\q\addons\custom_server\Missions\UMS\GMS_UMS_StaticMissions_Lists.sqf";
 
 {
-	//diag_log format["[blckeagls] GMS__UMS_StaticMissions_init.sqf <Evaluating Mission = %1>",_x];
-	//diag_log format["[blckeagls] GMS__UMS_StaticMissions_init.sqf <worldName = %1 | _mod = %2>",toLower worldName,(toLower blck_modType)];	
+	diag_log format["[blckeagls] GMS__UMS_StaticMissions_init.sqf <Evaluating Mission = %1>",_x];
+	diag_log format["[blckeagls] GMS__UMS_StaticMissions_init.sqf <worldName = %1 | _mod = %2>",toLower worldName,(toLower blck_modType)];	
 	if ((toLower worldName) isEqualTo toLower(_x select 1)) then
 	{
 		if ((toLower blck_modType) isEqualTo (toLower(_x select 0))) then

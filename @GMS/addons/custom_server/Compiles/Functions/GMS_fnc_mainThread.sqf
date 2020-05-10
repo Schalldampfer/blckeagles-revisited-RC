@@ -32,10 +32,8 @@ while {true} do
 		_timer5sec = diag_tickTime + 5;
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
 		[] call blck_fnc_sm_staticPatrolMonitor;
-		[] call blck_fnc_vehicleMonitor;		
-		//[] call blck_fnc_cleanupAliveAI;
-		//[] call blck_fnc_cleanupObjects;
-		//[] call blck_fnc_cleanupDeadAI;			
+		[] call blck_fnc_vehicleMonitor;	
+
 		#ifdef GRGserver
 		[] call blck_fnc_broadcastServerFPS;
 		#endif		
@@ -70,13 +68,7 @@ while {true} do
 			Return Value:
 			Array of Arrays - to format [[scriptName, fileName, isRunning, currentLine], ...]: 
 		*/
-		//private _activeScripts = call diag_activeSQFScripts;
-		{
-			if (_x select 2 /* isRunning */) then 
-			{
-				//diag_log format["script name %1",_x select 0];
-			};
-		} forEach diag_activeSQFScripts;
+
 		#endif		
 		[] call blck_fnc_cleanupAliveAI;
 		[] call blck_fnc_cleanupObjects;
