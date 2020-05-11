@@ -39,6 +39,7 @@ blck_missionsRun = 0;
 blck_activeMissions = [];
 blck_connectedHCs = [];
 blck_missionMarkerRootName = "blckeagls_marker";
+DMS_missionMarkerRootName = "DMS_MissionMarker";
 blck_missionMarkers = [];
 blck_heliCrashSites = [];
 blck_temporaryMarkers = [];
