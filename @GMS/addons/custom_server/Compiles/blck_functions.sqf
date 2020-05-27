@@ -48,6 +48,7 @@ private _functions = [
 	["blck_fnc_getAllBlackeaglsMarkers" ,"\q\addons\custom_server\Compiles\Functions\GMS_fnc_getAllBlckeaglsMarkers.sqf"],
 	["blck_fnc_getAllMarkersOfSubtype","\q\addons\custom_server\Compiles\Functions\GMS_fnc_getAllMarkersOfSubtype.sqf"],
 	["blck_fnc_getAllDMSMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_getAllDMSMarkers.sqf"],
+	["blck_fnc_createMissionMarkers","\q\addons\custom_server\Compiles\Functions\GMS_fnc_createMissionMarkers.sqf"],
 
 	// Player-related functions
 	["GMS_fnc_handlePlayerUpdates","\q\addons\custom_server\Compiles\Units\GMS_fnc_handlePlayerUpdates.sqf"],

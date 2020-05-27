@@ -19,11 +19,11 @@ private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_mission
 		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount",
 		"_defaultMissionLocations"];
 		
-params["_coords","_markerClass","_aiDifficultyLevel"];
+params["_coords","_markerName","_aiDifficultyLevel"];
 
-[_markerClass,  "active",_coords] call blck_fnc_updateMissionQue;
+[_markerName,  "active",_coords] call blck_fnc_updateMissionQue;
 
-diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
+diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 
 if (isNil "_assetKilledMsg")			 then {_assetKilledMsg = ""};
 if (isNil "_markerColor") 				then {_markerColor = "ColorBlack"};
@@ -92,29 +92,33 @@ _aiGroup = [];
 _missionAIVehicles = [];
 _blck_AllMissionAI = [];
 _AI_Vehicles = [];
-_blck_localMissionMarker = [_markerClass,_coords,"","",_markerColor,_markerType];
+_blck_localMissionMarker = [[],_markerName,_coords,"","",_markerColor,_markerType];
 #define delayTime 1
 #define useRelativePos true
 
 #ifdef blck_debugMode
 diag_log "_missionSpawner:  All variables initialized";
 #endif
-
+private _markerPos = _coords;
 if (blck_labelMapMarkers select 0) then
 {
 	_blck_localMissionMarker set [2, _markerMissionName];
 };
 if !(blck_preciseMapMarkers) then
 {
-	_blck_localMissionMarker set [1,[_coords,75] call blck_fnc_randomPosition];
-};
+	private _markerPos = [_coords,75] call blck_fnc_randomPosition;
+	diag_log format["_fnc_missionSpawner (110): _markerPos = %1",_markerPos];
+	_blck_localMissionMarker set [1,_markerMissionName];	
+} ;
+
 _blck_localMissionMarker set [3,blck_labelMapMarkers select 1];  // Use an arrow labeled with the mission name?
 [["start",_startMsg,_markerMissionName]] call blck_fnc_messageplayers;
-_marker = [_blck_localMissionMarker] call blck_fnc_spawnMarker;
-_blck_localMissionMarker set [0, _marker];
+_markerType params["_type",["_size",[250,250]],["_brush","GRID"]];
+_markers = [_markerName,_markerPos,_markerMissionName,_markerColor,_type,_size,_brush] call blck_fnc_createMissionMarkers;
+_blck_localMissionMarker set [0, _markers];
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then {diag_log "missionSpawner:: (145) message players and spawn a mission marker";};
-if (blck_debugLevel > 0) then {diag_log format["missionSpawner:: (146) _marker = %1",_marker];};
+if (blck_debugLevel > 0) then {diag_log format["missionSpawner:: (146) _markers = %1",_markers];};
 if (blck_debugLevel > 0) then {diag_log "missionSpawner:: (147) waiting for player to trigger the mission";};
 #endif
 ////////
@@ -134,20 +138,20 @@ if (blck_debugLevel > 0) then {
 
 while {_wait} do
 {
-	//ifdef blck_debugMode
+	//#ifdef blck_debugMode
 	if (blck_debugLevel > 2) exitWith {_playerInRange = true;diag_log "_fnc_missionSpawner (168): player trigger loop triggered by scripting";};
-	//endif
+	//#endif
 
 	if ([_coords, blck_TriggerDistance, false] call blck_fnc_playerInRange) exitWith {_playerInRange = true;};
 	if ([_missionStartTime,blck_MissionTimeout] call blck_fnc_timedOut) exitWith {_missionTimedOut = true;};
 	uiSleep 5;
 
 	#ifdef blck_debugMode
-	if (blck_debugLevel > 2) then
+	if (blck_debugLevel > 3) then
 	{
 		diag_log format["missionSpawner:: Trigger Loop - blck_debugLevel = %1 and _coords = %2",blck_debugLevel, _coords];
 		diag_log format["missionSpawner:: Trigger Loop - players in range = %1",{isPlayer _x && _x distance2D _coords < blck_TriggerDistance} count allPlayers];
-		diag_log format["missionSpawner:: Trigger Loop - timeout = %1", [_missionStartTime,blck_MissionTimeout] call blck_fnc_timedOut];
+		diag_log format["missionSpawner:: Trigger Loop - blck_MissionTimeout = %4 | _missionStartTime = %1 | time = %2 | timeout = %3",_missionStartTime, diag_tickTime, [_missionStartTime,blck_MissionTimeout] call blck_fnc_timedOut,blck_MissionTimeout];
 	};
 	#endif
 };
@@ -155,7 +159,25 @@ while {_wait} do
 if (_missionTimedOut) exitWith
 {
 	diag_log format["_fnc_missionSpawner (187): mission timed out"];
-	[_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass,  1] call blck_fnc_endMission;
+	/*
+	params[
+	"_coords",
+	"_mines",
+	"_objects",
+	"_crates",
+	"_blck_AllMissionAI",
+	"_endMsg",
+	"_markers",
+	"_markerPos",
+	"_markerName",
+	"_markerLabel",
+	["_endCondition",0],
+	["_vehicles",[]],
+	["_isScubaMission",false]
+
+];
+*/
+	[_coords,_mines,_objects,_crates, _blck_AllMissionAI,_endMsg,_markers,_markerPos,_markerName,_markerMissionName,  1] call blck_fnc_endMission;
 };
 
 ////////////////////////////////////////////////
@@ -164,7 +186,7 @@ if (_missionTimedOut) exitWith
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then
 {		
-	diag_log format["[blckeagls] missionSpawner:: (200) --  >>  Mission tripped: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
+	diag_log format["[blckeagls] missionSpawner:: (200) --  >>  Mission tripped: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerMissionName];
 };
 #endif
 
@@ -201,7 +223,7 @@ if (typeName _temp isEqualTo "ARRAY") then
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then
 {
-	diag_log format["[blckeagls] missionSpawner:: (237) Landscape spawned: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
+	diag_log format["[blckeagls] missionSpawner:: (237) Landscape spawned: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 };
 #endif
 
@@ -223,7 +245,7 @@ if !(_abort) then
 uiSleep 10;
 if (blck_debugLevel > 0) then
 {
-	diag_log format["[blckeagls] missionSpawner:: (288) AI Patrols Spawned: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
+	diag_log format["[blckeagls] missionSpawner:: (288) AI Patrols Spawned: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 };
 #endif
 
@@ -410,11 +432,9 @@ switch (_endCondition) do
 
 if (blck_showCountAliveAI) then
 {
-	if !(_marker isEqualTo "") then
-	{
-		[_marker,_markerMissionName,_blck_AllMissionAI] call blck_fnc_updateMarkerAliveCount;
-		blck_missionMarkers pushBack [_marker,_markerMissionName,_blck_AllMissionAI];
-	};
+	diag_log format["_missionSpawner(419): updating AI Alive Counts for _markers = %1",_markers];
+	[_markers select 1,_markerMissionName,_blck_AllMissionAI] call blck_fnc_updateMarkerAliveCount;
+	blck_missionLabelMarkers pushBack [_markers select 1,_markerMissionName,_blck_AllMissionAI];
 };
 
 _crateStolen = false;
@@ -511,7 +531,24 @@ while {_missionComplete isEqualTo -1} do
 
 if (_crateStolen) exitWith
 {
-	[_mines,_objects,_crates, _blck_AllMissionAI,"Crate Removed from Mission Site Before Mission Completion: Mission Aborted",_blck_localMissionMarker,_coords,_markerClass,  2] call blck_fnc_endMission;
+	/*
+	params[
+	"_coords",
+	"_mines",
+	"_objects",
+	"_crates",
+	"_blck_AllMissionAI",
+	"_endMsg",
+	"_markers",
+	"_markerPos",
+	"_markerName",
+	"_markerLabel",
+	["_endCondition",0],
+	["_vehicles",[]],
+	["_isScubaMission",false]
+];
+*/
+	[_coords,_mines,_objects,_crates, _blck_AllMissionAI,"Crate Removed from Mission Site Before Mission Completion: Mission Aborted",_markers,_markerPos,_markerName,_markerLabel,  2] call blck_fnc_endMission;
 };
 
 if (_spawnCratesTiming in ["atMissionEndGround","atMissionEndAir"]) then
@@ -537,7 +574,7 @@ if (_spawnCratesTiming in ["atMissionEndGround","atMissionEndAir"]) then
 		};
 
 		#ifdef blck_debugMode
-		if (blck_debugLevel > 0) then {diag_log format["[blckeagls] missionSpawner:: (428) Crates Spawned: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName]};
+		if (blck_debugLevel > 0) then {diag_log format["[blckeagls] missionSpawner:: (428) Crates Spawned: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel]};
 		#endif
 	};
 };
@@ -559,11 +596,13 @@ _blck_localMissionMarker set [2, _markerMissionName];
 // delete the prior instance of this mission.
 if (blck_showCountAliveAI) then
 {
-	_marker setMarkerText format["%1: All AI Dead",_markerMissionName];
+	_marker setMarkerText format["%1: All AI Dead",_markerLabel];
 	{
-		if ((_x select 1) isEqualTo _markerMissionName) exitWith{blck_missionMarkers deleteAt _forEachIndex};
-	}forEach blck_missionMarkers;
+		if ((_x select 1) isEqualTo _markerLabel) exitWith{blck_missionLabelMarkers deleteAt _forEachIndex};
+	}forEach blck_missionLabelMarkers;
 };
+*/
+
 
 if (_secureAsset && (alive _assetSpawned)) then
 {
@@ -588,18 +627,33 @@ if (_secureAsset && (alive _assetSpawned)) then
 };
 if (_secureAsset && !(alive _assetSpawned)) then
 {
-	//diag_log format["_fnc_missionSpawner: irregular mission end, asset killed"];
-	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_assetKilledMsg,_blck_localMissionMarker,_coords,_markerClass, -1] call blck_fnc_endMission;
+/*	params[
+	"_coords",
+	"_mines",
+	"_objects",
+	"_crates",
+	"_blck_AllMissionAI",
+	"_endMsg",
+	"_markers",
+	"_markerPos",
+	"_markerName",
+	"_markerLabel",
+	["_endCondition",0],
+	["_vehicles",[]],
+	["_isScubaMission",false]
+];
+*/
+	[_coords,_mines,_objects,_crates,_blck_AllMissionAI,_assetKilledMsg,_markers,_markerPos,_markerName,_markerLabel, -1] call blck_fnc_endMission;
 };
 
 if (!(_secureAsset) || (_secureAsset && (alive _assetSpawned))) then
 {
-	_result = [_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_blck_localMissionMarker,_coords,_markerClass, 0] call blck_fnc_endMission;
+	[_coords,_mines,_objects,_crates,_blck_AllMissionAI,_endMsg,_markers,_markerPos,_markerName,_markerLabel, 0] call blck_fnc_endMission;
 };
 
 #ifdef blck_debugMode
 if (blck_debugLevel > 2) then {diag_log format["[blckeagls] missionSpawner:: (507)end of mission: blck_fnc_endMission has returned control to _fnc_missionSpawner"]};
 #endif
-diag_log format["_fnc_missionSpawner (643) Mission Completed | _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
+diag_log format["_fnc_missionSpawner (643) Mission Completed | _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 blck_missionsRun = blck_missionsRun + 1;
 diag_log format["_fnc_missionSpawner (644): Total Dyanamic Land and UMS Run = %1", blck_missionsRun];

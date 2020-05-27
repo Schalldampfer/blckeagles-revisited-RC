@@ -10,4 +10,6 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 params["_marker","_rootText","_missionAI"];
+
+private _txtPrior = markerText _marker;
 _marker setMarkerText format["%1 / %2 AI Alive",_rootText,{alive _x} count _missionAI];

@@ -16,7 +16,7 @@
 private["_cleanupAliveAITimer","_cleanupCompositionTimer","_isScubaMission"];
 	
 _fn_missionCleanup = {	
-	params["_mines","_objects","_blck_AllMissionAI","_mission","_cleanupAliveAITimer","_cleanupCompositionTimer",["_isScubaMission",false]];
+	params["_coords","_mines","_objects","_blck_AllMissionAI","_markerName","_cleanupAliveAITimer","_cleanupCompositionTimer",["_isScubaMission",false]];
 	[_mines] call blck_fnc_clearMines;
 	//[_coords,_objects, _cleanupCompositionTimer] call blck_fnc_addObjToQue;
 	blck_oldMissionObjects pushback [_coords,_objects, (diag_tickTime + _cleanupCompositionTimer)];	
@@ -26,7 +26,7 @@ _fn_missionCleanup = {
 	if !(_isScubaMission) then
 	{
 		blck_recentMissionCoords pushback [_coords,diag_tickTime]; 
-		[_mission,"inactive",[0,0,0]] call blck_fnc_updateMissionQue;	
+		[_markerName,"inactive",[0,0,0]] call blck_fnc_updateMissionQue;	
 	};
 	if (_isScubaMission) then
 	{
@@ -40,33 +40,51 @@ _fn_missionCleanup = {
 //  MAIN FUNCTION STARTS HERE
 //////////////////////////////////////////////////////////////////////
 
-params["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission",["_endCondition",0],["_vehicles",[]],["_isScubaMission",false]];
-private _param = ["_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_blck_localMissionMarker","_coords","_mission","_endCondition","_vehicles","_isScubaMission"];
-diag_log format["_fnc_endMission: _this = %1",_this];
+params[
+	"_coords",
+	"_mines",
+	"_objects",
+	"_crates",
+	"_blck_AllMissionAI",
+	"_endMsg",
+	"_markers",
+	"_markerPos",
+	"_markerName",
+	"_markerLabel",
+	["_endCondition",0],
+	["_vehicles",[]],
+	["_isScubaMission",false]
+];
 /*
-if (blck_debugLevel >=3) then 
+private _param = ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","_endMsg","_markers","_markerPos","_markerName","_markerLabel","_endCondition","_vehicles","_isScubaMission"];
 {
-	diag_log format["_fnc_endMission: param %1 = %2",_forEachIndex,_x];
+	diag_log format["_fnc_endMission: parameter %1 named %2 = %3",_forEachIndex,_param select _forEachIndex,_x];
 } forEach _this;
 */
+{
+	[_x] call blck_fnc_deleteMarker;
+}forEach (_blck_localMissionMarker select 0);
+
+
 if (_endCondition > 0) exitWith  // Mision aborted for some reason
 {
-	[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;
-	_cleanupCompositionTimer = 0;
-	_cleanupAliveAITimer = 0;
-
-	[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
+	#define	cleanupCompositionTimer  0
+	#define	cleanupAliveAITimer  0
+	// 	params["_coords","_mines","_objects","_blck_AllMissionAI","_markerName","_cleanupAliveAITimer","_cleanupCompositionTimer",["_isScubaMission",false]];
+	[_coords,_mines,_objects,_blck_AllMissionAI,_markerName,cleanupAliveAITimer,cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
+	/*
 	{
-		//if (local _x) then {deleteVehicle _x};
+		if (local _x) then {deleteVehicle _x};
 	}forEach _crates;
+	*/
 	{
-		deleteVehicle _x;
+		if (local _x) then {deleteVehicle _x};
 	}forEach _vehicles;
 };
 if (_endCondition <= 0) then // Normal Mission End State
 {
 
-	private["_cleanupAliveAITimer","_cleanupCompositionTimer"];
+
 	if (blck_useSignalEnd) then
 	{
 		[_crates select 0] spawn blck_fnc_signalEnd;
@@ -74,19 +92,14 @@ if (_endCondition <= 0) then // Normal Mission End State
 			_x enableRopeAttach true;
 		}forEach _crates;
 	};
-	
-	_cleanupCompositionTimer = blck_cleanupCompositionTimer;
-	_cleanupAliveAITimer = blck_AliveAICleanUpTimer;
-	if (_endCondition == 0) then {[["end",_endMsg,_blck_localMissionMarker select 2]] call blck_fnc_messageplayers;};
-	if (_endCondition == -1) then {[["warning",_endMsg,_blck_localMissionMarker select 2]] call blck_fnc_messageplayers;};
-	[_blck_localMissionMarker select 0] call blck_fnc_deleteMarker;		
-	[_blck_localMissionMarker select 1, _markerClass] spawn blck_fnc_missionCompleteMarker;
-	// Using a variable attached to the crate rather than the global setting to be sure we do not fill a crate twice.
-	// the "lootLoaded" loaded should be set to true by the crate filler script so we can use that for our check.
+	diag_log format["_fnc_endMission (93) _endMsg = %1 | _markerLabel = %2",_endMsg,_markerLabel];
+	if (_endCondition == 0) then {[["end",_endMsg,_markerLabel]] call blck_fnc_messageplayers;};
+	if (_endCondition == -1) then {[["warning",_endMsg,_markerLabel]] call blck_fnc_messageplayers;};
+	[_markerPos, _markerName] spawn blck_fnc_missionCompleteMarker;
 	{
 		if !(_x getVariable["lootLoaded",false] || _endCondition == 1) then // dont load loot if the asset was killed
 		{
-			// _crateLoot,_lootCounts are defined above and carry the loot table to be used and the number of items of each category to load
+
 			[_x,_crateLoot,_lootCounts] call blck_fnc_fillBoxes;
 		};
 	}forEach _crates;
@@ -102,7 +115,8 @@ if (_endCondition <= 0) then // Normal Mission End State
 			blck_monitoredVehicles pushback _x;
 		};
 	} forEach _vehicles;
-	[_mines,_objects,_blck_AllMissionAI,_mission,_cleanupAliveAITimer,_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
+	// 	params["_coords","_mines","_objects","_blck_AllMissionAI","_markerName","_cleanupAliveAITimer","_cleanupCompositionTimer",["_isScubaMission",false]];
+	[_coords,_mines,_objects,_blck_AllMissionAI,_markerName,blck_AliveAICleanUpTimer,blck_cleanupCompositionTimer,_isScubaMission] call _fn_missionCleanup;
 };
 
 	_endCondition

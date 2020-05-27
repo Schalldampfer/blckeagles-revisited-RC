@@ -7,12 +7,12 @@ Many thanks for new Coding and ideas from Grahame.
 
 Significant Changes:
 =====================
-6.96 Build 203 
+6.98 Build 204
 FIXED: few minor bug fixes. 
 FIXED: Static Mission Loot vehicles are no longer deleted by Epoch servers when players enter them.
 FIXED: an error in coordinates for some randomly spawned missions tha added an extra 0 to the array with the coordinaates.
 Added: a define for NIA all in one in blck_defines; 
-Added a few preconfigures variables with lists of NIA Armas items.
+Added a few preconfiguration variables with lists of NIA Armas items.
 Added: an optional parameter to define the location of a mission as one of one or more locations in an array 
   _defaultMissionLocations = [];
 

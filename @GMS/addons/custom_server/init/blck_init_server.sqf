@@ -63,7 +63,8 @@ waitUntil{(!isNil "blck_useHC") && (!isNil "blck_simulationManager") && (!isNil 
 uiSleep 10;
 
 // Load any user-defined specifications or overrides
-[] execVM "\q\addons\custom_server\Configs\blck_custom_config.sqf";
+#include "\q\addons\custom_server\Configs\blck_custom_config.sqf";
+
 diag_log format["[blckeagls] Custom Configurations Loaded at %1",diag_tickTime];
 diag_log format["[blckeagls] debug mode settings:blck_debugON = %1 | blck_debugLevel = %3",blck_debugON,blck_debugLevel];
 

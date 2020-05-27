@@ -61,8 +61,9 @@ _wp setWaypointCombatMode "RED";
 if (blck_showCountAliveAI) then
 {
 	{
-		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;
-	} forEach blck_missionMarkers;
+		diag_log format["_fnc_processAIKill: _x = %1",_x];
+		_x call blck_fnc_updateMarkerAliveCount;
+	} forEach blck_missionLabelMarkers;
 };
 
 if ([_unit,_killer] call blck_fnc_processIlleagalAIKills) then {
