@@ -238,8 +238,8 @@ if !(_abort) then
 {
 	_blck_AllMissionAI append (_temp select 0);
 };
-
-if (count _scubaGroupParameters > 0) then
+//diag_log format["[blckeagls] missionSpawner:: (236) missionAI spawned: _markerName %1 : _markerLabel %2 : count _blck_AllMissionAI = %3",_markerName,_markerLabel, count _blck_AllMissionAI];
+if !(_scubaGroupParameters isEqualTo []) then
 {
 	#define isScubaMission true
 	//diag_log format["_fnc_dynamicUMSspawner: spawning scuba groups with _scubaGroupParameters = %1",_scubaGroupParameters];
@@ -315,7 +315,7 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (256) helipatrols s
 #endif 
 
 uisleep 3;
-if (count _garrisonedBuilding_ATLsystem > 0) then
+if !(_garrisonedBuilding_ATLsystem isEqualTo []) then
 {
 	_temp = [_coords, _garrisonedBuilding_ATLsystem, _aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_garrisonBuilding_ATLsystem;
 	_objects append (_temp select 1);
@@ -330,7 +330,7 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (271) garrisons (AT
 #endif 
 
 uiSleep 3;
-if (count _garrisonedBuildings_BuildingPosnSystem > 0) then
+if !(_garrisonedBuildings_BuildingPosnSystem isEqualTo []) then
 {
 	_temp = [_coords, _garrisonedBuildings_BuildingPosnSystem, _aiDifficultyLevel,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms] call blck_fnc_garrisonBuilding_RelPosSystem;
 	_objects append (_temp select 1);
@@ -360,17 +360,17 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (309) emplaced weap
 #endif 
 
 _vehToSpawn = [_noVehiclePatrols] call blck_fnc_getNumberFromRange;
-if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles > 0)) then
+if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || !(_missionPatrolVehicles isEqualTo []) )) then
 {
 	//diag_log format["_missionSpawner(315):  _vehToSpawn = %1 | _missionPatrolVehicles = %2",_vehToSpawn,_missionPatrolVehicles];
 	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_missionPatrolVehicles,useRelativePos,_uniforms,_headGear,_vests,_backpacks,_weaponList,_sideArms,false,_vehicleCrewCount] call blck_fnc_spawnMissionVehiclePatrols;
-	diag_log format["_fnc_missionSpawner (327)  _temp = %1",_temp];
+
 	_temp params ["_patrolVehicles","_units","_abort"];
 	_blck_AllMissionAI append _units; 
 };
 
 // Spawn any submarine patrols
-if (blck_useVehiclePatrols &&  count _submarinePatrolParameters > 0) then
+if (blck_useVehiclePatrols &&  !(_submarinePatrolParameters isEqualTo []) ) then
 {
 	// params["_coords","_noVehiclePatrols","_aiDifficultyLevel","_missionPatrolVehicles",["_useRelativePos",true],["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_weaponList",[]],["_sideArms",blck_Pistols], ["_isScubaGroup",false]];
 	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_submarinePatrolParameters,true,_umsUniforms,_umsHeadgear,_umsVests,[],_umsWeapons,[],isScubaMission] call blck_fnc_spawnMissionVehiclePatrols;
@@ -386,7 +386,7 @@ if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (330) vehicle patro
 uiSleep  delayTime;
 if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 {
-	if (count _missionLootBoxes > 0) then
+	if !(_missionLootBoxes isEqualTo []) then
 	{
 		_crates = [_coords,_missionLootBoxes,_loadCratesTiming, _spawnCratesTiming, "start", _aiDifficultyLevel] call blck_fnc_spawnMissionCrates;
 	}
@@ -407,7 +407,7 @@ uiSleep 10;
 if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (355) loot crate(s) spawned"};
 #endif 
 
-if (count _missionLootVehicles > 0) then
+if !(_missionLootVehicles isEqualTo []) then
 {
 	_temp = [_coords,_missionLootVehicles,_loadCratesTiming,0] call blck_fnc_spawnMissionLootVehicles;
 	_crates append _temp;
@@ -578,7 +578,7 @@ if (_spawnCratesTiming in ["atMissionEndGround","atMissionEndAir"]) then
 {
 	if (!(_secureAsset) || (_secureAsset && (alive _assetSpawned))) then
 	{
-		if (count _missionLootBoxes > 0) then
+		if !(_missionLootBoxes isEqualTo []) then
 		{
 			_crates = [_coords,_missionLootBoxes,_loadCratesTiming,_spawnCratesTiming, "end", _aiDifficultyLevel] call blck_fnc_spawnMissionCrates;
 		}
