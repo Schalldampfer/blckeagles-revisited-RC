@@ -83,7 +83,7 @@ if !(_defaultMissionLocations isEqualTo []) then
 
 blck_ActiveMissionCoords pushback _coords; 
 blck_missionsRunning = blck_missionsRunning + 1;
-diag_log format["_fnc_missionSpawner:  count blck_ActiveMissionCoords = %1 | blck_ActiveMissionCoords = %2",count blck_ActiveMissionCoords,blck_ActiveMissionCoords];
+//diag_log format["_fnc_missionSpawner:  count blck_ActiveMissionCoords = %1 | blck_ActiveMissionCoords = %2",count blck_ActiveMissionCoords,blck_ActiveMissionCoords];
 
 _objects = [];
 _mines = [];
@@ -156,7 +156,9 @@ while {_wait} do
 
 if (_missionTimedOut) exitWith
 {
-	diag_log format["_fnc_missionSpawner (187): mission timed out"];
+	
+	//  diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
+	diag_log format["_fnc_missionSpawner (187): mission timed out: _markerName %1 | _markerLabel %2 | time %3",_markerName,_markerLabel,diag_tickTime];
 	/*
 	params[
 	"_coords",
