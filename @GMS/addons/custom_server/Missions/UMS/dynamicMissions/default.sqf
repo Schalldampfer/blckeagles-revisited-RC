@@ -67,6 +67,10 @@ _missionLandscape = [  //  Paste appropriate lines from M3EDEN output here.
 	["Land_Boat_05_wreck_F",[1,2,0],0,[false,false]]
 ]; // list of objects to spawn as landscape using output from M3EDEN editor.
 
+_missionSurfaceWrecks = [
+	//["Land_Boat_05_wreck_F",[1,1,0],0,[false,false]]  // [false, false] here refers to enableSimulation / enableDamage
+];
+
 _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output here, then add the appropriate lootArray
 	// [["box_classname1",_customLootArray1,[px,py,pz],...,_customLootArray1],["box_classname2",,[px2,py2,pz2],...,_customLootArray2]
 	//  where _customLootArray follows the same format as blck_BoxLoot_Red and the other pre-defined arrays and
@@ -94,14 +98,14 @@ _missionGroups =
 
 _scubaGroupParameters = [
 	// Scuba units.
-	// [[-10.9121,-10.9824,-1.20243],5,7,"Green",5,12],
+	[[-10.9121,-10.9824,-1.20243],2,3,"red",5,12],
 	[[-2,2,-1],2,3,"red", 5,10],
 	[[2,-2,-1],2,3,"red", 5,10]
 ];
 
 //_noVehiclePatrols = blck_SpawnVeh_Red; // Not useful for marine missions which we assume need pre-defined positions for vehicles.
 // These are surface patrols. 
-_vehiclePatrolParameters = [
+_missionPatrolVehicles = [
 	["B_Boat_Armed_01_minigun_F",[2,2,0],0]
 ]; 							//[ ["vehicleClassName",[px,py,pz] /* center of patrol area */, difficulty /* blue, red etc*/, patrol radius] ]
 							// When this array is empty, vehicle patrols will be scattered randomely around the mission.
