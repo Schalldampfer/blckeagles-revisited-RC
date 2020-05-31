@@ -13,11 +13,11 @@
 
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 #define delayTime 1
-private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_blck_localMissionMarker","_assetKilledMsg","_enemyLeaderConfig",
+private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_missionLandscape","_mines","_blck_AllMissionAI","_assetKilledMsg","_enemyLeaderConfig",
 		"_AI_Vehicles","_timeOut","_aiDifficultyLevel","_missionPatrolVehicles","_missionGroups","_loadCratesTiming","_spawnCratesTiming","_assetSpawned","_hostageConfig",
 		"_chanceHeliPatrol","_noPara","_chanceLoot","_heliCrew","_loadCratesTiming","_useMines","_blck_AllMissionAI","_delayTime","_groupPatrolRadius",
 		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount",
-		"_defaultMissionLocations"];
+		"_defaultMissionLocations","_garrisonedbuildings_buildingposnsystem","_garrisonedBuilding_ATLsystem", "_isScubaMission"];
 		
 params["_coords","_markerName","_aiDifficultyLevel"];
 
@@ -57,8 +57,9 @@ if (isNil "_missionLootVehicles") 		then {_missionLootVehicles = []};
 if (isNil "_garrisonedBuilding_ATLsystem") then {_garrisonedBuilding_ATLsystem = []};
 if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {_garrisonedBuildings_BuildingPosnSystem = []};
 if (isNil "_vehicleCrewCount") then {_vehicleCrewCount = [_aiDifficultyLevel] call GMS_fnc_selectVehicleCrewCount};
-if (isNil "_submarinePatrolParameters") then {_submarinePatrolParameters = []};
 if (isNil "_airpatrols") then {_airpatrols = []};
+if (isNil "_submarinePatrolParameters") then {_submarinePatrolParameters = []};
+
 if (isNil "_scubagroupparameters") then {_scubagroupparameters = []};
 if (isNil "_markerMissionName") then {
 	diag_log format["_fnc_missionSpawner: _markerMissionName not defined, using default value"];
@@ -67,8 +68,7 @@ if (isNil "_markerMissionName") then {
 if (isNil "_noLootCrates") then {_noLootCrates = 1};
 if (isNil "_lootCrates") then {_lootCrates = blck_crateTypes};
 if (isNil "_lootCratePositions") then {_lootCratePositions = []};
-//if (isNil "_markerSize") then {_markerSize = [200,200]};
-//if (isNil "_markerBrush") then {_markerBrush = "GRID"};
+
 if (isNil "_isScubaMission") then {_isScubaMission = false};
 if (isNil "_missionLootBoxes") then {_missionLootBoxes = []};
 private "_temp";
@@ -92,7 +92,7 @@ _aiGroup = [];
 _missionAIVehicles = [];
 _blck_AllMissionAI = [];
 _AI_Vehicles = [];
-_blck_localMissionMarker = [[],_markerName,_coords,"","",_markerColor,_markerType];
+
 #define delayTime 1
 #define useRelativePos true
 
@@ -100,22 +100,20 @@ _blck_localMissionMarker = [[],_markerName,_coords,"","",_markerColor,_markerTyp
 diag_log "_missionSpawner:  All variables initialized";
 #endif
 private _markerPos = _coords;
-if (blck_labelMapMarkers select 0) then
-{
-	_blck_localMissionMarker set [2, _markerMissionName];
-};
+ 
 if !(blck_preciseMapMarkers) then
 {
 	private _markerPos = [_coords,75] call blck_fnc_randomPosition;
-	diag_log format["_fnc_missionSpawner (110): _markerPos = %1",_markerPos];
-	_blck_localMissionMarker set [1,_markerMissionName];	
+	//diag_log format["_fnc_missionSpawner (110): _markerPos = %1",_markerPos];
 } ;
 
-_blck_localMissionMarker set [3,blck_labelMapMarkers select 1];  // Use an arrow labeled with the mission name?
 [["start",_startMsg,_markerMissionName]] call blck_fnc_messageplayers;
+
+
 _markerType params["_type",["_size",[250,250]],["_brush","GRID"]];
 _markers = [_markerName,_markerPos,_markerMissionName,_markerColor,_type,_size,_brush] call blck_fnc_createMissionMarkers;
-_blck_localMissionMarker set [0, _markers];
+
+
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then {diag_log "missionSpawner:: (145) message players and spawn a mission marker";};
 if (blck_debugLevel > 0) then {diag_log format["missionSpawner:: (146) _markers = %1",_markers];};
@@ -212,7 +210,7 @@ if (_missionLandscapeMode isEqualTo "random") then
 {
 	_temp = [_coords,_missionLandscape, 3, 15, 2] call blck_fnc_spawnRandomLandscape;
 } else {
-	params["_center","_objects"];
+	
 	_temp = [_coords, _missionLandscape] call blck_fnc_spawnCompositionObjects;
 };
 if (typeName _temp isEqualTo "ARRAY") then
@@ -223,7 +221,7 @@ if (typeName _temp isEqualTo "ARRAY") then
 #ifdef blck_debugMode
 if (blck_debugLevel > 0) then
 {
-	diag_log format["[blckeagls] missionSpawner:: (237) Landscape spawned: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
+	diag_log format["[blckeagls] missionSpawner:: (219) Landscape spawned: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 };
 #endif
 
@@ -239,6 +237,23 @@ _abort = _temp select 1;
 if !(_abort) then 
 {
 	_blck_AllMissionAI append (_temp select 0);
+};
+
+if (count _scubaGroupParameters > 0) then
+{
+	#define isScubaMission true
+	//diag_log format["_fnc_dynamicUMSspawner: spawning scuba groups with _scubaGroupParameters = %1",_scubaGroupParameters];
+	// params["_coords",["_minNoAI",3],["_maxNoAI",6],"_missionGroups",["_aiDifficultyLevel","red"],["_uniforms",blck_SkinList],["_headGear",blck_BanditHeadgear],["_vests",blck_vests],["_backpacks",[]],["_weapons",[]],["_sideArms",blck_Pistols],["_isScubaGroup",false]];
+	private _temp = [_coords, _minNoAI,_maxNoAI,count _scubaGroupParameters,_scubaGroupParameters,_aiDifficultyLevel,blck_UMS_uniforms,blck_UMS_headgear,blck_UMS_vests,[],blck_UMS_weapons,[],_isScubaMission] call blck_fnc_spawnMissionAI;
+	diag_log format["_fnc_missionSpawner (243): _temp = %1",_temp];
+	uiSleep 2;
+	_abort = _temp select 1;
+
+	if !(_abort) then 
+	{
+		_blck_AllMissionAI append (_temp select 0);
+	};
+	diag_log format["[blckeagls] missionSpawner:: (250) scuba AI spawned: _markerName %1 : _markerLabel %2 : count _blck_AllMissionAI = %3",_markerName,_markerLabel, count _blck_AllMissionAI];
 };
 
 #ifdef blck_debugMode
@@ -354,6 +369,15 @@ if (blck_useVehiclePatrols && ((_vehToSpawn > 0) || count _missionPatrolVehicles
 	_blck_AllMissionAI append _units; 
 };
 
+// Spawn any submarine patrols
+if (blck_useVehiclePatrols &&  count _submarinePatrolParameters > 0) then
+{
+	// params["_coords","_noVehiclePatrols","_aiDifficultyLevel","_missionPatrolVehicles",["_useRelativePos",true],["_uniforms",blck_SkinList], ["_headGear",blck_headgear],["_vests",blck_vests],["_backpacks",blck_backpacks],["_weaponList",[]],["_sideArms",blck_Pistols], ["_isScubaGroup",false]];
+	_temp = [_coords,_vehToSpawn,_aiDifficultyLevel,_submarinePatrolParameters,true,_umsUniforms,_umsHeadgear,_umsVests,[],_umsWeapons,[],isScubaMission] call blck_fnc_spawnMissionVehiclePatrols;
+	_missionAIVehicles append  (_temp select 0);
+	_blck_AllMissionAI append (_temp select 1);
+};
+
 #ifdef blck_debugMode
 uiSleep 10;
 if (blck_debugLevel > 2) then {diag_log "_fnc_missionSpawner (330) vehicle patrols spawned"};
@@ -369,7 +393,6 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 	else
 	{
 		_crates = [_coords,[[selectRandom blck_crateTypes,[0,0,0],_crateLoot,_lootCounts]], _loadCratesTiming, _spawnCratesTiming, "start", _aiDifficultyLevel] call blck_fnc_spawnMissionCrates;
-		
 	};
 
 	if (blck_cleanUpLootChests) then
@@ -591,17 +614,7 @@ if (_spawnCratesTiming isEqualTo "atMissionSpawnGround" && _loadCratesTiming isE
 };
 
 private["_result"];
-// Force passing the mission name for informational purposes.
-_blck_localMissionMarker set [2, _markerMissionName];
-// delete the prior instance of this mission.
-if (blck_showCountAliveAI) then
-{
-	_marker setMarkerText format["%1: All AI Dead",_markerLabel];
-	{
-		if ((_x select 1) isEqualTo _markerLabel) exitWith{blck_missionLabelMarkers deleteAt _forEachIndex};
-	}forEach blck_missionLabelMarkers;
-};
-*/
+
 
 
 if (_secureAsset && (alive _assetSpawned)) then

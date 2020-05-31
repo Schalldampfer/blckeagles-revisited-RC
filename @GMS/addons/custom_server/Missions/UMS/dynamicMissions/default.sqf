@@ -12,9 +12,9 @@ private ["_markerLabel","_endMsg","_startMsg","_lootCounts","_crateLoot","_marke
 params["_missionCenter","_mission"];
 //_mission = "UMS mission example #2";  //  Included for additional documentation. Not intended to be spawned as a mission per se.
 //_missionCenter = [22584.9,15304.8,0];  // I pulled this from the position of the marker.
-_difficulty = "red";  // Skill level of AI (blue, red, green etc)
+_aiDifficultyLevel = "red";  // Skill level of AI (blue, red, green etc)
 //diag_log format["[blckeagls UMS missions] STARTED initializing dynamic mission %1 position at %2 difficulty %3",_mission,_missionCenter,_difficulty];
-_crateLoot = blck_BoxLoot_Orange;  // You can use a customized _crateLoot configuration by defining an array here. It must follow the following format shown for a hypothetical loot array called _customLootArray
+//_crateLoot = blck_BoxLoot_Orange;  // You can use a customized _crateLoot configuration by defining an array here. It must follow the following format shown for a hypothetical loot array called _customLootArray
 	/*
 	_customLootArray = 
 		// Loot is grouped as [weapons],[magazines],[items] in order to be able to use the correct function to load the item into the crate later on.
@@ -45,15 +45,16 @@ _crateLoot = blck_BoxLoot_Orange;  // You can use a customized _crateLoot config
 	*/
 
 _isScubaMission = true;  // This tells the mission spawner to search for a location on the water near a shore rather than on land.
-
-_lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts or one that is predefined but it must follow the following format:
+_crateLoot = blck_BoxLoot_Red;
+_lootCounts = [3,5,2,3,6,1];
+//_lootCounts = blck_lootCountsRed; // You can use a customized set of loot counts or one that is predefined but it must follow the following format:
 								  // values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
 								  //  blck_lootCountsOrange = [[6,8],[24,32],[5,10],[25,35],16,1];   // Orange
 
 
 _startMsg = "Pirates were spotted off the coast - intercept them and collect the loot";
 _endMsg = "The pirates were defeated";
-_markerLabel = "";
+_markerLabel = "";  //  No Longer Used by the mission spawner
 //_markerType = ["ellipse",[200,200],"GRID"];
 // An alternative would be:
 _markerType = ["mil_triangle",[0,0]];  // You can replace mil_triangle with any other valid Arma 3 marker type https://community.bistudio.com/wiki/cfgMarkers
@@ -63,7 +64,7 @@ _missionLandscapeMode = "precise"; // acceptable values are "random","precise"
 									// In precise mode objects will be spawned at the relative positions specified.
 									// In the random mode, objects will be randomly spawned within the mission area.
 _missionLandscape = [  //  Paste appropriate lines from M3EDEN output here.
-	["Land_Boat_05_wreck_F",[1,1,0],0,[true,false]]
+	["Land_Boat_05_wreck_F",[1,2,0],0,[false,false]]
 ]; // list of objects to spawn as landscape using output from M3EDEN editor.
 
 _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output here, then add the appropriate lootArray
@@ -71,11 +72,11 @@ _missionLootBoxes = [  //  Paste appropriate lines from M3EDEN editor output her
 	//  where _customLootArray follows the same format as blck_BoxLoot_Red and the other pre-defined arrays and
 	//  where _customlootcountsarray1 also follows the same format as the predefined arrays like blck_lootCountsRed
 		//  ["Box_NATO_Ammo_F",[22893,16766.8,6.31652],[[0,1,0],[0,0,1]],[true,false], _crateLoot, _lootCounts],
-		//[selectRandom blck_UMS_crates,[0,0,0],_crateLoot, _lootCounts]
+	[selectRandom blck_UMS_crates,[-1,-1,0],_crateLoot, _lootCounts]
 ];  // If this array is empty a single loot chest will be added at the center. If you add items loot chest(s) will be spawned in specific positions.
 
 _missionLootVehicles = [  // Paste appropriate lines from the output of M3EDEN Editor here and add the loot crate type and loot counts at the end of each entry as shown in the example below.
-						  // Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
+	// Many vehicles have less inventory capacity than crates so you may have to modify _lootcounts to avoid having stuff spawned all over the ground.
 	["I_Boat_Transport_01_F",[3,3,0],0,_crateLoot, _lootCounts]
 ]; //  [ ["vehicleClassName", [px, py, pz] /* possition at which to spawn*/, _loot /* pointer to array of loot (see below)]; 
 // When blank nothing is spawned.
@@ -134,10 +135,12 @@ _noVehiclePatrols = blck_SpawnVeh_Blue;
 _noEmplacedWeapons = blck_SpawnEmplaced_Blue;
 // Pertains to AI on boats, structures or land
 // The UMS configurations are used for sub and scuba AI.
-// These are defined here because they are needed for any calls used to spawn non-scuba AI
-_uniforms = blck_SkinList;
-_headgear = blck_headgear;
-_spawnCratesTiming = "atMissionEndAir"; // Choices: "atMissionSpawnGround","atMissionEndGround","atMissionEndAir". 
+_umsUniforms = blck_UMS_uniforms;
+_umsHeadgear = blck_UMS_headgear;
+_umsWeapons = blck_UMS_weapons;
+_umsVests = blck_UMS_vests;
+
+_spawnCratesTiming = "atMissionSpawnGround"; // Choices: "atMissionSpawnGround","atMissionEndGround","atMissionEndAir". 
 						 // Crates spawned in the air will be spawned at mission center or the position(s) defined in the mission file and dropped under a parachute.
 						 //  This sets the default value but can be overridden by defining  _spawnCrateTiming in the file defining a particular mission.
 _loadCratesTiming = "atMissionSpawn"; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
@@ -164,5 +167,6 @@ _chanceLoot = 0.999999990;
 _paraLoot = blck_BoxLoot_Blue;
 _paraLootCounts = blck_lootCountsRed;  // Throw in something more exotic than found at a normal blue mission.
 
-#include "\q\addons\custom_server\Missions\UMS\GMS_fnc_spawnDynamicUMSMission.sqf"; 
+//#include "\q\addons\custom_server\Missions\UMS\GMS_fnc_spawnDynamicUMSMission.sqf"; 
+#include "\q\addons\custom_server\Compiles\Missions\GMS_fnc_missionSpawner.sqf";  
 

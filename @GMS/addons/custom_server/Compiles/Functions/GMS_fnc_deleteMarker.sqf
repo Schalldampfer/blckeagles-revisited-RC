@@ -11,6 +11,6 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 params[["_markerName",""]];
 
-if (_markerName isEqualTo "" || !(typeName _markerName isEqualTo "STRING")) exitWith {diag_log format"[blckeagls] <ERROR> illeagal or missing marker name: typeName _markerName = %1 | _makerName = %2",typeName _markerName,_markerName};
+
 deleteMarker _markerName;
 deleteMarker (_markerName + "label");

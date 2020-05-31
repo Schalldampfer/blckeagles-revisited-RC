@@ -16,7 +16,5 @@
 /////////////////////////////////////////////////////
 
 params["_startTime",["_timeoutTime",blck_MissionTimeout]];
-private["_return"];
-//if ((diag_tickTime - _startTime) > _timeoutTime) then {_return = true} else {_return = false};
-_return = ((diag_tickTime - _startTime) > _timeoutTime) ;
-_return;
+private _return = if ((diag_tickTime - _startTime) > _timeoutTime) then {true} else {false};
+_return

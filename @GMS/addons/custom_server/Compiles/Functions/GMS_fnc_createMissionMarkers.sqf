@@ -21,7 +21,7 @@ private "_markers";
 	["_markerBrush","GRID"]
  ];
 
- 
+/* 
 private _pList =[
 	"_markerName",  // the name used when creating the marker. Must be unique.
 	"_markerPos",
@@ -35,7 +35,7 @@ for "_i" from 0 to ((count _this) - 1) do
 {
 	diag_log format["_fnc_createMarker: parameter %1 = %2",_pList select _i,_this select _i];
 }; 
-
+*/
 
 if (toUpper(_markerType) in ["ELLIPSE","RECTANGLE"]) then // not an Icon .... 
 {
@@ -49,7 +49,7 @@ if (toUpper(_markerType) in ["ELLIPSE","RECTANGLE"]) then // not an Icon ....
 	_m2 setMarkerColor "ColorBlack";
 	_m2 setMarkerText _markerLabel;	
 	_markers = [_m,_m2];	
-	diag_log format["_fnc_createMarkers: case of ELLIPSE/RECTANGLE: _markers = %1",_markers];
+	//diag_log format["_fnc_createMarkers: case of ELLIPSE/RECTANGLE: _markers = %1",_markers];
 } else {
 	private _m = "";
 	private _m2 = createMarker [blck_missionMarkerRootName + _markerName + "label", _markerPos];
@@ -57,7 +57,7 @@ if (toUpper(_markerType) in ["ELLIPSE","RECTANGLE"]) then // not an Icon ....
 	_m2 setMarkerColor _markerColor;
 	_m2 setMarkerText _markerLabel;
 	_markers = [_m,_m2];
-	diag_log format["_fnc_createMarkers: case of ICON: _markers = %1",_markers];		
+	//diag_log format["_fnc_createMarkers: case of ICON: _markers = %1",_markers];		
 };
 
 _markers

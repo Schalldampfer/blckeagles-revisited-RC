@@ -63,7 +63,7 @@ private _param = ["_coords","_mines","_objects","_crates","_blck_AllMissionAI","
 */
 {
 	[_x] call blck_fnc_deleteMarker;
-}forEach (_blck_localMissionMarker select 0);
+}forEach (_markers);
 
 
 if (_endCondition > 0) exitWith  // Mision aborted for some reason

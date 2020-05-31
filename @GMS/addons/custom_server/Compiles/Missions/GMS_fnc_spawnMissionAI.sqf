@@ -18,10 +18,17 @@
 
 params["_coords",["_minNoAI",3],["_maxNoAI",6],["_noAIGroups",0],["_missionGroups",[]],["_aiDifficultyLevel","red"],["_uniforms",[]],["_headGear",blck_BanditHeadgear],["_vests",[]],["_backpacks",[]],["_weapons",[]],["_sideArms",[]],["_isScubaGroup",false]];
 
-private["_unitsToSpawn","_unitsPerGroup","_ResidualUnits","_newGroup","_blck_AllMissionAI","_abort","_return","_adjusttedGroupSize","_minDist","_maxDist"];
-_unitsToSpawn = 0;
-_unitsPerGroup = 0;
-_ResidualUnits = 0;
+/*
+private _params = ["_coords","_minNoAI","_maxNoAI","_noAIGroups","_missionGroups","_aiDifficultyLevel","_uniforms","_headGear","_vests","_backpacks","_weapons","_sideArms","_isScubaGroup"];
+{
+	diag_log format["_fnc_spawnMissionAI: _this %1 | name %3 = %2",_forEachIndex,_x,_params select _forEachIndex];
+} forEach _this;
+*/
+
+private _unitsToSpawn = 0;
+private _unitsPerGroup = 0;
+private _ResidualUnits = 0;
+private _adjusttedGroupSize = 0;
 
 // TODO: Does not really look right
 if (_noAIGroups > 0) then
@@ -31,17 +38,28 @@ if (_noAIGroups > 0) then
 	_unitsPerGroup = floor(_unitsToSpawn/_noAIGroups);
 	_ResidualUnits = _unitsToSpawn - (_unitsPerGroup * _noAIGroups);
 };
-_blck_AllMissionAI = [];
-_abort = false;
+private _allSpawnedAI = [];
+private _abort = false;
 
 private _newGroup = grpNull;
 //_newGroup setVariable ["soldierType","infantry"];
-if ( (count _missionGroups > 0) && _noAIGroups > 0) then
+if !(_missionGroups isEqualTo []) then
 { 	
+	//diag_log "_fnc_missionspawner: spawning pre-defined groups";
 	{
 		_x params["_position","_minAI","_maxAI","_skillLevel","_minPatrolRadius","_maxPatrolRadius"];
-		_groupSpawnPos = _coords vectorAdd _position;
+		private _p = ["_position","_minAI","_maxAI","_skillLevel","_minPatrolRadius","_maxPatrolRadius"];
+		private _p1 = [_position,_minAI,_maxAI,_skillLevel,_minPatrolRadius,_maxPatrolRadius];	
+
+		/*
+		{
+			diag_log format["_fnc_spawnMissionAI: %1 = %2",_p select _forEachIndex, _x];
+		} forEach _p1;
+		*/
+
+		private _groupSpawnPos = _coords vectorAdd _position;
 		_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;
+		//diag_log format["_fnc_spawnMissionAI(55): _newGroup = %1",_newGroup];
 		_newGroup setVariable ["soldierType","infantry"];	
 		#ifdef blck_debugMode
 		if (blck_debugLevel >= 2) then
@@ -55,17 +73,12 @@ if ( (count _missionGroups > 0) && _noAIGroups > 0) then
 			//[["_group","Error"],"_pos",  "_center", ["_numai1",5],  ["_numai2",10],  ["_skillLevel","red"], ["_minDist",30], ["_maxDist",45],["_configureWaypoints",true], ["_uniforms",[]], ["_headGear",[]],["_vests",[]],["_backpacks",[]],["_weaponList",[]],["_sideArms",[]], ["_scuba",false],["_patrolRadius",30]];
 			[_newGroup,_groupSpawnPos,_coords,_minAI,_maxAI,_aiDifficultyLevel,_minPatrolRadius,_maxPatrolRadius,configureWaypoints,_uniforms,_headGear,_vests,_backpacks,_weapons,_sideArms,_isScubaGroup] call blck_fnc_spawnGroup;
 			_newGroup setVariable ["soldierType","infantry"];
-			_newAI = units _newGroup;
+			//private _newAI = units _newGroup;
 			blck_monitoredMissionAIGroups pushback _newGroup;
-			#ifdef blck_debugMode
-			if (blck_debugLevel >= 2) then
-			{
-				diag_log format["_fnc_spawnMissionAI(41): Spawning Groups for defined array of group positions: _noAIGroups=1 _newGroup=%1 _newAI = %2",_newGroup, _newAI];
-			};
-			#endif
+
 			
-			_blck_AllMissionAI append _newAI;
-			
+			_allSpawnedAI append (units _newGroup);
+			diag_log format["_fnc_spawnMissionAI(77): group %1 | count _newAI = %2 | count _allSpawnedAI = %3",_forEachIndex,count (units _newGroup), count _allSpawnedAI];			
 		};
 	}forEach _missionGroups;
 };
@@ -104,9 +117,9 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 						diag_log format["_fnc_spawnMissionAI(41): Spawning Groups: _noAIGroups=1 _newGroup=%1 _newAI = %2",_newGroup, _newAI];
 					};
 					#endif
-					
-					_blck_AllMissionAI append _newAI;
-					
+
+					_allSpawnedAI append _newAI;
+				
 				};
 			 };
 		case 2: {
@@ -140,7 +153,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 						};
 						#endif
 
-						_blck_AllMissionAI append _newAI;
+						_allSpawnedAI append _newAI;
 					};
 				}forEach _groupLocations;
 
@@ -166,7 +179,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 						diag_log format["_fnc_spawnMissionAI (73): Case 3:  _newGroup=%1",_newGroup];
 					};
 					#endif
-					_blck_AllMissionAI append _newAI;
+					_allSpawnedAI append _newAI;
 					_groupLocations = [_coords,2,20,35] call blck_fnc_findPositionsAlongARadius;
 					{
 						_newGroup = [blck_AI_Side,true]  call blck_fnc_createGroup;	
@@ -182,7 +195,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 								diag_log format["_fnc_spawnMissionAI(78): Case 3: line 81: _newGroup = %1",_newGroup];
 							};
 							#endif
-							_blck_AllMissionAI append _newAI;
+							_allSpawnedAI append _newAI;
 						};
 					}forEach _groupLocations;
 				};
@@ -209,7 +222,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 						diag_log format["_fnc_spawnMissionAI(92): Spawning Groups: Default - > Center Position:  _noAIGroups=1 _newGroup=%1 _newAI = %2",_newGroup, _newAI];
 					};
 					#endif
-					_blck_AllMissionAI append _newAI;
+					_allSpawnedAI append _newAI;
 				};
 				_groupLocations = [_coords,(_noAIGroups - 1),20,40] call blck_fnc_findPositionsAlongARadius;
 				{
@@ -226,7 +239,7 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 							diag_log format["_fnc_spawnMissionAI(99): Default: Radial Positions: _newGroup=%1",_newGroup];
 						};
 						#endif
-						_blck_AllMissionAI append _newAI;
+						_allSpawnedAI append _newAI;
 					};
 				}forEach _groupLocations;
 			};
@@ -236,9 +249,9 @@ if (_missionGroups isEqualTo [] && _noAIGroups > 0) then
 #ifdef blck_debugMode
 if (blck_debugLevel >= 1) then
 {
-	diag_log format["_fnc_spawnMissionAI(133): _abort = %1 | _blck_AllMissionAI = %2",_abort,_blck_AllMissionAI];
+	diag_log format["_fnc_spawnMissionAI(243): _abort = %1 | _allSpawnedAI = %2",_abort,_allSpawnedAI];
 };
 #endif
-
-_return = [_blck_AllMissionAI,_abort];
+//diag_log format["_fnc_spawnMissionAI(246): _unitsToSpawn = %1 | count _allSpawnedAI = %2",_unitsToSpawn,count _allSpawnedAI];
+_return = [_allSpawnedAI,_abort];
 _return
