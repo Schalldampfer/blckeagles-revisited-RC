@@ -54,6 +54,16 @@ _fn_doUpdates = {
 			[["showScore",[_respectGained,_distanceBonus,_kills]], [_player]] call blck_fnc_messageplayers;
 		};
 	};
+	if (toLower(blck_modType) isEqualTo "default") then 
+	{
+		private _newKillerFrags = _player getVariable ["ExileKills", 0];
+		_newKillerFrags = _newKillerFrags + 1;
+		_player setVariable ["ExileKills", _newKillerFrags,true];
+		if (blck_useKillScoreMessage) then
+		{
+			[["showScore",[_respectGained,_distanceBonus,_kills]], [_player]] call blck_fnc_messageplayers;
+		};
+	};
 	if (blck_useKillMessages) then
 	{
 		private _weapon = currentWeapon _player;

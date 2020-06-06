@@ -16,7 +16,8 @@
 #define delayTime 1
 private ["_abort","_crates","_aiGroup","_objects","_mines","_blck_AllMissionAI","_blck_localMissionMarker",
 		"_AI_Vehicles","_timeOut","_aiDifficultyLevel","_missionPatrolVehicles","_missionGroups","_loadCratesTiming","_spawnCratesTiming","_assetSpawned",
-		"_blck_AllMissionAI","_delayTime","_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_marker","_vehicleCrewCount"];
+		"_blck_AllMissionAI","_delayTime","_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_marker","_vehicleCrewCount",
+		"_defaultMissionLocations"];
 		
 params["_coords","_mission",["_allowReinforcements",false]];
 
@@ -25,33 +26,52 @@ _aiDifficultyLevel = _difficulty;  // _difficulty is defined in the mission desc
 
 diag_log format["[blckeagls Dynamic UMS] dynamicUMSspawner (34):: Initializing mission: _cords %1 : _markerClass %2 :  _aiDifficultyLevel %3 _markerMissionName %4",_coords,_markerClass,_aiDifficultyLevel,_markerMissionName];
 
-if (isNil "_markerColor") 		then {_markerColor = "ColorBlack"};
-if (isNil "_markerType") 		then {_markerType = ["mil_box",[]]};
-//if (isNil "_timeOut") then {_timeOut = -1;};
-if (isNil "_missionGroups") 	then {_missionGroups = []};
-if (isNil "_endCondition") 		then {_endCondition = blck_missionEndCondition};  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"};
-if (isNil "_spawnCratesTiming") then {_spawnCratesTiming = blck_spawnCratesTiming}; // Choices: "atMissionSpawnGround","atMissionStartAir","atMissionEndGround","atMissionEndAir". 
-if (isNil "_loadCratesTiming") 	then {_loadCratesTiming = blck_loadCratesTiming}; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
-if (isNil "_useMines") 			then {_useMines = blck_useMines;};
 
-if (isNil "_weaponList") 		then {_weaponList = [_aiDifficultyLevel] call blck_fnc_selectAILoadout};
-if (isNil "_sideArms") 			then {_sideArms = [_aiDifficultyLevel] call blck_fnc_selectAISidearms};
-if (isNil "_uniforms") 			then {_uniforms = [_aiDifficultyLevel] call blck_fnc_selectAIUniforms};
-if (isNil "_headGear") 			then {_headGear = [_aiDifficultyLevel] call blck_fnc_selectAIHeadgear};
-if (isNil "_vests") 			then {_vests = [_aiDifficultyLevel] call blck_fnc_selectAIVests};
-if (isNil "_backpacks") 		then {_backpacks = [_aiDifficultyLevel] call blck_fnc_selectAIBackpacks};
-
-if (isNil "_chanceHeliPatrol")  then {_chanceHeliPatrol = [_aiDifficultyLevel] call blck_fnc_selectChanceHeliPatrol};
-if (isNil "_noChoppers") 		then {_noChoppers = [_aiDifficultyLevel] call blck_fnc_selectNumberAirPatrols};
-if (isNil "_chancePara") 		then {_chancePara = [_aiDifficultyLevel] call blck_fnc_selectChanceParatroops};
-if (isNil "_missionHelis") 		then {_missionHelis = [_aiDifficultyLevel] call blck_fnc_selectMissionHelis};
-if (isNil "_noPara") 			then {_noPara = [_aiDifficultyLevel] call blck_fnc_selectNumberParatroops};
-
-if (isNil "_chanceLoot") 		then {_chanceLoot = 0}; 
-if (isNil "_paraTriggerDistance") then {_paraTriggerDistance = 400;};
-if (isNil "_paraLoot") 			then {_paraLoot = blck_BoxLoot_Blue};
-if (isNil "_paraLootCounts") 	then {_paraLootCounts = blck_lootCountsRed};
+if (isNil "_assetKilledMsg")			 then {_assetKilledMsg = ""};
+if (isNil "_markerColor") 				then {_markerColor = "ColorBlack"};
+if (isNil "_markerType") 				then {_markerType = ["mil_box",[]]};
+if (isNil "_markerSize") 				then {_markerSize = []};
+if (isNil "_endCondition") 				then {_endCondition = blck_missionEndCondition};  // Options are "allUnitsKilled", "playerNear", "allKilledOrPlayerNear"};
+if (isNil "_spawnCratesTiming")	 		then {_spawnCratesTiming = blck_spawnCratesTiming}; // Choices: "atMissionSpawnGround","atMissionStartAir","atMissionEndGround","atMissionEndAir". 
+if (isNil "_loadCratesTiming") 			then {_loadCratesTiming = blck_loadCratesTiming}; // valid choices are "atMissionCompletion" and "atMissionSpawn"; 
+if (isNil "_missionPatrolVehicles") 	then {_missionPatrolVehicles = []};
+if (isNil "_missionGroups") 			then {_missionGroups = []};
+if (isNil "_hostageConfig") 			then {_hostageConfig = []};
+if (isNil "_enemyLeaderConfig") 		then {_enemyLeaderConfig = []};
+if (isNil "_useMines") 					then {_useMines = blck_useMines;};
+if (isNil "_weaponList") 				then {_weaponList = [_aiDifficultyLevel] call blck_fnc_selectAILoadout};
+if (isNil "_sideArms") 					then {_sideArms = [_aiDifficultyLevel] call blck_fnc_selectAISidearms};
+if (isNil "_uniforms") 					then {_uniforms = [_aiDifficultyLevel] call blck_fnc_selectAIUniforms};
+if (isNil "_headGear") 					then {_headGear = [_aiDifficultyLevel] call blck_fnc_selectAIHeadgear};
+if (isNil "_vests") 					then {_vests = [_aiDifficultyLevel] call blck_fnc_selectAIVests};
+if (isNil "_backpacks") 				then {_backpacks = [_aiDifficultyLevel] call blck_fnc_selectAIBackpacks};
+if (isNil "_chanceHeliPatrol") 			then {_chanceHeliPatrol = [_aiDifficultyLevel] call blck_fnc_selectChanceHeliPatrol};
+if (isNil "_noChoppers") 				then {_noChoppers = [_aiDifficultyLevel] call blck_fnc_selectNumberAirPatrols};
+if (isNil "_chancePara") 				then {_chancePara = [_aiDifficultyLevel] call blck_fnc_selectChanceParatroops};
+if (isNil "_missionHelis") 				then {_missionHelis = [_aiDifficultyLevel] call blck_fnc_selectMissionHelis};
+if (isNil "_noPara") 					then {_noPara = [_aiDifficultyLevel] call blck_fnc_selectNumberParatroops};
+if (isNil "_paraSkill")					then {_paraSkill = _aiDifficultyLevel};
+if (isNil "_chanceLoot") 				then {_chanceLoot = 1.0}; //0.5}; 
+if (isNil "_paraTriggerDistance") 		then {_paraTriggerDistance = 400;};
+if (isNil "_paraLoot") 					then {_paraLoot = blck_BoxLoot_Green};  //  Add diffiiculty based settings
+if (isNil "_paraLootCounts") 			then {_paraLootCounts = blck_lootCountsRed}; // Add difficulty based settings
+if (isNil "_missionLootVehicles") 		then {_missionLootVehicles = []};
+if (isNil "_garrisonedBuilding_ATLsystem") then {_garrisonedBuilding_ATLsystem = []};
+if (isNil "_garrisonedBuildings_BuildingPosnSystem") then {_garrisonedBuildings_BuildingPosnSystem = []};
 if (isNil "_vehicleCrewCount") then {_vehicleCrewCount = [_aiDifficultyLevel] call GMS_fnc_selectVehicleCrewCount};
+if (isNil "_defaultMissionLocations") then {_defaultMissionLocations = []};
+if (isNil "_submarinePatrolParameters") then {_submarinePatrolParameters = []};
+if (isNil "_airpatrols") then {_airpatrols = []};
+if (isNil "_scubagroupparameters") then {_scubagroupparameters = []};
+if (isNil "_markerMissionName") then {
+	diag_log format["_fnc_missionSpawner: _markerMissionName not defined, using default value"];
+	_markerMissionName = "Default Mission Name";
+};
+if (isNil "_noLootCrates") then {_noLootCrates = 1};
+if (isNil "_lootCrates") then {_lootCrates = blck_crateTypes};
+if (isNil "_lootCratePositions") then {_lootCratePositions = []};
+if (isNil "_isScubaMission") then {_isScubaMission = false};
+if (isNil "_missionLootBoxes") then {_missionLootBoxes = []};
 
 _objects = [];
 _mines = [];
@@ -231,6 +251,8 @@ if (blck_useStatic && ((_noEmplacedToSpawn > 0)) || count _missionEmplacedWeapon
 };
 
 uiSleep _delayTime;
+if (isNil "blck_UMS_crates") then {blck_UMS_crates = blck_crateTypes};
+if (blck_UMS_crates isEqualTo []) then {blck_UMS_crates = blck_crateTypes};
 if (_spawnCratesTiming isEqualTo "atMissionSpawnGround") then
 {
 	if (count _missionLootBoxes > 0) then

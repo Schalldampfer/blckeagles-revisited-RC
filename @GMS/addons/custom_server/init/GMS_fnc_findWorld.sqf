@@ -34,8 +34,8 @@ switch (toLower worldName) do
 			blck_mapRange = 6000;
 		};		
 		case "livonia":{
-			blck_mapCenter = [6500,6500,0];
-			blck_mapRange = 6100;
+			blck_mapCenter = [6500,5500,0];
+			blck_mapRange = 6000;
 		};
 		case "chernarus":{
 			diag_log "[blckeagls] Chernarus-specific settings loaded";

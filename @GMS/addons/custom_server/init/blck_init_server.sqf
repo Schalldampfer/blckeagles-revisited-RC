@@ -23,7 +23,7 @@ if !(isNil "blck_Initialized") exitWith{};
 blck_Initialized = true;
 
 // find and set Mod
-blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {""}};
+blck_modType = if (!isNull (configFile >> "CfgPatches" >> "exile_server")) then {"Exile"} else {if (!isnull (configFile >> "CfgPatches" >> "a3_epoch_server")) then {"Epoch"} else {"default"}};
 publicVariable "blck_modType";
 
 // This block waits for the mod to start but is disabled for now
@@ -219,3 +219,14 @@ blck_graveyardGroup setVariable ["blck_group",1];
 blck_pvs_version = blck_versionNumber;
 publicVariable "blck_pvs_version";
 diag_log format["[blckeagls] version %1 Build %2 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime]; //,blck_modType];
+
+if (blck_debugOn || (blck_debugLevel >= 1)) then 
+{
+	private _pos = [] call blck_fnc_findSafePosn;
+	private _root = "";
+	private _path = "Orange";
+	private _mission = "bunkerMission";
+	private _compiledMission = compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\%1\%2.sqf",_path,_mission];
+	diag_log format["[blckeagls] mission test sequence run for mission path %1 name %2",_path,_mission];
+	[_pos,"testMarkerGRG","blue"] call _compiledMission;
+};

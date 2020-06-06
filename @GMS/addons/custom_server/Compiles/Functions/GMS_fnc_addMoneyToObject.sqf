@@ -11,14 +11,10 @@
 	http://creativecommons.org/licenses/by-nc-sa/4.0/	
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
+if (toLower(blck_modType) isEqualTo "default") exitWith {};
+
 params["_obj","_difficulty"];
 
-
-#ifdef blck_debugMode
-{
-	diag_log format["_fnc_addMoneyToOject: _this select %1 = %2",_foreachindex, _this select _foreachindex];
-}forEach _this;
-#endif
 if (blck_modType isEqualTo "Exile") then
 {
 	switch (_difficulty) do
@@ -27,11 +23,7 @@ if (blck_modType isEqualTo "Exile") then
 		case "red":{_obj setVariable["ExileMoney", floor(random([blck_crateMoneyRed] call blck_fnc_getNumberFromRange)),true];};
 		case "green":{_obj setVariable["ExileMoney", floor(random([blck_crateMoneyGreen] call blck_fnc_getNumberFromRange)),true];};
 		case "orange":{_obj setVariable["ExileMoney", floor(random([blck_crateMoneyGreen] call blck_fnc_getNumberFromRange)),true];};
-		//#ifdef blck_debugMode
-		
-		//#endif
 	};
-	//diag_log format["_fnc_addMoneyToOject: ExileMoney set to %1", _obj getVariable "ExileMoney"];	
 };
 
 if (blck_modType isEqualTo "Epoch") then
@@ -43,5 +35,4 @@ if (blck_modType isEqualTo "Epoch") then
 		case "green":{_obj setVariable["Crypto", floor(random([blck_crateMoneyGreen] call blck_fnc_getNumberFromRange)),true];};
 		case "orange":{_obj setVariable["Crypto", floor(random([blck_crateMoneyGreen] call blck_fnc_getNumberFromRange)),true];};
 	};
-	//diag_log format["_fnc_addMoneyToOject: Crypto set to %1", _obj getVariable "Crypto"];
 };

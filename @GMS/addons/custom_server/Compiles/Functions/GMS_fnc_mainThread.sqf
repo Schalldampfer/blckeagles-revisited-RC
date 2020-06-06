@@ -33,12 +33,7 @@ while {true} do
 		if (blck_simulationManager isEqualTo blck_useBlckeaglsSimulationManagement) then {[] call blck_fnc_simulationManager};
 		[] call blck_fnc_sm_staticPatrolMonitor;
 		[] call blck_fnc_vehicleMonitor;		
-		//[] call blck_fnc_cleanupAliveAI;
-		//[] call blck_fnc_cleanupObjects;
-		//[] call blck_fnc_cleanupDeadAI;			
-		#ifdef GRGserver
-		[] call blck_fnc_broadcastServerFPS;
-		#endif		
+	
 	};
 	if (diag_tickTime > _timer20sec) then
 	{

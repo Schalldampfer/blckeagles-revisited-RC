@@ -48,9 +48,9 @@ _fnc_dropMissionCrates = {
 };
 
 params[ ["_coords", [0,0,0]], ["_cratesToSpawn",[]], ["_loadCrateTiming","atMissionSpawn"],["_spawnCrateTiming","atMissionSpawn"],["_missionState","start"], ["_difficulty","red"] ];
-private _params = ["_coords","_cratesToSpawn","_loadCrateTiming","_spawnCrateTiming","_missionState","_difficulty"];
 
 /*
+private _params = ["_coords","_cratesToSpawn","_loadCrateTiming","_spawnCrateTiming","_missionState","_difficulty"];
 {
 	diag_log format["_fnc_spawnMissionCrates: %1 = %2 with _foreachindex = %3",_params select _foreachindex, _this select _foreachindex, _foreachindex];
 }forEach _this;
