@@ -360,6 +360,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 
 		[  
 			[// Weapons
+			/*
 				#ifdef useAPEX
 				"arifle_AK12_F","arifle_AK12_GL_F","arifle_AKM_F","arifle_AKM_FL_F","arifle_AKS_F","arifle_ARX_blk_F","arifle_ARX_ghex_F","arifle_ARX_hex_F","arifle_CTAR_blk_F","arifle_CTAR_hex_F",
 				"arifle_CTAR_ghex_F","arifle_CTAR_GL_blk_F","arifle_CTARS_blk_F","arifle_CTARS_hex_F","arifle_CTARS_ghex_F","arifle_SPAR_01_blk_F","arifle_SPAR_01_khk_F","arifle_SPAR_01_snd_F",
@@ -392,9 +393,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["MMG_02_camo_F","130Rnd_338_Mag"],
 				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"]
-
+			*/
 			],
 			[//Magazines
+			/*
 				["3rnd_HE_Grenade_Shell",3,6],
 				["30Rnd_65x39_caseless_green",3,6],
 				["30Rnd_556x45_Stanag",3,6],
@@ -416,12 +418,14 @@ for examples of how you can do this see \Major\Compositions.sqf
 				// Apex Ammo
 				["130Rnd_338_Mag",1,3],
 				["150Rnd_93x64_Mag",1,3]
+			*/
 			],
 			[  // Optics
+			/*
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_MRCO",1,3],["optic_NVS",1,3],["optic_Nightstalker",1,2],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
 				["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3]
-
+			*/
 			],
 			[// Materials and supplies
 				["CinderBlocks",5,15],
@@ -476,6 +480,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Green = 
 		[
 			[// Weapons
+			/*
 				// Format is ["Weapon Name","Magazine Name"],
 				#ifdef useAPEX
 				"arifle_AK12_F","arifle_AK12_GL_F","arifle_AKM_F","arifle_AKM_FL_F","arifle_AKS_F","arifle_ARX_blk_F","arifle_ARX_ghex_F","arifle_ARX_hex_F","arifle_CTAR_blk_F","arifle_CTAR_hex_F",
@@ -509,9 +514,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["MMG_02_camo_F","130Rnd_338_Mag"],
 				["MMG_02_sand_F","130Rnd_338_Mag"],
 				["srifle_DMR_06_olive_F","20Rnd_762x51_Mag"]
-
+			*/
 			],
 			[//Magazines
+			/*
 				// Format is ["Magazine name, Minimum number to add, Maximum number to add],
 				["3rnd_HE_Grenade_Shell",2,4],
 				["30Rnd_65x39_caseless_green",3,6],
@@ -532,10 +538,13 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["10Rnd_127x54_Mag",1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4],
 				["10Rnd_93x64_DMR_05_Mag" ,1,4]
+			*/
 			],
 			[  // Optics
+			/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],["optic_Holosight",1,3],["optic_Holosight_smg",1,3],["acc_flashlight",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_SOS",1,2],["optic_LRPS",1,2],["optic_MRCO",1,3],["optic_DMS",1,3],["optic_NVS",1,3]
+			*/
 			],
 			[
 				["CinderBlocks",5,15],
@@ -589,6 +598,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Blue = 
 		[
 			[// Weapons
+			/*
 				["MultiGun","EnergyPackLg"],
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
 				["arifle_Katiba_GL_F","30Rnd_65x39_caseless_green"],
@@ -619,8 +629,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["Arifle_MX_SW_F","100Rnd_65x39_caseless_mag_Tracer"],
 				["Arifle_MX_SW_Black_F","100Rnd_65x39_caseless_mag_Tracer"]
+			*/
 			],
 			[//Magazines
+			/*
 				["3rnd_HE_Grenade_Shell",1,2],
 				["30Rnd_65x39_caseless_green",3,6],
 				["30Rnd_556x45_Stanag",3,6],
@@ -633,10 +645,13 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["3rnd_HE_Grenade_Shell",1,4],
 				["HandGrenade",1,3],
 				["EnergyPack",2,5]
+			*/
 			],
 			[  // Optics
+			/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],["optic_Holosight",1,3],["optic_Holosight_smg",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_MRCO",1,3],["optic_Yorris",1,3],["optic_MRD",1,3],["acc_flashlight",1,3]
+			*/
 			],
 			[
 				["jerrycan_epoch",1,2],
@@ -686,6 +701,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Red = 
 		[
 			[// Weapons
+			/*
 				["MultiGun","EnergyPackLg"],
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
 				["arifle_Katiba_GL_F","30Rnd_65x39_caseless_green"],
@@ -717,18 +733,21 @@ for examples of how you can do this see \Major\Compositions.sqf
 				["srifle_EBR_F","20Rnd_762x51_Mag"],
 				["m249_EPOCH","200Rnd_556x45_M249"],
 				["LMG_Zafir_F","150Rnd_762x54_Box"]
+				*/
 			],
 			[//Magazines
-
+				/*
 				["3rnd_HE_Grenade_Shell",1,5],["30Rnd_65x39_caseless_green",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_45ACP_Mag_SMG_01",3,6],["20Rnd_556x45_UW_mag",3,6],
 				["10Rnd_762x54_Mag",3,6],["20Rnd_762x51_Mag",3,7],["200Rnd_65x39_cased_Box",3,6],["100Rnd_65x39_caseless_mag_Tracer",3,6],
 				["3rnd_HE_Grenade_Shell",1,2],["HandGrenade",1,3],["EnergyPack",2,5]
+				*/
 			],
 			[  // Optics
-
+				/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],
 				["optic_Holosight",1,3],["optic_Holosight_smg",1,3],["optic_Yorris",1,3],["optic_MRD",1,3],["acc_flashlight",1,3],
 				["muzzle_snds_H",1,3],["muzzle_snds_L",1,3],["muzzle_snds_M",1,3],["muzzle_snds_B",1,3],["muzzle_snds_H_MG",1,3],["muzzle_snds_acp",1,3]
+				*/
 			],
 			[
 				["jerrycan_epoch",1,2],
