@@ -421,6 +421,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[  // Optics
+				//"CUP_optic_GOSHAWK","CUP_optic_NSPU","CUP_optic_AN_PVS_4","CUP_optic_AN_PVS_10_black","CUP_optic_AN_PAS_13c1","CUP_optic_CWS",
+				"CUP_optic_PSO_3","CUP_optic_LeupoldMk4","CUP_optic_Leupold_VX3","CUP_optic_LeupoldM3LR","CUP_optic_LeupoldMk4_20x40_LRT","CUP_optic_SB_11_4x20_PM","CUP_optic_SB_3_12x50_PMII","CUP_optic_LeupoldMk4_25x50_LRT","CUP_optic_PGO7V","CUP_optic_NSPU_RPG",
+				"CUP_optic_PSO_1","CUP_optic_PSO_1_AK","CUP_optic_PechenegScope","CUP_optic_PSO_1_1","CUP_optic_SUSAT","CUP_optic_ACOG","CUP_optic_ACOG2","CUP_optic_ACOG_TA01NSN_RMR_Black","CUP_optic_ACOG_TA01B_Black","CUP_optic_ACOG_TA01B_RMR_Black","CUP_optic_LeupoldMk4_CQ_T","CUP_optic_ElcanM145","CUP_optic_Elcan_SpecterDR","CUP_optic_Elcan_SpecterDR_RMR","CUP_optic_Elcan","CUP_optic_HensoldtZO","CUP_optic_HensoldtZO_RDS",
+				//"CUP_optic_ekp_8_02","CUP_optic_1p63","CUP_optic_AC11704_Black","CUP_optic_VortexRazor_UH1_Black","CUP_optic_HoloBlack","CUP_optic_Eotech533","CUP_optic_CompM2_Black","CUP_optic_CompM4","CUP_optic_MicroT1","CUP_optic_MARS","CUP_optic_ZDDot","CUP_optic_MRad","CUP_optic_TrijiconRx01_black","CUP_optic_TrijiconRx01_kf_black","CUP_optic_ZeissZPoint",
+				//"optic_MRD","CUP_optic_no23mk2","CUP_optic_PEM","CUP_optic_Remington",
+				"CUP_muzzle_snds_AWM","CUP_muzzle_snds_KZRZP_SVD","CUP_muzzle_snds_KZRZP_PK","CUP_muzzle_snds_M110","CUP_muzzle_snds_Mk12",
+				"CUP_muzzle_snds_68SPC","CUP_muzzle_snds_KZRZP_AK762","CUP_muzzle_snds_KZRZP_AK545","muzzle_snds_M","muzzle_snds_B",
+				//"CUP_muzzle_PB6P9","CUP_muzzle_Bizon","CUP_muzzle_PBS4","CUP_muzzle_snds_MicroUzi","CUP_muzzle_snds_mk23","CUP_muzzle_snds_MP7","CUP_muzzle_snds_SA61","muzzle_snds_acp","muzzle_snds_L",
+				//"CUP_muzzle_mfsup_Flashhider_545x39_Black","CUP_muzzle_mfsup_Flashhider_762x39_Black","CUP_muzzle_mfsup_Flashhider_PK_Black","CUP_muzzle_mfsup_Flashhider_556x45_Black","CUP_muzzle_mfsup_Flashhider_762x51_Black",
+				"acc_pointer_IR","CUP_acc_MLPLS_Laser"//,
+				//"acc_flashlight","acc_flashlight_pistol",
+				//"CUP_bipod_Harris_1A2_L","CUP_bipod_VLTOR_Modpod","CUP_bipod_G3","CUP_bipod_FNFAL","CUP_Bipod_G36"
 			/*
 				["optic_SOS",1,2],["optic_LRPS",1,2],["optic_DMS",1,2],["optic_KHS_blk",1,3],["optic_KHS_hex",1,3],["optic_KHS_old",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_MRCO",1,3],["optic_NVS",1,3],["optic_Nightstalker",1,2],["acc_flashlight",1,3],["acc_pointer_IR",1,3],
@@ -542,6 +554,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[  // Optics
+				//"CUP_optic_GOSHAWK","CUP_optic_NSPU","CUP_optic_AN_PVS_4","CUP_optic_AN_PVS_10_black","CUP_optic_AN_PAS_13c1","CUP_optic_CWS",
+				//"CUP_optic_PSO_3","CUP_optic_LeupoldMk4","CUP_optic_Leupold_VX3","CUP_optic_LeupoldM3LR","CUP_optic_LeupoldMk4_20x40_LRT","CUP_optic_SB_11_4x20_PM","CUP_optic_SB_3_12x50_PMII","CUP_optic_LeupoldMk4_25x50_LRT","CUP_optic_PGO7V","CUP_optic_NSPU_RPG",
+				"CUP_optic_PSO_1","CUP_optic_PSO_1_AK","CUP_optic_PechenegScope","CUP_optic_PSO_1_1","CUP_optic_SUSAT","CUP_optic_ACOG","CUP_optic_ACOG2","CUP_optic_ACOG_TA01NSN_RMR_Black","CUP_optic_ACOG_TA01B_Black","CUP_optic_ACOG_TA01B_RMR_Black","CUP_optic_LeupoldMk4_CQ_T","CUP_optic_ElcanM145","CUP_optic_Elcan_SpecterDR","CUP_optic_Elcan_SpecterDR_RMR","CUP_optic_Elcan","CUP_optic_HensoldtZO","CUP_optic_HensoldtZO_RDS",
+				"CUP_optic_ekp_8_02","CUP_optic_1p63","CUP_optic_AC11704_Black","CUP_optic_VortexRazor_UH1_Black","CUP_optic_HoloBlack","CUP_optic_Eotech533","CUP_optic_CompM2_Black","CUP_optic_CompM4","CUP_optic_MicroT1","CUP_optic_MARS","CUP_optic_ZDDot","CUP_optic_MRad","CUP_optic_TrijiconRx01_black","CUP_optic_TrijiconRx01_kf_black","CUP_optic_ZeissZPoint",
+				//"optic_MRD","CUP_optic_no23mk2","CUP_optic_PEM","CUP_optic_Remington",
+				//"CUP_muzzle_snds_AWM","CUP_muzzle_snds_KZRZP_SVD","CUP_muzzle_snds_KZRZP_PK","CUP_muzzle_snds_M110","CUP_muzzle_snds_Mk12",
+				"CUP_muzzle_snds_68SPC","CUP_muzzle_snds_KZRZP_AK762","CUP_muzzle_snds_KZRZP_AK545","muzzle_snds_M","muzzle_snds_B",
+				"CUP_muzzle_PB6P9","CUP_muzzle_Bizon","CUP_muzzle_PBS4","CUP_muzzle_snds_MicroUzi","CUP_muzzle_snds_mk23","CUP_muzzle_snds_MP7","CUP_muzzle_snds_SA61","muzzle_snds_acp","muzzle_snds_L",
+				//"CUP_muzzle_mfsup_Flashhider_545x39_Black","CUP_muzzle_mfsup_Flashhider_762x39_Black","CUP_muzzle_mfsup_Flashhider_PK_Black","CUP_muzzle_mfsup_Flashhider_556x45_Black","CUP_muzzle_mfsup_Flashhider_762x51_Black",
+				"acc_pointer_IR","CUP_acc_MLPLS_Laser",
+				//"acc_flashlight","acc_flashlight_pistol",
+				"CUP_bipod_Harris_1A2_L","CUP_bipod_VLTOR_Modpod"//,"CUP_bipod_G3","CUP_bipod_FNFAL","CUP_Bipod_G36"
 			/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],["optic_Holosight",1,3],["optic_Holosight_smg",1,3],["acc_flashlight",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_SOS",1,2],["optic_LRPS",1,2],["optic_MRCO",1,3],["optic_DMS",1,3],["optic_NVS",1,3]
@@ -650,6 +674,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[  // Optics
+				//"CUP_optic_GOSHAWK","CUP_optic_NSPU","CUP_optic_AN_PVS_4","CUP_optic_AN_PVS_10_black","CUP_optic_AN_PAS_13c1","CUP_optic_CWS",
+				//"CUP_optic_PSO_3","CUP_optic_LeupoldMk4","CUP_optic_Leupold_VX3","CUP_optic_LeupoldM3LR","CUP_optic_LeupoldMk4_20x40_LRT","CUP_optic_SB_11_4x20_PM","CUP_optic_SB_3_12x50_PMII","CUP_optic_LeupoldMk4_25x50_LRT","CUP_optic_PGO7V","CUP_optic_NSPU_RPG",
+				//"CUP_optic_PSO_1","CUP_optic_PSO_1_AK","CUP_optic_PechenegScope","CUP_optic_PSO_1_1","CUP_optic_SUSAT","CUP_optic_ACOG","CUP_optic_ACOG2","CUP_optic_ACOG_TA01NSN_RMR_Black","CUP_optic_ACOG_TA01B_Black","CUP_optic_ACOG_TA01B_RMR_Black","CUP_optic_LeupoldMk4_CQ_T","CUP_optic_ElcanM145","CUP_optic_Elcan_SpecterDR","CUP_optic_Elcan_SpecterDR_RMR","CUP_optic_Elcan","CUP_optic_HensoldtZO","CUP_optic_HensoldtZO_RDS",
+				"CUP_optic_ekp_8_02","CUP_optic_1p63","CUP_optic_AC11704_Black","CUP_optic_VortexRazor_UH1_Black","CUP_optic_HoloBlack","CUP_optic_Eotech533","CUP_optic_CompM2_Black","CUP_optic_CompM4","CUP_optic_MicroT1","CUP_optic_MARS","CUP_optic_ZDDot","CUP_optic_MRad","CUP_optic_TrijiconRx01_black","CUP_optic_TrijiconRx01_kf_black","CUP_optic_ZeissZPoint",
+				"optic_MRD","CUP_optic_no23mk2","CUP_optic_PEM","CUP_optic_Remington",
+				//"CUP_muzzle_snds_AWM","CUP_muzzle_snds_KZRZP_SVD","CUP_muzzle_snds_KZRZP_PK","CUP_muzzle_snds_M110","CUP_muzzle_snds_Mk12",
+				//"CUP_muzzle_snds_68SPC","CUP_muzzle_snds_KZRZP_AK762","CUP_muzzle_snds_KZRZP_AK545","muzzle_snds_M","muzzle_snds_B",
+				//"CUP_muzzle_PB6P9","CUP_muzzle_Bizon","CUP_muzzle_PBS4","CUP_muzzle_snds_MicroUzi","CUP_muzzle_snds_mk23","CUP_muzzle_snds_MP7","CUP_muzzle_snds_SA61","muzzle_snds_acp","muzzle_snds_L",
+				//"CUP_muzzle_mfsup_Flashhider_545x39_Black","CUP_muzzle_mfsup_Flashhider_762x39_Black","CUP_muzzle_mfsup_Flashhider_PK_Black","CUP_muzzle_mfsup_Flashhider_556x45_Black","CUP_muzzle_mfsup_Flashhider_762x51_Black",
+				//"acc_pointer_IR","CUP_acc_MLPLS_Laser",
+				"acc_flashlight","acc_flashlight_pistol",
+				"CUP_bipod_Harris_1A2_L","CUP_bipod_VLTOR_Modpod","CUP_bipod_G3","CUP_bipod_FNFAL","CUP_Bipod_G36"
 			/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],["optic_Holosight",1,3],["optic_Holosight_smg",1,3],
 				["optic_Arco",1,3],["optic_Hamr",1,3],["optic_MRCO",1,3],["optic_Yorris",1,3],["optic_MRD",1,3],["acc_flashlight",1,3]
@@ -746,6 +782,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 				*/
 			],
 			[  // Optics
+				//"CUP_optic_GOSHAWK","CUP_optic_NSPU","CUP_optic_AN_PVS_4","CUP_optic_AN_PVS_10_black","CUP_optic_AN_PAS_13c1","CUP_optic_CWS",
+				//"CUP_optic_PSO_3","CUP_optic_LeupoldMk4","CUP_optic_Leupold_VX3","CUP_optic_LeupoldM3LR","CUP_optic_LeupoldMk4_20x40_LRT","CUP_optic_SB_11_4x20_PM","CUP_optic_SB_3_12x50_PMII","CUP_optic_LeupoldMk4_25x50_LRT","CUP_optic_PGO7V","CUP_optic_NSPU_RPG",
+				"CUP_optic_PSO_1","CUP_optic_PSO_1_AK","CUP_optic_PechenegScope","CUP_optic_PSO_1_1","CUP_optic_SUSAT","CUP_optic_ACOG","CUP_optic_ACOG2","CUP_optic_ACOG_TA01NSN_RMR_Black","CUP_optic_ACOG_TA01B_Black","CUP_optic_ACOG_TA01B_RMR_Black","CUP_optic_LeupoldMk4_CQ_T","CUP_optic_ElcanM145","CUP_optic_Elcan_SpecterDR","CUP_optic_Elcan_SpecterDR_RMR","CUP_optic_Elcan","CUP_optic_HensoldtZO","CUP_optic_HensoldtZO_RDS",
+				"CUP_optic_ekp_8_02","CUP_optic_1p63","CUP_optic_AC11704_Black","CUP_optic_VortexRazor_UH1_Black","CUP_optic_HoloBlack","CUP_optic_Eotech533","CUP_optic_CompM2_Black","CUP_optic_CompM4","CUP_optic_MicroT1","CUP_optic_MARS","CUP_optic_ZDDot","CUP_optic_MRad","CUP_optic_TrijiconRx01_black","CUP_optic_TrijiconRx01_kf_black","CUP_optic_ZeissZPoint",
+				"optic_MRD","CUP_optic_no23mk2","CUP_optic_PEM","CUP_optic_Remington",
+				//"CUP_muzzle_snds_AWM","CUP_muzzle_snds_KZRZP_SVD","CUP_muzzle_snds_KZRZP_PK","CUP_muzzle_snds_M110","CUP_muzzle_snds_Mk12",
+				//"CUP_muzzle_snds_68SPC","CUP_muzzle_snds_KZRZP_AK762","CUP_muzzle_snds_KZRZP_AK545","muzzle_snds_M","muzzle_snds_B",
+				//"CUP_muzzle_PB6P9","CUP_muzzle_Bizon","CUP_muzzle_PBS4","CUP_muzzle_snds_MicroUzi","CUP_muzzle_snds_mk23","CUP_muzzle_snds_MP7","CUP_muzzle_snds_SA61","muzzle_snds_acp","muzzle_snds_L",
+				"CUP_muzzle_mfsup_Flashhider_545x39_Black","CUP_muzzle_mfsup_Flashhider_762x39_Black","CUP_muzzle_mfsup_Flashhider_PK_Black","CUP_muzzle_mfsup_Flashhider_556x45_Black","CUP_muzzle_mfsup_Flashhider_762x51_Black",
+				//"acc_pointer_IR","CUP_acc_MLPLS_Laser",
+				"acc_flashlight","acc_flashlight_pistol",
+				"CUP_bipod_Harris_1A2_L","CUP_bipod_VLTOR_Modpod","CUP_bipod_G3","CUP_bipod_FNFAL","CUP_Bipod_G36"
 				/*
 				["optic_Aco",1,3],["optic_ACO_grn",1,3],["optic_Aco_smg",1,3],["optic_ACO_grn_smg",1,3],
 				["optic_Holosight",1,3],["optic_Holosight_smg",1,3],["optic_Yorris",1,3],["optic_MRD",1,3],["acc_flashlight",1,3],
