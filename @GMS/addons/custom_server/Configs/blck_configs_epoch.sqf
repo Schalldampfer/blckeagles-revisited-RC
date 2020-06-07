@@ -357,7 +357,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 	blck_BoxLoot_Orange = 
 		// Loot is grouped as [weapons],[magazines],[items] in order to be able to use the correct function to load the item into the crate later on.
 		// Each item consist of the following information ["ItemName",minNum, maxNum] where min is the smallest number added and min+max is the largest number added.
-
+		//[Extreme]
 		[  
 			[// Weapons
 			/*
@@ -478,6 +478,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 	];
 
 	blck_BoxLoot_Green = 
+		//[Hard]
 		[
 			[// Weapons
 			/*
@@ -596,6 +597,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 		];
 
 	blck_BoxLoot_Blue = 
+		//[Easy]
 		[
 			[// Weapons
 			/*
@@ -699,6 +701,7 @@ for examples of how you can do this see \Major\Compositions.sqf
 		];
 
 	blck_BoxLoot_Red = 
+		//[Medium]
 		[
 			[// Weapons
 			/*
