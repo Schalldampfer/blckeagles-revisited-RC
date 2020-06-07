@@ -159,6 +159,7 @@
 	blck_cleanupCompositionTimer = 40*30;  // Mission objects will be deleted after the mission is completed after a deley set by this timer.
 	blck_cleanUpLootChests = false; // when true, loot crates will be deleted together with other mission objects.
 	blck_MissionTimeout = 45*60;  // 60 min - missions will timeout and respawn in another location. This prevents missions in impossible locations from persisting.
+	blck_maxSpawnedMissions = 10;
 
 	///////////////////////////////
 	// Paratroop Settings
