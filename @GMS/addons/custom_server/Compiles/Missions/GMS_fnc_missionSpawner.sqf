@@ -66,6 +66,13 @@ if (isNil "_markerMissionName") then {
 	diag_log format["_fnc_missionSpawner: _markerMissionName not defined, using default value"];
 	_markerMissionName = "Default Mission Name";
 };
+switch (_markerColor) do {
+		case "ColorBlue":{ _markerMissionName = "[Easy] " + _markerMissionName; };
+		case "ColorRed":{ _markerMissionName = "[Medium] " + _markerMissionName; };
+		case "ColorGreen":{ _markerMissionName = "[Hard] " + _markerMissionName; };
+		case "ColorOrange":{ _markerMissionName = "[Extreme] " + _markerMissionName; };
+		default {};
+};
 if (isNil "_noLootCrates") then {_noLootCrates = 1};
 if (isNil "_lootCrates") then {_lootCrates = blck_crateTypes};
 if (isNil "_lootCratePositions") then {_lootCratePositions = []};
