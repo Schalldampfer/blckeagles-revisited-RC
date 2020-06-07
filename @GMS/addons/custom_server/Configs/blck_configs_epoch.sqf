@@ -147,13 +147,13 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	];
 
 	blck_AIPatrolVehicles = ["B_G_Offroad_01_armed_EPOCH","B_LSV_01_armed_F","I_C_Offroad_02_LMG_F","B_T_LSV_01_armed_black_F","B_T_LSV_01_armed_olive_F","B_T_LSV_01_armed_sand_F"]; // Type of vehicle spawned to defend AI bases
-	blck_AIPatrolVehiclesBlue = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesRed = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesGreen = blck_AIPatrolVehicles;
-	blck_AIPatrolVehiclesOrange = blck_AIPatrolVehicles;
+	blck_AIPatrolVehiclesBlue = ["CUP_O_Datsun_PK","CUP_O_Datsun_PK_Random","CUP_O_Hilux_DSHKM_TK_INS","CUP_O_Hilux_M2_TK_INS","CUP_B_LR_MG_GB_W","CUP_O_LR_MG_TKM","CUP_O_UAZ_MG_RU","CUP_O_UAZ_MG_CSAT"];
+	blck_AIPatrolVehiclesRed = ["CUP_O_Hilux_DSHKM_TK_INS","CUP_O_Hilux_M2_TK_INS","CUP_B_LR_MG_GB_W","CUP_O_LR_MG_TKM","CUP_B_HMMWV_M2_USMC","CUP_B_HMMWV_M1114_USMC","CUP_O_UAZ_AGS30_RU","CUP_O_UAZ_AGS30_CSAT","CUP_O_UAZ_MG_RU","CUP_O_UAZ_MG_CSAT"];
+	blck_AIPatrolVehiclesGreen = ["CUP_O_Hilux_armored_M2_TK_INS","CUP_O_Hilux_armored_DSHKM_TK_INS","CUP_B_HMMWV_M2_USMC","CUP_B_M1165_GMV_USMC","CUP_O_UAZ_AGS30_RU","CUP_O_UAZ_AGS30_CSAT"];
+	blck_AIPatrolVehiclesOrange = ["CUP_B_M1151_Deploy_WDL_USA","CUP_B_M1151_M2_WDL_USA","CUP_O_Hilux_btr60_TK_INS"];
 
 	// Blacklisted itesm
-	blck_blacklistedOptics = ["optic_Nightstalker","optic_tws","optic_tws_mg","optic_DMS","optic_DMS_ghex_F","optic_SOS","optic_SOS_khk_F","optic_LRPS","optic_LRPS_tna_F","optic_LRPS_ghex_F"];
+	blck_blacklistedOptics = ["optic_Nightstalker","optic_tws","optic_tws_mg","optic_DMS","optic_DMS_ghex_F","optic_SOS","optic_SOS_khk_F","optic_LRPS","optic_LRPS_tna_F","optic_LRPS_ghex_F","CUP_optic_CWS","CUP_optic_AN_PVS_4","CUP_optic_AN_PVS_4_M14","CUP_optic_AN_PVS_4_M16","CUP_optic_AN_PVS_10","CUP_optic_AN_PVS_10_black","CUP_optic_AN_PVS_10_od","CUP_optic_AN_PAS_13c1","CUP_optic_AN_PAS_13c2","CUP_optic_NSPU","CUP_optic_GOSHAWK","CUP_optic_GOSHAWK_RIS","CUP_optic_NSPU_RPG"];
 
 	// AI Weapons and Attachments
 	blck_bipods = ["bipod_01_F_blk","bipod_01_F_mtp","bipod_01_F_snd","bipod_02_F_blk","bipod_02_F_hex","bipod_02_F_tan","bipod_03_F_blk","bipod_03_F_oli"];
@@ -223,7 +223,8 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 	];
 
 	blck_Pistols = [
-		"hgun_PDW2000_F","hgun_ACPC2_F","hgun_Rook40_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F","hgun_Pistol_Signal_F"
+		//"hgun_PDW2000_F","hgun_ACPC2_F","hgun_Rook40_F","hgun_P07_F","hgun_Pistol_heavy_01_F","hgun_Pistol_heavy_02_F","hgun_Pistol_Signal_F"
+		"CUP_hgun_Compact","CUP_hgun_Duty","CUP_hgun_Phantom","CUP_hgun_Glock17","CUP_hgun_Glock17_blk","CUP_hgun_Glock17_tan","CUP_hgun_M9","CUP_hgun_Makarov","CUP_hgun_PMM","CUP_hgun_PB6P9","CUP_hgun_TaurusTracker455","CUP_hgun_Colt1911","CUP_hgun_Deagle","CUP_hgun_SA61","CUP_hgun_MicroUzi","CUP_hgun_Mac10","CUP_hgun_MP7","CUP_hgun_TEC9","CUP_hgun_Mk23"
 	];
 	blck_Pistols_blue = blck_Pistols;
 	blck_Pistols_red = blck_Pistols;
@@ -244,10 +245,10 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 
 	//This defines the random weapon to spawn on the AI
 	//https://community.bistudio.com/wiki/Arma_3_CfgWeapons_Weapons
-	blck_WeaponList_Orange = blck_RifleLMG + blck_DLC_Sniper + blck_DLC_MMG;
-	blck_WeaponList_Green = blck_RifleSniper + blck_RifleAsault_650 + blck_RifleLMG + blck_DLC_MMG;
-	blck_WeaponList_Blue = blck_RifleOther + blck_RifleAsault_556 + blck_RifleSniper;
-	blck_WeaponList_Red = blck_Pistols + blck_RifleOther + blck_RifleAsault_556;
+	blck_WeaponList_Blue = ["CUP_srifle_Mosin_Nagant","CUP_srifle_LeeEnfield_rail","CUP_srifle_CZ550_rail","CUP_smg_MP5A5","CUP_smg_MP5A5_flashlight","CUP_sgun_Saiga12K","CUP_arifle_AKS74U","CUP_arifle_SAIGA_MK03_top_rail","CUP_arifle_SIAGE_MK03_Wood_top_rail","CUP_arifle_TYPE_56_2_Early","CUP_smg_bizon","CUP_smg_vityaz","CUP_smg_saiga9","CUP_smg_EVO","CUP_arifle_G36C","CUP_sgun_CZ584","CUP_sgun_M1014","CUP_arifle_M16A1","CUP_smg_PS90_olive","CUP_sgun_SPAS12","CUP_sgun_M1014_Entry_vfg","CUP_srifle_Remington700","CUP_SKS","CUP_SKS_rail","CUP_smg_p90_black","CUP_smg_MP5SD6"];
+	blck_WeaponList_Red = ["CUP_sgun_AA12","CUP_arifle_AUG_A1","CUP_arifle_AKM","CUP_arifle_AKMS","CUP_arifle_AK47","CUP_arifle_AK74","CUP_arifle_AKS74","CUP_arifle_AK74M","CUP_arifle_AK74M_camo","CUP_arifle_AK74M_top_rail","CUP_arifle_AK107","CUP_arifle_CZ805_A1","CUP_arifle_CZ805_A2","CUP_arifle_FNFAL5060_railed","CUP_arifle_FNFAL_OSW_railed","CUP_arifle_G36A_RIS","CUP_arifle_G36K_RIS","CUP_arifle_HK416_CQB_Black","CUP_arifle_HK416_Black","CUP_arifle_HK_M27","CUP_arifle_HK417_12","CUP_arifle_L85A2","CUP_arifle_L85A2_NG","CUP_arifle_L86A2","CUP_srifle_M14","CUP_arifle_M16A2","CUP_arifle_M16A4_Grip","CUP_arifle_M4A1","CUP_arifle_M4A1_black","CUP_arifle_M4A3_black","CUP_arifle_mk18_black","CUP_arifle_SBR_black","CUP_arifle_Sa58P","CUP_arifle_Sa58V","CUP_arifle_Sa58RIS1","CUP_arifle_Sa58RIS2","CUP_arifle_Sa58P_frontris","CUP_arifle_Mk16_STD","CUP_arifle_Mk16_CQC","CUP_arifle_Mk17_CQC","CUP_arifle_Mk17_STD","CUP_arifle_XM8_Carbine","CUP_arifle_XM8_Compact_Rail","CUP_lmg_UK59","CUP_Famas_F1_Rail","CUP_arifle_G3A3_ris","CUP_arifle_ACR_blk_556","CUP_arifle_Galil_556_black","CUP_arifle_Galil_SAR_black","CUP_arifle_X95","CUP_arifle_Fort224","CUP_arifle_Fort221","CUP_arifle_FNFAL5061_wooden_railed","CUP_arifle_DSA_SA58","CUP_arifle_DSA_SA58_OSW"];
+	blck_WeaponList_Green = blck_WeaponList_Red + ["CUP_arifle_AKS74U_railed","CUP_arifle_AK74M_railed","CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_G36A","CUP_arifle_MG36","CUP_lmg_L110A1","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_arifle_DSA_SA58_DMR","CUP_arifle_CZ805_B"];
+	blck_WeaponList_Orange = blck_WeaponList_Red + ["CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_CZ805_GL","CUP_arifle_G36A","CUP_arifle_MG36","CUP_arifle_HK417_20","CUP_lmg_L110A1","CUP_srifle_L129A1","CUP_srifle_M110","CUP_srifle_Mk12SPR","CUP_lmg_M240","CUP_lmg_L7A2","CUP_lmg_FNMAG","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_lmg_m249_pip3","CUP_lmg_m249_pip4","CUP_lmg_M60","CUP_lmg_M60E4","CUP_lmg_MG3_rail","CUP_lmg_Mk48","CUP_lmg_PKMN","CUP_lmg_Pecheneg","CUP_arifle_Mk16_SV","CUP_arifle_Mk20","CUP_arifle_xm8_sharpshooter","CUP_arifle_xm8_SAW","CUP_srifle_DMR","CUP_srifle_M24_blk","CUP_srifle_M40A3","CUP_srifle_SVD","CUP_srifle_SVD_top_rail","CUP_srifle_RSASS_Black","CUP_srifle_m110_kac","CUP_srifle_G22_wdl"];
 
 	#ifdef useAPEX
 		blck_WeaponList_Orange = blck_WeaponList_Orange + blck_apexWeapons;

@@ -283,7 +283,7 @@
 	
 	blck_useStatic = true;  // When true, AI will man static weapons spawned 20-30 meters from the mission center. These are very effective against most vehicles
 	blck_killEmptyStaticWeapons = true;  // When true, static weapons will have damage set to 1 when the AI manning them is killed.
-	blck_staticWeapons = ["B_HMG_01_high_F","B_HMG_01_high_F","B_GMG_01_high_F"/*,"O_static_AT_F"*/];  // [0.50 cal, grenade launcher, AT Launcher]
+	blck_staticWeapons = ["I_HMG_02_high_F","CUP_I_DSHKM_NAPA","CUP_I_M2StaticMG_RACS","CUP_I_KORD_high_UN"/*,"B_HMG_01_high_F","B_HMG_01_high_F","B_GMG_01_high_F","O_static_AT_F"*/];  // [0.50 cal, grenade launcher, AT Launcher]
 
 	////////////////////
 	// Mission Static Weapon Settings

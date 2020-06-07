@@ -101,15 +101,15 @@ _missionGroups =
 	]; // Can be used to define spawn positions of AI patrols
 	
 _missionEmplacedWeapons = [
-	["B_HMG_01_high_F",[-10,-15,0]],
-	["B_GMG_01_high_F",[10,12,0]],
-	["O_static_AT_F",[-10,10,0]]
+	["I_HMG_02_high_F",[-10,-15,0]],
+	["I_HMG_02_high_F",[10,12,0]],
+	["CUP_I_SPG9_NAPA",[-10,10,0]]
 	]; // can be used to define the type and precise placement of static weapons [["wep",[1,2,3]] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
 
 _missionPatrolVehicles = [
-	["B_MRAP_01_hmg_F",[27.8945,100.275,0],0,[true,false]],
-	["B_MRAP_01_hmg_F",[-84.7793,72.2617,9.53674e-007],0,[true,false]],
-	["B_MRAP_01_gmg_F",[-87.8457,-109.947,7.15256e-007],0,[true,false]]
+	["CUP_O_Datsun_PK",[27.8945,100.275,0],0,[true,false]],
+	["CUP_O_Datsun_PK_Random",[-84.7793,72.2617,9.53674e-007],0,[true,false]],
+	["CUP_O_Hilux_DSHKM_TK_INS",[-87.8457,-109.947,7.15256e-007],0,[true,false]]
 ];	
 //  Change _useMines to true/false below to enable mission-specific settings.
 _useMines = blck_useMines;
