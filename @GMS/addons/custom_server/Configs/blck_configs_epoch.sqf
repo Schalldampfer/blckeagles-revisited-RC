@@ -349,10 +349,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 ***************************************************************************************/
 
 	// values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
-	blck_lootCountsOrange = [2,12,2,12,8,1];   // Orange
-	blck_lootCountsGreen = [2,10,2,8,6,1]; // Green
-	blck_lootCountsRed = [1,8,1,6,5,1];  // Red
-	blck_lootCountsBlue = [1,4,1,4,4,1];   // Blue
+	blck_lootCountsOrange = [3,12,4,12,10,1];   // Orange
+	blck_lootCountsGreen = [3,10,3,10,8,1]; // Green
+	blck_lootCountsRed = [2,8,2,8,6,1];  // Red
+	blck_lootCountsBlue = [2,6,2,6,4,1];   // Blue
 
 	blck_BoxLoot_Orange = 
 		// Loot is grouped as [weapons],[magazines],[items] in order to be able to use the correct function to load the item into the crate later on.
