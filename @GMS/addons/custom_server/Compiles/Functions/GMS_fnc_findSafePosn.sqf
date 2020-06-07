@@ -66,7 +66,7 @@ if (_coords isEqualTo []) then
 			_x set[1, (_x select 1) * 0.8];
 			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
 		} forEach _blacklistedLocations;
-		_coords = [blck_mapCenter,0,blck_mapRange,3,0,5,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+		_coords = [blck_mapCenter,0,blck_mapRange,20,0,1,0,_blacklistedLocations] call BIS_fnc_findSafePos;
 		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
 		if !(_coords isEqualTo []) exitWith {};
 		uisleep 1;
