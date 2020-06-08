@@ -17,13 +17,13 @@ private ["_abort","_crates","_aiGroup","_objects","_groupPatrolRadius","_mission
 		"_AI_Vehicles","_timeOut","_aiDifficultyLevel","_missionPatrolVehicles","_missionGroups","_loadCratesTiming","_spawnCratesTiming","_assetSpawned","_hostageConfig",
 		"_chanceHeliPatrol","_noPara","_chanceLoot","_heliCrew","_loadCratesTiming","_useMines","_blck_AllMissionAI","_delayTime","_groupPatrolRadius",
 		"_wait","_missionStartTime","_playerInRange","_missionTimedOut","_temp","_patrolVehicles","_vehToSpawn","_noChoppers","_chancePara","_paraSkill","_marker","_vehicleCrewCount",
-		"_defaultMissionLocations","_garrisonedbuildings_buildingposnsystem","_garrisonedBuilding_ATLsystem", "_isScubaMission"];
+		"_defaultMissionLocations","_garrisonedbuildings_buildingposnsystem","_garrisonedBuilding_ATLsystem", "_isScubaMission","_markerlabel"];
 		
 params["_coords","_markerName","_aiDifficultyLevel"];
-
+if (isNil "_markerLabel") then {_markerLabel = _markerMissionName};
 [_markerName,  "active",_coords] call blck_fnc_updateMissionQue;
 
-diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3 _markerLabel %4",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
+diag_log format["[blckeagls] missionSpawner (17):: Initializing mission: _cords %1 : _markerName %2 :  _aiDifficultyLevel %3",_coords,_markerName,_aiDifficultyLevel,_markerLabel];
 
 if (isNil "_assetKilledMsg")			 then {_assetKilledMsg = ""};
 if (isNil "_markerColor") 				then {_markerColor = "ColorBlack"};
