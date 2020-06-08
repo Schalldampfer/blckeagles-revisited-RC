@@ -40,6 +40,10 @@ switch (_blck_WorldName) do
 			blck_mapCenter = [6322,7801,0]; 
 			blck_mapRange = 4500; 
 		}; // Add Central, East and West respawns/traders 
+		case "tanoa":{
+			blck_mapCenter = [9304.97,10165.4,0];
+			blck_mapRange = 5000;
+		};
 		case "chernarus":{
 			diag_log "[blckeagls] Chernarus-specific settings loaded";
 			blck_mapCenter = [7100, 7750, 0]; //centerPosition = {7100, 7750, 300};

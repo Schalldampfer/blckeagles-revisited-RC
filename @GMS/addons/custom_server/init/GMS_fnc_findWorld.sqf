@@ -26,8 +26,8 @@ switch (toLower worldName) do
 			blck_mapRange = 4500; 
 		}; // Add Central, East and West respawns/traders 
 		case "tanoa":{
-			blck_mapCenter = [9000,9000,0];
-			blck_mapRange = 10000;
+			blck_mapCenter = [9304.97,10165.4,0];
+			blck_mapRange = 5000;
 		};
 		case "malden":{
 			blck_mapCenter = [6000,7000,0];
