@@ -360,6 +360,16 @@ for examples of how you can do this see \Major\Compositions.sqf
 		//[Extreme]
 		[  
 			[// Weapons
+				//"CUP_hgun_Compact","CUP_hgun_Duty","CUP_hgun_Phantom","CUP_hgun_Glock17","CUP_hgun_Glock17_blk","CUP_hgun_Glock17_tan","CUP_hgun_M9","CUP_hgun_Makarov","CUP_hgun_PMM","CUP_hgun_PB6P9","CUP_hgun_TaurusTracker455","CUP_hgun_Colt1911","CUP_hgun_Deagle","CUP_hgun_Mk23",
+				//"CUP_hgun_SA61","CUP_hgun_MicroUzi","CUP_hgun_Mac10","CUP_hgun_MP7","CUP_hgun_TEC9",
+				//"CUP_srifle_LeeEnfield","CUP_srifle_LeeEnfield_rail","CUP_srifle_Mosin_Nagant","CUP_sgun_AA12","CUP_sgun_Saiga12K","CUP_sgun_CZ584","CUP_sgun_M1014","CUP_sgun_SPAS12","CUP_sgun_M1014_Entry_vfg",
+				//"CUP_smg_bizon","CUP_smg_vityaz","CUP_smg_saiga9","CUP_smg_MP5A5","CUP_smg_MP5A5_flashlight","CUP_smg_EVO","CUP_smg_PS90_olive",
+				//"CUP_arifle_SAIGA_MK03_top_rail","CUP_arifle_SIAGE_MK03_Wood_top_rail","CUP_SKS","CUP_SKS_rail","CUP_arifle_AKS74U","CUP_arifle_G36C",
+				"CUP_arifle_G36A","CUP_arifle_TYPE_56_2_Early","CUP_arifle_AUG_A1","CUP_arifle_AKM","CUP_arifle_AKMS","CUP_arifle_AK47","CUP_arifle_AK74","CUP_arifle_AKS74","CUP_arifle_AK74M","CUP_arifle_AK74M_camo","CUP_arifle_AK74M_top_rail","CUP_arifle_AKS74U_railed","CUP_arifle_AK74M_railed","CUP_arifle_AK107","CUP_arifle_CZ805_A1","CUP_arifle_CZ805_A2","CUP_arifle_G36A_RIS","CUP_arifle_G36K_RIS","CUP_arifle_HK416_CQB_Black","CUP_arifle_HK416_Black","CUP_arifle_HK_M27","CUP_arifle_L85A2","CUP_arifle_L85A2_NG","CUP_arifle_L86A2","CUP_arifle_M16A1","CUP_arifle_M16A2","CUP_arifle_M16A4_Grip","CUP_arifle_M4A1","CUP_arifle_M4A1_black","CUP_arifle_M4A3_black","CUP_arifle_mk18_black","CUP_arifle_SBR_black","CUP_arifle_Sa58P","CUP_arifle_Sa58V","CUP_arifle_Sa58RIS1","CUP_arifle_Sa58RIS2","CUP_arifle_Sa58P_frontris","CUP_arifle_Mk16_STD","CUP_arifle_Mk16_CQC","CUP_arifle_XM8_Carbine","CUP_arifle_XM8_Compact_Rail","CUP_Famas_F1_Rail","CUP_arifle_ACR_blk_556","CUP_arifle_Galil_556_black","CUP_arifle_Galil_SAR_black","CUP_arifle_X95","CUP_arifle_Fort224","CUP_arifle_Fort221",
+				"CUP_arifle_FNFAL5060_railed","CUP_arifle_FNFAL_OSW_railed","CUP_arifle_HK417_12","CUP_srifle_M14","CUP_arifle_Mk17_CQC","CUP_arifle_Mk17_STD","CUP_lmg_UK59","CUP_arifle_G3A3_ris","CUP_arifle_FNFAL5061_wooden_railed",
+				"CUP_arifle_AKM_GL","CUP_arifle_AK47_GL","CUP_arifle_AK74_GL","CUP_arifle_AK74M_GL","CUP_arifle_CZ805_GL","CUP_arifle_AG36","CUP_arifle_HK416_M203_Black","CUP_arifle_L85A2_GL","CUP_arifle_M16A2_GL","CUP_arifle_M16A4_GL",
+				"CUP_arifle_HK417_20","CUP_srifle_L129A1","CUP_srifle_M110","CUP_srifle_Mk12SPR","CUP_arifle_Mk16_SV","CUP_arifle_Mk20","CUP_arifle_xm8_sharpshooter","CUP_srifle_DMR","CUP_srifle_M24_blk","CUP_srifle_M40A3","CUP_srifle_SVD","CUP_srifle_SVD_top_rail","CUP_srifle_RSASS_Black","CUP_srifle_m110_kac","CUP_srifle_CZ550_rail","CUP_srifle_Remington700",
+				"CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_MG36","CUP_lmg_L110A1","CUP_lmg_M240","CUP_lmg_L7A2","CUP_lmg_FNMAG","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_lmg_m249_pip3","CUP_lmg_m249_pip4","CUP_lmg_M60","CUP_lmg_M60E4","CUP_lmg_MG3_rail","CUP_lmg_Mk48","CUP_lmg_PKMN","CUP_lmg_Pecheneg","CUP_arifle_xm8_SAW"
 			/*
 				#ifdef useAPEX
 				"arifle_AK12_F","arifle_AK12_GL_F","arifle_AKM_F","arifle_AKM_FL_F","arifle_AKS_F","arifle_ARX_blk_F","arifle_ARX_ghex_F","arifle_ARX_hex_F","arifle_CTAR_blk_F","arifle_CTAR_hex_F",
@@ -493,6 +503,16 @@ for examples of how you can do this see \Major\Compositions.sqf
 		//[Hard]
 		[
 			[// Weapons
+				//"CUP_hgun_Compact","CUP_hgun_Duty","CUP_hgun_Phantom","CUP_hgun_Glock17","CUP_hgun_Glock17_blk","CUP_hgun_Glock17_tan","CUP_hgun_M9","CUP_hgun_Makarov","CUP_hgun_PMM","CUP_hgun_PB6P9","CUP_hgun_TaurusTracker455","CUP_hgun_Colt1911","CUP_hgun_Deagle","CUP_hgun_Mk23",
+				//"CUP_hgun_SA61","CUP_hgun_MicroUzi","CUP_hgun_Mac10","CUP_hgun_MP7","CUP_hgun_TEC9",
+				//"CUP_srifle_LeeEnfield","CUP_srifle_LeeEnfield_rail","CUP_srifle_Mosin_Nagant","CUP_sgun_AA12","CUP_sgun_Saiga12K","CUP_sgun_CZ584","CUP_sgun_M1014","CUP_sgun_SPAS12","CUP_sgun_M1014_Entry_vfg",
+				//"CUP_smg_bizon","CUP_smg_vityaz","CUP_smg_saiga9","CUP_smg_MP5A5","CUP_smg_MP5A5_flashlight","CUP_smg_EVO","CUP_smg_PS90_olive",
+				"CUP_arifle_SAIGA_MK03_top_rail","CUP_arifle_SIAGE_MK03_Wood_top_rail","CUP_SKS","CUP_SKS_rail","CUP_arifle_AKS74U","CUP_arifle_G36C",
+				"CUP_arifle_G36A","CUP_arifle_TYPE_56_2_Early","CUP_arifle_AUG_A1","CUP_arifle_AKM","CUP_arifle_AKMS","CUP_arifle_AK47","CUP_arifle_AK74","CUP_arifle_AKS74","CUP_arifle_AK74M","CUP_arifle_AK74M_camo","CUP_arifle_AK74M_top_rail","CUP_arifle_AKS74U_railed","CUP_arifle_AK74M_railed","CUP_arifle_AK107","CUP_arifle_CZ805_A1","CUP_arifle_CZ805_A2","CUP_arifle_G36A_RIS","CUP_arifle_G36K_RIS","CUP_arifle_HK416_CQB_Black","CUP_arifle_HK416_Black","CUP_arifle_HK_M27","CUP_arifle_L85A2","CUP_arifle_L85A2_NG","CUP_arifle_L86A2","CUP_arifle_M16A1","CUP_arifle_M16A2","CUP_arifle_M16A4_Grip","CUP_arifle_M4A1","CUP_arifle_M4A1_black","CUP_arifle_M4A3_black","CUP_arifle_mk18_black","CUP_arifle_SBR_black","CUP_arifle_Sa58P","CUP_arifle_Sa58V","CUP_arifle_Sa58RIS1","CUP_arifle_Sa58RIS2","CUP_arifle_Sa58P_frontris","CUP_arifle_Mk16_STD","CUP_arifle_Mk16_CQC","CUP_arifle_XM8_Carbine","CUP_arifle_XM8_Compact_Rail","CUP_Famas_F1_Rail","CUP_arifle_ACR_blk_556","CUP_arifle_Galil_556_black","CUP_arifle_Galil_SAR_black","CUP_arifle_X95","CUP_arifle_Fort224","CUP_arifle_Fort221",
+				"CUP_arifle_FNFAL5060_railed","CUP_arifle_FNFAL_OSW_railed","CUP_arifle_HK417_12","CUP_srifle_M14","CUP_arifle_Mk17_CQC","CUP_arifle_Mk17_STD","CUP_lmg_UK59","CUP_arifle_G3A3_ris","CUP_arifle_FNFAL5061_wooden_railed",
+				//"CUP_arifle_AKM_GL","CUP_arifle_AK47_GL","CUP_arifle_AK74_GL","CUP_arifle_AK74M_GL","CUP_arifle_CZ805_GL","CUP_arifle_AG36","CUP_arifle_HK416_M203_Black","CUP_arifle_L85A2_GL","CUP_arifle_M16A2_GL","CUP_arifle_M16A4_GL",
+				//"CUP_arifle_HK417_20","CUP_srifle_L129A1","CUP_srifle_M110","CUP_srifle_Mk12SPR","CUP_arifle_Mk16_SV","CUP_arifle_Mk20","CUP_arifle_xm8_sharpshooter","CUP_srifle_DMR","CUP_srifle_M24_blk","CUP_srifle_M40A3","CUP_srifle_SVD","CUP_srifle_SVD_top_rail","CUP_srifle_RSASS_Black","CUP_srifle_m110_kac","CUP_srifle_CZ550_rail","CUP_srifle_Remington700",
+				"CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_MG36","CUP_lmg_L110A1","CUP_lmg_M240","CUP_lmg_L7A2","CUP_lmg_FNMAG","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_lmg_m249_pip3","CUP_lmg_m249_pip4","CUP_lmg_M60","CUP_lmg_M60E4","CUP_lmg_MG3_rail","CUP_lmg_Mk48","CUP_lmg_PKMN","CUP_lmg_Pecheneg","CUP_arifle_xm8_SAW"
 			/*
 				// Format is ["Weapon Name","Magazine Name"],
 				#ifdef useAPEX
@@ -624,6 +644,16 @@ for examples of how you can do this see \Major\Compositions.sqf
 		//[Easy]
 		[
 			[// Weapons
+				"CUP_hgun_Compact","CUP_hgun_Duty","CUP_hgun_Phantom","CUP_hgun_Glock17","CUP_hgun_Glock17_blk","CUP_hgun_Glock17_tan","CUP_hgun_M9","CUP_hgun_Makarov","CUP_hgun_PMM","CUP_hgun_PB6P9","CUP_hgun_TaurusTracker455","CUP_hgun_Colt1911","CUP_hgun_Deagle","CUP_hgun_Mk23",
+				//"CUP_hgun_SA61","CUP_hgun_MicroUzi","CUP_hgun_Mac10","CUP_hgun_MP7","CUP_hgun_TEC9",
+				//"CUP_srifle_LeeEnfield","CUP_srifle_LeeEnfield_rail","CUP_srifle_Mosin_Nagant","CUP_sgun_AA12","CUP_sgun_Saiga12K","CUP_sgun_CZ584","CUP_sgun_M1014","CUP_sgun_SPAS12","CUP_sgun_M1014_Entry_vfg",
+				"CUP_smg_bizon","CUP_smg_vityaz","CUP_smg_saiga9","CUP_smg_MP5A5","CUP_smg_MP5A5_flashlight","CUP_smg_EVO","CUP_smg_PS90_olive",
+				"CUP_arifle_SAIGA_MK03_top_rail","CUP_arifle_SIAGE_MK03_Wood_top_rail","CUP_SKS","CUP_SKS_rail","CUP_arifle_AKS74U","CUP_arifle_G36C",
+				"CUP_arifle_G36A","CUP_arifle_TYPE_56_2_Early","CUP_arifle_AUG_A1","CUP_arifle_AKM","CUP_arifle_AKMS","CUP_arifle_AK47","CUP_arifle_AK74","CUP_arifle_AKS74","CUP_arifle_AK74M","CUP_arifle_AK74M_camo","CUP_arifle_AK74M_top_rail","CUP_arifle_AKS74U_railed","CUP_arifle_AK74M_railed","CUP_arifle_AK107","CUP_arifle_CZ805_A1","CUP_arifle_CZ805_A2","CUP_arifle_G36A_RIS","CUP_arifle_G36K_RIS","CUP_arifle_HK416_CQB_Black","CUP_arifle_HK416_Black","CUP_arifle_HK_M27","CUP_arifle_L85A2","CUP_arifle_L85A2_NG","CUP_arifle_L86A2","CUP_arifle_M16A1","CUP_arifle_M16A2","CUP_arifle_M16A4_Grip","CUP_arifle_M4A1","CUP_arifle_M4A1_black","CUP_arifle_M4A3_black","CUP_arifle_mk18_black","CUP_arifle_SBR_black","CUP_arifle_Sa58P","CUP_arifle_Sa58V","CUP_arifle_Sa58RIS1","CUP_arifle_Sa58RIS2","CUP_arifle_Sa58P_frontris","CUP_arifle_Mk16_STD","CUP_arifle_Mk16_CQC","CUP_arifle_XM8_Carbine","CUP_arifle_XM8_Compact_Rail","CUP_Famas_F1_Rail","CUP_arifle_ACR_blk_556","CUP_arifle_Galil_556_black","CUP_arifle_Galil_SAR_black","CUP_arifle_X95","CUP_arifle_Fort224","CUP_arifle_Fort221"
+				//"CUP_arifle_FNFAL5060_railed","CUP_arifle_FNFAL_OSW_railed","CUP_arifle_HK417_12","CUP_srifle_M14","CUP_arifle_Mk17_CQC","CUP_arifle_Mk17_STD","CUP_lmg_UK59","CUP_arifle_G3A3_ris","CUP_arifle_FNFAL5061_wooden_railed",
+				//"CUP_arifle_AKM_GL","CUP_arifle_AK47_GL","CUP_arifle_AK74_GL","CUP_arifle_AK74M_GL","CUP_arifle_CZ805_GL","CUP_arifle_AG36","CUP_arifle_HK416_M203_Black","CUP_arifle_L85A2_GL","CUP_arifle_M16A2_GL","CUP_arifle_M16A4_GL",
+				//"CUP_arifle_HK417_20","CUP_srifle_L129A1","CUP_srifle_M110","CUP_srifle_Mk12SPR","CUP_arifle_Mk16_SV","CUP_arifle_Mk20","CUP_arifle_xm8_sharpshooter","CUP_srifle_DMR","CUP_srifle_M24_blk","CUP_srifle_M40A3","CUP_srifle_SVD","CUP_srifle_SVD_top_rail","CUP_srifle_RSASS_Black","CUP_srifle_m110_kac","CUP_srifle_CZ550_rail","CUP_srifle_Remington700",
+				//"CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_MG36","CUP_lmg_L110A1","CUP_lmg_M240","CUP_lmg_L7A2","CUP_lmg_FNMAG","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_lmg_m249_pip3","CUP_lmg_m249_pip4","CUP_lmg_M60","CUP_lmg_M60E4","CUP_lmg_MG3_rail","CUP_lmg_Mk48","CUP_lmg_PKMN","CUP_lmg_Pecheneg","CUP_arifle_xm8_SAW"
 			/*
 				["MultiGun","EnergyPackLg"],
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
@@ -740,6 +770,16 @@ for examples of how you can do this see \Major\Compositions.sqf
 		//[Medium]
 		[
 			[// Weapons
+				//"CUP_hgun_Compact","CUP_hgun_Duty","CUP_hgun_Phantom","CUP_hgun_Glock17","CUP_hgun_Glock17_blk","CUP_hgun_Glock17_tan","CUP_hgun_M9","CUP_hgun_Makarov","CUP_hgun_PMM","CUP_hgun_PB6P9","CUP_hgun_TaurusTracker455","CUP_hgun_Colt1911","CUP_hgun_Deagle","CUP_hgun_Mk23",
+				"CUP_hgun_SA61","CUP_hgun_MicroUzi","CUP_hgun_Mac10","CUP_hgun_MP7","CUP_hgun_TEC9",
+				"CUP_srifle_LeeEnfield","CUP_srifle_LeeEnfield_rail","CUP_srifle_Mosin_Nagant","CUP_sgun_AA12","CUP_sgun_Saiga12K","CUP_sgun_CZ584","CUP_sgun_M1014","CUP_sgun_SPAS12","CUP_sgun_M1014_Entry_vfg",
+				"CUP_smg_bizon","CUP_smg_vityaz","CUP_smg_saiga9","CUP_smg_MP5A5","CUP_smg_MP5A5_flashlight","CUP_smg_EVO","CUP_smg_PS90_olive",
+				"CUP_arifle_SAIGA_MK03_top_rail","CUP_arifle_SIAGE_MK03_Wood_top_rail","CUP_SKS","CUP_SKS_rail","CUP_arifle_AKS74U","CUP_arifle_G36C",
+				"CUP_arifle_G36A","CUP_arifle_TYPE_56_2_Early","CUP_arifle_AUG_A1","CUP_arifle_AKM","CUP_arifle_AKMS","CUP_arifle_AK47","CUP_arifle_AK74","CUP_arifle_AKS74","CUP_arifle_AK74M","CUP_arifle_AK74M_camo","CUP_arifle_AK74M_top_rail","CUP_arifle_AKS74U_railed","CUP_arifle_AK74M_railed","CUP_arifle_AK107","CUP_arifle_CZ805_A1","CUP_arifle_CZ805_A2","CUP_arifle_G36A_RIS","CUP_arifle_G36K_RIS","CUP_arifle_HK416_CQB_Black","CUP_arifle_HK416_Black","CUP_arifle_HK_M27","CUP_arifle_L85A2","CUP_arifle_L85A2_NG","CUP_arifle_L86A2","CUP_arifle_M16A1","CUP_arifle_M16A2","CUP_arifle_M16A4_Grip","CUP_arifle_M4A1","CUP_arifle_M4A1_black","CUP_arifle_M4A3_black","CUP_arifle_mk18_black","CUP_arifle_SBR_black","CUP_arifle_Sa58P","CUP_arifle_Sa58V","CUP_arifle_Sa58RIS1","CUP_arifle_Sa58RIS2","CUP_arifle_Sa58P_frontris","CUP_arifle_Mk16_STD","CUP_arifle_Mk16_CQC","CUP_arifle_XM8_Carbine","CUP_arifle_XM8_Compact_Rail","CUP_Famas_F1_Rail","CUP_arifle_ACR_blk_556","CUP_arifle_Galil_556_black","CUP_arifle_Galil_SAR_black","CUP_arifle_X95","CUP_arifle_Fort224","CUP_arifle_Fort221"
+				//"CUP_arifle_FNFAL5060_railed","CUP_arifle_FNFAL_OSW_railed","CUP_arifle_HK417_12","CUP_srifle_M14","CUP_arifle_Mk17_CQC","CUP_arifle_Mk17_STD","CUP_lmg_UK59","CUP_arifle_G3A3_ris","CUP_arifle_FNFAL5061_wooden_railed",
+				//"CUP_arifle_AKM_GL","CUP_arifle_AK47_GL","CUP_arifle_AK74_GL","CUP_arifle_AK74M_GL","CUP_arifle_CZ805_GL","CUP_arifle_AG36","CUP_arifle_HK416_M203_Black","CUP_arifle_L85A2_GL","CUP_arifle_M16A2_GL","CUP_arifle_M16A4_GL",
+				//"CUP_arifle_HK417_20","CUP_srifle_L129A1","CUP_srifle_M110","CUP_srifle_Mk12SPR","CUP_arifle_Mk16_SV","CUP_arifle_Mk20","CUP_arifle_xm8_sharpshooter","CUP_srifle_DMR","CUP_srifle_M24_blk","CUP_srifle_M40A3","CUP_srifle_SVD","CUP_srifle_SVD_top_rail","CUP_srifle_RSASS_Black","CUP_srifle_m110_kac","CUP_srifle_CZ550_rail","CUP_srifle_Remington700",
+				//"CUP_arifle_RPK74","CUP_arifle_RPK74M","CUP_arifle_MG36","CUP_lmg_L110A1","CUP_lmg_M240","CUP_lmg_L7A2","CUP_lmg_FNMAG","CUP_lmg_minimipara","CUP_lmg_minimi","CUP_lmg_M249_E2","CUP_lmg_M249","CUP_lmg_m249_pip3","CUP_lmg_m249_pip4","CUP_lmg_M60","CUP_lmg_M60E4","CUP_lmg_MG3_rail","CUP_lmg_Mk48","CUP_lmg_PKMN","CUP_lmg_Pecheneg","CUP_arifle_xm8_SAW"
 			/*
 				["MultiGun","EnergyPackLg"],
 				["arifle_Katiba_F","30Rnd_65x39_caseless_green"],
