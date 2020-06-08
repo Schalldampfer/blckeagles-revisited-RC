@@ -363,7 +363,7 @@
 	blck_addAIMoney = true;
 	blck_chanceBackpack = 0.1;  // Chance AI will be spawned with a backpack
 	blck_useNVG = true; // When true, AI will be spawned with NVG if is dark
-	blck_removeNVG = true; // When true, NVG will be removed from AI when they are killed.
+	blck_removeNVG = false; // When true, NVG will be removed from AI when they are killed.
 	blck_useLaunchers = true;  // When true, some AI will be spawned with RPGs; they do not however fire on vehicles for some reason so I recommend this be set to false for now
 	blck_launcherTypes = ["CUP_launch_M72A6_Loaded","CUP_launch_M136_Loaded","CUP_launch_RPG18_Loaded","CUP_launch_9K32Strela_Loaded"];
 	//blck_launcherTypes = ["launch_MRAWS_olive_rail_F","launch_MRAWS_sand_F","launch_RPG32_F","launch_B_Titan_F"];
