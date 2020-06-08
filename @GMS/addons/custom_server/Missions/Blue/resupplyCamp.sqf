@@ -37,9 +37,7 @@ _missionLandscape = [
 _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionLootVehicles = [
 	[selectRandom[
-		"B_Truck_01_mover_EPOCH","B_Truck_01_transport_EPOCH","B_Truck_01_covered_EPOCH","B_Truck_01_box_EPOCH",
-		"O_Truck_02_transport_EPOCH","O_Truck_02_covered_EPOCH","O_Truck_02_box_EPOCH",
-		"O_Truck_03_transport_EPOCH","O_Truck_03_covered_EPOCH"
+		"CUP_B_Ural_CDF","CUP_B_Ural_Open_CDF","CUP_B_MTVR_USMC","CUP_B_Kamaz_CDF","CUP_B_Kamaz_Open_CDF"
 	],[0,5,0],random 360,_crateLoot,_lootCounts]
 ]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionEmplacedWeapons = []; // can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used

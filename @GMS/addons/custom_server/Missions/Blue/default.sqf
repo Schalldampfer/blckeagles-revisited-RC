@@ -96,7 +96,7 @@ _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the 
 					  // When present with values these override the defaults.
 					  // See default2.sqf for an example of the use of this variable.
 _missionLootVehicles = [
-	[selectRandom["B_MRAP_01_EPOCH","O_MRAP_02_EPOCH","I_MRAP_03_EPOCH"],[-5,5,0],random 360,_crateLoot,_lootCounts]
+	[selectRandom["CUP_B_HMMWV_Unarmed_USA","CUP_B_HMMWV_Transport_USA","CUP_B_M1151_NATO_T","CUP_B_M1152_NATO_T"],[-5,5,0],random 360,_crateLoot,_lootCounts]
 ]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 					
 					// when the array is empty this parameter is ignored.

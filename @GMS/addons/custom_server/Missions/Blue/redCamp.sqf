@@ -71,7 +71,7 @@ _missionLandscape = [
 		]; // list of objects to spawn as landscape
 _missionLootBoxes = [];  //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionLootVehicles = [
-	[selectRandom["B_G_Offroad_01_armed_EPOCH","I_C_Offroad_02_LMG_F","A2_SUV_armed_EPOCH"],[-5,5,0],random 360,_crateLoot,_lootCounts]
+	[selectRandom["CUP_O_Hilux_DSHKM_TK_INS","CUP_O_Hilux_M2_TK_INS","CUP_B_LR_MG_GB_W","CUP_O_LR_MG_TKM","CUP_O_UAZ_MG_RU"],[-5,5,0],random 360,_crateLoot,_lootCounts]
 ]; //  Parameters are "Box Item Code", array defining the loot to be spawned, and position.
 _missionEmplacedWeapons = []; // can be used to define the precise placement of static weapons [[1,2,3] /*loc 1*/, [2,3,4] /*loc 2*/]; if blank random locations will be used
 //  Change _useMines to true/false below to enable mission-specific settings.
