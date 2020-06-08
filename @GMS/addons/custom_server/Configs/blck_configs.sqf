@@ -365,10 +365,10 @@
 	blck_useNVG = true; // When true, AI will be spawned with NVG if is dark
 	blck_removeNVG = true; // When true, NVG will be removed from AI when they are killed.
 	blck_useLaunchers = true;  // When true, some AI will be spawned with RPGs; they do not however fire on vehicles for some reason so I recommend this be set to false for now
-	blck_launcherTypes = ["launch_MRAWS_olive_rail_F","launch_MRAWS_sand_F","launch_RPG32_F","launch_B_Titan_F"];
-	//blck_launcherTypes = ["launch_RPG32_F"];
+	blck_launcherTypes = ["CUP_launch_M72A6_Loaded","CUP_launch_M136_Loaded","CUP_launch_RPG18_Loaded","CUP_launch_9K32Strela_Loaded"];
+	//blck_launcherTypes = ["launch_MRAWS_olive_rail_F","launch_MRAWS_sand_F","launch_RPG32_F","launch_B_Titan_F"];
 	blck_launchersPerGroup = 2;  // Defines the number of AI per group spawned with a launcher
-	blck_launcherCleanup = true;// When true, launchers and launcher ammo are removed from dead AI.
+	blck_launcherCleanup = false;// When true, launchers and launcher ammo are removed from dead AI.
 	blck_minimumPatrolRadius = 100;  // AI will patrol within a circle with radius of approximately min-max meters. note that because of the way waypoints are completed they may more more or less than this distance.
 	blck_maximumPatrolRadius = 400;
 	
