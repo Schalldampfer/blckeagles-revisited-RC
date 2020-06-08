@@ -15,6 +15,7 @@
 params["_vehType","_pos",["_special","NONE"]];
 //diag_log format["spawnVehicle.sqf: _this = %3 | _vehType = %1 | _pos = %2",_vehType,_pos,_special];
 private _veh = createVehicle[_vehType, _pos, [], 0, _special];
+if (_veh isKindOf "LandVehicle") then {_veh limitSpeed 40;};
 _veh setVectorUp surfaceNormal position _veh;
 _veh allowDamage true;
 _veh enableRopeAttach true;
