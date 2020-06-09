@@ -349,10 +349,10 @@ for examples of how you can do this see \Major\Compositions.sqf
 ***************************************************************************************/
 
 	// values are: number of things from the weapons, magazines, optics, materials(cinder etc), items (food etc) and backpacks arrays to add, respectively.
-	blck_lootCountsOrange = [3,12,4,12,10,1];   // Orange
-	blck_lootCountsGreen = [3,10,3,10,8,1]; // Green
-	blck_lootCountsRed = [2,8,2,8,6,1];  // Red
-	blck_lootCountsBlue = [2,6,2,6,4,1];   // Blue
+	blck_lootCountsOrange = [3,24,4,12,10,1];   // Orange
+	blck_lootCountsGreen = [3,20,3,10,8,1]; // Green
+	blck_lootCountsRed = [2,16,2,8,6,1];  // Red
+	blck_lootCountsBlue = [2,12,2,6,4,1];   // Blue
 
 	blck_BoxLoot_Orange = 
 		// Loot is grouped as [weapons],[magazines],[items] in order to be able to use the correct function to load the item into the crate later on.
@@ -406,6 +406,20 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[//Magazines
+				"CUP_1Rnd_StarCluster_White_M203","CUP_1Rnd_StarCluster_Red_M203","CUP_1Rnd_StarCluster_Green_M203",
+				//"CUP_1Rnd_StarFlare_White_M203","CUP_1Rnd_StarFlare_Red_M203","CUP_1Rnd_StarFlare_Green_M203","CUP_IlumFlareWhite_GP25_M","CUP_IlumFlareRed_GP25_M","CUP_IlumFlareGreen_GP25_M",
+				"CUP_1Rnd_HE_GP25_M","CUP_1Rnd_HE_M203","CUP_1Rnd_HEDP_M203","CUP_20Rnd_B_AA12_HE",
+				//"CUP_FlareWhite_M203","CUP_FlareGreen_M203","CUP_FlareRed_M203","CUP_FlareYellow_M203","CUP_FlareWhite_GP25_M","CUP_FlareGreen_GP25_M","CUP_FlareRed_GP25_M","CUP_FlareYellow_GP25_M",
+				"CUP_1Rnd_Smoke_M203","CUP_1Rnd_SmokeRed_M203","CUP_1Rnd_SmokeGreen_M203","CUP_1Rnd_SmokeYellow_M203","CUP_1Rnd_SMOKE_GP25_M","CUP_1Rnd_SMOKERED_GP25_M","CUP_1Rnd_SMOKEGREEN_GP25_M","CUP_1Rnd_SMOKEYELLOW_GP25_M",
+				"CUP_20Rnd_762x51_G3","CUP_20Rnd_762x51_DMR","CUP_20Rnd_9x39_SP5_GROZA_M","CUP_20Rnd_762x51_B_M110","CUP_10Rnd_762x54_SVD_M","CUP_20Rnd_9x39_SP5_VSS_M","CUP_20Rnd_762x51_L129_M","CUP_20Rnd_762x51_HK417",
+				"CUP_50Rnd_UK59_762x54R_Tracer","CUP_75Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M","CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M","CUP_100Rnd_556x45_BetaCMag","CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_200Rnd_TE4_Red_Tracer_556x45_M249","CUP_120Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M",
+				"CUP_10Rnd_762x51_CZ750_Tracer","CUP_5Rnd_762x51_M24","CUP_5Rnd_86x70_L115A1","CUP_5Rnd_762x67_G22",
+				"CUP_35Rnd_556x45_Galil_Mag","CUP_30Rnd_556x45_AUG","CUP_30Rnd_556x45_X95","CUP_30Rnd_545x39_Fort224_M","CUP_30Rnd_762x39_AK47_bakelite_M","CUP_30Rnd_545x39_AK74_plum_M","CUP_30Rnd_556x45_AK","CUP_30Rnd_556x45_CZ805","CUP_25Rnd_556x45_Famas","CUP_30Rnd_556x45_G36","CUP_30Rnd_Sa58_M","CUP_30Rnd_556x45_Stanag_Mk16","CUP_30Rnd_556x45_XM8",
+				"CUP_30Rnd_680x43_Stanag","CUP_25Rnd_762x51_Galil_Mag","CUP_20Rnd_762x51_FNFAL_M","CUP_30Rnd_762x39_CZ807","CUP_20Rnd_762x51_B_SCAR"
+				//"CUP_30Rnd_556x45_Stanag","CUP_30Rnd_762x39_AK47_M","CUP_30Rnd_545x39_AK_M","20Rnd_762x51_Mag",
+				//"CUP_5x_22_LR_17_HMR_M","CUP_10x_303_M","CUP_5Rnd_762x54_Mosin_M","CUP_6Rnd_762x51_R700","CUP_10Rnd_762x39_SaigaMk03_M","CUP_10Rnd_762x39_SKS_M",
+				//"CUP_30Rnd_45ACP_MAC10_M","50Rnd_570x28_SMG_03","CUP_64Rnd_9x19_Bizon_M","CUP_10Rnd_9x19_Saiga9","30Rnd_9x21_Mag","CUP_40Rnd_46x30_MP7",
+				//"CUP_1Rnd_B_CZ584_74Pellets","CUP_8Rnd_B_Beneli_74Pellets",
 			/*
 				["3rnd_HE_Grenade_Shell",3,6],
 				["30Rnd_65x39_caseless_green",3,6],
@@ -550,6 +564,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[//Magazines
+				"CUP_1Rnd_HE_GP25_M","CUP_1Rnd_HE_M203","CUP_1Rnd_HEDP_M203","CUP_20Rnd_B_AA12_HE",
+				"CUP_FlareWhite_M203","CUP_FlareGreen_M203","CUP_FlareRed_M203","CUP_FlareYellow_M203","CUP_FlareWhite_GP25_M","CUP_FlareGreen_GP25_M","CUP_FlareRed_GP25_M","CUP_FlareYellow_GP25_M",
+				"CUP_1Rnd_Smoke_M203","CUP_1Rnd_SmokeRed_M203","CUP_1Rnd_SmokeGreen_M203","CUP_1Rnd_SmokeYellow_M203","CUP_1Rnd_SMOKE_GP25_M","CUP_1Rnd_SMOKERED_GP25_M","CUP_1Rnd_SMOKEGREEN_GP25_M","CUP_1Rnd_SMOKEYELLOW_GP25_M",
+				//"CUP_20Rnd_762x51_G3","CUP_20Rnd_762x51_DMR","CUP_20Rnd_9x39_SP5_GROZA_M","CUP_20Rnd_762x51_B_M110","CUP_10Rnd_762x54_SVD_M","CUP_20Rnd_9x39_SP5_VSS_M","CUP_20Rnd_762x51_L129_M","CUP_20Rnd_762x51_HK417",
+				"CUP_50Rnd_UK59_762x54R_Tracer","CUP_75Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M","CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M","CUP_100Rnd_556x45_BetaCMag","CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_200Rnd_TE4_Red_Tracer_556x45_M249","CUP_120Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M",
+				"CUP_10Rnd_762x51_CZ750_Tracer","CUP_5Rnd_762x51_M24","CUP_5Rnd_86x70_L115A1","CUP_5Rnd_762x67_G22",
+				//"CUP_35Rnd_556x45_Galil_Mag","CUP_30Rnd_556x45_AUG","CUP_30Rnd_556x45_X95","CUP_30Rnd_545x39_Fort224_M","CUP_30Rnd_762x39_AK47_bakelite_M","CUP_30Rnd_545x39_AK74_plum_M","CUP_30Rnd_556x45_AK","CUP_30Rnd_556x45_CZ805","CUP_25Rnd_556x45_Famas","CUP_30Rnd_556x45_G36","CUP_30Rnd_Sa58_M","CUP_30Rnd_556x45_Stanag_Mk16","CUP_30Rnd_556x45_XM8",
+				"CUP_30Rnd_680x43_Stanag","CUP_25Rnd_762x51_Galil_Mag","CUP_20Rnd_762x51_FNFAL_M","CUP_30Rnd_762x39_CZ807","CUP_20Rnd_762x51_B_SCAR",
+				"CUP_30Rnd_556x45_Stanag","CUP_30Rnd_762x39_AK47_M","CUP_30Rnd_545x39_AK_M","20Rnd_762x51_Mag"
+				//"CUP_5x_22_LR_17_HMR_M","CUP_10x_303_M","CUP_5Rnd_762x54_Mosin_M","CUP_6Rnd_762x51_R700","CUP_10Rnd_762x39_SaigaMk03_M","CUP_10Rnd_762x39_SKS_M",
+				//"CUP_30Rnd_45ACP_MAC10_M","50Rnd_570x28_SMG_03","CUP_64Rnd_9x19_Bizon_M","CUP_10Rnd_9x19_Saiga9","30Rnd_9x21_Mag","CUP_40Rnd_46x30_MP7",
+				//"CUP_1Rnd_B_CZ584_74Pellets","CUP_8Rnd_B_Beneli_74Pellets",
 			/*
 				// Format is ["Magazine name, Minimum number to add, Maximum number to add],
 				["3rnd_HE_Grenade_Shell",2,4],
@@ -688,6 +714,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 			*/
 			],
 			[//Magazines
+				//"CUP_1Rnd_HE_GP25_M","CUP_1Rnd_HE_M203","CUP_1Rnd_HEDP_M203","CUP_20Rnd_B_AA12_HE",
+				//"CUP_FlareWhite_M203","CUP_FlareGreen_M203","CUP_FlareRed_M203","CUP_FlareYellow_M203","CUP_FlareWhite_GP25_M","CUP_FlareGreen_GP25_M","CUP_FlareRed_GP25_M","CUP_FlareYellow_GP25_M",
+				//"CUP_1Rnd_Smoke_M203","CUP_1Rnd_SmokeRed_M203","CUP_1Rnd_SmokeGreen_M203","CUP_1Rnd_SmokeYellow_M203","CUP_1Rnd_SMOKE_GP25_M","CUP_1Rnd_SMOKERED_GP25_M","CUP_1Rnd_SMOKEGREEN_GP25_M","CUP_1Rnd_SMOKEYELLOW_GP25_M",
+				//"CUP_20Rnd_762x51_G3","CUP_20Rnd_762x51_DMR","CUP_20Rnd_9x39_SP5_GROZA_M","CUP_20Rnd_762x51_B_M110","CUP_10Rnd_762x54_SVD_M","CUP_20Rnd_9x39_SP5_VSS_M","CUP_20Rnd_762x51_L129_M","CUP_20Rnd_762x51_HK417",
+				//"CUP_50Rnd_UK59_762x54R_Tracer","CUP_75Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M","CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M","CUP_100Rnd_556x45_BetaCMag","CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_200Rnd_TE4_Red_Tracer_556x45_M249","CUP_120Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M",
+				//"CUP_10Rnd_762x51_CZ750_Tracer","CUP_5Rnd_762x51_M24","CUP_5Rnd_86x70_L115A1","CUP_5Rnd_762x67_G22",
+				"CUP_35Rnd_556x45_Galil_Mag","CUP_30Rnd_556x45_AUG","CUP_30Rnd_556x45_X95","CUP_30Rnd_545x39_Fort224_M","CUP_30Rnd_762x39_AK47_bakelite_M","CUP_30Rnd_545x39_AK74_plum_M","CUP_30Rnd_556x45_AK","CUP_30Rnd_556x45_CZ805","CUP_25Rnd_556x45_Famas","CUP_30Rnd_556x45_G36","CUP_30Rnd_Sa58_M","CUP_30Rnd_556x45_Stanag_Mk16","CUP_30Rnd_556x45_XM8",
+				"CUP_30Rnd_680x43_Stanag","CUP_25Rnd_762x51_Galil_Mag","CUP_20Rnd_762x51_FNFAL_M","CUP_30Rnd_762x39_CZ807","CUP_20Rnd_762x51_B_SCAR",
+				"CUP_30Rnd_556x45_Stanag","CUP_30Rnd_762x39_AK47_M","CUP_30Rnd_545x39_AK_M","20Rnd_762x51_Mag",
+				"CUP_5x_22_LR_17_HMR_M","CUP_10x_303_M","CUP_5Rnd_762x54_Mosin_M","CUP_6Rnd_762x51_R700","CUP_10Rnd_762x39_SaigaMk03_M","CUP_10Rnd_762x39_SKS_M",
+				"CUP_30Rnd_45ACP_MAC10_M","50Rnd_570x28_SMG_03","CUP_64Rnd_9x19_Bizon_M","CUP_10Rnd_9x19_Saiga9","30Rnd_9x21_Mag","CUP_40Rnd_46x30_MP7",
+				"CUP_1Rnd_B_CZ584_74Pellets","CUP_8Rnd_B_Beneli_74Pellets"
 			/*
 				["3rnd_HE_Grenade_Shell",1,2],
 				["30Rnd_65x39_caseless_green",3,6],
@@ -815,6 +853,18 @@ for examples of how you can do this see \Major\Compositions.sqf
 				*/
 			],
 			[//Magazines
+				//"CUP_1Rnd_HE_GP25_M","CUP_1Rnd_HE_M203","CUP_1Rnd_HEDP_M203","CUP_20Rnd_B_AA12_HE",
+				//"CUP_FlareWhite_M203","CUP_FlareGreen_M203","CUP_FlareRed_M203","CUP_FlareYellow_M203","CUP_FlareWhite_GP25_M","CUP_FlareGreen_GP25_M","CUP_FlareRed_GP25_M","CUP_FlareYellow_GP25_M",
+				//"CUP_1Rnd_Smoke_M203","CUP_1Rnd_SmokeRed_M203","CUP_1Rnd_SmokeGreen_M203","CUP_1Rnd_SmokeYellow_M203","CUP_1Rnd_SMOKE_GP25_M","CUP_1Rnd_SMOKERED_GP25_M","CUP_1Rnd_SMOKEGREEN_GP25_M","CUP_1Rnd_SMOKEYELLOW_GP25_M",
+				//"CUP_20Rnd_762x51_G3","CUP_20Rnd_762x51_DMR","CUP_20Rnd_9x39_SP5_GROZA_M","CUP_20Rnd_762x51_B_M110","CUP_10Rnd_762x54_SVD_M","CUP_20Rnd_9x39_SP5_VSS_M","CUP_20Rnd_762x51_L129_M","CUP_20Rnd_762x51_HK417",
+				//"CUP_50Rnd_UK59_762x54R_Tracer","CUP_75Rnd_TE4_LRT4_Green_Tracer_762x39_RPK_M","CUP_45Rnd_TE4_LRT4_Green_Tracer_545x39_RPK_M","CUP_100Rnd_556x45_BetaCMag","CUP_100Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_200Rnd_TE4_Red_Tracer_556x45_M249","CUP_120Rnd_TE4_LRT4_White_Tracer_762x51_Belt_M","CUP_100Rnd_TE4_LRT4_762x54_PK_Tracer_Green_M",
+				"CUP_10Rnd_762x51_CZ750_Tracer","CUP_5Rnd_762x51_M24","CUP_5Rnd_86x70_L115A1","CUP_5Rnd_762x67_G22",
+				"CUP_35Rnd_556x45_Galil_Mag","CUP_30Rnd_556x45_AUG","CUP_30Rnd_556x45_X95","CUP_30Rnd_545x39_Fort224_M","CUP_30Rnd_762x39_AK47_bakelite_M","CUP_30Rnd_545x39_AK74_plum_M","CUP_30Rnd_556x45_AK","CUP_30Rnd_556x45_CZ805","CUP_25Rnd_556x45_Famas","CUP_30Rnd_556x45_G36","CUP_30Rnd_Sa58_M","CUP_30Rnd_556x45_Stanag_Mk16","CUP_30Rnd_556x45_XM8",
+				"CUP_30Rnd_680x43_Stanag","CUP_25Rnd_762x51_Galil_Mag","CUP_20Rnd_762x51_FNFAL_M","CUP_30Rnd_762x39_CZ807","CUP_20Rnd_762x51_B_SCAR",
+				"CUP_30Rnd_556x45_Stanag","CUP_30Rnd_762x39_AK47_M","CUP_30Rnd_545x39_AK_M","20Rnd_762x51_Mag",
+				"CUP_5x_22_LR_17_HMR_M","CUP_10x_303_M","CUP_5Rnd_762x54_Mosin_M","CUP_6Rnd_762x51_R700","CUP_10Rnd_762x39_SaigaMk03_M","CUP_10Rnd_762x39_SKS_M",
+				"CUP_30Rnd_45ACP_MAC10_M","50Rnd_570x28_SMG_03","CUP_64Rnd_9x19_Bizon_M","CUP_10Rnd_9x19_Saiga9","30Rnd_9x21_Mag","CUP_40Rnd_46x30_MP7"
+				//"CUP_1Rnd_B_CZ584_74Pellets","CUP_8Rnd_B_Beneli_74Pellets",
 				/*
 				["3rnd_HE_Grenade_Shell",1,5],["30Rnd_65x39_caseless_green",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_556x45_Stanag",3,6],["30Rnd_45ACP_Mag_SMG_01",3,6],["20Rnd_556x45_UW_mag",3,6],
 				["10Rnd_762x54_Mag",3,6],["20Rnd_762x51_Mag",3,7],["200Rnd_65x39_cased_Box",3,6],["100Rnd_65x39_caseless_mag_Tracer",3,6],
