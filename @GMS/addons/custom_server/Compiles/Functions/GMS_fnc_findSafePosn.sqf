@@ -58,7 +58,7 @@ if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter
 private _coords = [blck_mapCenter,0,blck_mapRange,30,0,1,0,_blacklistedLocations] call BIS_fnc_findSafePos;
 
 //diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
-if (_coords isEqualTo []) then 
+if (_coords isEqualTo [] || count _coords > 2) then 
 {
 	for "_index" from 1 to 100 do 
 	{
