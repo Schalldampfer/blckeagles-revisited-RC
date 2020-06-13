@@ -73,7 +73,7 @@ if (_coords isEqualTo [] || count _coords > 2) then
 	};
 };
 
-//diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
+diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
 _coords
 
 
