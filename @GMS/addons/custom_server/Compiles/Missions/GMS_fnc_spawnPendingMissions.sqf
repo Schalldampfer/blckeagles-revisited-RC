@@ -31,7 +31,10 @@ if (count _readyToSpawnQue > 0) then
 
 
 	_coords = [] call blck_fnc_FindSafePosn;
-
+	if (_coords isEqualTo []) exitWith 
+	{
+		diag_log format["[blckagls] fnc_spawnPendingMissions: <ERROR> _fnc_findSafePosn could not find a location for this mission; consider reducing distances between players, bases, missions or towns."];
+	};
 	_compiledMission = selectRandom (_missionToSpawn select 0);
 
 	_missionMarker = _missionToSpawn select 1;

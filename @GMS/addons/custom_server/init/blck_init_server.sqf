@@ -166,6 +166,9 @@ private _other = ["NameLocal"] call _fn_setupLocationType;
 private _airport = ["Airport"] call _fn_setupLocationType;
 
 blck_townLocations = _villages + _cites + _capitals + _marine + _other + _airport;
+{
+	blck_locationBlackList pushBack [locationPosition _x, blck_minDistanceFromTowns];
+} forEach blck_townLocations;
 diag_log format["_init_server: count blck_townLocations = %1 || blck_townLocations = %2",count blck_townLocations, blck_townLocations];
 
 //Start the mission timers
@@ -228,4 +231,38 @@ blck_pvs_version = blck_versionNumber;
 publicVariable "blck_pvs_version";
 diag_log format["[blckeagls] version %1 Build %2 Date %4 Loaded in %3 seconds",blck_versionNumber,blck_buildNumber,diag_tickTime - _blck_loadingStartTime,blck_buildDate]; //,blck_modType];
 
+/*
+if (blck_debugOn || (blck_debugLevel >= 1)) then 
+{
+	private _pos = [] call blck_fnc_findSafePosn;
+	private _root = "";
+	private _path = "Orange";
+	private _mission = "officeComplex"; //"bunkerMission";
+	private _compiledMission = compilefinal preprocessFileLineNumbers format["\q\addons\custom_server\Missions\%1\%2.sqf",_path,_mission];
+	diag_log format["[blckeagls] mission test sequence run for mission path %1 name %2",_path,_mission];
+	[_pos,"testMarkerGRG","blue"] spawn _compiledMission;
+	diag_log format["testmarker mission spawned at %1",diag_tickTime];
+	{
+		diag_log format["<GRG-TEST.Here are some settings: %1 = %2", ['blck_MinDistanceFromMission','blck_minDistanceToBases','blck_minDistanceToPlayer','blck_minDistanceFromTowns'] select _forEachIndex,_x];
+	} forEach [blck_MinDistanceFromMission,blck_minDistanceToBases,blck_minDistanceToPlayer,blck_minDistanceFromTowns];
+};
+*/
+if (blck_debugOn) then 
+{
+	diag_log "blck_init_server:  <BEGIN> findSafePosn speed tests";
+	private _allCoords = [];
+	private _t1 = diag_tickTime;
+	for "_i" from 1 to 25 do 
+	{
+		private _coords = [] call blck_fnc_FindSafePosn;
 
+	};
+	diag_log format["blck_init_server: time elapsed for 10000 calls to blck_fnc_findSafePosn = %1",diag_tickTime - _t1];
+ 	_t1 = diag_tickTime;
+	 _allCoords = [];
+	for "_j" from 1 to 25 do 
+	{
+		private _coords = [] call blck_fnc_FindSafePosn_2;
+	};
+	diag_log format["blck_init_server: time elapsed for 10000 calls to blck_fnc_findSafePosn_2 = %1",diag_tickTime - _t1];	
+};
