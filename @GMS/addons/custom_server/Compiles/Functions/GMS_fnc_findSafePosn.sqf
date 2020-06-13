@@ -55,22 +55,29 @@ if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter
 	_blacklistedLocations pushBack [getPosATL _x,blck_minDistanceToPlayer];
 } forEach allPlayers;
 
-private _coords = [blck_mapCenter,0,blck_mapRange,30,0,1,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+private _coords = [];
 
 //diag_log format["_fnc_findSafePosn: _coords from first attempt = %1 | _blacklistedLocations = %2",_coords, _blacklistedLocations];
-if (_coords isEqualTo [] || count _coords > 2) then 
-{
-	for "_index" from 1 to 100 do 
-	{
-		{
-			_x set[1, (_x select 1) * 0.8];
-			//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
-		} forEach _blacklistedLocations;
-		_coords = [blck_mapCenter,0,blck_mapRange,30,0,1,0,_blacklistedLocations] call BIS_fnc_findSafePos;
-		//diag_log format["_fnc_findSafePosn: try %1 yielded _coords = %2",_index,_coords];
-		if !(_coords isEqualTo []) exitWith {};
-		uisleep 1;
+while {_coords isEqualTo [] || count _coords > 2} do {
+	uisleep 0.5;
+
+	//find position
+	_coords = [blck_mapCenter,0,blck_mapRange,30,0,1,0,_blacklistedLocations] call BIS_fnc_findSafePos;
+	//diag_log format["_fnc_findSafePosn: yielded _coords = %1",_coords];
+
+	//check water
+	for "_i" from 0 to 359 step 45 do {
+		_position = [(_coords select 0) + (sin(_i)*50), (_coords select 1) + (cos(_i)*50)];
+		if (surfaceIsWater _position) exitWith {
+			_coords = [];
+		};
 	};
+
+	//reduce blacklist range for next loop
+	{
+		_x set[1, (_x select 1) * 0.8];
+		//diag_log format["_fnc_findSafePosn: _x downgraded to %1",_x];
+	} forEach _blacklistedLocations;
 };
 
 diag_log format["_fnc_findSafePosn: _coords = %1",_coords];
