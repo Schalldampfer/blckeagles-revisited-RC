@@ -30,8 +30,8 @@ switch (toLower worldName) do
 			blck_mapRange = 5000;
 		};
 		case "malden":{
-			blck_mapCenter = [6000,7000,0];
-			blck_mapRange = 6000;
+			blck_mapCenter = [5200,5300,0];
+			blck_mapRange = 5000;
 		};		
 		case "livonia":{
 			blck_mapCenter = [6500,5500,0];

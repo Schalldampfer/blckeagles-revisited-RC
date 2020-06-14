@@ -44,6 +44,10 @@ switch (_blck_WorldName) do
 			blck_mapCenter = [9304.97,10165.4,0];
 			blck_mapRange = 5000;
 		};
+		case "malden":{
+			blck_mapCenter = [5200,5300,0];
+			blck_mapRange = 5000;
+		};
 		case "chernarus":{
 			diag_log "[blckeagls] Chernarus-specific settings loaded";
 			blck_mapCenter = [7100, 7750, 0]; //centerPosition = {7100, 7750, 300};
