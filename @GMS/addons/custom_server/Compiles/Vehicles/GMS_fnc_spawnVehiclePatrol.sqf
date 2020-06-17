@@ -50,6 +50,7 @@ if (_setWaypoints) then
 	//diag_log format["_fnc_spawnVehiclePatrol(50): waypoint configuration set for vehicle %1 with crew %2",_veh, crew _veh];
 };
 
+_veh setVehicleLock "LOCKEDPLAYER";
 //diag_log format["_fnc_spawnVehiclePatrol(53):  _veh = %1",_veh];
 
 _veh
