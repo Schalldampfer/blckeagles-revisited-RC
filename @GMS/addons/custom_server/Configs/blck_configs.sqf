@@ -502,6 +502,10 @@
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
 	};	
+	if (toLower(blck_modType) isEqualTo "default") then 
+	{
+		execVM "\q\addons\custom_server\Configs\blck_configs_default.sqf";		
+	};
 	uiSleep 10;
 	if (blck_useConfigsGeneratedLoadouts) then
 	{

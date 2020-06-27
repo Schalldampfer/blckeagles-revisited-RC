@@ -430,6 +430,11 @@
 		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile_mil.sqf";
 	};	
+	if (toLower(blck_modType) isEqualTo "default") then 
+	{
+		diag_log format["[blckeagls] Loading Mission System using Parameters for %1 for militarized servers",blck_modType];
+		execVM "\q\addons\custom_server\Configs\blck_configs_default_mil.sqf";
+	};
 	//waitUntil{!isNil "blck_useConfigsGeneratedLoadouts"};
 	//waitUntil {!isNil "blck_maximumItemPriceInAI_Loadouts"};
 	uiSleep 10;
