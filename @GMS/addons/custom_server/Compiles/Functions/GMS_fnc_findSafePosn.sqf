@@ -32,7 +32,7 @@ _fn_buildBlacklistedLocationsList = {
 		_blacklistedLocs pushBack [_x,_minToMissions];
 	} forEach blck_ActiveMissionCoords;	
 
-	private "_bases";
+	private _bases = [];
 	if (blck_modType isEqualTo "Epoch") then {_bases = nearestObjects[blck_mapCenter, ["PlotPole_EPOCH"], blck_mapRange + 25000]};
 	if (blck_modType isEqualTo "Exile") then {_bases = nearestObjects[blck_mapCenter, ["Exile_Construction_Flag_Static"], blck_mapRange + 25000]};
 

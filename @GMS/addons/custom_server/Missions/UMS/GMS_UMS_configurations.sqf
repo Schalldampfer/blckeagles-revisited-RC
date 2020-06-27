@@ -65,8 +65,7 @@ if ((toLower blck_modType) isEqualTo "default") then
 		"Exile_Boat_SDV_Grey"
 	];
 	
-	blck_UMS_crates =
-	[
+	blck_UMS_crates = blck_crateTypes;
 
 	];
 };

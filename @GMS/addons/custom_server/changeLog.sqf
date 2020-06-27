@@ -7,7 +7,7 @@ Many thanks for new Coding and ideas from Grahame.
 
 Significant Changes:
 =====================
-6.98 Build 204
+6.98 Build 206
 FIXED: few minor bug fixes. 
 FIXED: Static Mission Loot vehicles are no longer deleted by Epoch servers when players enter them.
 FIXED: an error in coordinates for some randomly spawned missions tha added an extra 0 to the array with the coordinaates.

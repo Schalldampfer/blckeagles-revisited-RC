@@ -77,8 +77,7 @@ if !(_missionGroups isEqualTo []) then
 			blck_monitoredMissionAIGroups pushback _newGroup;
 
 			
-			_allSpawnedAI append (units _newGroup);
-			diag_log format["_fnc_spawnMissionAI(77): group %1 | count _newAI = %2 | count _allSpawnedAI = %3",_forEachIndex,count (units _newGroup), count _allSpawnedAI];			
+			_allSpawnedAI append (units _newGroup);		
 		};
 	}forEach _missionGroups;
 };

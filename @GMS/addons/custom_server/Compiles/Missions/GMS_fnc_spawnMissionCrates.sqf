@@ -49,12 +49,6 @@ _fnc_dropMissionCrates = {
 
 params[ ["_coords", [0,0,0]], ["_cratesToSpawn",[]], ["_loadCrateTiming","atMissionSpawn"],["_spawnCrateTiming","atMissionSpawn"],["_missionState","start"], ["_difficulty","red"] ];
 
-/*
-private _params = ["_coords","_cratesToSpawn","_loadCrateTiming","_spawnCrateTiming","_missionState","_difficulty"];
-{
-	diag_log format["_fnc_spawnMissionCrates: %1 = %2 with _foreachindex = %3",_params select _foreachindex, _this select _foreachindex, _foreachindex];
-}forEach _this;
-*/
 
 if ((count _coords) == 2) then // assume only X and Y offsets are provided
 {
@@ -93,5 +87,5 @@ if (_spawnCrateTiming in ["atMissionEndAir","atMissionStartAir"]) then
 {
 	[_cratesSpawned] spawn _fnc_dropMissionCrates;
 };
-//diag_log format["_fnc_spawnMissionCrates: _cratesSpawned = %1",_cratesSpawned];
+
 _cratesSpawned
