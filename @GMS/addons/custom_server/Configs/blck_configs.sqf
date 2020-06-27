@@ -102,9 +102,9 @@
 
 	//Minimum distance between missions
 	blck_MinDistanceFromMission = 2000;
-	blck_minDistanceToBases = 300;
+	blck_minDistanceToBases = 500;
 	blck_minDistanceToPlayer = 1000;
-	blck_minDistanceFromTowns = 300;
+	blck_minDistanceFromTowns = 800;
 	
 	///////////////////////////////
 	// Mission Smoke and Signals
