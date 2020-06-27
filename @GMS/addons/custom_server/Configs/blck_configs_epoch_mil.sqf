@@ -533,6 +533,7 @@ AI WEAPONS, UNIFORMS, VESTS AND GEAR
 		blck_femaleWetsuitsEpoch = [
 			"U_Wetsuit_uniform","U_Wetsuit_White","U_Wetsuit_Blue","U_Wetsuit_Purp","U_Wetsuit_Camo"
 		];
+		blck_skinlist_male = blck_SkinList;
 		blck_SkinList = blck_femaleUniformsEpoch + blck_femaleWetsuitsEpoch + blck_SkinList_Male;			
 		blck_SkinList_blue = blck_SkinList;
 		blck_SkinList_red = blck_SkinList;

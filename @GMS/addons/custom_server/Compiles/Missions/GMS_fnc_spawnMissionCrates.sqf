@@ -50,6 +50,8 @@ _fnc_dropMissionCrates = {
 params[ ["_coords", [0,0,0]], ["_cratesToSpawn",[]], ["_loadCrateTiming","atMissionSpawn"],["_spawnCrateTiming","atMissionSpawn"],["_missionState","start"], ["_difficulty","red"] ];
 
 
+private _params = ["_coords","_cratesToSpawn","_loadCrateTiming","_spawnCrateTiming","_missionState","_difficulty"];
+
 if ((count _coords) == 2) then // assume only X and Y offsets are provided
 {
 	_coords pushback 0;; // calculate the world coordinates
@@ -58,6 +60,7 @@ private _cratesSpawned = [];
 
 {
 	_x params["_crateType","_crateOffset","_lootArray","_lootCounts",["_crateDir",0]];
+	
 	private _pos = _coords vectorAdd _crateOffset;
 	private _crate = [_pos,_crateType] call blck_fnc_spawnCrate;
 	_crate setDir _crateDir;
@@ -66,7 +69,6 @@ private _cratesSpawned = [];
 	_crate setVariable["difficulty",_difficulty];
 	if (_loadCrateTiming isEqualTo "atMissionSpawn" || _missionState isEqualTo "end") then
 	{
-		//diag_log format["_fnc_spawnMissionCrates: calling blck_fnc_loadMissionCrate for _crate = %1",_crate];
 		[_crate] call blck_fnc_loadMissionCrate;
 	};
 	_cratesSpawned pushback _crate;
@@ -74,7 +76,6 @@ private _cratesSpawned = [];
 	#ifdef blck_debugMode
 	if (blck_debugLevel >= 2) then
 	{
-		//diag_log format["_fnc_spawnMissionCrates: _crateType = %1 | _crateOffset = %2 | _lootArray = %3 | _lootCounts = %4",_crateType,_crateOffset,_lootArray,_lootCounts];
 		_marker = createMarker [format["crateMarker%1",random(1000000)], _pos];
 		_marker setMarkerType "mil_triangle";
 		_marker setMarkerColor "colorGreen";	
