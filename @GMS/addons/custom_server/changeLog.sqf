@@ -29,6 +29,8 @@ Changed: some code for finding locations for a new mission.
 Added: all blckeagls map markers have the same prefix:  "blckeagls_marker"
 
 
+
+
 6.96 Build 199
 Added support for Arma servers not running Epoch or Exile 
 

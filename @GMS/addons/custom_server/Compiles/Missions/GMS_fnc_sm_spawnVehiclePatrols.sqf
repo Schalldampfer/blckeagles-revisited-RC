@@ -12,7 +12,7 @@
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
 params["_coords","_noVehiclePatrols","_vehiclePatrolSpawns","_aiDifficultyLevel"];
-//diag_log format["_sm_spawnVehiclePatrols:: _vehiclePatrolSpawns = %1",_vehiclePatrolSpawns];
+
 private["_vehGroup","_patrolVehicle","_missionAI","_missiongroups","_vehicles","_return","_vehiclePatrolSpawns","_randomVehicle","_return","_abort"];
 private ["_weaponList","_sideArms","_uniforms","_headgear","_vests","_backpacks"];
 
