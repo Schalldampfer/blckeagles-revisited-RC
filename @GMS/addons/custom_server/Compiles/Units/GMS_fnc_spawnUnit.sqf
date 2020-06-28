@@ -132,7 +132,7 @@ if !(_sideArms  isEqualTo []) then
 	//diag_log format["[spawnUnit.sqf] _weap os %1",_weap];
 	_unit addWeaponGlobal  _weap; 
 	_ammoChoices = getArray (configFile >> "CfgWeapons" >> _weap >> "magazines");
-	_unit addMagazines [selectRandom _ammoChoices, 2];
+	_unit addMagazines [_ammoChoices select 0, 2];
 };
 for "_i" from 1 to (1+floor(random(4))) do 
 {
