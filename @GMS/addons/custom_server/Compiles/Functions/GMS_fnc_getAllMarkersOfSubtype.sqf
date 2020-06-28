@@ -1,6 +1,6 @@
 /*
 	By Ghostrider [GRG]
-	Copyright 2016	
+	Copyright 2016
 	--------------------------
 	License
 	--------------------------
@@ -8,8 +8,17 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-params[["_markerName",""]];
 
-deleteMarker _markerName;
-deleteMarker (_markerName + "label");
+/*
+	Useful if you know the rootname for markers for a mission system to add these to black lists or other lists
+*/
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+private _subtype = _this;
+private _end = (count _subtype) - 1;
+private _m = [];
+{
+	if ([_x,0,_end] call BIS_fnc_trimString isEqualTo _subtype) then {_m pushBack _x};
+} forEach allMapMarkers;
+
+_m
+

@@ -7,6 +7,33 @@ Many thanks for new Coding and ideas from Grahame.
 
 Significant Changes:
 =====================
+6.98 Build 206
+FIXED: few minor bug fixes. 
+FIXED: Static Mission Loot vehicles are no longer deleted by Epoch servers when players enter them.
+FIXED: an error in coordinates for some randomly spawned missions tha added an extra 0 to the array with the coordinaates.
+Added: a define for NIA all in one in blck_defines; 
+Added a few preconfiguration variables with lists of NIA Armas items.
+Added: an optional parameter to define the location of a mission as one of one or more locations in an array 
+  _defaultMissionLocations = [];
+
+Added: a function that returns an array of all mission markers used by blckeagls for mission makers and server owners 
+	blck_fnc_getAllBlackeaglsMarkers
+	Returns: an array with all markers used by the mission system.
+
+Added: a function to pull a list of all map markers belonging to DMS and avoid spawning new blckeagls missions near these.
+	Configuraiont parameter: blck_minDistanceFromDMS  // set to -1 to disable this check.
+	Function: blck_fnc_getAllDMSMarkers
+
+Removed: some debugging and map sepcific settings from blck_custom_config.sqf 
+Changed: some code for finding locations for a new mission. 
+Added: all blckeagls map markers have the same prefix:  "blckeagls_marker"
+
+
+
+
+6.96 Build 199
+Added support for Arma servers not running Epoch or Exile 
+
 6.96 Build 197
 Sorted some wisses with the dynamic UMS spawner. 
 Removing debugging info

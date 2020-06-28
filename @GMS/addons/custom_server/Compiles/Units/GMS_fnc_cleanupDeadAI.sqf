@@ -17,11 +17,11 @@
 	private _unit = _x; 
 	if (_unit getVariable["blck_cleanupAt",0] isEqualTo 0) then {_unit setVariable["blck_cleanupAt",diag_tickTime + blck_bodyCleanUpTimer]};
 	private _nearplayer = [position _unit,800] call blck_fnc_nearestPlayers;	
-	diag_log format["fnc_cleanupDeadAI: _unit = %1 | blck_cleanupat = %2 | _nearPlayer = %3",_unit, _unit getVariable["blck_cleanupAt",0],_nearPlayer];	
+	//diag_log format["fnc_cleanupDeadAI: _unit = %1 | blck_cleanupat = %2 | _nearPlayer = %3",_unit, _unit getVariable["blck_cleanupAt",0],_nearPlayer];	
 	if (diag_tickTime > _unit getVariable ["blck_cleanupAt",0]) then 
 	{
 		if (_nearplayer isequalto []) then {
-			diag_log format["_fnc_cleanupDeadAI: handling deletion of unit %1",_unit];
+			//diag_log format["_fnc_cleanupDeadAI: handling deletion of unit %1",_unit];
 			{
 				deleteVehicle _x;
 			}forEach nearestObjects [getPos _unit,["WeaponHolderSimulated","GroundWeapoonHolder"],3];	

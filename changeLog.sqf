@@ -4,10 +4,36 @@ Loosely based on the AI mission system by blckeagls ver 2.0.2
 Contributions by Narines: bug fixes, testing, infinite ammo fix.
 Ideas or code from that by He-Man, Vampire and KiloSwiss have been used for certain functions.
 Many thanks for new Coding and ideas from Grahame.
-A huge thank you to Ignaz-HeMan for many changes to resolve bugs and improve coding efficiency.
 
 Significant Changes:
 =====================
+6.98 Build 205
+FIXED: few minor bug fixes. 
+FIXED: Static Mission Loot vehicles are no longer deleted by Epoch servers when players enter them.
+FIXED: an error in coordinates for some randomly spawned missions tha added an extra 0 to the array with the coordinaates.
+Added: a define for NIA all in one in blck_defines; 
+Added a few preconfiguration variables with lists of NIA Armas items.
+Added: an optional parameter to define the location of a mission as one of one or more locations in an array 
+  _defaultMissionLocations = [];
+
+Added: a function that returns an array of all mission markers used by blckeagls for mission makers and server owners 
+	blck_fnc_getAllBlackeaglsMarkers
+	Returns: an array with all markers used by the mission system.
+
+Added: a function to pull a list of all map markers belonging to DMS and avoid spawning new blckeagls missions near these.
+	Configuraiont parameter: blck_minDistanceFromDMS  // set to -1 to disable this check.
+	Function: blck_fnc_getAllDMSMarkers
+
+Removed: some debugging and map sepcific settings from blck_custom_config.sqf 
+Changed: some code for finding locations for a new mission. 
+Added: all blckeagls map markers have the same prefix:  "blckeagls_marker"
+
+Known Issues 
+  - Live AI Counts are sometimes inaccurate at UMS Dynamic Missions
+
+6.96 Build 199
+Added support for Arma servers not running Epoch or Exile 
+
 6.96 Build 197
 Sorted some wisses with the dynamic UMS spawner. 
 Removing debugging info
@@ -30,23 +56,24 @@ Updates to simulation managers.
 All actions on dead AI are handled throug units blck_graveyardGroup 
 All use of blck_deadAI has been deleted.
 
-6.94 Build 181 
-1. code and logic for generating waypoints updated.
-2. this code, and that for reload events, is broadcast to clients
-3. blckClient has been tweaked to inactivate some code on any connected HC.
-4. Script errors that prevented the HC from starting and being passed AI were fixed.
-
-6.92 Build 180
-=======
-
-1. Support for claim-vehicle scripts is now built-in 
+6.92 Build 184
+Fixed an issues that caused blckeagls to load before exile servers were ready to accept players.
+Added checks that ensure that live AI and mission scenery do not despawn when players are nearby.
+Decreased the frequency with which some checks (dead AI, live AI, scenery at completed missions) is checked.
+Redid a few lops that should be using the more speedy deleteAt rather than forEach methods.
+worked on killed and hit EH so that these can run on the client owning the unit and server with each having a specific role 
+  - note that this requires that the code be streamed to clients and compiled on the HC.
+Updates to client to reduce logging 
+Added a firedNear EH 
+Redid system for setting up combatmode and behavior to be context dependent
+Redid setNextWaypont to include an antiStuck check and implement the above checks on behavior and combat mode. 
+Support for claim-vehicle scripts is now built-in 
 	blck_allowClaimVehicle = true; // To allow players to claim vehicles (Exile only).
-	Thanks to PRJX for the lead on the code.
-2. Added a setting to disable having AI toss smoke before healing. Set:
+Added a setting to disable having AI toss smoke before healing. Set:
 	blck_useSmokeWhenHealing=false; // to disable this
-3. Added an option to display kill notices using Toasts
+Added an option to display kill notices using Toasts
 	blck_aiKillUseToast=true; // in blckClient.sqf in the debug folder of your mission.pbo to enable these.
-4. Added offloading of AI to clients (Experimental, waypoints may break when using this)
+Added offloading of AI to clients
 	////////
 	//  Client Offloading and Headless Client Configurations
 	blck_useHC = true; // Experimental (death messages and rewards not yet working).
@@ -55,10 +82,12 @@ All use of blck_deadAI has been deleted.
 	blck_ai_offload_notifyClient = false;  // Set true if you want notifications when AI are offloaded to a client PC. Only for testing/debugging purposes.
 										// TODO: set to false before release
 	blck_limit_ai_offload_to_blckeagls = true;  // when true, only groups spawned by blckeagls are evaluated.
-5.Changed - Monitoring of groups refined to route mission groups that have left the mission area back to it.
-6. Fixed - Vehicle unlock when empty of crew through adding a getOut event handler.
-7. Code for spawning vehicles redone to reduced redundancy.
-8. two code tweaks from the Tall Man (MGTDB) were added. 
+
+
+
+Fixed - Vehicle unlock when empty of crew through adding a getOut event handler.
+Code for spawning vehicles redone to reduced redundancy.
+Monitoring of groups refined to route mission groups that have left the mission area back to it.
 
 V 6.90  Build 175
 1. Added new settings to specify the number of crew per vehhicle to blck_config.sqf and blck_config_mil.sqf
@@ -92,10 +121,9 @@ V 6.90  Build 175
 
 8. Other minor coding fixes and optimizations.
 
-6.88 Build 167
+6.88 
 This update consists primarily of a set of bug fixes and code tweaks.
 Many thanks to HeMan for his time in effort spent going through the scripts to troublehsoot and improve them.
-The most important bug fix has been resolution of issues with use of headless clients.
 
 6.86 Build 156
 Added support for spawning infantry and statics inside buildings for forming a garrison using either of two methods.

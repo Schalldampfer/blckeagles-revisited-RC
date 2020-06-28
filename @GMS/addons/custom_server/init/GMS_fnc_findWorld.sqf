@@ -18,13 +18,13 @@ switch (toLower worldName) do
 		case "altis":{
 			diag_log "[blckeagls] Altis-specific settings for Epoch loaded";
 			blck_mapCenter = [12000,10000,0]; 
-			blck_mapRange = 23000; 
+			blck_mapRange = 25000; 
 		};
 		case "stratis":{
 			diag_log "[blckeagls] Stratis-specific settings loaded";
-			blck_mapCenter = [6322,7801,0]; 
+			blck_mapCenter = [3900,4500,0]; 
 			blck_mapRange = 4500; 
-		}; // Add Central, East and West respawns/traders 
+		}; 
 		case "tanoa":{
 			blck_mapCenter = [9304.97,10165.4,0];
 			blck_mapRange = 5000;
@@ -34,17 +34,24 @@ switch (toLower worldName) do
 			blck_mapRange = 5000;
 		};		
 		case "livonia":{
-			blck_mapCenter = [6500,5500,0];
-			blck_mapRange = 6000;
+			blck_mapCenter = [6500,6500,0];  
+			blck_mapRange = 6100;
+		};
+		case "gm_weferlingen_summer":{
+			blck_mapCenter = [10000,10000,0];
+			blck_mapRange = 10000;
 		};
 		case "chernarus":{
 			diag_log "[blckeagls] Chernarus-specific settings loaded";
-			blck_mapCenter = [7100, 7750, 0]; //centerPosition = {7100, 7750, 300};
+			blck_mapCenter = [7100, 7750, 0]; 
 			blck_mapRange = 5300;
 		};	
+		case "namalsk":{
+			blck_mapCenter = [5700, 8700, 0];
+			blck_mapRange = 10000;
+		};		
 		case "chernarus_summer":{blck_mapCenter = [7100, 7750, 0]; blck_mapRange = 6000;}; 
 		case "bornholm":{
-			//diag_log "Bornholm-specific settings loaded";
 			blck_mapCenter = [11240, 11292, 0];
 			blck_mapRange = 14400;
 		};
@@ -54,8 +61,11 @@ switch (toLower worldName) do
 			blck_mapRange = 6000;
 		};
 		case "taviana":{blck_mapCenter = [10370, 11510, 0];blck_mapRange = 14400;};
-		case "namalsk":{blck_mapCenter = [4352, 7348, 0];blck_mapRange = 10000;};
-		case "napf": {blck_mapCenter = [10240,10240,0]; blck_mapRange = 14000};  // {_centerPos = [10240, 10240, 0];_isMountainous = true;_maxHeight = 50;};
+
+		case "napf": {
+			blck_mapCenter = [10240,10240,0]; 
+			blck_mapRange = 14000;
+		};  
 		case "australia": {blck_mapCenter = [20480,20480, 150];blck_mapRange = 40960;};
 		case "panthera3":{blck_mapCenter = [4400, 4400, 0];blck_mapRange = 4400;};
 		case "isladuala":{blck_mapCenter = [4400, 4400, 0];blck_mapRange = 4400;};
@@ -68,5 +78,6 @@ switch (toLower worldName) do
 		case "lingor":{blck_mapCenter = [4400, 4400, 0];blck_mapRange = 4400;};	
 		case "takistan":{blck_mapCenter = [5500, 6500, 0];blck_mapRange = 5000;};
 		case "lythium":{blck_mapCenter = [10000,10000,0];blck_mapRange = 8500;};
+		case "vt7": {_mapCenter = [9000,9000,0]; _maxDistance = 9000};		
 		default {blck_mapCenter = [6322,7801,0]; blck_mapRange = 6000};
 };

@@ -10,17 +10,12 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-params["_Vehicle"];
+params["_veh"];
 
-switch (blck_modType) do {
-	case "Epoch":
-		{
-			#ifdef blck_debugMode
-			if (blck_debugLevel > 2) then {diag_log format["GMS_fnc_protectVehicle::  Tokens set for vehicle %1",_Vehicle];};
-			#endif
-			//_Vehicle call EPOCH_server_vehicleInit;
-			_Vehicle call EPOCH_server_setVToken;
-		};
+if (blck_modType isEqualTo "Epoch") then
+{
+	_veh call EPOCH_server_setVToken;
 };
+
 
 

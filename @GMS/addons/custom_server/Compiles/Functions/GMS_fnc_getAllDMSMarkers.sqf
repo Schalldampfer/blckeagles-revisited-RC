@@ -1,8 +1,6 @@
 /*
-	_EH_AHVehicle_Hit
 	By Ghostrider [GRG]
-	Handles the case where a vehicle is hit.
-
+	Copyright 2016
 	--------------------------
 	License
 	--------------------------
@@ -10,8 +8,8 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-//#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-// TODO: No longer needed; move this to old code folder
-if (isServer) then {_this call blck_fnc_HandleAIVehicleHit};
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
 
-
+#define DMS_missionMarkerRootName "DMS_MissionMarker"
+private _dmsMarkers = [DMS_missionMarkerRootName] call blck_fnc_getAllMarkersOfSubtype;
+_dmsMarkers

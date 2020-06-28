@@ -17,8 +17,8 @@
 		changing any of these variables may break the mission systemChat
 	*/
 	blck_locationBlackList = [];  // Do not touch ...
-	blck_debugON = false;  //  Do not touch ... 
-	blck_debugLevel = 0;  //  Do not touch ... 
+	blck_debugON = true;  //  Do not touch ... 
+	blck_debugLevel = 3;  //  Do not touch ... 
 	#ifdef blck_milServer
 	if (true) exitWith 
 	{
@@ -105,6 +105,8 @@
 	blck_minDistanceToBases = 500;
 	blck_minDistanceToPlayer = 1000;
 	blck_minDistanceFromTowns = 800;
+	blck_minDistanceFromDMS = 500;  // minimum distance for a blackeagls mission from any nearby DMS missions. set to -1 to disable this check.	
+
 	
 	///////////////////////////////
 	// Mission Smoke and Signals
@@ -240,6 +242,10 @@
 	// MISSION TIMERS
 	////////////////////
 	
+
+	// Change this value to reduce the number of spawned missions at any one time.
+	blck_maxSpawnedMissions = 9;
+		
 	// Reduce to 1 sec for immediate spawns, or longer if you wish to space the missions out	
 	blck_TMin_Orange = 250;
 	blck_TMin_Green = 200;
@@ -562,14 +568,18 @@
 	
 	if (toLower(blck_modType) isEqualTo "epoch") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
+
 		execVM "\q\addons\custom_server\Configs\blck_configs_epoch.sqf";
 	};
 	if (toLower(blck_modType)  isEqualTo "exile") then
 	{
-		diag_log format["[blckeagls] Loading Mission System using Parameters for %1",blck_modType];
+
 		execVM "\q\addons\custom_server\Configs\blck_configs_exile.sqf";
 	};	
+	if (toLower(blck_modType) isEqualTo "default") then 
+	{
+		execVM "\q\addons\custom_server\Configs\blck_configs_default.sqf";		
+	};
 	uiSleep 10;
 	if (blck_useConfigsGeneratedLoadouts) then
 	{

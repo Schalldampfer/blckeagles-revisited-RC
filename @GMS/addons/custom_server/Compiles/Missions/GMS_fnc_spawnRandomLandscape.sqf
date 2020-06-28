@@ -12,6 +12,7 @@
 */
 #include "\q\addons\custom_server\Configs\blck_defines.hpp";
 params["_coords","_missionLandscape",["_min",3],["_max",15],["_nearest",1]];
+
 private["_objects","_wreck","_dir","_dirOffset"];
 #define maxObjectSpawnRadius 25
 #define minObjectSpawnRadius 15
@@ -27,8 +28,7 @@ _objects pushBack _wreck;
 {
 	private _dir = random(360);
 	private _radius = minObjectSpawnRadius + random(maxObjectSpawnRadius);
-	_wreck = createVehicle[_x, _coords getPos[_radius,_dir], [], 2];
-	//diag_log format["_fnc_spawnRandomLandscape: _x = %1 | _wreck = %2",_x,_wreck];	
+	_wreck = createVehicle[_x, _coords getPos[_radius,_dir], [], 2];	
 	_wreck allowDamage true;
 	_wreck enableSimulation false;
 	_wreck enableSimulationGlobal false;
@@ -37,9 +37,5 @@ _objects pushBack _wreck;
 	_objects pushback _wreck;
 	sleep 0.1;
 } forEach _missionLandscape;
-
-#ifdef blck_debugMode
-if (blck_debugLevel > 2) then {diag_log format["_fnc_spawnRandomLandscape::-->> _objects = %1",_objects];};
-#endif
 
 _objects

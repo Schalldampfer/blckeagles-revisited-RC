@@ -1,9 +1,6 @@
-
 /*
-	_EH_VehicleKilled
-	Killed handler for destruction of vehicles
-	By Ghostrider-GRG-
-
+	By Ghostrider [GRG]
+	Copyright 2016
 	--------------------------
 	License
 	--------------------------
@@ -11,5 +8,6 @@
 
 	http://creativecommons.org/licenses/by-nc-sa/4.0/
 */
-//#include "\q\addons\custom_server\Configs\blck_defines.hpp";
-if (isServer) then {_this call blck_fnc_processAIVehicleKill};
+#include "\q\addons\custom_server\Configs\blck_defines.hpp";
+private _blckMarkers = [blck_missionMarkerRootName] call blck_fnc_getAllMarkersOfSubtype;
+_blckMarkers

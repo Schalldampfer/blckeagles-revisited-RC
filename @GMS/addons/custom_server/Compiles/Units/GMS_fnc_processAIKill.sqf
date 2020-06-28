@@ -58,12 +58,7 @@ _wp setWaypointBehaviour "COMBAT";
 (group _unit) setCombatMode "RED";
 _wp setWaypointCombatMode "RED";
 
-if (blck_showCountAliveAI) then
-{
-	{
-		[_x select 0, _x select 1, _x select 2] call blck_fnc_updateMarkerAliveCount;
-	} forEach blck_missionMarkers;
-};
+
 
 if ([_unit,_killer] call blck_fnc_processIlleagalAIKills) then {
 	[_unit,_killer] call GMS_fnc_handlePlayerUpdates;

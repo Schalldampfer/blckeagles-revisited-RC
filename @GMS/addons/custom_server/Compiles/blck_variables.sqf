@@ -37,10 +37,11 @@ blck_pendingMissions = [];
 blck_missionsRunning = 0;
 blck_missionsRun = 0;
 blck_activeMissions = [];
-//blck_deadAI = [];
 blck_connectedHCs = [];
-blck_missionMarkers = [];
-blck_heliCrashSites = [];
+blck_missionMarkerRootName = "blckeagls_marker";
+DMS_missionMarkerRootName = "DMS_MissionMarker";
+blck_missionLabelMarkers = [];
+
 blck_temporaryMarkers = [];
 blck_illuminatedCrates = []; // [crate,duration,freq of replacement]
 blck_mainThreadUpdateInterval = 60;

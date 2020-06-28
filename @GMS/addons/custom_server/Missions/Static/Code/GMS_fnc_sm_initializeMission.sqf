@@ -83,6 +83,7 @@ _blck_localMissionMarker set [3,blck_labelMapMarkers select 1];  // Use an arrow
 uiSleep 30;
 // spawn loot chests
 [_missionLootBoxes,_missionCenter] call blck_fnc_sm_spawnLootContainers;
-[_missionLootVehicles,_missionCenter] call blck_fnc_sm_spawnLootContainers;
+[_missionLootVehicles,_missionCenter] call blck_fnc_sm_spawnLootVehicles;
+
 diag_log format["[blckeagls] Static Mission Spawner: Mission %1 spawned",_mission];
 

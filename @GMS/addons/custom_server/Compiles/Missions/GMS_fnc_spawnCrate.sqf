@@ -18,7 +18,7 @@ _crate setVariable ["LAST_CHECK", 100000];
 _crate allowDamage false;
 _crate enableRopeAttach false;
 [_crate] call blck_fnc_emptyObject;
-//uiSleep 1;
+
 _crate setPosATL [_coords select 0, _coords select 1, (_coords select 2) + 0.25];
 _crate setDir _crateDir;
 //_crate setVectorUp [0,0,1];
