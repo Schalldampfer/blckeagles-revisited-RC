@@ -233,9 +233,9 @@
 
 	//Set to -1 to disable. Values of 2 or more force the mission spawner to spawn copies of that mission - this feature is not recommended because you may run out of available groups.
 	blck_enableOrangeMissions = 1;  
-	blck_enableGreenMissions = 1;
+	blck_enableGreenMissions = 2;
 	blck_enableRedMissions = 2;
-	blck_enableBlueMissions = 2;
+	blck_enableBlueMissions = 3;
 	blck_numberUnderwaterDynamicMissions = 0;  // Values from -1 (no UMS) to N (N Underwater missions will be spawned; static UMS units and subs will be spawned.	
 
 	////////////////////
