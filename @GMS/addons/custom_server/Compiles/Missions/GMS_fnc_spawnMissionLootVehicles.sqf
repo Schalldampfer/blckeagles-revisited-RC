@@ -40,9 +40,14 @@ private _vehs = [];
 		_unit = _this select 2;
 		if !(isPlayer _unit) exitWith {};
 		if !(EPOCH_VehicleSlots isEqualTo []) then {
+			// Save vehicle
 			_vehSlot = EPOCH_VehicleSlots deleteAt 0;
 			missionNamespace setVariable ['EPOCH_VehicleSlotCount', count EPOCH_VehicleSlots, true];
 			_vehicle setVariable["VEHICLE_SLOT", _vehSlot, true];
+			_vehicle call EPOCH_server_save_vehicle;
+			// Initialize
+			_vehicle call EPOCH_server_vehicleInit;
+			addToRemainsCollector[_vehicle];
 		};
 		_vehicle removeAllEventHandlers "GetIn";
 	}];
